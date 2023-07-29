@@ -57,7 +57,8 @@
 
     # Use the open source version of the kernel module
     # Only available on driver 515.43.04+
-    open = true;
+    # NB: Secondary GPU not happy with open source
+    open = false;
 
     # Enable the nvidia settings menu
     nvidiaSettings = true;

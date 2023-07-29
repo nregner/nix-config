@@ -1,5 +1,10 @@
 { inputs, config, lib, pkgs, ... }: {
-  imports = [ ../../common/global ./hardware-configuration.nix ./builders.nix ];
+  imports = [
+    ../../common/global
+    ./hardware-configuration.nix
+    ./builders.nix
+    ./vfio.nix
+  ];
 
   # Login shell
   programs.zsh.enable = true;
@@ -51,6 +56,11 @@
     pulse.enable = true;
     # jack.enable = true;
   };
+
+  # Windows VM
+  vfio.enable = true;
+  virtualisation.libvirtd.enable = true;
+  environment.systemPackages = with pkgs; [ virt-manager ];
 
   # Misc
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
