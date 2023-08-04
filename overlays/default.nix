@@ -1,8 +1,11 @@
 # This file defines overlays
-{ inputs, ... }:
-{
+{ inputs, ... }: {
   # This one brings our custom packages from the 'pkgs' directory
-  additions = final: _prev: import ../pkgs { pkgs = final; };
+  additions = final: _prev:
+    import ../pkgs {
+      nixpkgs = inputs.nixpkgs;
+      pkgs = final;
+    };
 
   # This one contains whatever you want to overlay
   # You can change versions, add patches, set compilation flags, anything really.
@@ -11,6 +14,10 @@
     # example = prev.example.overrideAttrs (oldAttrs: rec {
     # ...
     # });
+
+    # https://github.com/NixOS/nixpkgs/issues/154163#issuecomment-1350599022
+    makeModulesClosure = x:
+      prev.makeModulesClosure (x // { allowMissing = true; });
   };
 
   # When applied, the unstable nixpkgs set (declared in the flake inputs) will

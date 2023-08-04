@@ -1,0 +1,24 @@
+# nix-shell -p sops --run "sops secrets/secrets.yaml"
+# nix-shell -p ssh-to-age age --run "ssh-to-age -private-key | age-keygen -y" < file
+keys:
+  - &user_nregner age1edzgfqhfrg5a6p9dgte7s8dqt87vu8a50up5mys0h34x3dsrj90qr743qw
+  - &host_iapetus age1yuzxe2qmhc2kq8f9g09nkfp076fgq986pqtp20r0vcueumrw7feqrd3cx2
+  - &host_server age1g2mgt0s80nc5yzkjnwmn6qwf8udnapx92vhwussjpa9d4et5v5zskgap5y
+  - &host_kraken age16zk73cejuepyskjeq0625ecf727y3nmmw32qq0ta97q9e4uj2sqstq6240
+creation_rules:
+  - path_regex: common/.*/secrets.yaml
+    key_groups:
+    - age:
+      - *user_nregner
+      - *host_iapetus
+      - *host_server
+  - path_regex: machines/kraken/secrets.yaml
+    key_groups:
+      - age:
+          - *user_nregner
+          - *host_kraken
+  - path_regex: machines/ec2-aarch64/secrets.yaml
+    key_groups:
+    - age:
+      - *user_nregner
+      - age19aerky0hut9aafgyet4pknu7r7emadgz8xq2tltjkupz0dluzf2sgsdfha
