@@ -4,6 +4,7 @@
     "${modulesPath}/profiles/minimal.nix"
     ../../common/global
     ./tailscale-bootstrap.nix
+    ./octoprint.nix
   ];
 
   nixpkgs.hostPlatform = lib.mkForce "aarch64-linux";
@@ -63,12 +64,6 @@
       priority = 2;
       psk = "@CenturyLink2746@";
     };
-  };
-
-  # 3d printer
-  services.octoprint = {
-    enable = true;
-    openFirewall = true;
   };
 
   # This value determines the NixOS release from which the default
