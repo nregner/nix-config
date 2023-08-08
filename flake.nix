@@ -63,15 +63,11 @@
       homeManagerModules = import ./modules/home-manager;
 
       # NixOS configuration entrypoint
-      # Available through 'nixos-rebuild --flake .#your-hostname'
+      # Available through 'nixos-rebuild --flake .#'
       nixosConfigurations = {
-        # FIXME replace with your hostname
-        your-hostname = lib.nixosSystem {
+        iapetus = lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
-          modules = [
-            # > Our main nixos configuration file <
-            ./nixos/configuration.nix
-          ];
+          modules = [ ./machines/iapetus/configuration.nix ];
         };
 
         # Builder VM
@@ -89,19 +85,14 @@
         });
 
       # Standalone home-manager configuration entrypoint
-      # Available through 'home-manager --flake .#your-username@your-hostname'
+      # Available through 'home-manager --flake .#'
       homeConfigurations = {
         # FIXME replace with your username@hostname
-        "your-username@your-hostname" =
-          home-manager.lib.homeManagerConfiguration {
-            pkgs =
-              nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-            extraSpecialArgs = { inherit inputs outputs; };
-            modules = [
-              # > Our main home-manager configuration file <
-              ./home-manager/home.nix
-            ];
-          };
+        "nregner@iapetus" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [ ./home-manager/home.nix ];
+        };
       };
 
       deploys.nodes = forEachNode (hostname: {

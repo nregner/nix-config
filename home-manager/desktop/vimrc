@@ -1,0 +1,18 @@
+inoremap jk <esc>
+inoremap <s-space> <esc>
+set ignorecase
+set smartcase
+
+#set expandtab
+#set tabstop=2
+#set softtabstop=2
+#set shiftwidth=2
+
+set number relativenumber
+
+#syntax on
+#filetype plugin on
+
+" Allow saving of files as sudo
+cmap w!! w !sudo tee %
+
