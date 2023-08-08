@@ -17,9 +17,6 @@
     kernelPackages =
       inputs.orangepi-nix.packages.x86_64-linux.linux-orange-pi-6-5-rk3588;
     kernelParams = [ "boot.shell_on_fail" ];
-    kernelModules = [
-      "sprdwl_ng" # wifi driver
-    ];
     supportedFilesystems = lib.mkForce [ "vfat" "ext4" ];
     consoleLogLevel = lib.mkDefault 7;
 
@@ -64,16 +61,7 @@
     };
   };
 
-  sdImage = {
-    postBuildCommands = ''
-      # Emplace bootloader to specific place in firmware file
-      dd if=/dev/zero of=$img bs=1k count=1023 seek=1 status=noxfer \
-          conv=notrunc # prevent truncation of image
-      dd if=${pkgs.cross.u-boot-v2021_10-sunxi}/u-boot-sunxi-with-spl.bin of=$img bs=1k seek=8 conv=fsync \
-          conv=notrunc # prevent truncation of image
-    '';
-    compressImage = true;
-  };
+  sdImage = { compressImage = true; };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
