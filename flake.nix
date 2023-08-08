@@ -17,7 +17,8 @@
     deploy-rs.url = "github:serokell/deploy-rs";
 
     # Misc
-    orangepi-nix = "git+ssh://git@github.com/nathanregner/orangepi-nix";
+    # orangepi-nix.url = "git+ssh://git@github.com/nathanregner/orangepi-nix";
+    orangepi-nix.url = "git+file:///home/nregner/dev/orangepi-nix";
 
     # TODO: Add any other flake you might need
     # hardware.url = "github:nixos/nixos-hardware";

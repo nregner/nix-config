@@ -14,7 +14,7 @@
   # TODO: https://discourse.nixos.org/t/how-to-have-a-minimal-nixos/22652/3
   boot = {
     kernelPackages =
-      pkgs.linuxPackagesFor pkgs.cross.linux_orange-pi-6_1-sun50iw9;
+      inputs.orangepi-nix.packages.x86_64-linux.linux-orange-pi-6-5-rk3588;
     kernelParams = [ "boot.shell_on_fail" ];
     kernelModules = [
       "sprdwl_ng" # wifi driver
