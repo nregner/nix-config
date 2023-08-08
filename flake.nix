@@ -16,6 +16,9 @@
     # Tools
     deploy-rs.url = "github:serokell/deploy-rs";
 
+    # Misc
+    orangepi-nix = "git+ssh://git@github.com/nathanregner/orangepi-nix";
+
     # TODO: Add any other flake you might need
     # hardware.url = "github:nixos/nixos-hardware";
 
@@ -74,6 +77,13 @@
         ec2-aarch64 = lib.nixosSystem {
           system = "aarch64-linux";
           modules = [ ./machines/ec2-aarch64/configuration.nix ];
+          specialArgs = { inherit inputs outputs; };
+        };
+
+        # Voron 2.4r2 Klipper machine
+        voron = lib.nixosSystem {
+          system = "aarch64-linux";
+          modules = [ ./machines/voron/configuration.nix ];
           specialArgs = { inherit inputs outputs; };
         };
       } // forEachNode (hostname:
