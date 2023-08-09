@@ -194,7 +194,7 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-OLMFwQRQNEp6M7msRH+j201xrQN4DLfi915FJrAJb1c=",
+        "narHash": "sha256-SkiBLrtFN02Lh4MVJnaqoK15MIEtmsdywmr68nvXcNk=",
         "path": "./pkgs/orange-pi",
         "type": "path"
       },
