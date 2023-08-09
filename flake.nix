@@ -18,7 +18,7 @@
 
     # Misc
     # orangepi-nix.url = "git+ssh://git@github.com/nathanregner/orangepi-nix";
-    orangepi-nix.url = "git+file:///home/nregner/dev/orangepi-nix";
+    orange-pi.url = "path:./pkgs/orange-pi";
 
     # TODO: Add any other flake you might need
     # hardware.url = "github:nixos/nixos-hardware";

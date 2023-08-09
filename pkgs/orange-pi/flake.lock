@@ -1,0 +1,77 @@
+{
+  "nodes": {
+    "flake-utils": {
+      "inputs": {
+        "systems": "systems"
+      },
+      "locked": {
+        "lastModified": 1689068808,
+        "narHash": "sha256-6ixXo3wt24N/melDWjq70UuHQLxGV8jZvooRanIHXw0=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "919d646de7be200f3bf08cb76ae1f09402b6f9b4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "linux-orange-pi-6-5-rk3588": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1691551632,
+        "narHash": "sha256-5/NMadqch6KKHpQvAGAPcHWRJltiMVU8F5T2cM5azMo=",
+        "ref": "collabora-rk3588",
+        "rev": "c25c3f39d68b1e0f89a0f4ffcd490869fca4074a",
+        "revCount": 1199857,
+        "type": "git",
+        "url": "ssh://git@github.com/nathanregner/linux-orangepi"
+      },
+      "original": {
+        "ref": "collabora-rk3588",
+        "type": "git",
+        "url": "ssh://git@github.com/nathanregner/linux-orangepi"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1691464053,
+        "narHash": "sha256-D21ctOBjr2Y3vOFRXKRoFr6uNBvE8q5jC4RrMxRZXTM=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "844ffa82bbe2a2779c86ab3a72ff1b4176cec467",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "type": "indirect"
+      }
+    },
+    "root": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "linux-orange-pi-6-5-rk3588": "linux-orange-pi-6-5-rk3588",
+        "nixpkgs": "nixpkgs"
+      }
+    },
+    "systems": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
