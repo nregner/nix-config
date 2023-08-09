@@ -4,6 +4,12 @@
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
 
+    linux-orange-pi-5-10-rk3588 = {
+      url =
+        "git+ssh://git@github.com/nathanregner/linux-orangepi?ref=orange-pi-5.10-rk3588";
+      flake = false;
+    };
+
     linux-orange-pi-6-5-rk3588 = {
       url =
         "git+ssh://git@github.com/nathanregner/linux-orangepi?ref=collabora-rk3588";
