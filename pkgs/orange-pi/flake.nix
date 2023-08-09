@@ -9,6 +9,11 @@
         "git+ssh://git@github.com/nathanregner/linux-orangepi?ref=collabora-rk3588";
       flake = false;
     };
+
+    u-boot-radxa-next = {
+      url = "git://git@github.com/radxa/u-boot?ref=next-dev";
+      flake = false;
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, flake-utils, ... }:
@@ -22,6 +27,9 @@
         packages = rec {
           linux-orange-pi-6-5-rk3588 = linuxPackagesFor
             (callPackage ./linux/orange-pi-6.5-rk3588 { inherit inputs; });
+
+          u-boot-radxa-next = linuxPackagesFor
+            (callPackage ./linux/u-boot-radxa-next { inherit inputs; });
         };
 
         devShells.default =
