@@ -193,11 +193,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1691506048,
-        "narHash": "sha256-t8kwPh7Jz1v+wAwThSPzPRZgEE/slkM4sYInxW5gO/M=",
+        "lastModified": 1691539168,
+        "narHash": "sha256-H90CG2OhjEa54cdbyrg81lUtoJruWxTWQk8ZBYp6x9U=",
         "ref": "refs/heads/master",
-        "rev": "79473e8f9b586ce58d95c176c783049fc6cd2e9a",
-        "revCount": 5,
+        "rev": "b2c2a612ab90ac6507b28fb0a7c0e52a153ba96c",
+        "revCount": 6,
         "type": "git",
         "url": "file:///home/nregner/dev/orangepi-nix"
       },
