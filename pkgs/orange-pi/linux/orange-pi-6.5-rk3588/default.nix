@@ -21,9 +21,10 @@ in with lib;
     "CROSS_COMPILE=aarch64-linux-gnu-"
   ];
 } // (args.argsOverride or { })).overrideAttrs (final: prev: {
+  name = "k"; # stay under u-boot path length limit
 
   nativeBuildInputs = prev.nativeBuildInputs ++ [ bintools-unwrapped clang ];
 
-  # remove CC=stdenv.cc flag
+  # remove CC=stdenv.cc
   makeFlags = filter (flag: !(strings.hasPrefix "CC=" flag)) prev.makeFlags;
 })
