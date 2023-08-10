@@ -75,6 +75,23 @@
         "type": "github"
       }
     },
+    "linux-orange-pi-5-10-rk3588": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1691624557,
+        "narHash": "sha256-IgXXnagUR7W5xnNOGQeeZ7IB20/bQFFjeWzQDl9h0wE=",
+        "ref": "orange-pi-5.10-rk3588",
+        "rev": "b9a65c2c9f24b423dc8efff7ae3842c4bc3d021b",
+        "revCount": 37,
+        "type": "git",
+        "url": "ssh://git@github.com/nathanregner/linux-orangepi"
+      },
+      "original": {
+        "ref": "orange-pi-5.10-rk3588",
+        "type": "git",
+        "url": "ssh://git@github.com/nathanregner/linux-orangepi"
+      }
+    },
     "linux-orange-pi-6-5-rk3588": {
       "flake": false,
       "locked": {
@@ -189,12 +206,13 @@
     "orange-pi": {
       "inputs": {
         "flake-utils": "flake-utils",
+        "linux-orange-pi-5-10-rk3588": "linux-orange-pi-5-10-rk3588",
         "linux-orange-pi-6-5-rk3588": "linux-orange-pi-6-5-rk3588",
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-SkiBLrtFN02Lh4MVJnaqoK15MIEtmsdywmr68nvXcNk=",
+        "narHash": "sha256-p4kbqEmmcHm0Jb6aeYqZuR3+CFxJcwPDwyccl+dcFJA=",
         "path": "./pkgs/orange-pi",
         "type": "path"
       },

@@ -2,7 +2,7 @@
 let inherit (pkgsBuildBuild.llvmPackages) bintools-unwrapped clang;
 in with lib;
 (linuxManualConfig rec {
-  version = "5.10.0";
+  version = "5.10.110";
   modDirVersion = version;
   extraMeta = {
     branch = versions.majorMinor version;
@@ -10,6 +10,11 @@ in with lib;
   };
 
   src = inputs.linux-orange-pi-5-10-rk3588;
+
+  #  src = fetchGit {
+  #    url = "/home/nregner/dev/linux-orangepi/orange-pi-5.10-rk3588";
+  #    rev = "b9a65c2c9f24b423dc8efff7ae3842c4bc3d021b";
+  #  };
 
   allowImportFromDerivation = true;
   configfile = ./.config;
