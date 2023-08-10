@@ -58,6 +58,9 @@
   # Misc
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
+  programs.ccache.enable = true;
+  nix.settings.extra-sandbox-paths = [ config.programs.ccache.cacheDir ];
+
   virtualisation.docker = {
     enable = true;
     extraOptions = "--insecure-registry nregner.net:32000";
