@@ -10,8 +10,9 @@
   home.packages = with pkgs; [
     nixfmt
 
+    # nix-du -s=500MB | xdot -
     nix-du
-    graphviz
+    xdot
     nix-output-monitor
     nix-prefetch
     nix-tree
