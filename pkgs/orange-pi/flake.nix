@@ -26,8 +26,15 @@
         inherit (targetPkgs) callPackage linuxPackagesFor;
       in {
         packages = rec {
+          arm-none-linux-gneuabihf-12 =
+            callPackage ./gcc/arm-none-linux-gneuabihf-12 { };
+
+          #          uboot-orange-pi-5-10-rk3588 = ;
+
           linuxPackages-orange-pi-5-10-rk3588 = linuxPackagesFor
-            (callPackage ./linux/orange-pi-5.10-rk3588 { inherit inputs; });
+            (callPackage ./linux/orange-pi-5.10-rk3588 {
+              inherit inputs arm-none-linux-gneuabihf-12;
+            });
 
           linuxPackages-orange-pi-6-5-rk3588 = linuxPackagesFor
             (callPackage ./linux/orange-pi-6.5-rk3588 { inherit inputs; });

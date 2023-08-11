@@ -1,7 +1,7 @@
 { inputs, lib, pkgsBuildBuild, linuxManualConfig, ... }@args:
 let
-  inherit (pkgsBuildBuild) ccache llvmPackages;
-  inherit (llvmPackages) bintools-unwrapped clang;
+  inherit (pkgsBuildBuild) ccache llvmPackages_16;
+  inherit (llvmPackages_16) bintools-unwrapped clang;
 in with lib;
 (linuxManualConfig rec {
   version = "5.10.110";
@@ -25,8 +25,7 @@ in with lib;
   extraMakeFlags = [
     "LLVM=1"
     "KCFLAGS=-I${clang}/resource-root/include"
-    "CC='ccache clang'"
-    "CROSS_COMPILE=aarch64-linux-gnu-"
+    #    "CROSS_COMPILE=arm-none-linux-gneuabihf-"
   ];
 } // (args.argsOverride or { })).overrideAttrs (final: prev: {
   name = "k"; # stay under u-boot path length limit
@@ -35,5 +34,6 @@ in with lib;
     ++ [ bintools-unwrapped clang ccache ];
 
   # remove CC=stdenv.cc
-  makeFlags = filter (flag: !(strings.hasPrefix "CC=" flag)) prev.makeFlags;
+  makeFlags = filter (flag: !(strings.hasPrefix "CC=" flag)) prev.makeFlags
+    ++ [ ''CC="ccache clang"'' ];
 })
