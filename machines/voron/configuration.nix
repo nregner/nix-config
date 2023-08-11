@@ -15,7 +15,7 @@
   # TODO: https://discourse.nixos.org/t/how-to-have-a-minimal-nixos/22652/3
   boot = {
     kernelPackages =
-      inputs.orange-pi.packages.x86_64-linux.linux-orange-pi-6-5-rk3588;
+      inputs.orange-pi.packages.x86_64-linux.linuxPackages-orange-pi-6-5-rk3588;
     kernelParams = [ "boot.shell_on_fail" ];
     supportedFilesystems = lib.mkForce [ "vfat" "ext4" ];
     consoleLogLevel = lib.mkDefault 7;
