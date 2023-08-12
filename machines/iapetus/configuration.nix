@@ -6,10 +6,7 @@
   users.users.nregner.shell = pkgs.zsh;
 
   # Bootloader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "nodev";
-  boot.loader.grub.efiSupport = true;
-  boot.loader.grub.useOSProber = false;
+  boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems =
     lib.mkForce [ "vfat" "fat32" "exfat" "ext4" "btrfs" ];

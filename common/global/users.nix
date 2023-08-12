@@ -9,7 +9,8 @@ in {
     mutableUsers = true;
     users.nregner = {
       isNormalUser = true;
-      extraGroups = [ "wheel" ] ++ ifTheyExist [ "docker" "libvirtd" "networkmanager"  ];
+      extraGroups = [ "wheel" ]
+        ++ ifTheyExist [ "docker" "libvirtd" "networkmanager" ];
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDk7uVEehfyhAZUvZbvH5Kw85MzLyYqVdTOMBXsmBeLx"
       ];
