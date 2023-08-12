@@ -16,6 +16,9 @@
     # Tools
     deploy-rs.url = "github:serokell/deploy-rs";
 
+    nix-index-database.url = "github:Mic92/nix-index-database";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+
     # TODO: Add any other flake you might need
     # hardware.url = "github:nixos/nixos-hardware";
 
@@ -91,7 +94,10 @@
         "nregner@iapetus" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ ./home-manager/home.nix ];
+          modules = [
+            inputs.nix-index-database.hmModules.nix-index
+            ./home-manager/home.nix
+          ];
         };
       };
 

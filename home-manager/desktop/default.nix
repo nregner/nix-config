@@ -31,6 +31,11 @@
 
   services.easyeffects.enable = true;
 
+  programs.nix-index = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
   gtk = {
     enable = true;
     # font.name = "Victor Mono SemiBold 12";
