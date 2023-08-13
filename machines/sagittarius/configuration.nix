@@ -1,12 +1,15 @@
 { inputs, config, lib, modulesPath, nixpkgs, pkgs, ... }: {
   imports = [
     inputs.nixos-generators.nixosModules.all-formats
-    "${modulesPath}/profiles/qemu-guest.nix"
     ../../common/global
+    ./hardware-configuration.nix
   ];
 
   nixpkgs.hostPlatform = lib.mkForce "x86_64-linux";
   networking.hostName = "sagittarius";
+
+  boot.loader.grub.enable = true;
+  boot.loader.grub.device = "nodev";
 
   users.users.root = {
     password = "root"; # ssh password auth disabled, so whatever :)
