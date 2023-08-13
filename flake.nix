@@ -21,6 +21,9 @@
     nix-index-database.url = "github:Mic92/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
+    nixos-generators.url = "github:nix-community/nixos-generators";
+    nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
+
     # Misc
     linux-rockchip = {
       url = "github:armbian/linux-rockchip/rk-5.10-rkr4";
@@ -86,6 +89,11 @@
           modules = [ ./machines/iapetus/configuration.nix ];
         };
 
+        sagittarius = lib.nixosSystem {
+          specialArgs = { inherit inputs outputs; };
+          modules = [ ./machines/sagittarius/configuration.nix ];
+        };
+
         # Builder VM
         ec2-aarch64 = lib.nixosSystem {
           system = "aarch64-linux";
@@ -121,6 +129,7 @@
         };
       };
 
+      # TODO: Derive from nixosC
       deploy.nodes = forEachNode (hostname: {
         inherit hostname;
         fastConnection = false;
@@ -151,6 +160,18 @@
           profiles.system = {
             user = "root";
             path = deploy-rs.lib.aarch64-linux.activate.nixos
+              self.nixosConfigurations.${hostname};
+          };
+        });
+        sagittarius = (let hostname = "sagittarius";
+        in {
+          inherit hostname;
+          fastConnection = false;
+          remoteBuild = true;
+          sshUser = "nregner";
+          profiles.system = {
+            user = "root";
+            path = deploy-rs.lib.x86_64-linux.activate.nixos
               self.nixosConfigurations.${hostname};
           };
         });

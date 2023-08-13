@@ -6,6 +6,7 @@ keys:
   - &host_server age1g2mgt0s80nc5yzkjnwmn6qwf8udnapx92vhwussjpa9d4et5v5zskgap5y
   - &host_kraken age16zk73cejuepyskjeq0625ecf727y3nmmw32qq0ta97q9e4uj2sqstq6240
   - &host_voron age1vzn4vh7xe7tqx0czgayafr208pjwegmus0l3gxn4v5yeemwch58sahxpee
+  - &host_sagittarius age1yfflu4pxlt32sy4xaa04m5gs7kyrccyj9y5hh0qvndmxtrxrtpns7mf682
 creation_rules:
   - path_regex: infrastructure/.*/secrets.yaml
     key_groups:
@@ -20,6 +21,7 @@ creation_rules:
           - *host_server
           - *host_voron
           - *host_kraken
+          - *host_sagittarius
   - path_regex: machines/voron/secrets.yaml
     key_groups:
       - age:
@@ -35,3 +37,8 @@ creation_rules:
       - age:
           - *user_nregner
           - age19aerky0hut9aafgyet4pknu7r7emadgz8xq2tltjkupz0dluzf2sgsdfha
+  - path_regex: machines/sagittarius/secrets.yaml
+    key_groups:
+      - age:
+          - *user_nregner
+          - *host_sagittarius
