@@ -15,6 +15,19 @@
     password = "root"; # ssh password auth disabled, so whatever :)
   };
 
+  services.k3s.enable = true;
+  services.k3s.extraFlags =
+    "--disable traefik --flannel-backend=host-gw --container-runtime-endpoint unix:///run/containerd/containerd.sock";
+  networking.firewall.allowedTCPPorts = [ 6443 ];
+  virtualisation.containerd.enable = true;
+
+  environment.systemPackages = with pkgs; [ k3s ];
+
+  systemd.services.k3s = {
+    wants = [ "containerd.service" ];
+    after = [ "containerd.service" ];
+  };
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
