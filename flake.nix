@@ -19,6 +19,9 @@
     nix-index-database.url = "github:Mic92/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
+    nixos-generators.url = "github:nix-community/nixos-generators";
+    nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
+
     # TODO: Add any other flake you might need
     # hardware.url = "github:nixos/nixos-hardware";
 
@@ -71,6 +74,11 @@
         iapetus = lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [ ./machines/iapetus/configuration.nix ];
+        };
+
+        sagittarius = lib.nixosSystem {
+          specialArgs = { inherit inputs outputs; };
+          modules = [ ./machines/sagittarius/configuration.nix ];
         };
 
         # Builder VM
