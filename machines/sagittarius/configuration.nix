@@ -16,10 +16,25 @@
   };
 
   services.k3s.enable = true;
+  #  services.k3s.extraFlags =
+  #    "--disable traefik --flannel-backend=host-gw --container-runtime-endpoint unix:///run/containerd/containerd.sock";
   services.k3s.extraFlags =
     "--disable traefik --flannel-backend=host-gw --container-runtime-endpoint unix:///run/containerd/containerd.sock";
   networking.firewall.allowedTCPPorts = [ 6443 ];
   virtualisation.containerd.enable = true;
+
+  # source: https://github.com/TUM-DSE/doctor-cluster-config/blob/d8cc881145738a9fea25894b6c778708e7ba1b44/modules/k3s/default.nix
+  virtualisation.containerd.settings = {
+    version = 2;
+    plugins."io.containerd.grpc.v1.cri" = {
+      cni.conf_dir = "/var/lib/rancher/k3s/agent/etc/cni/net.d/";
+      # FIXME: upstream
+      cni.bin_dir = "${pkgs.runCommand "cni-bin-dir" { } ''
+        mkdir -p $out
+        ln -sf ${pkgs.cni-plugins}/bin/* ${pkgs.cni-plugin-flannel}/bin/* $out
+      ''}";
+    };
+  };
 
   environment.systemPackages = with pkgs; [ k3s ];
 
