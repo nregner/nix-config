@@ -8,6 +8,10 @@
   nixpkgs.hostPlatform = lib.mkForce "aarch64-linux";
   networking.hostName = "voron";
 
+  users.users.root = {
+    password = "root"; # ssh password auth disabled, so whatever :)
+  };
+
   boot = {
     kernelPackages = pkgs.linuxPackagesFor
       (pkgs.callPackage ./kernel { src = inputs.linux-rockchip; });
