@@ -1,15 +1,16 @@
 {
   services.moonraker = {
-    user = "moonraker";
     enable = true;
+    package = pkgs.unstable.klipper;
+    user = "moonraker";
+
     address = "0.0.0.0";
     settings = {
       octoprint_compat = { };
       history = { };
       authorization = {
         force_logins = true;
-        cors_domains =
-          [ "*.local" "*.lan" "*://app.fluidd.xyz" "*://my.mainsail.xyz" ];
+        cors_domains = [ "https://voron.nregner.net" ];
         trusted_clients = [
           "10.0.0.0/8"
           "127.0.0.0/8"

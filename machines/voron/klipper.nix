@@ -1,8 +1,10 @@
-{
+{ pkgs, ... }: {
   services.klipper = {
+    enable = true;
+    package = pkgs.unstable.klipper;
     user = "klipper";
     group = "klipper";
-    enable = true;
+
     configFile = ./klipper.cfg;
     firmwares = {
       mcu = {
@@ -13,4 +15,10 @@
       };
     };
   };
+
+  # systemd udev rule to restart Klipper
+  systemd.udevRules = ''
+    ACTION=="add", SUBSYSTEM=="tty", KERNEL=="ttyACM*", TAG+="systemd", ENV{SYSTEMD_WANTS}="klipper.service"
+  '';
+
 }
