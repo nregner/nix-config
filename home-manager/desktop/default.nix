@@ -31,6 +31,11 @@
 
   services.easyeffects.enable = true;
 
+  programs.nix-index = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
   gtk = {
     enable = true;
     # font.name = "Victor Mono SemiBold 12";
@@ -41,7 +46,13 @@
   };
 
   dconf.settings = {
-    "org/gnome/desktop/interface" = { color-scheme = "prefer-dark"; };
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+      clock = "12h";
+    };
+    "org/gnome/settings-daemon/plugins/power" = {
+      sleep-inactive-ac-type = "nothing";
+    };
     "org/gtk/settings/file-chooser" = { clock-format = "12h"; };
     "org/gnome/shell" = {
       disable-user-extensions = false;

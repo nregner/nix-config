@@ -12,14 +12,41 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" = {
-    device = "/dev/disk/by-label/nix-root";
-    fsType = "ext4";
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/3E8C-7A71";
+    fsType = "vfat";
+    neededForBoot = true;
   };
 
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-label/new-efi";
-    fsType = "vfat";
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/432fbe74-ed01-4696-aecb-59028c69531b";
+    fsType = "btrfs";
+    options = [ "subvol=root" "noatime" ];
+  };
+
+  fileSystems."/home" = {
+    device = "/dev/disk/by-uuid/432fbe74-ed01-4696-aecb-59028c69531b";
+    fsType = "btrfs";
+    options = [ "subvol=home" "noatime" ];
+  };
+
+  fileSystems."/nix" = {
+    device = "/dev/disk/by-uuid/432fbe74-ed01-4696-aecb-59028c69531b";
+    fsType = "btrfs";
+    options = [ "subvol=nix" "noatime" ];
+  };
+
+  fileSystems."/var/lib" = {
+    device = "/dev/disk/by-uuid/432fbe74-ed01-4696-aecb-59028c69531b";
+    fsType = "btrfs";
+    options = [ "subvol=var-lib" "noatime" ];
+  };
+
+  fileSystems."/var/log" = {
+    device = "/dev/disk/by-uuid/432fbe74-ed01-4696-aecb-59028c69531b";
+    fsType = "btrfs";
+    options = [ "subvol=var-log" "noatime" ];
+    neededForBoot = true;
   };
 
   swapDevices = [ ];
@@ -30,7 +57,8 @@
 
     # Use the open source version of the kernel module
     # Only available on driver 515.43.04+
-    open = true;
+    # NB: Secondary GPU not happy with open source
+    open = false;
 
     # Enable the nvidia settings menu
     nvidiaSettings = true;

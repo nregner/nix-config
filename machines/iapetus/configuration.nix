@@ -1,15 +1,17 @@
 { inputs, config, lib, pkgs, ... }: {
-  imports = [ ../../common/global ./hardware-configuration.nix ./builders.nix ];
+  imports = [
+    ../../common/global
+    ./hardware-configuration.nix
+    ./builders.nix
+    ./vfio.nix
+  ];
 
   # Login shell
   programs.zsh.enable = true;
   users.users.nregner.shell = pkgs.zsh;
 
   # Bootloader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "nodev";
-  boot.loader.grub.efiSupport = true;
-  boot.loader.grub.useOSProber = false;
+  boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems =
     lib.mkForce [ "vfat" "fat32" "exfat" "ext4" "btrfs" ];
@@ -54,6 +56,11 @@
     pulse.enable = true;
     # jack.enable = true;
   };
+
+  # Windows VM
+  vfio.enable = true;
+  virtualisation.libvirtd.enable = true;
+  environment.systemPackages = with pkgs; [ virt-manager ];
 
   # Misc
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
