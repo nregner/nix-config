@@ -21,7 +21,7 @@
       prev.makeModulesClosure (x // { allowMissing = true; });
 
     # bleeding edge by default
-    inherit (final.unstable) octoprint;
+    inherit (final.unstable) octoprint moonraker;
   };
 
   # When applied, the unstable nixpkgs set (declared in the flake inputs) will

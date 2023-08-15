@@ -145,7 +145,7 @@
           in {
             inherit hostname;
             fastConnection = true;
-            remoteBuild = false;
+            remoteBuild = true;
             sshUser = "nregner";
             profiles.system = {
               user = "root";

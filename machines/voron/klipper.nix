@@ -3,24 +3,14 @@
 
   services.klipper = {
     enable = true;
-    #    package = pkgs.cross.klipper;
-    user = "klipper";
-    group = "klipper";
-
+    user = "moonraker";
+    group = "moonraker";
     configFile = ./klipper.cfg;
-    #    firmwares = {
-    #      mcu = {
-    #        enable = true;
-    #        configFile = ./avr.cfg;
-    #        serial =
-    #          "/dev/serial/by-id/usb-Klipper_stm32f446xx_450016000450335331383520-if00";
-    #      };
-    #    };
   };
 
   # restart Klipper when printer is powerd on
+  # https://github.com/Klipper3d/klipper/issues/835
   services.udev.extraRules = ''
-    ACTION=="add", ATTRS{idProduct}=="614e", ATTRS{idVendor}=="1d50", ENV{SYSTEMD_WANTS}="klipper.service"
+    ACTION=="add", ATTRS{idProduct}=="614e", ATTRS{idVendor}=="1d50", RUN+="${pkgs.bash} -c 'systemctl restart klipper.service'"
   '';
-
 }
