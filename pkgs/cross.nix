@@ -25,4 +25,7 @@ in rec {
 
   # TODO: More generic way to cross-compile heavy packages
   inherit (targetPkgs.unstable) klipper moonraker;
+  #  klipper = targetPkgs.unstable.klipper.overrideAttrs (old: {
+  #    nativeBuildInputs = old.nativeBuildInputs ++ [ hostPkgs.stdenv.cc ];
+  #  });
 }

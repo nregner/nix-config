@@ -1,19 +1,21 @@
 { pkgs, ... }: {
+  nixpkgs.overlays = [ (final: prev: { }) ];
+
   services.klipper = {
     enable = true;
-    package = pkgs.unstable.klipper;
+    #    package = pkgs.cross.klipper;
     user = "klipper";
     group = "klipper";
 
     configFile = ./klipper.cfg;
-    firmwares = {
-      mcu = {
-        enable = true;
-        configFile = ./avr.cfg;
-        serial =
-          "/dev/serial/by-id/usb-Klipper_stm32f446xx_450016000450335331383520-if00";
-      };
-    };
+    #    firmwares = {
+    #      mcu = {
+    #        enable = true;
+    #        configFile = ./avr.cfg;
+    #        serial =
+    #          "/dev/serial/by-id/usb-Klipper_stm32f446xx_450016000450335331383520-if00";
+    #      };
+    #    };
   };
 
   # restart Klipper when printer is powerd on

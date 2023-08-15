@@ -117,26 +117,43 @@
         };
       };
 
-      deploys.nodes = forEachNode (hostname: {
-        inherit hostname;
-        fastConnection = false;
-        remoteBuild = false;
-        profiles.system = {
-          path = deploy-rs.lib.aarch64-linux.activate.nixos
-            self.nixosConfigurations.${hostname};
+      deploy.nodes =
+        /* forEachNode (hostname: {
+             inherit hostname;
+             fastConnection = false;
+             remoteBuild = false;
+             profiles.system = {
+               path = deploy-rs.lib.aarch64-linux.activate.nixos
+                 self.nixosConfigurations.${hostname};
+             };
+           }) ++
+        */
+        {
+          ec2-aarch64 = (let hostname = "ec2-aarch64";
+          in {
+            inherit hostname;
+            fastConnection = true;
+            remoteBuild = true;
+            sshUser = "root";
+            profiles.system = {
+              user = "root";
+              path = deploy-rs.lib.aarch64-linux.activate.nixos
+                self.nixosConfigurations.${hostname};
+            };
+          });
+          voron = (let hostname = "voron";
+          in {
+            inherit hostname;
+            fastConnection = true;
+            remoteBuild = false;
+            sshUser = "nregner";
+            profiles.system = {
+              user = "root";
+              path = deploy-rs.lib.aarch64-linux.activate.nixos
+                self.nixosConfigurations.${hostname};
+            };
+          });
         };
-      }) ++ [
-        (let hostname = "ec2-aarch64";
-        in {
-          inherit hostname;
-          fastConnection = true;
-          remoteBuild = true;
-          profiles.system = {
-            path = deploy-rs.lib.aarch64-linux.activate.nixos
-              self.nixosConfigurations.${hostname};
-          };
-        })
-      ];
 
       checks = builtins.mapAttrs
         (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
