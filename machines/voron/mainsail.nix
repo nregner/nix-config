@@ -1,0 +1,1 @@
+{ services.mainsail = { enable = true; }; }

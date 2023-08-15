@@ -3,6 +3,9 @@
     "${modulesPath}/installer/sd-card/sd-image-aarch64.nix"
     "${modulesPath}/profiles/minimal.nix"
     ../../common/global
+    ./klipper.nix
+    ./moonraker.nix
+    ./mainsail.nix
   ];
 
   nixpkgs.hostPlatform = lib.mkForce "aarch64-linux";
