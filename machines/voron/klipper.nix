@@ -5,7 +5,7 @@
     enable = true;
     user = "moonraker";
     group = "moonraker";
-    configFile = ./klipper.cfg;
+    configFile = ./printer.cfg;
   };
 
   # restart Klipper when printer is powerd on
