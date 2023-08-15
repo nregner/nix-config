@@ -125,7 +125,18 @@
           path = deploy-rs.lib.aarch64-linux.activate.nixos
             self.nixosConfigurations.${hostname};
         };
-      });
+      }) ++ [
+        (let hostname = "ec2-aarch64";
+        in {
+          inherit hostname;
+          fastConnection = true;
+          remoteBuild = true;
+          profiles.system = {
+            path = deploy-rs.lib.aarch64-linux.activate.nixos
+              self.nixosConfigurations.${hostname};
+          };
+        })
+      ];
 
       checks = builtins.mapAttrs
         (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;

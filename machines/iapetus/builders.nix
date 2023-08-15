@@ -15,6 +15,7 @@
       system = "aarch64-linux";
       supportedFeatures =
         [ "nixos-test" "benchmark" "big-parallel" "kvm" "gccarch-armv8-a" ];
+      maxJobs = 8;
       mandatoryFeatures = [ ];
     }
     #      {
