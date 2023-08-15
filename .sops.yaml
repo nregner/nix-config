@@ -22,3 +22,7 @@ creation_rules:
     - age:
       - *user_nregner
       - age19aerky0hut9aafgyet4pknu7r7emadgz8xq2tltjkupz0dluzf2sgsdfha
+  - path_regex: machines/sagittarius/secrets.yaml
+    key_groups:
+      - age:
+          - *user_nregner

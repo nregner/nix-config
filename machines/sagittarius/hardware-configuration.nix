@@ -13,7 +13,7 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
-    device = "/dev/vda1";
+    device = "/dev/disk/by-label/nixos";
     fsType = "ext4";
   };
 
