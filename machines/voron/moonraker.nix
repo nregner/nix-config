@@ -1,7 +1,6 @@
 {
   services.moonraker = {
     enable = true;
-    package = pkgs.unstable.klipper;
     user = "moonraker";
 
     address = "0.0.0.0";

@@ -16,9 +16,9 @@
     };
   };
 
-  # systemd udev rule to restart Klipper
-  systemd.udevRules = ''
-    ACTION=="add", SUBSYSTEM=="tty", KERNEL=="ttyACM*", TAG+="systemd", ENV{SYSTEMD_WANTS}="klipper.service"
+  # restart Klipper when printer is powerd on
+  services.udev.extraRules = ''
+    ACTION=="add", ATTRS{idProduct}=="614e", ATTRS{idVendor}=="1d50", ENV{SYSTEMD_WANTS}="klipper.service"
   '';
 
 }
