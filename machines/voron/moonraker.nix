@@ -1,4 +1,6 @@
 {
+  nixpkgs.overlays = [ (final: prev: { inherit (final.unstable) moonraker; }) ];
+
   # required for allowSystemControl
   security.polkit.enable = true;
 

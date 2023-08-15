@@ -19,9 +19,6 @@
     # https://github.com/NixOS/nixpkgs/issues/154163#issuecomment-1350599022
     makeModulesClosure = x:
       prev.makeModulesClosure (x // { allowMissing = true; });
-
-    # bleeding edge by default
-    inherit (final.unstable) octoprint moonraker;
   };
 
   # When applied, the unstable nixpkgs set (declared in the flake inputs) will

@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  nixpkgs.overlays = [ (final: prev: { }) ];
+  nixpkgs.overlays = [ (final: prev: { inherit (final.unstable) klipper; }) ];
 
   services.klipper = {
     enable = true;

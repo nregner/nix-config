@@ -3,6 +3,7 @@ let
   rootDir = "/var/lib/octoprint";
   restartPath = "${rootDir}/restart";
 in {
+  nixpkgs.overlays = [ (final: prev: { inherit (final.unstable) octoprint; }) ];
 
   # 3d printer
   services.octoprint = {
