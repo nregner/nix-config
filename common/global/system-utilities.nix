@@ -39,6 +39,7 @@
     nmap
     socat
     tcpdump
+    wget
 
     # debugging
     strace

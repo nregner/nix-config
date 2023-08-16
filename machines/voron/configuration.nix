@@ -19,6 +19,8 @@
     kernelPackages = pkgs.linuxPackagesFor
       (pkgs.callPackage ./kernel { src = inputs.linux-rockchip; });
 
+    supportedFilesystems = lib.mkForce [ "vfat" "fat32" "exfat" "ext4" ];
+
     loader = {
       grub.enable = false;
       generic-extlinux-compatible.enable = true;
@@ -27,7 +29,10 @@
     initrd.includeDefaultModules = false;
   };
 
+  powerManagement.cpuFreqGovernor = "ondemand";
+
   hardware = {
+    enableRedistributableFirmware = true;
     deviceTree = {
       name = "rockchip/rk3588s-orangepi-5.dtb";
       overlays = [
@@ -83,29 +88,6 @@
       ];
     };
   };
-
-  # Some filesystems (e.g. zfs) have some trouble with cross (or with BSP kernels?) here.
-  boot.supportedFilesystems = lib.mkForce [ "vfat" "fat32" "exfat" "ext4" ];
-
-  #  fileSystems = {
-  #    "/" = {
-  #      device = "/dev/disk/by-label/nixos";
-  #      fsType = "ext4";
-  #      options = [ "noatime" ];
-  #    };
-  #  };
-
-  hardware.enableRedistributableFirmware = true;
-  powerManagement.cpuFreqGovernor = "ondemand";
-
-  #  # build an SD image, by the command:
-  #  #   nix build .#
-  #  system.build.sdImage =
-  #    import "${inputs.nixpkgs}/nixos/lib/make-disk-image.nix" {
-  #      name = "orangepi5-sd-image";
-  #      copyChannel = false;
-  #      inherit config lib pkgs;
-  #    };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
