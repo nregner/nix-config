@@ -21,7 +21,6 @@
     transcrypt
     uucp
     pv
-    sops
     kubectl
     helm
   ];
