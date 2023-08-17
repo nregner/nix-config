@@ -1,14 +1,13 @@
 # Custom packages, that can be defined similarly to ones from nixpkgs
 # You can build them using 'nix build .#example' or (legacy) 'nix-build -A example'
 
-{ nixpkgs, pkgs }: {
-  inherit (pkgs) ubootOrangePiZero2;
+{ nixpkgs, nixpkgs-unstable, pkgs }: {
 
   # cross-compile heavy ARM on dependencies on more powerful x86 machines
   # TODO: Something more generic/flexible
   cross = import ./cross.nix {
-    inherit nixpkgs;
+    inherit nixpkgs nixpkgs-unstable;
     localSystem = "x86_64-linux";
-    crossSystem = "aarch64-linux";
+    crossSystem = "aarch64-multiplatform";
   };
 }

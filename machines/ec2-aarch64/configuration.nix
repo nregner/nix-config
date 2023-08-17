@@ -2,7 +2,6 @@
   imports = [
     "${modulesPath}/virtualisation/amazon-image.nix"
     ../../common/global
-    ../../common/optional/sops.nix
     ./binary-cache.nix
   ];
 
