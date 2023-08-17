@@ -29,6 +29,7 @@
       trusted-users = [ "nregner" ];
       trusted-public-keys =
         [ "builder-name:8HCwoSUcLvQOsrG8WyPTABSgBqK1SGqRsrUqQu1sTSk=" ];
+      auto-optimise-store = true;
     };
   };
 
