@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }: {
+{ pkgs, lib, nixpkgs-unstable, ... }: {
   services.klipper = {
     enable = true;
     user = "moonraker";
@@ -20,9 +20,12 @@
     ACTION=="add", ATTRS{idProduct}=="614e", ATTRS{idVendor}=="1d50", RUN+="${pkgs.bash} -c 'systemctl restart klipper.service'"
   '';
 
+  # use bleeding edge
+  disabledModules = [ "services/misc/klipper.nix" ];
+  imports = [ "${nixpkgs-unstable}/nixos/modules/services/misc/klipper.nix" ];
+
   nixpkgs.overlays = [
     (final: prev: {
-      # use bleeding edge
       inherit (final.unstable) klipper;
 
       # build without massive gui dependencies

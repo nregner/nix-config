@@ -33,7 +33,8 @@
     # nix-colors.url = "github:misterio77/nix-colors";
   };
 
-  outputs = { self, nixpkgs, home-manager, deploy-rs, ... }@inputs:
+  outputs =
+    { self, nixpkgs, nixpkgs-unstable, home-manager, deploy-rs, ... }@inputs:
     let
       inherit (self) outputs;
       inherit (nixpkgs) lib;
@@ -54,10 +55,7 @@
       # Acessible through 'nix build', 'nix shell', etc
       packages = forAllSystems (system:
         let pkgs = nixpkgs.legacyPackages.${system};
-        in import ./pkgs {
-          inherit nixpkgs pkgs;
-          inherit (inputs) nixpkgs-unstable;
-        });
+        in import ./pkgs { inherit nixpkgs nixpkgs-unstable pkgs; });
 
       # Devshell for bootstrapping
       # Acessible through 'nix develop' or 'nix-shell' (legacy)
@@ -93,7 +91,7 @@
         voron = lib.nixosSystem {
           system = "aarch64-linux";
           modules = [ ./machines/voron/configuration.nix ];
-          specialArgs = { inherit inputs outputs; };
+          specialArgs = { inherit inputs outputs nixpkgs-unstable; };
         };
       } // forEachNode (hostname:
         # 3d print farm node
