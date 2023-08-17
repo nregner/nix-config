@@ -55,7 +55,7 @@
       # Acessible through 'nix build', 'nix shell', etc
       packages = forAllSystems (system:
         let pkgs = nixpkgs.legacyPackages.${system};
-        in import ./pkgs { inherit nixpkgs pkgs; });
+        in import ./pkgs { inherit nixpkgs nixpkgs-unstable pkgs; });
 
       # Devshell for bootstrapping
       # Acessible through 'nix develop' or 'nix-shell' (legacy)
