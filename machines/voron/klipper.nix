@@ -1,11 +1,17 @@
-{ pkgs, ... }: {
-  nixpkgs.overlays = [ (final: prev: { inherit (final.unstable) klipper; }) ];
-
+{ pkgs, lib, ... }: {
   services.klipper = {
     enable = true;
     user = "moonraker";
     group = "moonraker";
     configFile = ./printer.cfg;
+    firmwares = {
+      mcu = {
+        enable = true;
+        configFile = ./firmware.cfg;
+        serial =
+          "/dev/serial/by-id/usb-Klipper_stm32f446xx_450016000450335331383520-if00";
+      };
+    };
   };
 
   # restart Klipper when printer is powerd on
@@ -13,4 +19,19 @@
   services.udev.extraRules = ''
     ACTION=="add", ATTRS{idProduct}=="614e", ATTRS{idVendor}=="1d50", RUN+="${pkgs.bash} -c 'systemctl restart klipper.service'"
   '';
+
+  nixpkgs.overlays = [
+    (final: prev: {
+      # use bleeding edge
+      inherit (final.unstable) klipper;
+
+      # build without massive gui dependencies
+      # TODO: submit patch to nixpkgs to make optional?
+      klipper-firmware = prev.unstable.klipper-firmware.overrideAttrs (prev: {
+        nativeBuidlInputs =
+          builtins.filter (pkg: lib.strings.hasPrefix "wxwidgets" pkg.name)
+          prev.nativebuildInputs;
+      });
+    })
+  ];
 }

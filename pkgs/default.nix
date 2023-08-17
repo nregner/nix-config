@@ -3,6 +3,8 @@
 
 { nixpkgs, nixpkgs-unstable, pkgs }: {
 
+  klipper-firmware = pkgs.callPackage ./klipper-firmware.nix { };
+
   # cross-compile heavy ARM on dependencies on more powerful x86 machines
   # TODO: Something more generic/flexible
   cross = import ./cross.nix {

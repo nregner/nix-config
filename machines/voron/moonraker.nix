@@ -1,9 +1,4 @@
 {
-  nixpkgs.overlays = [ (final: prev: { inherit (final.unstable) moonraker; }) ];
-
-  # required for allowSystemControl
-  security.polkit.enable = true;
-
   services.moonraker = {
     enable = true;
     allowSystemControl = true;
@@ -16,4 +11,10 @@
       history = { };
     };
   };
+
+  # required for allowSystemControl
+  security.polkit.enable = true;
+
+  # use bleeding edge
+  nixpkgs.overlays = [ (final: prev: { inherit (final.unstable) moonraker; }) ];
 }
