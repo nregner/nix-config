@@ -13,7 +13,7 @@
     gparted
     openrgb
 
-    jetbrains-toolbox
+    unstable.jetbrains-toolbox
     alacritty
 
     awscli2
