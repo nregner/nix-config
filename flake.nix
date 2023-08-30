@@ -54,13 +54,17 @@
       # Your custom packages
       # Acessible through 'nix build', 'nix shell', etc
       packages = forAllSystems (system:
-        let pkgs = nixpkgs.legacyPackages.${system};
-        in import ./pkgs { inherit nixpkgs nixpkgs-unstable pkgs; });
+        let
+          pkgs = nixpkgs.legacyPackages.${system} // {
+            # TODO: Don't duplicate overlay?
+            unstable = nixpkgs-unstable.legacyPackages.${system};
+          };
+        in import ./pkgs { inherit inputs pkgs; });
 
       # Devshell for bootstrapping
       # Acessible through 'nix develop' or 'nix-shell' (legacy)
       devShells = forAllSystems (system:
-        let pkgs = nixpkgs.legacyPackages.${system};
+        let pkgs = nixpkgs-unstable.legacyPackages.${system};
         in import ./shell.nix { inherit pkgs; });
 
       # Your custom packages and modifications, exported as overlays

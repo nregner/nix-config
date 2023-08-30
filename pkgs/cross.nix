@@ -1,6 +1,7 @@
 # Custom packages with explicit cross-compilation
-{ nixpkgs, nixpkgs-unstable, localSystem, crossSystem }:
+{ localSystem, crossSystem }:
 let
+  inherit (inputs) nixpkgs nixpkgs-unstable;
   hostPkgs = nixpkgs.legacyPackages.${localSystem} // {
     unstable = nixpkgs-unstable.legacyPackages.${localSystem};
   };
