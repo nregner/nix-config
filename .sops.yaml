@@ -22,3 +22,12 @@ creation_rules:
     - age:
       - *user_nregner
       - age19aerky0hut9aafgyet4pknu7r7emadgz8xq2tltjkupz0dluzf2sgsdfha
+  # janky workaround for encrypting from stdin
+  # https://github.com/getsops/sops/issues/884
+  # https://github.com/getsops/sops/issues/510
+  - path_regex: /dev/stdin
+    key_groups:
+      - age:
+          - *user_nregner
+          - *host_iapetus
+          - *host_server
