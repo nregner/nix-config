@@ -35,68 +35,33 @@
     enableRedistributableFirmware = true;
     deviceTree = {
       name = "rockchip/rk3588s-orangepi-5.dtb";
-      overlays = [
-        {
-          name = "orangepi5-sata-overlay";
-          dtsText = ''
-            // Orange Pi 5 Pcie M.2 to sata
-            /dts-v1/;
-            /plugin/;
-
-            / {
-              compatible = "rockchip,rk3588s-orangepi-5";
-
-              fragment@0 {
-                target = <&sata0>;
-
-                __overlay__ {
-                  status = "okay";
-                };
-              };
-
-              fragment@1 {
-                target = <&pcie2x1l2>;
-
-                __overlay__ {
-                  status = "disabled";
-                };
-              };
-            };
-          '';
-        }
-        {
-          name = "orangepi5-i2c-overlay";
-          dtsText = ''
-            /dts-v1/;
-            /plugin/;
-
-            / {
-              compatible = "rockchip,rk3588s-orangepi-5";
-
-              fragment@0 {
-                target = <&i2c1>;
-
-                __overlay__ {
-                  status = "okay";
-                  pinctrl-names = "default";
-                  pinctrl-0 = <&i2c1m2_xfer>;
-                };
-              };
-            };
-          '';
-        }
-      ] ++ (let
-        path = "${inputs.linux-rockchip}/arch/arm64/boot/dts/rockchip/overlay";
-      in lib.trivial.pipe (builtins.readDir path) [
-        (lib.filterAttrs (name: type:
-          type == "regular" && builtins.match ".*pwm.*" name != null))
-        (lib.attrNames)
-        (lib.naturalSort)
-        (map (name: {
-          name = name;
-          dtsFile = builtins.readFile "${path}/${name}";
-        }))
-      ]);
+      overlays = (let
+        #        path = "${inputs.linux-rockchip}/arch/arm64/boot/dts/rockchip/overlay";
+        path = ./kernel/dts;
+        overlays = [
+          "rk3588-pwm0-m1.dts"
+          "rk3588-pwm13-m2.dts"
+          "rk3588-pwm14-m1.dts"
+          "rk3588-pwm15-m2.dts"
+          "orangepi-5-sata.dts"
+        ];
+      in map (name: {
+        inherit name;
+        # dtsText = builtins.readFile "${path}/${name}";
+        dtsFile = "${path}/${name}";
+      }) overlays);
+      /* lib.trivial.pipe (builtins.readDir path) [
+           (lib.filterAttrs (name: type:
+             type == "regular" && builtins.match
+             ".*(rk3588-pwm|orangepi-5-sata|rk3588-i2c1-m2).*\\.dts" name != null))
+           (lib.attrNames)
+           (lib.naturalSort)
+           (map (name: {
+             inherit name;
+             dtsFile = builtins.readFile "${path}/${name}";
+           }))
+         ]);
+      */
     };
   };
 

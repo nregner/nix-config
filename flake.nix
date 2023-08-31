@@ -143,8 +143,8 @@
         voron = (let hostname = "voron";
         in {
           inherit hostname;
-          fastConnection = false;
-          remoteBuild = true;
+          fastConnection = true;
+          remoteBuild = false;
           sshUser = "nregner";
           profiles.system = {
             user = "root";
