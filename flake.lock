@@ -182,7 +182,8 @@
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-unstable": "nixpkgs-unstable",
-        "sops-nix": "sops-nix"
+        "sops-nix": "sops-nix",
+        "wiring-op": "wiring-op"
       }
     },
     "sops-nix": {
@@ -216,6 +217,23 @@
       "original": {
         "owner": "numtide",
         "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "wiring-op": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1693309707,
+        "narHash": "sha256-FsrB/024QWTfXknBcLoM8SA9F46Shtm3iJlacJWG3H4=",
+        "owner": "orangepi-xunlong",
+        "repo": "wiringOP",
+        "rev": "0c11e159076195d52c4229fae324a51026420814",
+        "type": "github"
+      },
+      "original": {
+        "owner": "orangepi-xunlong",
+        "ref": "next",
+        "repo": "wiringOP",
         "type": "github"
       }
     }

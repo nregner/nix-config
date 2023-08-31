@@ -12,4 +12,6 @@ in {
     localSystem = "x86_64-linux";
     crossSystem = "aarch64-multiplatform";
   };
+
+  wiring-op = callPackage ./wiring-op.nix { src = inputs.wiring-op; };
 }

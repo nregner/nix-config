@@ -24,6 +24,10 @@
       url = "github:armbian/linux-rockchip/rk-5.10-rkr4";
       flake = false;
     };
+    wiring-op = {
+      url = "github:orangepi-xunlong/wiringOP/next";
+      flake = false;
+    };
 
     # TODO: Add any other flake you might need
     # hardware.url = "github:nixos/nixos-hardware";
