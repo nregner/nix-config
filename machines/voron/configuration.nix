@@ -85,7 +85,18 @@
             };
           '';
         }
-      ];
+      ] ++ (let
+        path = "${inputs.linux-rockchip}/arch/arm64/boot/dts/rockchip/overlay";
+      in lib.trivial.pipe (builtins.readDir path) [
+        (lib.filterAttrs (name: type:
+          type == "regular" && builtins.match ".*pwm.*" name != null))
+        (lib.attrNames)
+        (lib.naturalSort)
+        (map (name: {
+          name = name;
+          dtsFile = builtins.readFile "${path}/${name}";
+        }))
+      ]);
     };
   };
 
@@ -97,6 +108,33 @@
       '';
     };
   };
+
+  #  passthru = rec {
+  #    inherit (inputs) linux-rockchip;
+  #    path = "${inputs.linux-rockchip}/arch/arm64/boot/dts/rockchip/overlay";
+  #
+  #    filtered = let
+  #    in map (name: {
+  #      name = name;
+  #      dtsFile = builtins.readFile "${path}/${name}";
+  #    }) (lib.naturalSort (lib.attrNames (lib.filterAttrs
+  #      (name: type: type == "regular" && builtins.match ".*sata.*" name != null)
+  #      (builtins.readDir path))));
+  #
+  #    filtered2 = let
+  #      path = "${inputs.linux-rockchip}/arch/arm64/boot/dts/rockchip/overlay";
+  #    in lib.trivial.pipe (builtins.readDir path) [
+  #      (lib.filterAttrs (name: type:
+  #        type == "regular" && builtins.match ".*sata.*" name != null))
+  #      (lib.attrNames)
+  #      (lib.naturalSort)
+  #      (map (name: {
+  #        name = name;
+  #        dtsFile = builtins.readFile "${path}/${name}";
+  #      }))
+  #    ];
+  #
+  #  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
