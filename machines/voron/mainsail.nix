@@ -4,7 +4,6 @@
 
   systemd.services.ustreamer = {
     description = "Mainsail webcam stream";
-    wantedBy = [ "multi-user.target" ];
     script = with pkgs; ''
       ${ustreamer}/bin/ustreamer --device /dev/video0 --host 0.0.0.0 --port 81
     '';

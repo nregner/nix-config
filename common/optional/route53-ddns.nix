@@ -55,7 +55,6 @@ in {
 
       after = [ "network-online.target" ];
       requires = [ "network-online.target" ];
-      wantedBy = [ "multi-user.target" ];
 
       serviceConfig.EnvironmentFile = cfg.environmentFile;
 

@@ -5,24 +5,12 @@
     ../../common/global
     ../../common/optional/route53-ddns.nix
     ./klipper.nix
-    ./moonraker.nix
     ./mainsail.nix
+    ./moonraker.nix
+    ./networking.nix
   ];
 
   nixpkgs.hostPlatform = lib.mkForce "aarch64-linux";
-  networking.hostName = "voron";
-
-  sops.secrets.ddns = {
-    sopsFile = ./secrets/ddns.env;
-    format = "dotenv";
-  };
-  services.route53-ddns = {
-    enable = true;
-    domain = "voron.nregner.net";
-    ipType = "lan";
-    ttl = 60;
-    environmentFile = config.sops.secrets.ddns.path;
-  };
 
   users.users.root = {
     password = "root"; # ssh password auth disabled, so whatever :)
