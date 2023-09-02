@@ -1,6 +1,7 @@
 { inputs, config, lib, pkgs, ... }: {
   imports = [
     ../../common/global
+    ../../infrastructure/tailscale
     ./hardware-configuration.nix
     ./builders.nix
     ./vfio.nix

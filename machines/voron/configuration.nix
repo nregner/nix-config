@@ -3,7 +3,7 @@
     "${modulesPath}/installer/sd-card/sd-image-aarch64.nix"
     "${modulesPath}/profiles/minimal.nix"
     ../../common/global
-    ../../common/optional/route53-ddns.nix
+    ../../common/server
     ./klipper.nix
     ./mainsail.nix
     ./moonraker.nix

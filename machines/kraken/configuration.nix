@@ -3,7 +3,7 @@
     "${modulesPath}/installer/sd-card/sd-image-aarch64.nix"
     "${modulesPath}/profiles/minimal.nix"
     ../../common/global
-    ./tailscale-bootstrap.nix
+    ../../common/server
     ./octoprint.nix
   ];
 
@@ -49,7 +49,6 @@
   };
 
   # Networking
-  services.tailscale-bootstrap.enable = true;
   sops.secrets.ddns = {
     sopsFile = ./secrets/ddns.env;
     format = "dotenv";

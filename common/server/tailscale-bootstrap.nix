@@ -7,7 +7,10 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    sops.secrets.tailscale-auth-key.sopsFile = ./secrets.yaml;
+    sops.secrets.tailscale-auth-key = {
+      sopsFile = ./secrets.yaml;
+      key = "tailscale/server-key";
+    };
 
     systemd.services.tailscale-bootstrap = {
       description = "Automatic Tailscale registration";
@@ -28,7 +31,7 @@ in {
         fi
 
         # otherwise authenticate with tailscale
-        ${tailscale}/bin/tailscale up --ssh -authkey="$(<${config.sops.secrets.tailscale-auth-key.path})"
+        ${tailscale}/bin/tailscale up --reset --ssh --auth-key="file:${config.sops.secrets.tailscale-auth-key.path}"
       '';
     };
   };
