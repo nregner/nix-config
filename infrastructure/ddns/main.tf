@@ -25,6 +25,6 @@ module "iam" {
 }
 
 output "aws_env" {
-  value     = {for username, iam in module.iam : username => iam.aws_env}
+  value     = { for username, iam in module.iam : username => jsonencode(iam.aws_env) }
   sensitive = true
 }

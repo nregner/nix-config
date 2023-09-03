@@ -1,4 +1,4 @@
-{ inputs, lib, config, ... }:
+{ config, inputs, lib, ... }:
 let
   isEd25519 = k: k.type == "ed25519";
   getKeyPath = k: k.path;
@@ -6,7 +6,8 @@ let
 in {
   imports = [ inputs.sops-nix.nixosModules.sops ];
 
-  sops.defaultSopsFile = lib.mkDefault ./secrets.yaml;
+  sops.defaultSopsFile = lib.mkDefault
+    (../.. + "/machines/${config.networking.hostName}/secrets.yaml");
   sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
   sops.gnupg.sshKeyPaths = [ ];
 }

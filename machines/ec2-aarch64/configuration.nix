@@ -15,8 +15,6 @@
     IdleActionSec=15min
   '';
 
-  sops.defaultSopsFile = ./secrets.yaml;
-
   # basic system utilities
   environment.systemPackages = with pkgs; [ awscli2 ];
 

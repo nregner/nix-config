@@ -7,7 +7,7 @@ keys:
   - &host_kraken age16zk73cejuepyskjeq0625ecf727y3nmmw32qq0ta97q9e4uj2sqstq6240
   - &host_voron age1vzn4vh7xe7tqx0czgayafr208pjwegmus0l3gxn4v5yeemwch58sahxpee
 creation_rules:
-  - path_regex: infrastructure/.*/(secrets.yaml|secrets/.*)
+  - path_regex: infrastructure/.*/secrets.yaml
     key_groups:
       - age:
           - *user_nregner
@@ -20,12 +20,12 @@ creation_rules:
           - *host_server
           - *host_voron
           - *host_kraken
-  - path_regex: machines/voron/(secrets.yaml|secrets/.*)
+  - path_regex: machines/voron/secrets.yaml
     key_groups:
       - age:
           - *user_nregner
           - *host_voron
-  - path_regex: machines/kraken/(secrets.yaml|secrets/*)
+  - path_regex: machines/kraken/secrets.yaml
     key_groups:
       - age:
           - *user_nregner

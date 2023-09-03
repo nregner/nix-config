@@ -49,10 +49,7 @@
   };
 
   # Networking
-  sops.secrets.ddns = {
-    sopsFile = ./secrets/ddns.env;
-    format = "dotenv";
-  };
+  sops.secrets.ddns.key = "route53-ddns/env";
   services.route53-ddns = {
     enable = true;
     domain = "${hostname}.nregner.net";
