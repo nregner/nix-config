@@ -1,3 +1,11 @@
+variable "hosted_zone" {
+  type = object({
+    arn     = string
+    zone_id = string
+    name    = string
+  })
+}
+
 variable "subdomain" {
   type = string
 }
@@ -8,10 +16,6 @@ variable "username" {
 
 locals {
   username = "${var.username}-nix-ddns"
-}
-
-data "aws_route53_zone" "zone" {
-  name = "nregner.net"
 }
 
 resource "aws_iam_user" "nix_ddns" {
@@ -37,12 +41,12 @@ data "aws_iam_policy_document" "nix_ddns" {
     actions = [
       "route53:ChangeResourceRecordSets",
     ]
-    resources = [data.aws_route53_zone.zone.arn]
+    resources = [var.hosted_zone.arn]
     # https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/specifying-rrset-conditions.html
     condition {
       test     = "ForAllValues:StringLike"
       variable = "route53:ChangeResourceRecordSetsNormalizedRecordNames"
-      values   = ["${var.subdomain}.${data.aws_route53_zone.zone.name}"]
+      values   = ["${var.subdomain == null ? "" : "${var.subdomain}."}${var.hosted_zone.name}"]
     }
     condition {
       test     = "ForAllValues:StringEquals"
@@ -67,9 +71,9 @@ resource "aws_iam_policy_attachment" "nix_ddns" {
   users      = [aws_iam_user.nix_ddns.name]
 }
 
-output "aws_env" {
+output "env" {
   value     = <<EOT
-HOSTED_ZONE_ID=${data.aws_route53_zone.zone.zone_id}
+HOSTED_ZONE_ID=${var.hosted_zone.zone_id}
 AWS_ACCESS_KEY_ID=${aws_iam_access_key.nix_ddns.id}
 AWS_SECRET_ACCESS_KEY=${aws_iam_access_key.nix_ddns.secret}
 AWS_DEFAULT_REGION=us-west-2
