@@ -6,13 +6,31 @@ terraform {
   }
 }
 
-data "aws_route53_zone" "primary" {
+resource "aws_route53_zone" "primary" {
   name = "nregner.net"
+}
+
+resource "aws_route53_record" "wildcard" {
+  zone_id = aws_route53_zone.primary.zone_id
+  name    = "*.nregner.net"
+  type    = "CNAME"
+  ttl     = 900
+  records = ["nregner.net"]
+}
+
+resource "aws_route53domains_registered_domain" "primary" {
+  domain_name = "nregner.net"
+  dynamic "name_server" {
+    for_each = aws_route53_zone.primary.name_servers
+    content {
+      name = name_server.value
+    }
+  }
 }
 
 module "acme" {
   source      = "./acme"
-  hosted_zone = data.aws_route53_zone.primary
+  hosted_zone = aws_route53_zone.primary
   username    = "sagittarius"
 }
 
@@ -23,7 +41,7 @@ module "ddns" {
     voron       = { subdomain = "voron" }
     kraken      = { subdomain = "kraken-*" }
   }
-  hosted_zone = data.aws_route53_zone.primary
+  hosted_zone = aws_route53_zone.primary
   username    = each.key
   subdomain   = each.value.subdomain
 }
