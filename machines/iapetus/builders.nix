@@ -21,16 +21,17 @@
            # speedFactor = 100;
          }
       */
-      {
-        hostName = "voron";
-        protocol = "ssh";
-        sshUser = "nregner";
-        system = "aarch64-linux";
-        supportedFeatures =
-          [ "nixos-test" "benchmark" "big-parallel" "kvm" "gccarch-armv8-a" ];
-        mandatoryFeatures = [ ];
-        maxJobs = 2;
-      }
+      /* {
+           hostName = "voron";
+           protocol = "ssh";
+           sshUser = "nregner";
+           system = "aarch64-linux";
+           supportedFeatures =
+             [ "nixos-test" "benchmark" "big-parallel" "kvm" "gccarch-armv8-a" ];
+           mandatoryFeatures = [ ];
+           maxJobs = 2;
+         }
+      */
     ];
   };
 }

@@ -1,0 +1,1 @@
+fd secrets.yaml -x sops updatekeys

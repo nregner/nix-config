@@ -3,6 +3,7 @@
 
 { inputs, pkgs }: {
   route53-ddns = pkgs.unstable.callPackage ./route53-ddns { };
+  jetbrains-toolbox = pkgs.unstable.callPackage ./jetbrains-toolbox.nix { };
 
   # cross-compile heavy ARM on dependencies on more powerful x86 machines
   # TODO: Something more generic/flexible

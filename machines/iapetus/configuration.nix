@@ -1,4 +1,4 @@
-{ inputs, config, lib, pkgs, ... }: {
+{ lib, pkgs, ... }: {
   imports = [
     ../../common/global
     ../../infrastructure/tailscale
@@ -20,6 +20,7 @@
   # Networking
   networking.hostName = "iapetus";
   networking.networkmanager.enable = true;
+  systemd.services.NetworkManager-wait-online.enable = false;
 
   # Desktop environment
   services.xserver = {
@@ -64,16 +65,33 @@
   environment.systemPackages = with pkgs; [ virt-manager ];
 
   # Misc
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+  # boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   virtualisation.docker = {
     enable = true;
-    extraOptions = "--insecure-registry nregner.net:32000";
+    package = pkgs.unstable.docker_24;
+    # enableOnBoot = false; # lazy start with docker.socket
+    # extraOptions = "--insecure-registry sagittarius:5000";
+    daemon.settings = {
+      insecure-registries =
+        [ "http://sagittarius:5000" "http://100.92.148.118:5000" ];
+    };
+    storageDriver = "btrfs";
   };
+
+  # virtualisation.docker.rootless = {
+  #   enable = true;
+  #   setSocketVariable = true;
+  #   # enableOnBoot = false; # lazy start with docker.socket
+  #   daemon.settings = { insecure-registries = [ "sagittarius:5000" ]; };
+  # };
 
   services.printing.enable = true;
 
-  services.flatpak.enable = true;
+  services.earlyoom = {
+    enable = true;
+    freeMemThreshold = 1; # no swap, let it get pretty full...
+  };
 
   programs.steam = {
     enable = true;

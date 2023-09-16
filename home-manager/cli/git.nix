@@ -1,4 +1,4 @@
-{
+{ pkgs, ... }: {
   programs.git = {
     enable = true;
     userName = "Nathan Regner";
@@ -7,5 +7,8 @@
     difftastic.enable = true;
     extraConfig = { push = { autoSetupRemote = true; }; };
   };
+
   programs.lazygit.enable = true;
+
+  home.packages = with pkgs; [ transcrypt ];
 }

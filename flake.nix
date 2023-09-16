@@ -24,6 +24,10 @@
     nixos-generators.url = "github:nix-community/nixos-generators";
     nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
 
+    stylix.url = "github:danth/stylix/release-23.05";
+    stylix.inputs.nixpkgs.follows = "nixpkgs";
+    stylix.inputs.home-manager.follows = "home-manager";
+
     # Misc
     linux-rockchip = {
       url = "github:armbian/linux-rockchip/rk-5.10-rkr4";
@@ -69,7 +73,10 @@
       # Devshell for bootstrapping
       # Acessible through 'nix develop' or 'nix-shell' (legacy)
       devShells = forAllSystems (system:
-        let pkgs = nixpkgs-unstable.legacyPackages.${system};
+        let
+          pkgs = nixpkgs-unstable.legacyPackages.${system} // {
+            inherit (home-manager.packages.${system}) home-manager;
+          };
         in import ./shell.nix { inherit pkgs; });
 
       # Your custom packages and modifications, exported as overlays
@@ -118,18 +125,17 @@
       # Standalone home-manager configuration entrypoint
       # Available through 'home-manager --flake .#'
       homeConfigurations = {
-        # FIXME replace with your username@hostname
-        "nregner@iapetus" = home-manager.lib.homeManagerConfiguration {
+        "nregner@iapetus" = home-manager.lib.homeManagerConfiguration rec {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = { inherit inputs outputs; };
-          modules = [
-            inputs.nix-index-database.hmModules.nix-index
-            ./home-manager/home.nix
-          ];
+          extraSpecialArgs = {
+            inherit inputs outputs;
+            inherit (pkgs) targetPlatform;
+          };
+          modules = [ ./home-manager/home.nix ];
         };
       };
 
-      # TODO: Derive from nixosC
+      # TODO: Derive from nixosConfigurations
       deploy.nodes = forEachNode (hostname: {
         inherit hostname;
         fastConnection = false;

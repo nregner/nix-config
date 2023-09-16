@@ -1,7 +1,17 @@
-{
+{ config, lib, pkgs, targetPlatform, ... }: {
   programs.zsh = {
     enable = true;
-    initExtra = ''
+    initExtra = let
+      templateRepo = pkgs.fetchFromGitHub {
+        owner = "chriskempson";
+        repo = "base16-shell";
+        rev = "588691ba71b47e75793ed9edfcfaa058326a6f41";
+        sha256 = "sha256-X89FsG9QICDw3jZvOCB/KsPBVOLUeE7xN3VCtf0DD3E=";
+      };
+      theme = config.lib.stylix.colors { inherit templateRepo; };
+    in ''
+      source ${theme}
+
       # Auto-start tmux
       if command -v tmux &> /dev/null \
           && [ -n "$PS1" ] \
@@ -31,7 +41,7 @@
     oh-my-zsh = {
       enable = true;
       plugins = [ "aws" "git" "vi-mode" ];
-      theme = "robbyrussell";
+      # theme = "robbyrussell";
     };
     shellAliases = {
       jqless = "jq -C | less -r";
@@ -46,6 +56,24 @@
       vim = "nvim";
       vi = "vim";
       v = "vim";
+    } // lib.attrsets.optionalAttrs targetPlatform.isLinux {
+      open = "xdg-open";
+      pbcopy = "xclip -selection clipboard";
+      pbpaste = "xclip -selection clipboard -o";
+    };
+  };
+
+  home.packages = with pkgs;
+    [ ] ++ lib.lists.optional targetPlatform.isLinux xclip;
+
+  programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
+    settings = {
+      # Move directory to the second line
+      format = "$all$directory$character";
+      package = { disabled = true; };
+      aws = { disabled = true; };
     };
   };
 }
