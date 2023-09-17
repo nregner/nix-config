@@ -59,7 +59,7 @@ in stdenv.mkDerivation {
   meta = with lib; {
     description = "Jetbrains Toolbox";
     homepage = "https://jetbrains.com/";
-    license = licenses.unfree;
+    # license = licenses.unfree;
     maintainers = with maintainers; [ AnatolyPopov ];
     platforms = [ "x86_64-linux" ];
   };
