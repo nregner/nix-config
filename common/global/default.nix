@@ -27,8 +27,9 @@
     settings = {
       experimental-features = [ "nix-command" "flakes" "repl-flake" ];
       trusted-users = [ "nregner" ];
+      substituters = [ "http://sagittarius:8080/default" ];
       trusted-public-keys =
-        [ "builder-name:8HCwoSUcLvQOsrG8WyPTABSgBqK1SGqRsrUqQu1sTSk=" ];
+        [ "default:h0V4pJnSGtvqgGKLO3KF0VJ0iOaiVBfa4OjmnnR2ob8=" ];
       auto-optimise-store = true;
     };
   };

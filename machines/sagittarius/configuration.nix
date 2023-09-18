@@ -4,6 +4,7 @@
     ../../common/global
     ../../common/server
     ./hardware-configuration.nix
+    ./attic.nix
     ./k8s.nix
     ./networking.nix
     ./nginx.nix
@@ -30,7 +31,7 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [ docker-compose ];
+  environment.systemPackages = with pkgs; [ attic docker-compose ];
   services.dockerRegistry = {
     enable = true;
     listenAddress = "0.0.0.0";

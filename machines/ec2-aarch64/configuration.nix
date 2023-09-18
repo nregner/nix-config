@@ -1,9 +1,6 @@
 { inputs, modulesPath, lib, pkgs, ... }: {
-  imports = [
-    "${modulesPath}/virtualisation/amazon-image.nix"
-    ../../common/global
-    ./binary-cache.nix
-  ];
+  imports =
+    [ "${modulesPath}/virtualisation/amazon-image.nix" ../../common/global ];
 
   ec2.efi = true;
 

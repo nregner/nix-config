@@ -18,7 +18,7 @@
     ./nvim
   ];
 
-  home.packages = with pkgs; [ openrgb ];
+  home.packages = with pkgs; [ attic openrgb ];
 
   nixpkgs = {
     # You can add overlays here

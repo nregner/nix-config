@@ -2,6 +2,7 @@
 # You can build them using 'nix build .#example' or (legacy) 'nix-build -A example'
 
 { inputs, pkgs }: {
+  inherit (inputs.attic.packages.${pkgs.stdenv.hostPlatform.system}) attic;
   route53-ddns = pkgs.unstable.callPackage ./route53-ddns { };
   jetbrains-toolbox = pkgs.unstable.callPackage ./jetbrains-toolbox.nix { };
 
