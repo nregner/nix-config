@@ -3,7 +3,11 @@
 
 { inputs, pkgs }: {
   inherit (inputs.attic.packages.${pkgs.stdenv.hostPlatform.system}) attic;
+
   route53-ddns = pkgs.unstable.callPackage ./route53-ddns { };
+
+  netdata-latest = pkgs.unstable.callPackage ./netdata.nix { };
+
   # jetbrains-toolbox = pkgs.unstable.callPackage ./jetbrains-toolbox.nix { };
 
   # https://github.com/realthunder/FreeCAD/tree/LinkMerge
