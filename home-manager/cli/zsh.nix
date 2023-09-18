@@ -74,6 +74,11 @@
       format = "$all$directory$character";
       package = { disabled = true; };
       aws = { disabled = true; };
+      custom.direnv = {
+        detect_files = [ ".envrc" ];
+        when = ''[[ $(direnv status) =~ " Found RC allowed true " ]]'';
+        format = "[ direnv](bold blue)";
+      };
     };
   };
 }
