@@ -6,8 +6,9 @@
     # image = "${pkgs.gnome.gnome-backgrounds}/gnome/blobs-d.svg";
     fonts = {
       monospace = {
-        package = pkgs.jetbrains-mono;
-        name = "JetBrains Mono";
+        # nerdfonts is large - pull in the ones we care about
+        package = (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; });
+        name = "JetBrainsMono Nerd Font";
       };
     };
     autoEnable = false;
