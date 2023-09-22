@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }: {
+{ inputs, config, pkgs, ... }: {
   imports = [ inputs.nix-index-database.hmModules.nix-index ];
 
   programs.direnv = {
@@ -23,5 +23,12 @@
     nix-output-monitor
     nix-prefetch
     nix-tree
+
+    nvd # nix closure diff
   ];
+
+  # https://discourse.nixos.org/t/nvd-simple-nix-nixos-version-diff-tool/12397/6
+  home.activation.report-changes = config.lib.dag.entryAnywhere ''
+    ${pkgs.nvd}/bin/nvd diff $oldGenPath $newGenPath
+  '';
 }

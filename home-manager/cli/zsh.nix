@@ -53,6 +53,8 @@
       hm = "home-manager --flake .";
       hms = "home-manager --flake . switch";
 
+      npd = "nix profile diff-closures --profile /nix/var/nix/profiles/system";
+
       vim = "nvim";
       vi = "vim";
       v = "vim";
@@ -74,6 +76,7 @@
       format = "$all$directory$character";
       package = { disabled = true; };
       aws = { disabled = true; };
+      nix_shell = { disabled = true; };
       custom.direnv = {
         detect_files = [ ".envrc" ];
         when = ''[[ $(direnv status) =~ " Found RC allowed true " ]]'';
