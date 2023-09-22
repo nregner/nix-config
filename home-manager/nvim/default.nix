@@ -67,9 +67,17 @@
       fidget-nvim
       vim-just
       vim-fugitive
+      conflict-marker-vim
 
       lualine-nvim
     ];
+  };
+
+  programs.git.extraConfig = {
+    merge = { tool = "vimdiff"; };
+    mergetool.vimdiff = {
+      cmd = "nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'";
+    };
   };
 
   home.packages = with pkgs.unstable; [
