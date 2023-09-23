@@ -1,5 +1,5 @@
 { config, lib, pkgs, ... }: {
-  xdg.configFile."nvim/lua".source = config.lib.file.mkOutOfStoreSymlink ./lua;
+  xdg.configFile."nvim/lua".source = config.lib.file.mkFlakeSymlink ./lua;
 
   programs.neovim = {
     enable = true;

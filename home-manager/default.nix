@@ -1,4 +1,6 @@
 { outputs, ... }: {
+  imports = [ outputs.homeManagerModules.flake-symlink ];
+
   nixpkgs = {
     overlays = [
       outputs.overlays.additions

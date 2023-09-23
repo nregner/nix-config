@@ -25,6 +25,7 @@
   home = {
     username = "nregner";
     homeDirectory = "/home/nregner";
+    flakePath = "/home/nregner/nix-config/iapetus";
   };
 
   # Nicely reload system units when changing configs

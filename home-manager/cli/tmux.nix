@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }: {
   xdg.configFile."tmux/user.conf".source =
-    config.lib.file.mkOutOfStoreSymlink ./tmux.conf;
+    config.lib.file.mkFlakeSymlink ./tmux.conf;
 
   programs.tmux = {
     enable = true;
