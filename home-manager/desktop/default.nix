@@ -14,12 +14,14 @@
     autoEnable = false;
   };
 
-  home.packages = with pkgs; [
+  services.easyeffects.enable = true;
+
+  home.packages = with pkgs.unstable; [
     # apps
     discord
-    easyeffects
     firefox
     gparted
+    insync
 
     # tools
     awscli2
@@ -33,9 +35,7 @@
     kubernetes-helm
 
     # 3d printer
-    unstable.super-slicer
+    super-slicer
     freecad
   ];
-
-  services.easyeffects.enable = true;
 }
