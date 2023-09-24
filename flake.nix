@@ -35,6 +35,12 @@
     };
 
     # Misc
+    # https://github.com/realthunder/FreeCAD/releases
+    freecad = {
+      url = "github:realthunder/FreeCAD/LinkMerge";
+      flake = false;
+    };
+
     linux-rockchip = {
       url = "github:armbian/linux-rockchip/rk-5.10-rkr4";
       flake = false;
@@ -137,7 +143,7 @@
             inherit inputs outputs;
             inherit (pkgs) targetPlatform;
           };
-          modules = [ ./home-manager/home.nix ];
+          modules = [ ./home-manager/iapetus.nix ];
         };
       };
 

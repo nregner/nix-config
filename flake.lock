@@ -162,11 +162,11 @@
     "freecad": {
       "flake": false,
       "locked": {
-        "lastModified": 1696081277,
-        "narHash": "sha256-AuZzCn0Jnp9XiRiEOWy+GPZy8CSeethoG2TmokWP36M=",
+        "lastModified": 1695466016,
+        "narHash": "sha256-TnRThwVQsYKlPwgifO9iVcuJwpqWOGSC1XWleXrfivo=",
         "owner": "realthunder",
         "repo": "FreeCAD",
-        "rev": "34c1d906c6cbc0a13f98eb5ea43b4fc350fccfb9",
+        "rev": "91ffe40b3818935394b840f4b66307f5ed0959c4",
         "type": "github"
       },
       "original": {
@@ -338,6 +338,7 @@
       "inputs": {
         "attic": "attic",
         "deploy-rs": "deploy-rs",
+        "freecad": "freecad",
         "home-manager": "home-manager",
         "linux-rockchip": "linux-rockchip",
         "nix-index-database": "nix-index-database",

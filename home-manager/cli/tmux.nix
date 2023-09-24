@@ -17,6 +17,4 @@
     '';
     plugins = with pkgs.unstable.tmuxPlugins; [ resurrect yank ];
   };
-
-  stylix.targets.tmux.enable = false;
 }

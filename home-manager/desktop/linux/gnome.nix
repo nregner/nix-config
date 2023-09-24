@@ -1,4 +1,6 @@
 { lib, pkgs, ... }: {
+  imports = [ ./common.nix ];
+
   home.packages = with pkgs; [
     gnomeExtensions.tray-icons-reloaded
     gnomeExtensions.vitals

@@ -23,6 +23,13 @@
     enableParallelBuilding = true;
   });
 
+  # https://github.com/realthunder/FreeCAD/tree/LinkMerge
+  freecad-link = pkgs.unstable.freecad.overrideAttrs (oldAttrs: {
+    pname = "${oldAttrs.pname}-link";
+    version = inputs.freecad.rev;
+    src = inputs.freecad;
+  });
+
   # cross-compile heavy ARM on dependencies on more powerful x86 machines
   # TODO: Something more generic/flexible
   cross = import ./cross.nix {

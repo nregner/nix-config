@@ -1,5 +1,5 @@
 { inputs, pkgs, ... }: {
-  imports = [ inputs.stylix.homeManagerModules.stylix ./alacritty.nix ];
+  imports = [ inputs.stylix.homeManagerModules.stylix ];
 
   stylix = {
     base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
@@ -12,30 +12,17 @@
       };
     };
     autoEnable = false;
+    targets = {
+      alacritty.enable = true;
+      fzf.enable = true;
+    };
   };
 
-  services.easyeffects.enable = true;
-
-  home.packages = with pkgs.unstable; [
-    # apps
-    discord
-    firefox
-    gparted
-    insync
-
-    # tools
-    awscli2
-    gh
-    jq
-    pv
-    uucp
-
-    # k8s
-    kubectl
-    kubernetes-helm
-
-    # 3d printer
-    super-slicer
-    freecad
-  ];
+  programs.alacritty = {
+    enable = true;
+    settings = {
+      selection = { save_to_clipboard = true; };
+      window = { dynamic_padding = true; };
+    };
+  };
 }
