@@ -32,6 +32,10 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       inputs.nixpkgs-stable.follows = "nixpkgs";
     };
+    bosl = {
+      url = "github:revarbat/BOSL";
+      flake = false;
+    };
 
     # Themes
     catppuccin-alacritty = {

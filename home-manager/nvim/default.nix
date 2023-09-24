@@ -50,6 +50,19 @@
       copilot-lua
       friendly-snippets
       luasnip
+
+      # https://github.com/salkin-mada/openscad.nvim
+      {
+        plugin = openscad-nvim;
+        type = "lua";
+        config = ''
+          vim.g.openscad_load_snippets = true
+          vim.g.openscad_auto_open = true
+          vim.g.openscad_cheatsheet_toggle_key = '<leader>h'
+          vim.g.openscad_exec_openscad_trig_key = '<leader>o'
+          require('openscad').setup({})
+        '';
+      }
     ];
   };
 

@@ -26,6 +26,22 @@
         "type": "github"
       }
     },
+    "bosl": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1676861544,
+        "narHash": "sha256-24vqGt0TPe09K1WTP8fDX2Wx4MlsDnigzx7Ha0mXCOg=",
+        "owner": "revarbat",
+        "repo": "BOSL",
+        "rev": "4ce427a8a38786e5f74b728c1e33d9fe7d4904d2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "revarbat",
+        "repo": "BOSL",
+        "type": "github"
+      }
+    },
     "catppuccin-alacritty": {
       "flake": false,
       "locked": {
@@ -408,6 +424,7 @@
     "root": {
       "inputs": {
         "attic": "attic",
+        "bosl": "bosl",
         "catppuccin-alacritty": "catppuccin-alacritty",
         "catppuccin-k9s": "catppuccin-k9s",
         "catppuccin-lazygit": "catppuccin-lazygit",
