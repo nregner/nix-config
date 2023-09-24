@@ -15,7 +15,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems =
-    lib.mkForce [ "vfat" "fat32" "exfat" "ext4" "btrfs" ];
+    lib.mkForce [ "vfat" "fat32" "exfat" "ext4" "btrfs" "ntfs" ];
 
   # Networking
   networking.hostName = "iapetus";
