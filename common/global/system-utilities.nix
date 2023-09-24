@@ -2,7 +2,6 @@
   # basic system utilities
   environment.systemPackages = with pkgs; [
     git # needed by flakes
-    transcrypt # git secrets
 
     # text manipulation
     gawk
