@@ -15,7 +15,7 @@
 
     # 3d printer
     unstable.super-slicer
-    freecad
+    freecad-link
   ];
 
   programs.alacritty.settings = { font = { size = lib.mkForce 11; }; };
