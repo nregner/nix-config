@@ -30,7 +30,7 @@
     # defaultKeymap = "viins";
     oh-my-zsh = {
       enable = true;
-      plugins = [ "aws" "git" "vi-mode" ];
+      plugins = [ "aws" "git" "vi-mode" "terraform" ];
       # theme = "robbyrussell";
     };
     shellAliases = {
