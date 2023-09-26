@@ -14,7 +14,7 @@
     kubernetes-helm
 
     # 3d printer
-    unstable.super-slicer
+    unstable.super-slicer-latest
     freecad-link
   ];
 
