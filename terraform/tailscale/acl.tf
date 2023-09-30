@@ -21,6 +21,7 @@ resource "tailscale_acl" "acl" {
         action = "accept"
         src    = ["tag:server"]
         dst = [
+          "tag:server:22",    # ssh
           "tag:server:8080",  # atticd
           "tag:server:19999", # netdata
         ]
@@ -30,8 +31,8 @@ resource "tailscale_acl" "acl" {
     ssh = [
       {
         action = "accept"
-        src    = ["group:admin", "tag:admin"]
-        dst    = ["tag:server", "tag:ssh"]
+        src    = ["group:admin", "tag:server"]
+        dst    = ["tag:server"]
         users  = ["autogroup:nonroot", "root"]
       }
     ]

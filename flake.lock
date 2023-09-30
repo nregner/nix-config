@@ -1,16 +1,28 @@
 {
   "nodes": {
+    "armbian-build": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1697313768,
+        "narHash": "sha256-17ZL1WkIzm7gCWlL7Ol+DYUaAodIC38Xy6RyECgCx7Q=",
+        "owner": "armbian",
+        "repo": "build",
+        "rev": "bebdc1164ac220e2c23f45b4f1682843e7257b04",
+        "type": "github"
+      },
+      "original": {
+        "owner": "armbian",
+        "repo": "build",
+        "type": "github"
+      }
+    },
     "attic": {
       "inputs": {
         "crane": "crane",
         "flake-compat": "flake-compat",
         "flake-utils": "flake-utils",
-        "nixpkgs": [
-          "nixpkgs-unstable"
-        ],
-        "nixpkgs-stable": [
-          "nixpkgs"
-        ]
+        "nixpkgs": ["nixpkgs-unstable"],
+        "nixpkgs-stable": ["nixpkgs"]
       },
       "locked": {
         "lastModified": 1692225040,
@@ -92,18 +104,9 @@
     },
     "crane": {
       "inputs": {
-        "flake-compat": [
-          "attic",
-          "flake-compat"
-        ],
-        "flake-utils": [
-          "attic",
-          "flake-utils"
-        ],
-        "nixpkgs": [
-          "attic",
-          "nixpkgs"
-        ],
+        "flake-compat": ["attic", "flake-compat"],
+        "flake-utils": ["attic", "flake-utils"],
+        "nixpkgs": ["attic", "nixpkgs"],
         "rust-overlay": "rust-overlay"
       },
       "locked": {
@@ -123,9 +126,7 @@
     "deploy-rs": {
       "inputs": {
         "flake-compat": "flake-compat_2",
-        "nixpkgs": [
-          "nixpkgs"
-        ],
+        "nixpkgs": ["nixpkgs"],
         "utils": "utils"
       },
       "locked": {
@@ -194,37 +195,16 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1689068808,
-        "narHash": "sha256-6ixXo3wt24N/melDWjq70UuHQLxGV8jZvooRanIHXw0=",
+        "lastModified": 1694529238,
+        "narHash": "sha256-zsNZZGTGnMOf9YpHKJqMSsa0dXbfmxeoJ7xHlrt+xmY=",
         "owner": "numtide",
         "repo": "flake-utils",
-        "rev": "919d646de7be200f3bf08cb76ae1f09402b6f9b4",
+        "rev": "ff7b65b44d01cf9ba6a71320833626af21126384",
         "type": "github"
       },
       "original": {
         "owner": "numtide",
         "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "flakelight": {
-      "inputs": {
-        "nixpkgs": [
-          "mealie",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1697684656,
-        "narHash": "sha256-bFiFvgpA4D90AUZPIZrUxZhnoPxsAKGmjdjQ5CVLQa8=",
-        "owner": "accelbread",
-        "repo": "flakelight",
-        "rev": "e401f680302d4f9c353f4f08744bc69a1f903557",
-        "type": "github"
-      },
-      "original": {
-        "owner": "accelbread",
-        "repo": "flakelight",
         "type": "github"
       }
     },
@@ -247,9 +227,7 @@
     },
     "home-manager": {
       "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
+        "nixpkgs": ["nixpkgs"]
       },
       "locked": {
         "lastModified": 1695108154,
@@ -287,9 +265,7 @@
       "inputs": {
         "flakelight": "flakelight",
         "mealie": "mealie_2",
-        "nixpkgs": [
-          "nixpkgs"
-        ],
+        "nixpkgs": ["nixpkgs"],
         "poetry2nix": "poetry2nix"
       },
       "locked": {
@@ -325,11 +301,7 @@
     },
     "nix-github-actions": {
       "inputs": {
-        "nixpkgs": [
-          "mealie",
-          "poetry2nix",
-          "nixpkgs"
-        ]
+        "nixpkgs": ["mealie", "poetry2nix", "nixpkgs"]
       },
       "locked": {
         "lastModified": 1688870561,
@@ -347,9 +319,7 @@
     },
     "nix-index-database": {
       "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
+        "nixpkgs": ["nixpkgs"]
       },
       "locked": {
         "lastModified": 1696131323,
@@ -383,9 +353,7 @@
     "nixos-generators": {
       "inputs": {
         "nixlib": "nixlib",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
+        "nixpkgs": ["nixpkgs"]
       },
       "locked": {
         "lastModified": 1696058303,
@@ -433,27 +401,37 @@
         "type": "github"
       }
     },
-    "poetry2nix": {
-      "inputs": {
-        "flake-utils": "flake-utils_2",
-        "nix-github-actions": "nix-github-actions",
-        "nixpkgs": [
-          "mealie",
-          "nixpkgs"
-        ]
-      },
+    "nixpkgs_2": {
       "locked": {
-        "lastModified": 1697447667,
-        "narHash": "sha256-myb6/cSc/1cZEYivqDhKNjYra8Qtp/MW/LGyD09lrDM=",
-        "owner": "nix-community",
-        "repo": "poetry2nix",
-        "rev": "fe0dcb4c9b44162a385f1170895fe6a392ed71b5",
-        "type": "github"
+        "lastModified": 1696374741,
+        "narHash": "sha256-gt8B3G0ryizT9HSB4cCO8QoxdbsHnrQH+/BdKxOwqF0=",
+        "path": "/nix/store/sg8d2aslxnyr4krwynnh2aszdrcnz3sq-source",
+        "rev": "8a4c17493e5c39769f79117937c79e1c88de6729",
+        "type": "path"
       },
       "original": {
-        "owner": "nix-community",
-        "repo": "poetry2nix",
-        "type": "github"
+        "id": "nixpkgs",
+        "type": "indirect"
+      }
+    },
+    "orangepi-nix": {
+      "inputs": {
+        "armbian-build": "armbian-build",
+        "flake-utils": "flake-utils_2",
+        "nixpkgs": "nixpkgs_2"
+      },
+      "locked": {
+        "lastModified": 1697407587,
+        "narHash": "sha256-TkhTt+Rwin/kNWHGfrlVgVyU6ZGMmUpC4cB99Kz/bg4=",
+        "ref": "refs/heads/master",
+        "rev": "0f82c386317d0a55265eb566de7474c8fbaec4e7",
+        "revCount": 3,
+        "type": "git",
+        "url": "ssh://git@github.com/nathanregner/orangepi-nix"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/nathanregner/orangepi-nix"
       }
     },
     "root": {
@@ -472,21 +450,14 @@
         "nixos-generators": "nixos-generators",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
+        "orangepi-nix": "orangepi-nix",
         "sops-nix": "sops-nix"
       }
     },
     "rust-overlay": {
       "inputs": {
-        "flake-utils": [
-          "attic",
-          "crane",
-          "flake-utils"
-        ],
-        "nixpkgs": [
-          "attic",
-          "crane",
-          "nixpkgs"
-        ]
+        "flake-utils": ["attic", "crane", "flake-utils"],
+        "nixpkgs": ["attic", "crane", "nixpkgs"]
       },
       "locked": {
         "lastModified": 1675391458,
@@ -504,12 +475,8 @@
     },
     "sops-nix": {
       "inputs": {
-        "nixpkgs": [
-          "nixpkgs-unstable"
-        ],
-        "nixpkgs-stable": [
-          "nixpkgs"
-        ]
+        "nixpkgs": ["nixpkgs-unstable"],
+        "nixpkgs-stable": ["nixpkgs"]
       },
       "locked": {
         "lastModified": 1696320910,
