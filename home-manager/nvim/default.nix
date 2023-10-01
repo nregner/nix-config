@@ -40,6 +40,9 @@
         '';
       }
 
+      # tmux <-> nvim navigation 
+      Navigator-nvim
+
       {
         plugin = nvim-colorizer-lua;
         type = "lua";
