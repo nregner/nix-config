@@ -7,7 +7,7 @@
     openrgb
 
     # tools
-    uucp
+    screen
 
     # k8s
     kubectl
