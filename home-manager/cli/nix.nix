@@ -15,16 +15,16 @@
   };
 
   home.packages = with pkgs; [
+    comma # auto-run from nix-index: https://github.com/nix-community/comma
+    nix-output-monitor
+    nix-prefetch
+    nix-tree
     nixfmt
+    nvd # nix closure diff
 
     # nix-du -s=500MB | xdot -
     nix-du
     xdot
-    nix-output-monitor
-    nix-prefetch
-    nix-tree
-
-    nvd # nix closure diff
   ];
 
   # https://discourse.nixos.org/t/nvd-simple-nix-nixos-version-diff-tool/12397/6
