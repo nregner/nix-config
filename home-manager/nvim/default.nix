@@ -56,6 +56,7 @@
       nvim-treesitter.withAllGrammars
       plenary-nvim
       mini-nvim
+      vim-surround
       nvim-tree-lua
       telescope-nvim
       telescope-fzy-native-nvim
