@@ -25,8 +25,11 @@ in {
 
       interval = mkOption {
         type = types.str;
-        default = "15min";
-        description = "Interval between between updates";
+        default = "*-*-* *:00/15:00";
+        description = lib.mdDoc ''
+          Systemd calendar expression when to check for ip changes. 
+          See {manpage}`systemd.time(7)`.
+        '';
       };
 
       environmentFile = mkOption {
@@ -47,7 +50,7 @@ in {
       requires = [ "network-online.target" ];
       wantedBy = [ "timers.target" ];
 
-      timerConfig = { OnUnitActiveSec = cfg.interval; };
+      timerConfig = { OnCalendar = cfg.interval; };
     };
 
     systemd.services.route53-ddns = {
