@@ -1,4 +1,4 @@
-{ inputs, config, lib, modulesPath, nixpkgs, pkgs, ... }: {
+{ inputs, lib, pkgs, ... }: {
   imports = [
     inputs.nixos-generators.nixosModules.all-formats
     ../../common/global
@@ -12,7 +12,8 @@
 
   nixpkgs.hostPlatform = lib.mkForce "x86_64-linux";
 
-  # Bootloader.
+  time.timeZone = "America/Boise";
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelParams = [ "console=tty0" ];

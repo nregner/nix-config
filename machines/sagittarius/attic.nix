@@ -1,15 +1,21 @@
 { inputs, config, ... }: {
   imports = [ inputs.attic.nixosModules.atticd ];
 
+  users.users.atticd = {
+    group = "atticd";
+    isSystemUser = true;
+  };
+
   sops.secrets.atticd = {
     key = "atticd";
-    owner = "atticd";
+    owner = config.users.users.atticd.name;
     group = "wheel";
     mode = "0440";
   };
 
   services.atticd = {
     enable = true;
+    user = config.users.users.atticd.name;
     credentialsFile = config.sops.secrets.atticd.path;
 
     settings = {
