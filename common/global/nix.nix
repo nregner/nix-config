@@ -1,4 +1,9 @@
-{ self, lib, pkgs, outputs, ... }: {
+{ self, lib, pkgs, inputs, outputs, ... }:
+let
+  inherit (inputs) nixpkgs-unstable;
+  base = "/etc/nixpkgs/channels";
+  nixpkgsPath = "${base}/nixpkgs";
+in {
   nixpkgs = {
     config = {
       allowUnfree = true;
@@ -14,7 +19,13 @@
   };
 
   nix = {
-    package = lib.mkDefault pkgs.nix;
+    package = lib.mkDefault pkgs.unstable.nix;
+
+    # pin system channel to flake input
+    # https://discourse.nixos.org/t/do-flakes-also-set-the-system-channel/19798
+    registry.nixpkgs.flake = nixpkgs-unstable; # `nixpkgs#`
+    nixPath = [ "nixpkgs=${nixpkgsPath}" ]; # `<nixpkgs>`
+
     settings = {
       experimental-features = [ "nix-command" "flakes" "repl-flake" ];
       trusted-users = [ "nregner" ];
@@ -24,6 +35,9 @@
       auto-optimise-store = true;
     };
   };
+
+  systemd.tmpfiles.rules =
+    [ "L+ ${nixpkgsPath}     - - - - ${nixpkgs-unstable}" ];
 
   # https://www.reddit.com/r/NixOS/comments/16t2njf/small_trick_for_people_using_nixos_with_flakes
   environment.etc."nixos-flake".source = ../..;
