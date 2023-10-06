@@ -3,10 +3,13 @@
     # Nix
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable-small";
-    # hardware.url = "github:nixos/nixos-hardware";
     home-manager = {
       url = "github:nix-community/home-manager/release-23.05";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    home-manager-unstable = {
+      url = "github:nix-community/home-manager/master";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
     # Tools
@@ -56,8 +59,8 @@
     };
   };
 
-  outputs =
-    { self, nixpkgs, nixpkgs-unstable, home-manager, deploy-rs, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager
+    , home-manager-unstable, deploy-rs, ... }@inputs:
     let
       inherit (self) outputs;
       inherit (nixpkgs) lib;
@@ -89,7 +92,7 @@
       devShells = forAllSystems (system:
         let
           pkgs = nixpkgs-unstable.legacyPackages.${system} // {
-            inherit (home-manager.packages.${system}) home-manager;
+            inherit (home-manager.packages.${system}) home-manager-unstable;
           };
         in import ./shell.nix { inherit pkgs; });
 
@@ -105,7 +108,7 @@
       # NixOS configuration entrypoint
       # Available through 'nixos-rebuild --flake .#'
       nixosConfigurations = {
-        iapetus = lib.nixosSystem {
+        iapetus = nixpkgs-unstable.lib.nixosSystem {
           specialArgs = { inherit self inputs outputs; };
           modules = [ ./machines/iapetus/configuration.nix ];
         };
@@ -139,14 +142,15 @@
       # Standalone home-manager configuration entrypoint
       # Available through 'home-manager --flake .#'
       homeConfigurations = {
-        "nregner@iapetus" = home-manager.lib.homeManagerConfiguration rec {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = {
-            inherit inputs outputs;
-            inherit (pkgs) targetPlatform;
+        "nregner@iapetus" =
+          home-manager-unstable.lib.homeManagerConfiguration rec {
+            pkgs = nixpkgs-unstable.legacyPackages.x86_64-linux;
+            extraSpecialArgs = {
+              inherit inputs outputs;
+              inherit (pkgs) targetPlatform;
+            };
+            modules = [ ./home-manager/iapetus.nix ];
           };
-          modules = [ ./home-manager/iapetus.nix ];
-        };
       };
 
       # TODO: Derive from nixosConfigurations
