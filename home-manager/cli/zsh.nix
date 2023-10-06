@@ -1,17 +1,7 @@
 { config, lib, pkgs, targetPlatform, ... }: {
   programs.zsh = {
     enable = true;
-    initExtra = let
-      templateRepo = pkgs.fetchFromGitHub {
-        owner = "chriskempson";
-        repo = "base16-shell";
-        rev = "588691ba71b47e75793ed9edfcfaa058326a6f41";
-        sha256 = "sha256-X89FsG9QICDw3jZvOCB/KsPBVOLUeE7xN3VCtf0DD3E=";
-      };
-      theme = config.lib.stylix.colors { inherit templateRepo; };
-    in ''
-      source ${theme}
-
+    initExtra = ''
       # Auto-start tmux
       if command -v tmux &> /dev/null \
           && [ -n "$PS1" ] \

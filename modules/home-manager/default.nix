@@ -3,4 +3,5 @@
 
 {
   flake-symlink = import ./flake-symlink.nix;
+  formats = import ./formats.nix;
 }

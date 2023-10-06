@@ -6,6 +6,7 @@ require('user.lsp.nil')
 require('user.lsp.rust-analyzer')
 require('user.lsp.terraform')
 
+require('user.plugins.catppuccin')
 require('user.plugins.cmp')
 require('user.plugins.lualine')
 require('user.plugins.mini-nvim')

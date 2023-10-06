@@ -1,44 +1,17 @@
-{ config, lib, pkgs, ... }: {
+{ config, pkgs, ... }: {
   xdg.configFile."nvim/lua".source = config.lib.file.mkFlakeSymlink ./lua;
 
   programs.neovim = {
     enable = true;
     defaultEditor = true;
     extraConfig = builtins.readFile ./init.vim;
+    extraLuaConfig = ''
+      require('user')
+    '';
 
     plugins = with pkgs.unstable.vimPlugins; [
-      {
-        plugin = nvim-base16;
-        type = "lua";
-        config = ''
-          require('base16-colorscheme').setup({
-          ${
-            let colors = config.lib.stylix.colors;
-            in lib.concatStrings
-            (map (i: "  base0${i} = '#${colors.${"base0${i}-hex"}}',\n") [
-              "0"
-              "1"
-              "2"
-              "3"
-              "4"
-              "5"
-              "6"
-              "7"
-              "8"
-              "9"
-              "A"
-              "B"
-              "C"
-              "D"
-              "E"
-              "F"
-            ])
-          }})
-
-          -- TODO: Better way to order configs?
-          require('user')
-        '';
-      }
+      # theme
+      catppuccin-nvim
 
       # tmux <-> nvim navigation 
       Navigator-nvim
@@ -72,8 +45,6 @@
       vim-just
       vim-fugitive
       conflict-marker-vim
-
-      lualine-nvim
     ];
   };
 
