@@ -32,7 +32,10 @@ struct Args {
 
 #[tokio::main(flavor = "current_thread")]
 async fn main() -> Result<(), Box<dyn Error>> {
-    let args = Args::parse();
+    let mut args = Args::parse();
+    if !args.domain.ends_with('.') {
+        args.domain.push('.');
+    }
     dbg!(&args);
 
     let ip = match args.ip {
@@ -51,15 +54,15 @@ async fn main() -> Result<(), Box<dyn Error>> {
         ttl: args.ttl,
     };
     let record_sets = list_record_sets(&client, &args.hosted_zone_id, &updated).await?;
+
     let current = extract_record(&record_sets, &args.domain, RrType::A);
 
     if Some(&updated) == current.as_ref() {
         println!("No update required");
         return Ok(());
-    } else {
-        println!("Updating record {current:?} -> {updated:?}");
     }
 
+    println!("Updating record {current:?} -> {updated:?}");
     update(client, &args.hosted_zone_id, updated).await?;
 
     Ok(())
