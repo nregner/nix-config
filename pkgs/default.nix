@@ -13,10 +13,11 @@
   # jetbrains-toolbox = pkgs.unstable.callPackage ./jetbrains-toolbox.nix { };
 
   # https://github.com/realthunder/FreeCAD/tree/LinkMerge
-  freecad-link = pkgs.unstable.freecad.overrideAttrs (oldAttrs: {
-    pname = "${oldAttrs.pname}-link";
+  freecad-link = let inherit (pkgs.unstable) freecad ccacheStdenv;
+  in (freecad.override { stdenv = ccacheStdenv; }).overrideAttrs (prev: {
     version = inputs.freecad.rev;
     src = inputs.freecad;
+    nativeBuildInputs = [ ccacheStdenv.cc ] ++ prev.nativeBuildInputs;
   });
 
   conform-nvim = pkgs.unstable.vimUtils.buildVimPlugin {
@@ -36,3 +37,4 @@
     crossSystem = "aarch64-multiplatform";
   };
 }
+

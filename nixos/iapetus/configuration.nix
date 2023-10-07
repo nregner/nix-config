@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }: {
   imports = [
     ../common/global
+    ../common/optional/ccache.nix
     ../../terraform/tailscale
     ./hardware-configuration.nix
     ./builders.nix
