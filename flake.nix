@@ -124,13 +124,13 @@
 
         # Voron 2.4r2 Klipper machine
         voron = lib.nixosSystem {
-          specialArgs = { inherit self inputs outputs nixpkgs-unstable; };
+          specialArgs = { inherit self inputs outputs; };
           modules = [ ./machines/voron/configuration.nix ];
           system = "aarch64-linux";
         };
       } // forEachNode (hostname:
         # 3d print farm node
-        lib.nixosSystem {
+        nixpkgs.lib.nixosSystem {
           specialArgs = { inherit self inputs outputs nixpkgs hostname; };
           modules = [ ./machines/kraken/configuration.nix ];
           system = "aarch64-linux";

@@ -1,4 +1,4 @@
-{ config, lib, pkgs, targetPlatform, ... }: {
+{
   programs.zsh = {
     enable = true;
     initExtra = ''
@@ -49,15 +49,8 @@
       vim = "nvim";
       vi = "vim";
       v = "vim";
-    } // lib.attrsets.optionalAttrs targetPlatform.isLinux {
-      open = "xdg-open";
-      pbcopy = "xclip -selection clipboard";
-      pbpaste = "xclip -selection clipboard -o";
     };
   };
-
-  home.packages = with pkgs;
-    [ ] ++ lib.lists.optional targetPlatform.isLinux xclip;
 
   programs.starship = {
     enable = true;

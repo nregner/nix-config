@@ -1,6 +1,12 @@
 { lib, pkgs, ... }: {
-  imports =
-    [ ./. ./cli ./desktop/jetbrains.nix ./desktop/linux/gnome.nix ./nvim ];
+  imports = [
+    ../common/global/nixpkgs.nix # standalone install - reimport nixpkgs
+    ./.
+    ./cli
+    ./desktop/jetbrains.nix
+    ./desktop/linux/gnome.nix
+    ./nvim
+  ];
 
   home.packages = with pkgs; [
     # apps

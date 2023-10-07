@@ -23,7 +23,7 @@
     zstd
 
     # system monitoring
-    htop
+    htop-vim
     iftop
     iotop
     lm_sensors # for `sensors` command

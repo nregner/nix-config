@@ -1,6 +1,9 @@
-{ inputs, modulesPath, lib, pkgs, ... }: {
-  imports =
-    [ "${modulesPath}/virtualisation/amazon-image.nix" ../../common/global ];
+{ modulesPath, pkgs, ... }: {
+  imports = [
+    "${modulesPath}/virtualisation/amazon-image.nix"
+    ../../common/global
+    ../../home-manager/server.nix
+  ];
 
   ec2.efi = true;
 

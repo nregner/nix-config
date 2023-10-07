@@ -3,6 +3,7 @@
     inputs.nixos-generators.nixosModules.all-formats
     ../../common/global
     ../../common/server
+    ../../home-manager/server.nix
     ./hardware-configuration.nix
     ./attic.nix
     ./k8s.nix

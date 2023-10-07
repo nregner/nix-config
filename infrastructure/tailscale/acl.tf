@@ -1,3 +1,5 @@
+# https://registry.terraform.io/providers/tailscale/tailscale/latest/docs
+
 resource "tailscale_acl" "acl" {
   acl = jsonencode({
     groups = {
@@ -13,11 +15,13 @@ resource "tailscale_acl" "acl" {
         src    = ["group:admin"]
         dst    = ["*:*"]
       },
-      # allow inter-node Netdata streaming
       {
         action = "accept"
         src    = ["tag:server"]
-        dst    = ["tag:server:19999"]
+        dst = [
+          "tag:server:8080",  # atticd
+          "tag:server:19999", # netdata
+        ]
       }
     ]
 

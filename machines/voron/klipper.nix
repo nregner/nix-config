@@ -1,4 +1,4 @@
-{ pkgs, lib, nixpkgs-unstable, ... }: {
+{ inputs, lib, pkgs, ... }: {
   services.klipper = {
     enable = true;
     user = "moonraker";
@@ -22,7 +22,8 @@
 
   # use bleeding edge
   disabledModules = [ "services/misc/klipper.nix" ];
-  imports = [ "${nixpkgs-unstable}/nixos/modules/services/misc/klipper.nix" ];
+  imports =
+    [ "${inputs.nixpkgs-unstable}/nixos/modules/services/misc/klipper.nix" ];
 
   nixpkgs.overlays = [
     (final: prev: {

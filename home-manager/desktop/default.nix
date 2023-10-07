@@ -1,8 +1,15 @@
 { inputs, pkgs, ... }: {
   fonts.fontconfig.enable = true;
-  home.packages = [
+  home.packages = with pkgs.unstable; [
     # nerdfonts is large - use a subset
-    (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+
+    comma # auto-run from nix-index: https://github.com/nix-community/comma
+    nix-output-monitor
+    nix-prefetch
+    nixfmt
+    nix-du # nix-du -s=500MB | xdot -
+    xdot
   ];
 
   programs.alacritty = {

@@ -5,6 +5,7 @@
     ../../common/global
     ../../common/server
     ../../common/server/netdata/agent.nix
+    ../../home-manager/server.nix
     ./klipper.nix
     ./mainsail.nix
     ./moonraker.nix
