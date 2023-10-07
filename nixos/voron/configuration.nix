@@ -15,6 +15,8 @@
   nixpkgs.hostPlatform = lib.mkForce "aarch64-linux";
   networking.hostName = "voron";
 
+  time.timeZone = "America/Boise";
+
   users.users.root = {
     password = "root"; # ssh password auth disabled, so whatever :)
   };
