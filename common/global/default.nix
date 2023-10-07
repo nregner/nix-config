@@ -2,7 +2,7 @@
   imports = [
     ./boot.nix
     ./networking.nix
-    ./nixos.nix
+    ./nix.nix
     ./nixpkgs.nix
     ./sops.nix
     ./system-utilities.nix
