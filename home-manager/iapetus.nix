@@ -1,12 +1,15 @@
-{ lib, pkgs, ... }: {
+{ inputs, lib, pkgs, ... }: {
   imports = [
     ../common/global/nixpkgs.nix # standalone install - reimport nixpkgs
     ./.
     ./cli
     ./desktop/jetbrains.nix
-    ./desktop/linux/gnome.nix
+    ./desktop/linux/hyprland.nix
     ./nvim
+    inputs.hyprland.homeManagerModules.default
   ];
+
+  wayland.windowManager.hyprland.enable = true;
 
   home.packages = with pkgs; [
     # apps
