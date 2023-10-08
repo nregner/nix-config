@@ -58,6 +58,22 @@
         "type": "github"
       }
     },
+    "catppuccin-papirus-folders": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1690494445,
+        "narHash": "sha256-LVMl33DGT6WwVbIXWmWox0Dp9pcRRniSQI8sq27JaAI=",
+        "owner": "catppuccin",
+        "repo": "papirus-folders",
+        "rev": "6f8292748e508373dea59cb7dacc0ddc3c6b287d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "catppuccin",
+        "repo": "papirus-folders",
+        "type": "github"
+      }
+    },
     "crane": {
       "inputs": {
         "flake-compat": [
@@ -305,6 +321,7 @@
         "attic": "attic",
         "catppuccin-alacritty": "catppuccin-alacritty",
         "catppuccin-lazygit": "catppuccin-lazygit",
+        "catppuccin-papirus-folders": "catppuccin-papirus-folders",
         "deploy-rs": "deploy-rs",
         "freecad": "freecad",
         "home-manager": "home-manager",

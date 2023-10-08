@@ -1,9 +1,21 @@
-{ inputs, pkgs, ... }: {
-  fonts.fontconfig.enable = true;
-  home.packages = with pkgs.unstable; [
-    # nerdfonts is large - use a subset
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+{ pkgs, ... }: {
+  imports = [ ./alacritty.nix ./theme.nix ];
 
+  home.packages = with pkgs.unstable; [
+    # apps
+    discord
+    firefox
+    gparted
+
+    # tools
+    pkgs.attic
+    awscli2
+    gh
+    jq
+    pv
+    xclip
+
+    # nix
     comma # auto-run from nix-index: https://github.com/nix-community/comma
     nix-output-monitor
     nix-prefetch
@@ -12,19 +24,12 @@
     xdot
   ];
 
-  programs.alacritty = {
+  programs.zsh = {
     enable = true;
-    settings = {
-      import = [ "${inputs.catppuccin-alacritty}/catppuccin-mocha.yml" ];
-      selection = { save_to_clipboard = true; };
-      window = { dynamic_padding = true; };
-      font = {
-        normal = {
-          family = "JetBrainsMono Nerd Font";
-          style = "Regular";
-        };
-        size = 11;
-      };
+    shellAliases = {
+      open = "xdg-open";
+      pbcopy = "xclip -selection clipboard";
+      pbpaste = "xclip -selection clipboard -o";
     };
   };
 }

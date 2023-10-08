@@ -3,8 +3,9 @@
     ../common/global/nixpkgs.nix # standalone install - reimport nixpkgs
     ./.
     ./cli
-    ./desktop/jetbrains.nix
-    ./desktop/linux/gnome.nix
+    ./desktop
+    ./desktop/gnome
+    ./desktop/jetbrains
     ./nvim
   ];
 

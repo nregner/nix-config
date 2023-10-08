@@ -1,6 +1,4 @@
 { lib, pkgs, ... }: {
-  imports = [ ./common.nix ];
-
   home.packages = with pkgs; [
     gnomeExtensions.tray-icons-reloaded
     gnomeExtensions.vitals
@@ -11,15 +9,6 @@
     dconf2nix
     gpick
   ];
-
-  gtk = {
-    enable = true;
-    # font.name = "Victor Mono SemiBold 12";
-    theme = {
-      name = "Adwaita-dark";
-      package = pkgs.gnome.gnome-themes-extra;
-    };
-  };
 
   # Generated via dconf2nix: https://github.com/gvolpe/dconf2nix
   dconf.settings = with lib.hm.gvariant; {
@@ -35,7 +24,6 @@
       clock = "12h";
       clock-format = "12h";
       color-scheme = "prefer-dark";
-      gtk-theme = "Adwaita-dark";
     };
 
     "org/gnome/desktop/screensaver" = {

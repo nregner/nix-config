@@ -38,6 +38,10 @@
       url = "github:catppuccin/alacritty";
       flake = false;
     };
+    catppuccin-papirus-folders = {
+      url = "github:catppuccin/papirus-folders";
+      flake = false;
+    };
     catppuccin-lazygit = {
       url = "github:catppuccin/lazygit";
       flake = false;
