@@ -111,32 +111,32 @@
       nixosConfigurations = {
         iapetus = lib.nixosSystem {
           specialArgs = { inherit self inputs outputs; };
-          modules = [ ./machines/iapetus/configuration.nix ];
+          modules = [ ./nixos/iapetus/configuration.nix ];
         };
 
         sagittarius = lib.nixosSystem {
           specialArgs = { inherit self inputs outputs; };
-          modules = [ ./machines/sagittarius/configuration.nix ];
+          modules = [ ./nixos/sagittarius/configuration.nix ];
         };
 
         # Builder VM
         ec2-aarch64 = lib.nixosSystem {
           specialArgs = { inherit self inputs outputs; };
-          modules = [ ./machines/ec2-aarch64/configuration.nix ];
+          modules = [ ./nixos/ec2-aarch64/configuration.nix ];
           system = "aarch64-linux";
         };
 
         # Voron 2.4r2 Klipper machine
         voron = lib.nixosSystem {
           specialArgs = { inherit self inputs outputs; };
-          modules = [ ./machines/voron/configuration.nix ];
+          modules = [ ./nixos/voron/configuration.nix ];
           system = "aarch64-linux";
         };
       } // forEachNode (hostname:
         # 3d print farm node
         nixpkgs.lib.nixosSystem {
           specialArgs = { inherit self inputs outputs nixpkgs hostname; };
-          modules = [ ./machines/kraken/configuration.nix ];
+          modules = [ ./nixos/kraken/configuration.nix ];
           system = "aarch64-linux";
         });
 

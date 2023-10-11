@@ -2,8 +2,8 @@
   imports = [
     "${modulesPath}/installer/sd-card/sd-image-aarch64.nix"
     "${modulesPath}/profiles/minimal.nix"
-    ../../common/global
-    ../../common/server
+    ../common/global
+    ../common/server
     ./octoprint.nix
   ];
 

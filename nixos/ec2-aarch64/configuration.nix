@@ -1,7 +1,7 @@
 { modulesPath, pkgs, ... }: {
   imports = [
     "${modulesPath}/virtualisation/amazon-image.nix"
-    ../../common/global
+    ../common/global
     ../../home-manager/server.nix
   ];
 

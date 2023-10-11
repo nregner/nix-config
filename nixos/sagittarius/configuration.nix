@@ -1,8 +1,8 @@
 { inputs, lib, pkgs, ... }: {
   imports = [
     inputs.nixos-generators.nixosModules.all-formats
-    ../../common/global
-    ../../common/server
+    ../common/global
+    ../common/server
     ../../home-manager/server.nix
     ./hardware-configuration.nix
     ./attic.nix

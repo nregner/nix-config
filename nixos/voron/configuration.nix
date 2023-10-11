@@ -2,9 +2,9 @@
   imports = [
     "${modulesPath}/installer/sd-card/sd-image-aarch64.nix"
     "${modulesPath}/profiles/minimal.nix"
-    ../../common/global
-    ../../common/server
-    ../../common/server/netdata/agent.nix
+    ../common/global
+    ../common/server
+    ../common/server/netdata/agent.nix
     ../../home-manager/server.nix
     ./klipper.nix
     ./mainsail.nix

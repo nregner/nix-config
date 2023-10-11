@@ -1,6 +1,6 @@
 { lib, pkgs, ... }: {
   imports = [
-    ../common/global/nixpkgs.nix # standalone install - reimport nixpkgs
+    ../nixos/common/global/nixpkgs.nix # standalone install - reimport nixpkgs
     ./.
     ./cli
     ./desktop
