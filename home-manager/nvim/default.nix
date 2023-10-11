@@ -43,8 +43,8 @@
       nvim-lspconfig
       fidget-nvim
       vim-just
-      vim-fugitive
       conflict-marker-vim
+      diffview-nvim
     ];
   };
 
