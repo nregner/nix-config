@@ -1,7 +1,7 @@
 { lib, pkgs, ... }: {
   imports = [
     ../../common/global
-    ../../infrastructure/tailscale
+    ../../terraform/tailscale
     ./hardware-configuration.nix
     ./builders.nix
     ./vfio.nix
