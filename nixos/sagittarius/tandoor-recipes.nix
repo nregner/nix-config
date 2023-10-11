@@ -14,4 +14,9 @@
     "/".proxyPass =
       "http://127.0.0.1:${toString config.services.tandoor-recipes.port}/";
   };
+
+  services.backups.tandoor-recipes = {
+    paths = [ config.systemd.services.tandoor-recipes.environment.MEDIA_ROOT ];
+    restic = { s3 = { }; };
+  };
 }
