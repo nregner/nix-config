@@ -3,9 +3,11 @@
     inputs.nixos-generators.nixosModules.all-formats
     ../common/global
     ../common/server
+    ../common/backups
     ../../home-manager/server.nix
     ./hardware-configuration.nix
     ./attic.nix
+    ./gitea.nix
     ./k8s.nix
     ./mealie.nix
     ./netdata.nix

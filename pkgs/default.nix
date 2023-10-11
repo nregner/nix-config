@@ -4,6 +4,8 @@
 { inputs, pkgs }: {
   inherit (inputs.attic.packages.${pkgs.stdenv.hostPlatform.system}) attic;
 
+  gitea-github-mirror = pkgs.unstable.callPackage ./gitea-github-mirror { };
+
   route53-ddns = pkgs.unstable.callPackage ./route53-ddns { };
 
   netdata-latest = pkgs.unstable.callPackage ./netdata.nix { };
