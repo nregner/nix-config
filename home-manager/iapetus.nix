@@ -14,6 +14,8 @@
     openrgb
 
     # tools
+    rclone
+    restic
     screen
 
     # k8s
