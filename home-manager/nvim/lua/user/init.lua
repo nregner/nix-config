@@ -1,6 +1,7 @@
 require('user.keybinds')
 
 require('user.lsp')
+require('user.lsp.gopls')
 require('user.lsp.lua')
 require('user.lsp.nil')
 require('user.lsp.rust-analyzer')
