@@ -58,8 +58,9 @@
   home.packages = with pkgs.unstable; [
     # just get from rustup for now
     # rust-analyzer
+    gopls
+    lua-language-server
     nil
     terraform-ls
-    lua-language-server
   ];
 }
