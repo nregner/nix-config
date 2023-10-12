@@ -54,10 +54,12 @@
           };
         };
 
-        "nregner.net" = {
-          extraConfig = ''
-            rewrite ^/craigslist(.*)$ https://craigslist.nregner.net$1 redirect;
-          '';
+        "nregner.net" = virtualHost {
+          "/" = {
+            extraConfig = ''
+              rewrite ^/craigslist(.*)$ https://craigslist.nregner.net$1 redirect;
+            '';
+          };
         };
       } // lib.mapAttrs' (subdomain: location: {
         name = "${subdomain}.nregner.net";
