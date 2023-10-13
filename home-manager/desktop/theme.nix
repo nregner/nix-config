@@ -9,10 +9,10 @@
   gtk = {
     enable = true;
     theme = {
-      name = "Catppuccin-Mocha-Compact-Lavender-Dark";
+      name = "Catppuccin-Mocha-Compact-Blue-Dark";
       # https://github.com/NixOS/nixpkgs/blob/master/pkgs/data/themes/catppuccin-gtk/default.nix#L16-L19
       package = pkgs.catppuccin-gtk.override {
-        accents = [ "lavender" ];
+        accents = [ "blue" ];
         size = "compact";
         tweaks = [ "rimless" ];
         variant = "mocha";
