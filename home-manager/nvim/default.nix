@@ -6,6 +6,7 @@
     defaultEditor = true;
     extraConfig = builtins.readFile ./init.vim;
     extraLuaConfig = ''
+      vim.g.copilot_node_command = '${pkgs.unstable.nodejs_20}/bin/node'
       require('user')
     '';
 
@@ -16,35 +17,31 @@
       # tmux <-> nvim navigation 
       Navigator-nvim
 
-      {
-        plugin = nvim-colorizer-lua;
-        type = "lua";
-        config = ''
-          require('colorizer').setup({})
-        '';
-      }
-
-      lualine-nvim
-
-      nvim-treesitter.withAllGrammars
-      plenary-nvim
-      mini-nvim
-      vim-surround
-      nvim-tree-lua
-      telescope-nvim
-      telescope-fzy-native-nvim
-      nvim-lspconfig
-
-      vim-nix # File type and syntax highlighting.
-      luasnip
-      nvim-cmp
-      cmp_luasnip
-      cmp-nvim-lsp
-      nvim-lspconfig
-      fidget-nvim
-      vim-just
+      # git
       conflict-marker-vim
       diffview-nvim
+
+      # file type/syntax highlighting
+      nvim-treesitter.withAllGrammars
+      vim-nix
+
+      # Misc
+      lualine-nvim
+      mini-nvim
+      nvim-colorizer-lua
+      nvim-tree-lua
+      plenary-nvim
+      telescope-fzy-native-nvim
+      telescope-nvim
+      vim-surround
+
+      # lsp/completion
+      nvim-lspconfig
+      nvim-cmp
+      cmp-nvim-lsp
+      cmp_luasnip
+      luasnip
+      copilot-lua
     ];
   };
 
