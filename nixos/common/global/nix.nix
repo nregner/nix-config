@@ -45,7 +45,7 @@
 
   # keep a reference to the flake source that was used to build
   # https://www.reddit.com/r/NixOS/comments/16t2njf/small_trick_for_people_using_nixos_with_flakes
-  environment.etc."nixos/flake".source = ../..;
+  environment.etc."nixos/flake".source = self.outPath;
   system.nixos.tags = [ self.sourceInfo.shortRev or "dirty" ];
 
   # show config changes on switch
