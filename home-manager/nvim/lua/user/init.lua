@@ -9,6 +9,8 @@ require('user.lsp.terraform')
 
 require('user.plugins.catppuccin')
 require('user.plugins.cmp')
+require('user.plugins.colorizer')
+require('user.plugins.copilot')
 require('user.plugins.diffview')
 require('user.plugins.lualine')
 require('user.plugins.mini-nvim')
