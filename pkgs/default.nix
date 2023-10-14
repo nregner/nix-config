@@ -10,34 +10,6 @@
 
   # jetbrains-toolbox = pkgs.unstable.callPackage ./jetbrains-toolbox.nix { };
 
-  # # https://github.com/realthunder/FreeCAD/tree/LinkMerge
-  # freecad-link = (pkgs.unstable.freecad.override {
-  #   stdenv = pkgs.unstable.ccacheStdenv;
-  # }).overrideAttrs (oldAttrs: {
-  #   pname = "${oldAttrs.pname}-link";
-  #   version = inputs.freecad.rev;
-  #   src = inputs.freecad;
-  # });
-
-  # https://github.com/realthunder/FreeCAD/tree/LinkMerge
-  freecad-link2 = pkgs.unstable.ccacheStdenv.mkDerivation {
-    pname = "freecad-link";
-    version = inputs.freecad.rev;
-    src = inputs.freecad;
-  };
-
-  # # https://github.com/realthunder/FreeCAD/tree/LinkMerge
-  # freecad-link = ((pkgs.unstable.libsForQt5.callPackage ./freecad.nix {
-  #   inputs = { inherit (inputs) freecad; };
-  #   boost = pkgs.unstable.python3Packages.boost;
-  #   inherit (pkgs.unstable.python3Packages)
-  #     gitpython matplotlib pivy ply pycollada pyside2 pyside2-tools python
-  #     pyyaml scipy shiboken2;
-  #   })(.override { stdenv = pkgs.unstable.ccacheStdenv;
-  # }).overrideAttrs( prev: {
-  #   nativeBuildInputs = [ ccacheStdenv.cc] ++ prev.nativeBuildInputs;
-  # }))
-
   # https://github.com/realthunder/FreeCAD/tree/LinkMerge
   freecad-link = let inherit (pkgs.unstable) freecad ccacheStdenv;
   in (freecad.override { stdenv = ccacheStdenv; }).overrideAttrs (prev: {
