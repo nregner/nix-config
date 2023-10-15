@@ -4,8 +4,8 @@
     "${modulesPath}/profiles/minimal.nix"
     ../common/global
     ../common/server
-    ../common/server/netdata/agent.nix
     ../../home-manager/server.nix
+    ./builders.nix
     ./klipper.nix
     ./mainsail.nix
     ./moonraker.nix
