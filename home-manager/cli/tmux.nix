@@ -12,4 +12,6 @@
     '';
     plugins = with pkgs.unstable.tmuxPlugins; [ resurrect yank ];
   };
+
+  home.packages = with pkgs.unstable; [ tmux-sessionizer ];
 }
