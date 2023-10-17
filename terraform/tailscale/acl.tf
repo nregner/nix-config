@@ -6,6 +6,7 @@ resource "tailscale_acl" "acl" {
       "group:admin" = ["nathanregner@gmail.com"]
     }
     tagOwners = {
+      "tag:admin"  = ["group:admin"]
       "tag:server" = ["group:admin"]
       "tag:ssh"    = ["group:admin"]
     }
@@ -13,7 +14,7 @@ resource "tailscale_acl" "acl" {
     acls = [
       {
         action = "accept"
-        src    = ["group:admin"]
+        src    = ["group:admin", "tag:admin"]
         dst    = ["*:*"]
       },
       {
@@ -29,7 +30,7 @@ resource "tailscale_acl" "acl" {
     ssh = [
       {
         action = "accept"
-        src    = ["group:admin"]
+        src    = ["group:admin", "tag:admin"]
         dst    = ["tag:server", "tag:ssh"]
         users  = ["autogroup:nonroot", "root"]
       }
