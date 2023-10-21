@@ -74,6 +74,22 @@
         "type": "github"
       }
     },
+    "conform-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1697815694,
+        "narHash": "sha256-KH9kZlLkqXwYRox7FB6vy11l8Vkc5/3/lvgwGoeD41c=",
+        "owner": "stevearc",
+        "repo": "conform.nvim",
+        "rev": "4897996612adeb9cb39325f95c9b0481ce892edf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "stevearc",
+        "repo": "conform.nvim",
+        "type": "github"
+      }
+    },
     "crane": {
       "inputs": {
         "flake-compat": [
@@ -446,6 +462,7 @@
         "catppuccin-alacritty": "catppuccin-alacritty",
         "catppuccin-lazygit": "catppuccin-lazygit",
         "catppuccin-papirus-folders": "catppuccin-papirus-folders",
+        "conform-nvim": "conform-nvim",
         "deploy-rs": "deploy-rs",
         "freecad": "freecad",
         "home-manager": "home-manager",
