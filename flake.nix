@@ -62,7 +62,8 @@
       flake = false;
     };
     mealie = {
-      url = "github:nathanregner/mealie-nix";
+      # url = "github:nathanregner/mealie-nix";
+      url = "path:/home/nregner/dev/mealie-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
