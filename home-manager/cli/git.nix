@@ -6,11 +6,23 @@
     userName = "Nathan Regner";
     userEmail = "nathanregner@gmail.com";
     lfs.enable = true;
-    difftastic.enable = true;
-    extraConfig = { push = { autoSetupRemote = true; }; };
+    extraConfig = {
+      push = { autoSetupRemote = true; };
+      # use difftastic as difftool: https://difftastic.wilfred.me.uk/git.html
+      diff.tool = "difftastic";
+      difftool = {
+        prompt = false;
+        difftastic.cmd = ''difft "$LOCAL" "$REMOTE"'';
+      };
+      pager.difftool = true;
+      alias = {
+        difft = "difftool";
+        dlog = "!f() { GIT_EXTERNAL_DIFF=difft git log -p --ext-diff; }; f";
+      };
+    };
   };
 
-  home.packages = with pkgs.unstable; [ commitizen ];
+  home.packages = with pkgs.unstable; [ commitizen difftastic ];
 
   programs.lazygit = {
     enable = true;
