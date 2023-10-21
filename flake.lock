@@ -274,17 +274,14 @@
         ]
       },
       "locked": {
-        "lastModified": 1699060973,
-        "narHash": "sha256-kjaQJmT6ZWn0upgLM4tBCvvij8IcARrLSFCCcN/MnpU=",
-        "owner": "nathanregner",
-        "repo": "mealie-nix",
-        "rev": "99187e681c700e8fce74d26e7eab664b34c10ab5",
-        "type": "github"
+        "lastModified": 1699061045,
+        "narHash": "sha256-huBmttig4NEc2o6J2d0WYEcbA1IS2hYEhlWP0bFN+3A=",
+        "path": "/home/nregner/dev/mealie-nix",
+        "type": "path"
       },
       "original": {
-        "owner": "nathanregner",
-        "repo": "mealie-nix",
-        "type": "github"
+        "path": "/home/nregner/dev/mealie-nix",
+        "type": "path"
       }
     },
     "mealie_2": {
