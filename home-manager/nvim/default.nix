@@ -14,7 +14,7 @@
       # theme
       catppuccin-nvim
 
-      # tmux <-> nvim navigation 
+      # tmux <-> nvim navigation
       Navigator-nvim
 
       # git
@@ -25,7 +25,10 @@
       nvim-treesitter.withAllGrammars
       vim-nix
 
-      # Misc
+      # formatting
+      pkgs.conform-nvim
+
+      # misc
       lualine-nvim
       mini-nvim
       nvim-colorizer-lua
@@ -58,6 +61,8 @@
     gopls
     lua-language-server
     nil
+    prettierd
+    stylua
     terraform-ls
   ];
 }

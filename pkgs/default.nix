@@ -19,6 +19,15 @@
     src = inputs.freecad;
   });
 
+  conform-nvim = pkgs.unstable.vimUtils.buildVimPlugin {
+    pname = "conform.nvim";
+    version = inputs.conform-nvim.rev;
+    src = inputs.conform-nvim;
+    meta.homepage = "https://github.com/stevearc/conform.nvim";
+    # the Makefile non-deterministically pulls git repos for linting/testing - don't need it
+    postPatch = "rm Makefile";
+  };
+
   # cross-compile heavy ARM on dependencies on more powerful x86 machines
   # TODO: Something more generic/flexible
   cross = import ./cross.nix {

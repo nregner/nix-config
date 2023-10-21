@@ -49,6 +49,10 @@
 
     # Misc
     # https://github.com/realthunder/FreeCAD/releases
+    conform-nvim = {
+      url = "github:stevearc/conform.nvim";
+      flake = false;
+    };
     freecad = {
       url = "github:realthunder/FreeCAD/LinkMerge";
       flake = false;
