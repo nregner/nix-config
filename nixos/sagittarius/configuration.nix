@@ -10,7 +10,6 @@
     ./gitea.nix
     ./k8s.nix
     ./mealie.nix
-    ./netdata.nix
     ./networking.nix
     ./nginx.nix
     ./tandoor-recipes.nix
