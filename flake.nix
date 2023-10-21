@@ -53,10 +53,13 @@
       url = "github:realthunder/FreeCAD/LinkMerge";
       flake = false;
     };
-
     linux-rockchip = {
       url = "github:armbian/linux-rockchip/rk-5.10-rkr4";
       flake = false;
+    };
+    mealie = {
+      url = "github:nathanregner/mealie-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
