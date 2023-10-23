@@ -79,30 +79,29 @@
         "aarch64-darwin"
         "x86_64-darwin"
       ];
-      forEachNode = lib.trivial.pipe 4 [
-        (lib.lists.range 1)
-        (map (n: "kraken-${toString n}"))
-        lib.genAttrs
-      ];
+      # FIXME: OrangePi Zero 2 Kernel
+      forEachNode = do: { };
+      # forEachNode = lib.trivial.pipe 4 [
+      #   (lib.lists.range 1)
+      #   (map (n: "kraken-${toString n}"))
+      #   lib.genAttrs
+      # ];
     in rec {
       # Your custom packages
       # Acessible through 'nix build', 'nix shell', etc
       packages = forAllSystems (system:
         let
           pkgs = nixpkgs.legacyPackages.${system} // {
-            # TODO: Don't duplicate overlay?
             unstable = nixpkgs-unstable.legacyPackages.${system};
           };
         in import ./pkgs { inherit inputs pkgs; });
 
-      # Devshell for bootstrapping
-      # Acessible through 'nix develop' or 'nix-shell' (legacy)
+      # Devshells for flake development
       devShells = forAllSystems (system:
         let
-          pkgs = nixpkgs-unstable.legacyPackages.${system} // {
-            inherit (home-manager.packages.${system}) home-manager;
-          };
-        in import ./shell.nix { inherit pkgs; });
+          config = import ./nixpkgs.nix { inherit inputs outputs; };
+          pkgs = import nixpkgs-unstable ({ inherit system; } // config);
+        in import ./shells.nix { inherit pkgs; });
 
       # Your custom packages and modifications, exported as overlays
       overlays = import ./overlays { inherit inputs; };

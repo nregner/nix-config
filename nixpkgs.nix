@@ -1,9 +1,14 @@
-# A nixpkgs instance that is grabbed from the pinned nixpkgs commit in the lock file
-# This is useful to avoid using channels when using legacy nix commands
-let
-  lock =
-    (builtins.fromJSON (builtins.readFile ./flake.lock)).nodes.nixpkgs.locked;
-in import (fetchTarball {
-  url = "https://github.com/nixos/nixpkgs/archive/${lock.rev}.tar.gz";
-  sha256 = lock.narHash;
-})
+{ inputs, outputs, ... }: {
+  config = {
+    allowUnfree = true;
+    # Workaround for https://github.com/nix-community/home-manager/issues/2942
+    allowUnfreePredicate = (_: true);
+  };
+
+  overlays = [
+    inputs.attic.overlays.default
+    outputs.overlays.additions
+    outputs.overlays.modifications
+    outputs.overlays.unstable-packages
+  ];
+}

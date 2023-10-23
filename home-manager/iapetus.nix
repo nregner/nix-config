@@ -1,13 +1,8 @@
-{ lib, pkgs, ... }: {
-  imports = [
-    ../nixos/common/global/nixpkgs.nix # standalone install - reimport nixpkgs
-    ./.
-    ./cli
-    ./desktop
-    ./desktop/gnome
-    ./desktop/jetbrains
-    ./nvim
-  ];
+{ inputs, outputs, lib, pkgs, ... }: {
+  imports = [ ./. ./cli ./desktop ./desktop/gnome ./desktop/jetbrains ./nvim ];
+
+  # standalone install - reimport nixpkgs
+  nixpkgs = import ../nixpkgs.nix { inherit inputs outputs; };
 
   home.packages = with pkgs; [
     # apps
