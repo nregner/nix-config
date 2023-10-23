@@ -4,6 +4,7 @@
     "${modulesPath}/profiles/minimal.nix"
     ../common/global
     ../common/server
+    ../common/backups
     ../../home-manager/server.nix
     ./builders.nix
     ./klipper.nix

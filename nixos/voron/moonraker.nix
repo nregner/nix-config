@@ -1,4 +1,4 @@
-{
+{ config, ... }: {
   services.moonraker = {
     enable = true;
     allowSystemControl = true;
@@ -10,6 +10,11 @@
       };
       history = { };
     };
+  };
+
+  services.backups.moonraker = {
+    paths = [ config.services.moonraker.stateDir ];
+    restic = { s3 = { }; };
   };
 
   # required for allowSystemControl
