@@ -1,6 +1,4 @@
 { config, lib, pkgs, ... }: {
-  environment.systemPackages = [ pkgs.unstable.tailscale ];
-
   services.tailscale = {
     enable = true;
     useRoutingFeatures = lib.mkDefault "client";
@@ -10,4 +8,5 @@
     trustedInterfaces = [ "tailscale0" ];
     allowedUDPPorts = [ config.services.tailscale.port ];
   };
+  environment.systemPackages = [ config.services.tailscale.package ];
 }

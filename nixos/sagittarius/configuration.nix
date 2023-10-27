@@ -31,6 +31,7 @@
 
   virtualisation.docker = {
     enable = true;
+    package = pkgs.unstable.docker_24;
     daemon.settings = {
       live-restore = false;
       insecure-registries = [ "http://sagittarius:5000" ];
