@@ -7,17 +7,20 @@ keys:
   - &host_kraken age16zk73cejuepyskjeq0625ecf727y3nmmw32qq0ta97q9e4uj2sqstq6240
   - &host_voron age1vzn4vh7xe7tqx0czgayafr208pjwegmus0l3gxn4v5yeemwch58sahxpee
   - &host_sagittarius age1yfflu4pxlt32sy4xaa04m5gs7kyrccyj9y5hh0qvndmxtrxrtpns7mf682
+  - &host_callisto age1h7223qs8fq2v8nta352jqd7kjffl0sxmrpvmcls0q3gm4j5m8d6q7ynsrr
 creation_rules:
   - path_regex: terraform/.*/secrets.yaml
     key_groups:
       - age:
           - *user_nregner
           - *host_iapetus
+          - *host_callisto
   - path_regex: nixos/common/server/secrets.yaml
     key_groups:
       - age:
           - *user_nregner
           - *host_iapetus
+          - *host_callisto
           - *host_server
           - *host_voron
           - *host_kraken

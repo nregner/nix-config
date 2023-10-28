@@ -15,6 +15,10 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       inputs.nixpkgs-stable.follows = "nixpkgs";
     };
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     deploy-rs = {
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -115,11 +119,19 @@
       # NixOS configuration entrypoint
       # Available through 'nixos-rebuild --flake .#'
       nixosConfigurations = {
+        # Desktop
         iapetus = lib.nixosSystem {
           specialArgs = { inherit self inputs outputs; };
           modules = [ ./nixos/iapetus/configuration.nix ];
         };
 
+        # GE73VR Laptop
+        callisto = lib.nixosSystem {
+          specialArgs = { inherit self inputs outputs; };
+          modules = [ ./nixos/callisto/configuration.nix ];
+        };
+
+        # Server
         sagittarius = lib.nixosSystem {
           specialArgs = { inherit self inputs outputs; };
           modules = [ ./nixos/sagittarius/configuration.nix ];
@@ -149,15 +161,50 @@
       # Standalone home-manager configuration entrypoint
       # Available through 'home-manager --flake .#'
       homeConfigurations = {
-        "nregner@iapetus" = home-manager.lib.homeManagerConfiguration rec {
+        "nregner@iapetus" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = {
-            inherit inputs outputs;
-            inherit (pkgs) targetPlatform;
-          };
+          extraSpecialArgs = { inherit inputs outputs; };
           modules = [ ./home-manager/iapetus.nix ];
         };
+        "nregner@callisto" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [ ./home-manager/callisto.nix ];
+        };
       };
+
+      images = lib.mapAttrs (name: nixosConfiguration:
+        let
+          inherit (nixosConfiguration) config;
+          inherit (config.nixpkgs.hostPlatform) system;
+          pkgs = nixpkgs.legacyPackages.${system};
+        in {
+          iso-installer = inputs.nixos-generators.nixosGenerate {
+            inherit system;
+            modules = [
+              "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-gnome.nix"
+              {
+                environment.etc."nixos/flake".source = self.outPath;
+                environment.systemPackages = [
+                  # copy system closure so we don't have to download/rebuild on the host
+                  config.system.build.toplevel
+                  (pkgs.runCommand "install-scripts" { } ''
+                    mkdir -p $out/bin
+                    cp ${config.system.build.formatScript} $out/bin/disko-format
+                    cp ${config.system.build.mountScript} $out/bin/disko-mount
+                    cp ${
+                      pkgs.writeShellScript "install" ''
+                        sudo nixos-install --root /mnt --flake ${self.outPath}#${name}
+                      ''
+                    } $out/bin/nixos-install-flake
+                  '')
+                ];
+                isoImage.squashfsCompression = "zstd -Xcompression-level 1";
+              }
+            ];
+            format = "install-iso";
+          };
+        }) nixosConfigurations;
 
       # TODO: Derive from nixosConfigurations
       deploy.nodes = forEachNode (hostname: {
