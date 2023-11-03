@@ -58,11 +58,13 @@ func sync() error {
 			}
 			continue
 		}
-		log.Printf("Mirroring %s", src.Name)
+		log.Printf("Mirroring %s", *src.Name)
 		option := gitea.MigrateRepoOption{
 			RepoName:  *src.Name,
 			CloneAddr: *src.CloneURL,
 			AuthToken: githubToken,
+			Mirror:    true,
+			Private:   true,
 		}
 		_, _, err := giteaClient.MigrateRepo(option)
 		if err != nil {
