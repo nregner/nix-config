@@ -181,7 +181,23 @@
               self.nixosConfigurations.${hostname};
           };
         });
-        voron = (let hostname = "voron";
+        voron = (let
+          hostname = "voron";
+          system = "aarch64-linux";
+          pkgs = nixpkgs.legacyPackages.${system};
+          # nixpkgs with deploy-rs overlay but force the nixpkgs package
+          deployPkgs = import nixpkgs {
+            inherit system;
+            overlays = [
+              deploy-rs.overlay
+              (self: super: {
+                deploy-rs = {
+                  inherit (pkgs) deploy-rs;
+                  lib = super.deploy-rs.lib;
+                };
+              })
+            ];
+          };
         in {
           inherit hostname;
           fastConnection = false;
@@ -189,7 +205,7 @@
           sshUser = "nregner";
           profiles.system = {
             user = "root";
-            path = deploy-rs.lib.aarch64-linux.activate.nixos
+            path = deployPkgs.deploy-rs.lib.activate.nixos
               self.nixosConfigurations.${hostname};
           };
         });
