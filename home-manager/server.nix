@@ -12,7 +12,10 @@
       imports = [
         #
         ./.
-        ./cli
+        ./cli/fzf.nix
+        ./cli/nix.nix
+        ./cli/tmux.nix
+        ./cli/zsh.nix
       ];
 
       home = {
