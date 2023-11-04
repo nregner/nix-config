@@ -20,19 +20,25 @@ in {
 
       serviceConfig.Type = "oneshot";
 
-      script = with pkgs; ''
-        # wait for tailscaled to settle
-        sleep 2
+      script = let
+        pkg = pkgs.writeShellApplication {
+          name = "tailscale-bootstrap";
+          runtimeInputs = [ config.services.tailscale.package pkgs.jq ];
+          text = ''
+            # wait for tailscaled to settle
+            sleep 2
 
-        # check if we are already authenticated to tailscale
-        status="$(${tailscale}/bin/tailscale status -json | ${jq}/bin/jq -r .BackendState)"
-        if [ $status = "Running" ]; then # if so, then do nothing
-          exit 0
-        fi
+            # check if we are already authenticated to tailscale
+            status="$(tailscale status -json | jq -r .BackendState)"
+            if [ "$status" = "Running" ]; then # if so, then do nothing
+              exit 0
+            fi
 
-        # otherwise authenticate with tailscale
-        ${tailscale}/bin/tailscale up --reset --ssh --auth-key="file:${config.sops.secrets.tailscale-auth-key.path}"
-      '';
+            # otherwise authenticate with tailscale
+            tailscale up --reset --ssh --auth-key="file:${config.sops.secrets.tailscale-auth-key.path}"
+          '';
+        };
+      in "${pkg}/bin/${pkg.name}";
     };
   };
 }

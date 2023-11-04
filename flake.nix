@@ -172,7 +172,7 @@
         ec2-aarch64 = (let hostname = "ec2-aarch64";
         in {
           inherit hostname;
-          fastConnection = true;
+          fastConnection = false;
           remoteBuild = true;
           sshUser = "root";
           profiles.system = {
