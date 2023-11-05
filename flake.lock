@@ -422,7 +422,8 @@
         "nixos-generators": "nixos-generators",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
-        "sops-nix": "sops-nix"
+        "sops-nix": "sops-nix",
+        "tree-sitter-nu": "tree-sitter-nu"
       }
     },
     "rust-overlay": {
@@ -472,6 +473,22 @@
       "original": {
         "owner": "Mic92",
         "repo": "sops-nix",
+        "type": "github"
+      }
+    },
+    "tree-sitter-nu": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1695210294,
+        "narHash": "sha256-RuvR2Yb2CTxpxyXgr+2uUQa9N75sIhYlS9moyedZo8A=",
+        "owner": "nushell",
+        "repo": "tree-sitter-nu",
+        "rev": "307559b6a3885ef0c55bcd5e23e9e164a7ce03bd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nushell",
+        "repo": "tree-sitter-nu",
         "type": "github"
       }
     },

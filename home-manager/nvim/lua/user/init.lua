@@ -19,3 +19,9 @@ require("user.plugins.mini-nvim")
 require("user.plugins.navigator")
 require("user.plugins.nvim-tree")
 require("user.plugins.telescope")
+
+local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+
+parser_config.nu = {
+  filetype = "nu",
+}

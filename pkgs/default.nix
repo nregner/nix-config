@@ -24,4 +24,11 @@
     # the Makefile non-deterministically pulls git repos for linting/testing - don't need it
     postPatch = "rm Makefile";
   };
+
+  tree-sitter-nu = pkgs.unstable.tree-sitter.buildGrammar {
+    language = "nu";
+    name = "tree-sitter-nu";
+    src = inputs.tree-sitter-nu;
+    version = inputs.tree-sitter-nu.rev;
+  };
 }

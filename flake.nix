@@ -70,6 +70,10 @@
       url = "path:/home/nregner/dev/mealie-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    tree-sitter-nu = {
+      url = "github:nushell/tree-sitter-nu";
+      flake = false;
+    };
   };
 
   outputs =

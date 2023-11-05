@@ -22,7 +22,11 @@
       diffview-nvim
 
       # file type/syntax highlighting
-      nvim-treesitter.withAllGrammars
+      (let plugin = nvim-treesitter;
+      in plugin.withAllGrammars.overrideAttrs (prev: {
+        passthru.dependencies = prev.passthru.dependencies
+          ++ [ (plugin.passthru.grammarToPlugin pkgs.tree-sitter-nu) ];
+      }))
       vim-nix
 
       # formatting
