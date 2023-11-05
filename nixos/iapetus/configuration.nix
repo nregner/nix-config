@@ -65,6 +65,15 @@
   environment.systemPackages = with pkgs; [ virt-manager ];
 
   # Misc
+  services.hardware.openrgb = {
+    enable = true;
+    motherboard = "amd";
+  };
+
+  zramSwap.enable = true;
+
+  environment.systemPackages = [ config.boot.kernelPackages.perf ];
+
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   virtualisation.docker = {
