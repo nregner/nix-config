@@ -26,6 +26,7 @@
 
   programs.lazygit = {
     enable = true;
+    package = pkgs.unstable.lazygit;
     # https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
     settings = {
       gui = (config.lib.formats.fromYAML
