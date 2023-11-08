@@ -1,7 +1,15 @@
 { config, pkgs, ... }: {
   services.gitea = {
     enable = true;
+    package = pkgs.unstable.gitea;
     lfs = { enable = true; };
+    settings = { service.DISABLE_REGISTRATION = true; };
+  };
+
+  nginx.subdomain.gitea = {
+    "/".proxyPass = "http://127.0.0.1:${
+        toString config.services.gitea.settings.server.HTTP_PORT
+      }/";
   };
 
   sops.secrets.gitea-github-mirror = { };
