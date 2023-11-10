@@ -24,7 +24,8 @@
 
   boot = {
     kernelPackages = pkgs.linuxPackagesFor
-      (pkgs.callPackage ./kernel { src = inputs.linux-rockchip; });
+      (let inherit (inputs.orangepi-nix.packages.x86_64-linux) pkgsCross;
+      in pkgsCross.aarch64-multiplatform.linuxKernel.linux-v6_6-rk3588);
 
     supportedFilesystems = lib.mkForce [ "vfat" "fat32" "exfat" "ext4" ];
 
