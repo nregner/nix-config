@@ -46,7 +46,10 @@ data "aws_iam_policy_document" "nix_acme" {
     condition {
       test     = "ForAllValues:StringEquals"
       variable = "route53:ChangeResourceRecordSetsNormalizedRecordNames"
-      values   = ["_acme-challenge.${var.hosted_zone.name}"]
+      values = [
+        "_acme-challenge.${var.hosted_zone.name}",
+        "_acme-challenge._.${var.hosted_zone.name}"
+      ]
     }
     condition {
       test     = "ForAllValues:StringEquals"
@@ -66,12 +69,14 @@ resource "aws_iam_policy_attachment" "nix_acme" {
   users      = [aws_iam_user.nix_acme.name]
 }
 
+# https://go-acme.github.io/lego/dns/route53/#credentials
 output "env" {
   value     = <<EOT
-HOSTED_ZONE_ID=${var.hosted_zone.zone_id}
+AWS_HOSTED_ZONE_ID=${var.hosted_zone.zone_id}
 AWS_ACCESS_KEY_ID=${aws_iam_access_key.nix_acme.id}
 AWS_SECRET_ACCESS_KEY=${aws_iam_access_key.nix_acme.secret}
 AWS_DEFAULT_REGION=us-west-2
+AWS_PROPAGATION_TIMEOUT=600
 EOT
   sensitive = true
 }
