@@ -33,6 +33,12 @@ resource "tailscale_acl" "acl" {
         src    = ["group:admin", "tag:admin"]
         dst    = ["tag:server", "tag:ssh"]
         users  = ["autogroup:nonroot", "root"]
+      },
+      {
+        action = "accept"
+        src    = ["tag:server"]
+        dst    = ["tag:ssh"]
+        users  = ["autogroup:nonroot", "root"]
       }
     ]
   })
