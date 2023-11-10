@@ -3,10 +3,14 @@
     enable = true;
     package = pkgs.unstable.gitea;
     lfs = { enable = true; };
-    settings = { service.DISABLE_REGISTRATION = true; };
+    settings = {
+      service.DISABLE_REGISTRATION = true;
+      server.DOMAIN = "git.nregner.net";
+      server.SSH_PORT = 30022;
+    };
   };
 
-  nginx.subdomain.gitea = {
+  nginx.subdomain.git = {
     "/".proxyPass = "http://127.0.0.1:${
         toString config.services.gitea.settings.server.HTTP_PORT
       }/";

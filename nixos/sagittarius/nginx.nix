@@ -11,8 +11,11 @@
       acceptTerms = true;
       defaults.email = "nathanregner@gmail.com";
       certs."nregner.net" = {
-        domain = "*.nregner.net";
+        extraDomainNames = [ "*.nregner.net" ];
         dnsProvider = "route53";
+        # propagation check always times out... issue with IPv6 configuration?
+        # https://github.com/go-acme/lego/issues/355
+        dnsPropagationCheck = false;
         credentialsFile = config.sops.secrets.acme.path;
       };
     };
