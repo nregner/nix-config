@@ -7,9 +7,10 @@
     firmwares = {
       mcu = {
         enable = true;
+        enableKlipperFlash = true;
         configFile = ./firmware.cfg;
-        serial =
-          "/dev/serial/by-id/usb-Klipper_stm32f446xx_450016000450335331383520-if00";
+        # serial = "/dev/serial/by-id/usb-Klipper_stm32f446xx_450016000450335331383520-if00";
+        serial = "1d50:614e";
       };
     };
   };
@@ -35,6 +36,12 @@
         nativeBuidlInputs =
           builtins.filter (pkg: lib.strings.hasPrefix "wxwidgets" pkg.name)
           prev.nativeBuildInputs;
+
+        installPhase = ''
+          mkdir -p $out
+          cp ./.config $out/config
+          cp -r out/* $out
+        '';
       });
     })
   ];
