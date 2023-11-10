@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "armbian-build": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1697313768,
+        "narHash": "sha256-17ZL1WkIzm7gCWlL7Ol+DYUaAodIC38Xy6RyECgCx7Q=",
+        "owner": "armbian",
+        "repo": "build",
+        "rev": "bebdc1164ac220e2c23f45b4f1682843e7257b04",
+        "type": "github"
+      },
+      "original": {
+        "owner": "armbian",
+        "repo": "build",
+        "type": "github"
+      }
+    },
     "attic": {
       "inputs": {
         "crane": "crane",
@@ -142,6 +158,28 @@
         "type": "github"
       }
     },
+    "devshell": {
+      "inputs": {
+        "nixpkgs": [
+          "orangepi-nix",
+          "nixpkgs"
+        ],
+        "systems": "systems"
+      },
+      "locked": {
+        "lastModified": 1698410321,
+        "narHash": "sha256-MphuSlgpmKwtJncGMohryHiK55J1n6WzVQ/OAfmfoMc=",
+        "owner": "numtide",
+        "repo": "devshell",
+        "rev": "1aed986e3c81a4f6698e85a7452cbfcc4b31a36e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "devshell",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -181,6 +219,24 @@
         "owner": "numtide",
         "repo": "flake-utils",
         "rev": "5aed5285a952e0b949eb3ba02c12fa4fcfef535f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "flake-utils_2": {
+      "inputs": {
+        "systems": "systems_2"
+      },
+      "locked": {
+        "lastModified": 1694529238,
+        "narHash": "sha256-zsNZZGTGnMOf9YpHKJqMSsa0dXbfmxeoJ7xHlrt+xmY=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "ff7b65b44d01cf9ba6a71320833626af21126384",
         "type": "github"
       },
       "original": {
@@ -248,20 +304,19 @@
         "type": "github"
       }
     },
-    "linux-rockchip": {
+    "joshua-riek-linux": {
       "flake": false,
       "locked": {
-        "lastModified": 1691467352,
-        "narHash": "sha256-9pp9OXRMY8RUq4Fn5AcYhiGeyXXDPRAm9fUVzQV5L2k=",
-        "owner": "armbian",
-        "repo": "linux-rockchip",
-        "rev": "8cae9a3e884071996260905575b55136e2480f6b",
+        "lastModified": 1699139118,
+        "narHash": "sha256-L+fBEsJfnycDnSyIdkF+zTRBdbIoaU9IiFGmCgDTTCg=",
+        "owner": "Joshua-Riek",
+        "repo": "linux",
+        "rev": "37103e25b6fd9f618e5c2c9d5ac86885f2bedca3",
         "type": "github"
       },
       "original": {
-        "owner": "armbian",
-        "ref": "rk-5.10-rkr4",
-        "repo": "linux-rockchip",
+        "owner": "Joshua-Riek",
+        "repo": "linux",
         "type": "github"
       }
     },
@@ -392,6 +447,38 @@
         "type": "github"
       }
     },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1696374741,
+        "narHash": "sha256-gt8B3G0ryizT9HSB4cCO8QoxdbsHnrQH+/BdKxOwqF0=",
+        "path": "/nix/store/sg8d2aslxnyr4krwynnh2aszdrcnz3sq-source",
+        "rev": "8a4c17493e5c39769f79117937c79e1c88de6729",
+        "type": "path"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "type": "indirect"
+      }
+    },
+    "orangepi-nix": {
+      "inputs": {
+        "armbian-build": "armbian-build",
+        "devshell": "devshell",
+        "flake-utils": "flake-utils_2",
+        "joshua-riek-linux": "joshua-riek-linux",
+        "nixpkgs": "nixpkgs_2"
+      },
+      "locked": {
+        "lastModified": 1699581933,
+        "narHash": "sha256-5erYdRJvEir/czFdRIa6PK0497X/4Rq2O1P5b21x6rE=",
+        "path": "/home/nregner/dev/orangepi-nix",
+        "type": "path"
+      },
+      "original": {
+        "path": "/home/nregner/dev/orangepi-nix",
+        "type": "path"
+      }
+    },
     "root": {
       "inputs": {
         "attic": "attic",
@@ -402,12 +489,12 @@
         "deploy-rs": "deploy-rs",
         "freecad": "freecad",
         "home-manager": "home-manager",
-        "linux-rockchip": "linux-rockchip",
         "mealie": "mealie",
         "nix-index-database": "nix-index-database",
         "nixos-generators": "nixos-generators",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
+        "orangepi-nix": "orangepi-nix",
         "sops-nix": "sops-nix"
       }
     },
@@ -458,6 +545,36 @@
       "original": {
         "owner": "Mic92",
         "repo": "sops-nix",
+        "type": "github"
+      }
+    },
+    "systems": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "systems_2": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
         "type": "github"
       }
     },
