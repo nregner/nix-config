@@ -26,6 +26,19 @@
 
   programs.lazygit = {
     enable = true;
+    # pull in https://github.com/jesseduffield/lazygit/pull/2738
+    package = let
+      version = "1d1b8cc01f87bb3495426ac8d81d97573f6840d4";
+      src = pkgs.fetchFromGitHub {
+        owner = "jesseduffield";
+        repo = "lazygit";
+        rev = version;
+        hash = "sha256-Qt50tBA7zAHoHv/GzpTcwpkJvq3TO96D8ClAw2TaABI=";
+      };
+    in pkgs.unstable.lazygit.override {
+      buildGoModule = args:
+        pkgs.unstable.buildGoModule (args // { inherit src version; });
+    };
     # https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
     settings = {
       gui = (config.lib.formats.fromYAML
