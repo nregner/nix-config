@@ -1,41 +1,48 @@
-{ inputs, lib, pkgs, ... }: {
+{ inputs, lib, pkgs, ... }:
+let
+  vendor = "1d50";
+  product = "614e";
+  firmwareConfig = ./firmware.cfg;
+  firmware = (pkgs.unstable.klipper-firmware.override {
+    inherit firmwareConfig;
+  }).overrideAttrs {
+    installPhase = ''
+      mkdir -p $out
+      cp -r out/* $out/
+      cp ./.config $out/config
+      cp out/klipper.bin $out/ || true
+      cp out/klipper.elf $out/ || true
+    '';
+  };
+in {
   services.klipper = {
+    package = pkgs.unstable.klipper;
     enable = true;
     user = "moonraker";
     group = "moonraker";
     configFile = ./printer.cfg;
-    firmwares = {
-      mcu = {
-        enable = true;
-        configFile = ./firmware.cfg;
-        serial =
-          "/dev/serial/by-id/usb-Klipper_stm32f446xx_450016000450335331383520-if00";
-      };
-    };
   };
 
-  # restart Klipper when printer is powerd on
-  # https://github.com/Klipper3d/klipper/issues/835
-  services.udev.extraRules = ''
-    ACTION=="add", ATTRS{idProduct}=="614e", ATTRS{idVendor}=="1d50", RUN+="${pkgs.bash} -c 'systemctl restart klipper.service'"
-  '';
-
-  # use bleeding edge
   disabledModules = [ "services/misc/klipper.nix" ];
   imports =
     [ "${inputs.nixpkgs-unstable}/nixos/modules/services/misc/klipper.nix" ];
 
-  nixpkgs.overlays = [
-    (final: prev: {
-      inherit (final.unstable) klipper;
+  # restart Klipper when printer is powerd on
+  # https://github.com/Klipper3d/klipper/issues/835
+  services.udev.extraRules = ''
+    ACTION=="add", ATTRS{idVendor}=="${vendor}", ATTRS{idProduct}=="${product}", RUN+="${pkgs.bash} -c 'systemctl restart klipper.service'"
+  '';
 
-      # build without massive gui dependencies
-      # TODO: submit patch to nixpkgs to make optional?
-      klipper-firmware = final.unstable.klipper-firmware.overrideAttrs (prev: {
-        nativeBuidlInputs =
-          builtins.filter (pkg: lib.strings.hasPrefix "wxwidgets" pkg.name)
-          prev.nativeBuildInputs;
-      });
+  # build and mount firmware.bin in a consistent location
+  systemd.tmpfiles.rules =
+    [ "L+ /var/lib/klipper/firmware - - - - ${firmware}" ];
+
+  environment.systemPackages = [
+    (pkgs.unstable.klipper-flash.override {
+      klipper-firmware = firmware;
+      flashDevice = "${vendor}:${product}";
+      inherit firmwareConfig;
     })
   ];
 }
+

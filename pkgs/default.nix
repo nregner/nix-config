@@ -24,4 +24,26 @@
     # the Makefile non-deterministically pulls git repos for linting/testing - don't need it
     postPatch = "rm Makefile";
   };
+
+  klipper-flash = let
+    vendor = "1d50";
+    product = "614e";
+    firmwareConfig = ../nixos/voron/firmware.cfg;
+    firmware = (pkgs.unstable.klipper-firmware.override {
+      inherit firmwareConfig;
+    }).overrideAttrs {
+      # patches = [ ../klipper-firmware.patch ];
+      installPhase = ''
+        mkdir -p $out
+        cp -r out/* $out/
+        cp ./.config $out/config
+        cp out/klipper.bin $out/ || true
+        cp out/klipper.elf $out/ || true
+      '';
+    };
+  in (pkgs.unstable.klipper-flash.override {
+    klipper-firmware = firmware;
+    flashDevice = "${vendor}:${product}";
+    inherit firmwareConfig;
+  }).overrideAttrs (oldAttrs: { passthru = { inherit firmware; }; });
 }

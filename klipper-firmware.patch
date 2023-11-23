@@ -1,0 +1,17 @@
+diff --git a/Makefile b/Makefile
+index 10615726..feda097c 100644
+--- a/Makefile
++++ b/Makefile
+@@ -90,10 +90,10 @@ create-board-link:
+ 	$(Q)mkdir -p $(addprefix $(OUT), $(dirs-y))
+ 	$(Q)rm -f $(OUT)*.d $(patsubst %,$(OUT)%/*.d,$(dirs-y))
+ 	$(Q)rm -f $(OUT)board
+-	$(Q)ln -sf $(CURDIR)/src/$(CONFIG_BOARD_DIRECTORY) $(OUT)board
++	$(Q)cp -r $(CURDIR)/src/$(CONFIG_BOARD_DIRECTORY) $(OUT)board
+ 	$(Q)mkdir -p $(OUT)board-generic
+ 	$(Q)rm -f $(OUT)board-generic/board
+-	$(Q)ln -sf $(CURDIR)/src/generic $(OUT)board-generic/board
++	$(Q)cp -r $(CURDIR)/src/generic $(OUT)board-generic/board
+ 
+ # Hack to rebuild OUT directory and reload make dependencies on Kconfig change
+ $(OUT)board-link: $(KCONFIG_CONFIG)
