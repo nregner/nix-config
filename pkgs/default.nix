@@ -8,14 +8,6 @@
 
   netdata-latest = pkgs.unstable.callPackage ./netdata.nix { };
 
-  # https://github.com/realthunder/FreeCAD/tree/LinkMerge
-  freecad-link = pkgs.freecad.overrideAttrs (oldAttrs: {
-    pname = "${oldAttrs.pname}-link";
-    version = inputs.freecad.rev;
-    src = inputs.freecad;
-    nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [ pkgs.fmt ];
-  });
-
   conform-nvim = pkgs.unstable.vimUtils.buildVimPlugin {
     pname = "conform.nvim";
     version = inputs.conform-nvim.rev;

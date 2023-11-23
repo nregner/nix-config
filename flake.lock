@@ -230,23 +230,6 @@
         "type": "github"
       }
     },
-    "freecad": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1699968847,
-        "narHash": "sha256-hnFn3JAzECvgpVkPqxsFObT0r6nlwd3t5lXDMmi2HEA=",
-        "owner": "realthunder",
-        "repo": "FreeCAD",
-        "rev": "2fd584eca674bc17bb4caa2b8b8ddd9c08ed25a7",
-        "type": "github"
-      },
-      "original": {
-        "owner": "realthunder",
-        "ref": "LinkMerge",
-        "repo": "FreeCAD",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -294,14 +277,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1700286550,
-        "narHash": "sha256-0Cvh5KobJWc3vMTLmDfA4A/Ro6TkenhnP3Anut6Y0Tg=",
-        "path": "/home/nregner/dev/mealie-nix",
-        "type": "path"
+        "lastModified": 1700286544,
+        "narHash": "sha256-PeI7YiIgIUOsZR/fyUS8wAC1FKgC5WyEVAdUy3bksMY=",
+        "owner": "nathanregner",
+        "repo": "mealie-nix",
+        "rev": "39318d3c8b4b085969183e1c08d03270d3e078d6",
+        "type": "github"
       },
       "original": {
-        "path": "/home/nregner/dev/mealie-nix",
-        "type": "path"
+        "owner": "nathanregner",
+        "repo": "mealie-nix",
+        "type": "github"
       }
     },
     "mealie_2": {
@@ -418,7 +404,6 @@
         "conform-nvim": "conform-nvim",
         "deploy-rs": "deploy-rs",
         "disko": "disko",
-        "freecad": "freecad",
         "home-manager": "home-manager",
         "linux-rockchip": "linux-rockchip",
         "mealie": "mealie",
