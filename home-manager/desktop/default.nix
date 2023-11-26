@@ -4,8 +4,8 @@
   home.packages = with pkgs.unstable; [
     # apps
     discord
-    firefox
-    gparted
+    # firefox
+    # gparted
 
     # tools
     pkgs.attic

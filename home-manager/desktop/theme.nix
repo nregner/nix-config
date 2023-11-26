@@ -6,37 +6,6 @@
     inter
   ];
 
-  gtk = {
-    enable = true;
-    theme = {
-      name = "Catppuccin-Mocha-Compact-Blue-Dark";
-      # https://github.com/NixOS/nixpkgs/blob/master/pkgs/data/themes/catppuccin-gtk/default.nix#L16-L19
-      package = pkgs.catppuccin-gtk.override {
-        accents = [ "blue" ];
-        size = "compact";
-        tweaks = [ "rimless" ];
-        variant = "mocha";
-      };
-    };
-
-    # iconTheme = {
-    #   name = "Papirus";
-    #   package = pkgs.unstable.catppuccin-papirus-folders.override {
-    #     flavor = "mocha";
-    #     accent = "blue";
-    #   };
-    # };
-  };
-
-  qt = {
-    enable = true;
-    platformTheme = "gnome";
-    style = {
-      package = pkgs.unstable.adwaita-qt;
-      name = "adwaita-dark";
-    };
-  };
-
   # home.pointerCursor = {
   #   name = "Catppuccin-Mocha-Light-Cursors";
   #   package = pkgs.unstable.catppuccin-cursors;

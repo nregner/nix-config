@@ -1,6 +1,6 @@
-{ self, inputs, outputs, lib, pkgs, ... }: {
+{ inputs, outputs, lib, pkgs, ... }: {
   environment.etc = {
-    "nix/flake-channels/system".source = inputs.self;
+    # "nix/flake-channels/system".source = inputs.self;
     "nix/flake-channels/nixpkgs".source = inputs.nixpkgs;
   };
 
@@ -17,13 +17,14 @@
     # pin system channels to flake inputs
     nixPath = [
       "nixpkgs=/etc/nix/flake-channels/nixpkgs"
+      "nixpkgs=/etc/nix/flake-channels/nixpkgs-unstable"
       "home-manager=/etc/nix/flake-channels/home-manager"
     ];
 
     gc = {
       automatic = true;
-      dates = "weekly";
       options = "--delete-older-than 7d";
+      dates = "weekly";
     };
 
     settings = {
@@ -47,8 +48,8 @@
 
   # keep a reference to the flake source that was used to build
   # https://www.reddit.com/r/NixOS/comments/16t2njf/small_trick_for_people_using_nixos_with_flakes
-  environment.etc."nixos/flake".source = self.outPath;
-  system.nixos.tags = [ self.sourceInfo.shortRev or "dirty" ];
+  # environment.etc."nixos/flake".source = self.outPath;
+  # system.nixos.tags = [ self.sourceInfo.shortRev or "dirty" ];
 
   # show config changes on switch
   # https://discourse.nixos.org/t/nvd-simple-nix-nixos-version-diff-tool/12397/33

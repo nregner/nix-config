@@ -8,6 +8,14 @@
       url = "github:nathanregner/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    mac-app-util = {
+      url = "github:hraban/mac-app-util";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
 
     # Tools
     attic = {
@@ -71,14 +79,13 @@
     };
   };
 
-  outputs =
-    { self, nixpkgs, nixpkgs-unstable, home-manager, deploy-rs, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, nix-darwin, home-manager
+    , deploy-rs, ... }@inputs:
     let
       inherit (self) outputs;
       inherit (nixpkgs) lib;
       forAllSystems = lib.genAttrs [
         "aarch64-linux"
-        "i686-linux"
         "x86_64-linux"
         "aarch64-darwin"
         "x86_64-darwin"
@@ -156,6 +163,13 @@
           system = "aarch64-linux";
         });
 
+      darwinConfigurations = {
+        "Nathans-MacBook-Pro" = nix-darwin.lib.darwinSystem {
+          specialArgs = { inherit self inputs outputs; };
+          modules = [ ./nixos/mac/configuration.nix ];
+        };
+      };
+
       # Standalone home-manager configuration entrypoint
       # Available through 'home-manager --flake .#'
       homeConfigurations = {
@@ -168,6 +182,11 @@
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [ ./home-manager/callisto.nix ];
+        };
+        "nregner" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [ ./home-manager/mac.nix ];
         };
       };
 
