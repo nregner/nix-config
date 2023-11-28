@@ -12,6 +12,7 @@
         };
         size = 11;
       };
+      env = { TERM = "alacritty"; };
     };
   };
 }
