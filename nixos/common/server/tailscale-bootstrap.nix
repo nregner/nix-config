@@ -4,12 +4,18 @@ in {
   # source: https://tailscale.com/blog/nixos-minecraft/
   options.services.tailscale-bootstrap = {
     enable = lib.mkEnableOption (lib.mdDoc "Automatic Tailscale registration");
+    secret-key = lib.mkOption {
+      type = lib.types.str;
+      default = "tailscale/server_key";
+      description =
+        lib.mkDefault "Path to the secret containing the Tailscale server key";
+    };
   };
 
   config = lib.mkIf cfg.enable {
     sops.secrets.tailscale-auth-key = {
       sopsFile = ./secrets.yaml;
-      key = "tailscale/server-key";
+      key = cfg.secret-key;
     };
 
     systemd.services.tailscale-bootstrap = {

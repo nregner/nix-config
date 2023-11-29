@@ -1,5 +1,14 @@
 { inputs, outputs, lib, pkgs, ... }: {
-  imports = [ ./. ./cli ./desktop ./desktop/gnome ./desktop/jetbrains ./nvim ];
+  imports = [
+    ./.
+    ./cli
+    ./desktop
+    ./desktop/gnome
+    ./desktop/jetbrains
+    ./nvim
+    ./dev/sops.nix
+    ../terraform/tailscale
+  ];
 
   # standalone install - reimport nixpkgs
   nixpkgs = import ../nixpkgs.nix { inherit inputs outputs; };

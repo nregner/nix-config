@@ -1,11 +1,6 @@
-{ lib, pkgs, ... }: {
-  imports = [
-    ../common/global
-    ../../terraform/tailscale
-    ./hardware-configuration.nix
-    ./builders.nix
-    ./vfio.nix
-  ];
+{ config, lib, pkgs, ... }: {
+  imports =
+    [ ../common/global ./hardware-configuration.nix ./builders.nix ./vfio.nix ];
 
   # Login shell
   programs.zsh.enable = true;

@@ -13,6 +13,39 @@ terraform {
 }
 
 provider "tailscale" {
-  oauth_client_id     = file("/run/secrets/tailscale/client_id")
-  oauth_client_secret = file("/run/secrets/tailscale/client_secret")
+  oauth_client_id     = file("~/run/secrets/tailscale/client_id")
+  oauth_client_secret = file("~/run/secrets/tailscale/client_secret")
 }
+
+resource "tailscale_tailnet_key" "server" {
+  ephemeral     = false
+  expiry        = null
+  preauthorized = true
+  reusable      = true
+  tags          = ["tag:server"]
+}
+
+resource "tailscale_tailnet_key" "builder" {
+  ephemeral     = true
+  expiry        = null
+  preauthorized = true
+  reusable      = true
+  tags          = ["tag:server"]
+}
+
+resource "tailscale_dns_search_paths" "default" {
+  search_paths = [
+    "nregner.net"
+  ]
+}
+
+output "server_key" {
+  value     = tailscale_tailnet_key.server.key
+  sensitive = true
+}
+
+output "builder_key" {
+  value     = tailscale_tailnet_key.builder.key
+  sensitive = true
+}
+
