@@ -65,6 +65,10 @@
       url = "github:nathanregner/mealie-nix";
       # inputs.nixpkgs.follows = "nixpkgs";
     };
+    orangepi-nix = {
+      url = "github:nathanregner/orangepi-nix";
+      # inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -79,13 +83,11 @@
         "aarch64-darwin"
         "x86_64-darwin"
       ];
-      # FIXME: OrangePi Zero 2 Kernel
-      forEachNode = do: { };
-      # forEachNode = lib.trivial.pipe 4 [
-      #   (lib.lists.range 1)
-      #   (map (n: "kraken-${toString n}"))
-      #   lib.genAttrs
-      # ];
+      forEachNode = lib.trivial.pipe 5 [
+        (lib.lists.range 0)
+        (map (n: "kraken-${toString n}"))
+        lib.genAttrs
+      ];
     in rec {
       # Your custom packages
       # Acessible through 'nix build', 'nix shell', etc
@@ -205,6 +207,7 @@
       # TODO: Derive from nixosConfigurations
       deploy.nodes = forEachNode (hostname: {
         inherit hostname;
+        sshUser = "root";
         fastConnection = false;
         remoteBuild = false;
         profiles.system = {

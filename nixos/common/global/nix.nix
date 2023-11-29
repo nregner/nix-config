@@ -2,7 +2,6 @@
   environment.etc = {
     "nix/flake-channels/system".source = inputs.self;
     "nix/flake-channels/nixpkgs".source = inputs.nixpkgs;
-    "nix/flake-channels/home-manager".source = inputs.home-manager;
   };
 
   nixpkgs = import ../../../nixpkgs.nix { inherit inputs outputs; };
@@ -11,7 +10,8 @@
     package = lib.mkDefault pkgs.unstable.nix;
 
     # pin the flake registry to flake inputs
-    registry = lib.mapAttrs (_: flake: { inherit flake; }) inputs;
+    registry =
+      lib.mapAttrs (_: flake: { inherit flake; }) { inherit (inputs) nixpkgs; };
 
     # https://discourse.nixos.org/t/do-flakes-also-set-the-system-channel/19798
     # pin system channels to flake inputs

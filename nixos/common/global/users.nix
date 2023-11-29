@@ -5,6 +5,8 @@ let
 in {
   security.sudo.wheelNeedsPassword = false;
 
+  nix.settings.trusted-users = [ "nregner" ];
+
   users = {
     mutableUsers = true;
     users.nregner = {

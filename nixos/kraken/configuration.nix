@@ -1,11 +1,12 @@
-{ config, hostname, lib, modulesPath, nixpkgs, pkgs, ... }: {
+{ inputs, config, hostname, lib, pkgs, ... }: {
   imports = [
-    "${modulesPath}/installer/sd-card/sd-image-aarch64.nix"
-    "${modulesPath}/profiles/minimal.nix"
+    inputs.orangepi-nix.nixosModules.zero2
     ../common/global
     ../common/server
     ./octoprint.nix
   ];
+
+  nixpkgs.overlays = [ inputs.orangepi-nix.overlays.default ];
 
   nixpkgs.hostPlatform = lib.mkForce "aarch64-linux";
   networking.hostName = hostname;
@@ -21,38 +22,12 @@
   };
 
   boot = {
-    kernelPackages =
-      pkgs.linuxPackagesFor pkgs.cross.linux_orange-pi-6_1-sun50iw9;
-    kernelParams = [ "boot.shell_on_fail" ];
-    kernelModules = [
-      "sprdwl_ng" # wifi driver
-    ];
     supportedFilesystems = lib.mkForce [ "vfat" "ext4" "ntfs" "cifs" ];
     consoleLogLevel = lib.mkDefault 7;
-
     initrd = { supportedFilesystems = lib.mkForce [ "vfat" "ext4" ]; };
-    loader.generic-extlinux-compatible.enable = true;
-    loader.grub.enable = false;
   };
 
-  hardware = {
-    firmware = with pkgs; [ cross.wcnmodem-firmware ];
-    deviceTree = {
-      name = "allwinner/sun50i-h616-orangepi-zero2.dtb";
-      filter = "sun50i-h616-orangepi-zero2.dtb";
-    };
-  };
-
-  sdImage = {
-    postBuildCommands = ''
-      # Emplace bootloader to specific place in firmware file
-      dd if=/dev/zero of=$img bs=1k count=1023 seek=1 status=noxfer \
-          conv=notrunc # prevent truncation of image
-      dd if=${pkgs.cross.u-boot-v2021_10-sunxi}/u-boot-sunxi-with-spl.bin of=$img bs=1k seek=8 conv=fsync \
-          conv=notrunc # prevent truncation of image
-    '';
-    compressImage = true;
-  };
+  sops.defaultSopsFile = ./secrets.yaml;
 
   # Networking
   sops.secrets.ddns.key = "route53/ddns";
@@ -73,10 +48,10 @@
       priority = 1;
       psk = "@Cosands@";
     };
-    # networks."CenturyLink2746" = {
-    #   priority = 2;
-    #   psk = "@CenturyLink2746@";
-    # };
+    networks."REGNERD" = {
+      priority = 2;
+      psk = "@REGNERD@";
+    };
   };
 
   # This value determines the NixOS release from which the default
