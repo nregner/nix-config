@@ -10,6 +10,12 @@
   nixpkgs.hostPlatform = lib.mkForce "aarch64-linux";
   networking.hostName = hostname;
 
+  # save on limited sd card space
+  nix.settings = {
+    keep-derivations = lib.mkForce true;
+    keep-outputs = lib.mkForce true;
+  };
+
   users.users.root = {
     password = "root"; # ssh password auth disabled, so whatever :)
   };
@@ -65,12 +71,12 @@
     environmentFile = config.sops.secrets.wireless.path;
     networks."4Cosands" = {
       priority = 1;
-      psk = "@4Cosands@";
+      psk = "@Cosands@";
     };
-    networks."CenturyLink2746" = {
-      priority = 2;
-      psk = "@CenturyLink2746@";
-    };
+    # networks."CenturyLink2746" = {
+    #   priority = 2;
+    #   psk = "@CenturyLink2746@";
+    # };
   };
 
   # This value determines the NixOS release from which the default
