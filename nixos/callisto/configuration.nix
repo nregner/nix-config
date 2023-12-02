@@ -1,10 +1,5 @@
 { config, lib, pkgs, ... }: {
-  imports = [
-    ./disko.nix
-    ./hardware-configuration.nix
-    ../common/global
-    ../../terraform/tailscale
-  ];
+  imports = [ ./disko.nix ./hardware-configuration.nix ../common/global ];
 
   # Login shell
   programs.zsh.enable = true;

@@ -1,11 +1,11 @@
 {
   inputs = {
     # Nix
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     # hardware.url = "github:nixos/nixos-hardware";
     home-manager = {
-      url = "github:nathanregner/home-manager/release-23.05";
+      url = "github:nathanregner/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -67,7 +67,7 @@
     };
     mealie = {
       url = "github:nathanregner/mealie-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 

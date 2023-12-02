@@ -1,9 +1,12 @@
 { inputs, config, ... }: {
   imports = [ inputs.attic.nixosModules.atticd ];
 
-  users.users.atticd = {
-    group = "atticd";
-    isSystemUser = true;
+  users = {
+    groups.atticd = { };
+    users.atticd = {
+      group = "atticd";
+      isSystemUser = true;
+    };
   };
 
   sops.secrets.atticd = {
