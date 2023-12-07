@@ -44,15 +44,14 @@
   };
 
   home.packages = with pkgs.unstable; [
-    # just get from rustup for now
-    # rust-analyzer
+    clojure-lsp
     gopls
     lua-language-server
     nil
     nixd
+    nodePackages_latest.typescript-language-server
     prettierd
     stylua
     terraform-ls
-    nodePackages_latest.typescript-language-server
   ];
 }

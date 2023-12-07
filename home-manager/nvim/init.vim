@@ -2,6 +2,7 @@
 " Keymap
 "==================
 let mapleader = " "
+let maplocalleader = ","
 
 inoremap jk <esc>
 

@@ -234,6 +234,7 @@ require("lazy").setup({
     end,
   },
 
+  "tpope/vim-repeat",
   "tpope/vim-surround",
 
   {
@@ -607,6 +608,7 @@ require("which-key").register({
 })
 
 local servers = {
+  clojure_lsp = {},
   gopls = {},
   html = { filetypes = { "html", "twig", "hbs" } },
   nil_ls = {},
