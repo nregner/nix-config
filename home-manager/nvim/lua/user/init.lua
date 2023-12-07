@@ -1,13 +1,6 @@
--- [[ Configure plugins ]]
--- NOTE: Here is where you install your plugins.
---  You can configure plugins using the `config` key.
---
---  You can also configure plugins after the setup call,
---    as they will be available in your neovim runtime.
+-- https://github.com/folke/lazy.nvim#-plugin-spec
 require("lazy").setup({
-  -- NOTE: First, some plugins that don't require any configuration
-
-  -- Git related plugins
+  -- Git
   "tpope/vim-fugitive",
   "tpope/vim-rhubarb",
 
@@ -20,11 +13,7 @@ require("lazy").setup({
     -- LSP Configuration & Plugins
     "neovim/nvim-lspconfig",
     dependencies = {
-      -- Useful status updates for LSP
-      -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { "j-hui/fidget.nvim", opts = {} },
-
-      -- Additional lua configuration, makes nvim stuff amazing!
+      "j-hui/fidget.nvim",
       "folke/neodev.nvim",
     },
   },
@@ -95,10 +84,21 @@ require("lazy").setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { "folke/which-key.nvim", opts = {} },
+  "folke/which-key.nvim",
 
   -- https://github.com/lewis6991/gitsigns.nvim
   "sindrets/diffview.nvim",
+
+  -- https://github.com/mbbill/undotree#configuration
+  {
+    "mbbill/undotree",
+    keys = {
+      { "<leader>fu", vim.cmd.UndotreeToggle, desc = "[F]ile [U]ndo Tree" },
+    },
+    config = function()
+      vim.g.undotree_WindowLayout = 4
+    end,
+  },
 
   {
     -- https://github.com/lewis6991/gitsigns.nvim
