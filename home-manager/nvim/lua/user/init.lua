@@ -34,7 +34,9 @@ require("lazy").setup({
     "stevearc/conform.nvim",
     opts = {
       formatters_by_ft = {
+        css = { { "prettierd", "prettier" } },
         go = { "gofmt" },
+        html = { { "prettierd", "prettier" } },
         javascript = { { "prettierd", "prettier" } },
         json = { { "prettierd", "prettier" } },
         lua = { "stylua" },
