@@ -2,10 +2,20 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
-require("nvim-tree").setup({})
-
-local api = require("nvim-tree.api")
-vim.keymap.set("n", "<leader>ft", function()
-  print("find")
-  api.tree.open({ find_file = true })
-end, {})
+return {
+  "nvim-tree/nvim-tree.lua",
+  lazy = false,
+  dependencies = {
+    "nvim-tree/nvim-web-devicons",
+  },
+  keys = {
+    {
+      "<leader>ft",
+      function()
+        require("nvim-tree.api").tree.open({ find_file = true })
+      end,
+      desc = "[F]ind file in [T]ree",
+    },
+  },
+  opts = {},
+}

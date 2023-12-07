@@ -5,8 +5,12 @@
         "crane": "crane",
         "flake-compat": "flake-compat",
         "flake-utils": "flake-utils",
-        "nixpkgs": ["nixpkgs-unstable"],
-        "nixpkgs-stable": ["nixpkgs"]
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ],
+        "nixpkgs-stable": [
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1698258239,
@@ -86,27 +90,20 @@
         "type": "github"
       }
     },
-    "conform-nvim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1701446094,
-        "narHash": "sha256-3Kd5G+Y6CdzytibazLl3oSxzOBH5dkKmnDnhv1OH+og=",
-        "owner": "stevearc",
-        "repo": "conform.nvim",
-        "rev": "e8ac7f1a9a3973ecce6942b2f26d16e65902aa70",
-        "type": "github"
-      },
-      "original": {
-        "owner": "stevearc",
-        "repo": "conform.nvim",
-        "type": "github"
-      }
-    },
     "crane": {
       "inputs": {
-        "flake-compat": ["attic", "flake-compat"],
-        "flake-utils": ["attic", "flake-utils"],
-        "nixpkgs": ["attic", "nixpkgs"],
+        "flake-compat": [
+          "attic",
+          "flake-compat"
+        ],
+        "flake-utils": [
+          "attic",
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "attic",
+          "nixpkgs"
+        ],
         "rust-overlay": "rust-overlay"
       },
       "locked": {
@@ -126,7 +123,9 @@
     "deploy-rs": {
       "inputs": {
         "flake-compat": "flake-compat_2",
-        "nixpkgs": ["nixpkgs"],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
         "utils": "utils"
       },
       "locked": {
@@ -145,7 +144,9 @@
     },
     "disko": {
       "inputs": {
-        "nixpkgs": ["nixpkgs"]
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1700927249,
@@ -210,7 +211,10 @@
     },
     "flakelight": {
       "inputs": {
-        "nixpkgs": ["mealie", "nixpkgs"]
+        "nixpkgs": [
+          "mealie",
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1699341227,
@@ -228,7 +232,9 @@
     },
     "home-manager": {
       "inputs": {
-        "nixpkgs": ["nixpkgs"]
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1698861275,
@@ -266,7 +272,7 @@
       "inputs": {
         "flakelight": "flakelight",
         "mealie": "mealie_2",
-        "nixpkgs": ["nixpkgs"]
+        "nixpkgs": "nixpkgs"
       },
       "locked": {
         "lastModified": 1700286544,
@@ -301,7 +307,9 @@
     },
     "nix-index-database": {
       "inputs": {
-        "nixpkgs": ["nixpkgs"]
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1700968077,
@@ -335,7 +343,9 @@
     "nixos-generators": {
       "inputs": {
         "nixlib": "nixlib",
-        "nixpkgs": ["nixpkgs"]
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1696058303,
@@ -406,7 +416,6 @@
         "catppuccin-k9s": "catppuccin-k9s",
         "catppuccin-lazygit": "catppuccin-lazygit",
         "catppuccin-papirus-folders": "catppuccin-papirus-folders",
-        "conform-nvim": "conform-nvim",
         "deploy-rs": "deploy-rs",
         "disko": "disko",
         "home-manager": "home-manager",
@@ -421,8 +430,16 @@
     },
     "rust-overlay": {
       "inputs": {
-        "flake-utils": ["attic", "crane", "flake-utils"],
-        "nixpkgs": ["attic", "crane", "nixpkgs"]
+        "flake-utils": [
+          "attic",
+          "crane",
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "attic",
+          "crane",
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1675391458,
@@ -440,8 +457,12 @@
     },
     "sops-nix": {
       "inputs": {
-        "nixpkgs": ["nixpkgs-unstable"],
-        "nixpkgs-stable": ["nixpkgs"]
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ],
+        "nixpkgs-stable": [
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1701127353,

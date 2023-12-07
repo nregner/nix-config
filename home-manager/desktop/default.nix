@@ -12,6 +12,7 @@
     awscli2
     gh
     jq
+    nushellFull
     pv
     xclip
 

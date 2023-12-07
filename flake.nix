@@ -57,10 +57,6 @@
 
     # Misc
     # https://github.com/realthunder/FreeCAD/releases
-    conform-nvim = {
-      url = "github:stevearc/conform.nvim";
-      flake = false;
-    };
     linux-rockchip = {
       url = "github:armbian/linux-rockchip/rk-5.10-rkr4";
       flake = false;

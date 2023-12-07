@@ -1,5 +1,7 @@
 { config, pkgs, ... }: {
   xdg.configFile."nvim/lua".source = config.lib.file.mkFlakeSymlink ./lua;
+  xdg.configFile."nvim/lazy-lock.json".source =
+    config.lib.file.mkFlakeSymlink ./lazy-lock.json;
 
   programs.neovim = {
     enable = true;
@@ -11,40 +13,26 @@
     '';
 
     plugins = with pkgs.unstable.vimPlugins; [
-      # theme
-      catppuccin-nvim
+      lazy-nvim
 
       # tmux <-> nvim navigation
-      Navigator-nvim
+      # Navigator-nvim
 
       # git
-      conflict-marker-vim
-      diffview-nvim
+      # conflict-marker-vim
+      # diffview-nvim
 
       # file type/syntax highlighting
+      # (let plugin = nvim-treesitter;
+      # in plugin.withAllGrammars.overrideAttrs (prev: {
+      #   passthru.dependencies = prev.passthru.dependencies
+      #     ++ [ (plugin.passthru.grammarToPlugin pkgs.tree-sitter-nu) ];
+      # }))
       nvim-treesitter.withAllGrammars
       vim-nix
 
       # formatting
-      pkgs.conform-nvim
-
-      # misc
-      lualine-nvim
-      mini-nvim
-      nvim-colorizer-lua
-      nvim-tree-lua
-      plenary-nvim
-      telescope-fzy-native-nvim
-      telescope-nvim
-      vim-surround
-
-      # lsp/completion
-      nvim-lspconfig
-      nvim-cmp
-      cmp-nvim-lsp
-      cmp_luasnip
-      luasnip
-      copilot-lua
+      # pkgs.conform-nvim
     ];
   };
 
@@ -61,8 +49,10 @@
     gopls
     lua-language-server
     nil
+    nixd
     prettierd
     stylua
     terraform-ls
+    nodePackages_latest.typescript-language-server
   ];
 }
