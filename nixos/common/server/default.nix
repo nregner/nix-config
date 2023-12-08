@@ -1,4 +1,4 @@
 { lib, ... }: {
-  imports = [ ./route53-ddns.nix ./tailscale-bootstrap.nix ];
-  services.tailscale-bootstrap.enable = lib.mkDefault true;
+  imports = [ ./route53-ddns.nix ./tailscaled-autoconnect.nix ];
+  services.tailscaled-autoconnect.enable = lib.mkDefault true;
 }
