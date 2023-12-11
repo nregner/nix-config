@@ -18,6 +18,10 @@ require("lazy").setup({
     },
   },
 
+  -- Extensible UI for Neovim notifications and LSP progress messages.
+  -- https://github.com/j-hui/fidget.nvim
+  { "j-hui/fidget.nvim", opts = {} },
+
   -- Formatting
   {
     "stevearc/conform.nvim",
@@ -613,7 +617,7 @@ local servers = {
   html = { filetypes = { "html", "twig", "hbs" } },
   nil_ls = {},
   rust_analyzer = {},
-  terraform_lsp = {},
+  terraformls = {},
   tsserver = {},
 
   lua_ls = {
