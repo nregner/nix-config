@@ -101,7 +101,7 @@
         let
           config = import ./nixpkgs.nix { inherit inputs outputs; };
           pkgs = import nixpkgs-unstable ({ inherit system; } // config);
-        in import ./shells.nix { inherit pkgs; });
+        in import ./shells.nix { inherit inputs pkgs; });
 
       # Your custom packages and modifications, exported as overlays
       overlays = import ./overlays { inherit inputs; };
