@@ -57,7 +57,6 @@
   # Windows VM
   vfio.enable = true;
   virtualisation.libvirtd.enable = true;
-  environment.systemPackages = with pkgs; [ virt-manager ];
 
   # Misc
   services.hardware.openrgb = {
@@ -67,7 +66,8 @@
 
   zramSwap.enable = true;
 
-  environment.systemPackages = [ config.boot.kernelPackages.perf ];
+  environment.systemPackages =
+    [ config.boot.kernelPackages.perf pkgs.virt-manager ];
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
