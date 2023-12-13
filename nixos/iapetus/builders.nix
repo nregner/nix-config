@@ -8,30 +8,15 @@
 
     # 1. manually `sudo ssh` first
     # 2. ensure `sshUser` is in `trusted-users`
-    buildMachines = [
-      /* {
-           hostName = "ec2-aarch64";
-           protocol = "ssh";
-           sshUser = "root";
-           system = "aarch64-linux";
-           supportedFeatures =
-             [ "nixos-test" "benchmark" "big-parallel" "kvm" "gccarch-armv8-a" ];
-           mandatoryFeatures = [ ];
-           maxJobs = 16;
-           # speedFactor = 100;
-         }
-      */
-      /* {
-           hostName = "voron";
-           protocol = "ssh";
-           sshUser = "nregner";
-           system = "aarch64-linux";
-           supportedFeatures =
-             [ "nixos-test" "benchmark" "big-parallel" "kvm" "gccarch-armv8-a" ];
-           mandatoryFeatures = [ ];
-           maxJobs = 2;
-         }
-      */
-    ];
+    buildMachines = [{
+      hostName = "m3-linux-builder";
+      protocol = "ssh";
+      sshUser = "root";
+      system = "aarch64-linux";
+      supportedFeatures =
+        [ "nixos-test" "benchmark" "big-parallel" "kvm" "gccarch-armv8-a" ];
+      mandatoryFeatures = [ ];
+      maxJobs = 8;
+    }];
   };
 }

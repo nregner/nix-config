@@ -69,7 +69,7 @@
   environment.systemPackages =
     [ config.boot.kernelPackages.perf pkgs.virt-manager ];
 
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+  # boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   virtualisation.docker = {
     enable = true;
