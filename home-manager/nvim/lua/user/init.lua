@@ -616,7 +616,17 @@ local servers = {
   gopls = {},
   html = { filetypes = { "html", "twig", "hbs" } },
   nil_ls = {},
-  rust_analyzer = {},
+  rust_analyzer = {
+    -- https://rust-analyzer.github.io/manual.html#configuration
+    ["rust-analyzer"] = {
+      completion = {
+        autoimport = { enable = true },
+      },
+      files = {
+        excludeDirs = { ".direnv", ".git" },
+      },
+    },
+  },
   terraformls = {},
   tsserver = {},
 
