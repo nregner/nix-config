@@ -183,6 +183,12 @@ require("lazy").setup({
     end,
   },
 
+  -- https://github.com/stevearc/dressing.nvim
+  {
+    "stevearc/dressing.nvim",
+    opts = {},
+  },
+
   {
     -- Set lualine as statusline
     "nvim-lualine/lualine.nvim",
