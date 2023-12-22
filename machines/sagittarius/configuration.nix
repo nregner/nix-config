@@ -10,6 +10,7 @@
     ./mealie.nix
     ./networking.nix
     ./nginx.nix
+    ./qbittorrent.nix
   ];
 
   nixpkgs.hostPlatform = lib.mkForce "x86_64-linux";
