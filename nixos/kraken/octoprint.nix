@@ -3,7 +3,12 @@ let
   rootDir = "/var/lib/octoprint";
   restartPath = "${rootDir}/restart";
 in {
-  nixpkgs.overlays = [ (final: prev: { inherit (final.unstable) octoprint; }) ];
+  nixpkgs.overlays = [
+    (final: prev: {
+      inherit (final.unstable) octoprint;
+      ffmpeg = prev.ffmpeg.override { ffmpegVariant = "headless"; };
+    })
+  ];
 
   # 3d printer
   services.octoprint = {
