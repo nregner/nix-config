@@ -26,9 +26,10 @@
     vim
 
     # filesystem
-    tree
-    file
     fd
+    file
+    rsync
+    tree
     which
 
     # archive formats
