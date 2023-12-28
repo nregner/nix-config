@@ -27,9 +27,21 @@ in {
         type = types.str;
         default = "*-*-* *:00/15:00";
         description = lib.mdDoc ''
-          Systemd calendar expression when to check for ip changes. 
+          Systemd calendar expression when to check for ip changes.
           See {manpage}`systemd.time(7)`.
         '';
+      };
+
+      user = mkOption {
+        type = types.str;
+        default = "route53-ddns";
+        description = lib.mdDoc "User for the daemon";
+      };
+
+      group = mkOption {
+        type = types.str;
+        default = "route53-ddns";
+        description = lib.mdDoc "Group for the daemon";
       };
 
       environmentFile = mkOption {
@@ -43,6 +55,20 @@ in {
   };
 
   config = mkIf cfg.enable {
+
+    users.users = optionalAttrs (cfg.user == "route53-ddns") {
+      route53-ddns = {
+        group = cfg.group;
+        isSystemUser = true;
+        # uid = config.ids.uids.route53-ddns;
+      };
+    };
+
+    users.groups = optionalAttrs (cfg.group == "route53-ddns") {
+      # route53-ddns.gid = config.ids.gids.route53-ddns;
+      route53-ddns = { };
+    };
+
     systemd.timers.route53-ddns = {
       description = "route53-ddns timer";
 

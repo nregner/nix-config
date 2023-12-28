@@ -28,7 +28,10 @@
   sops.defaultSopsFile = ./secrets.yaml;
 
   # Networking
-  sops.secrets.ddns.key = "route53/ddns";
+  sops.secrets.ddns = {
+    key = "route53/ddns";
+    group = config.services.route53-ddns.group;
+  };
   services.route53-ddns = {
     enable = true;
     domain = "${hostname}.nregner.net";
