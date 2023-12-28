@@ -554,16 +554,15 @@
         "u-boot-orangepi-v2021_10-sunxi": "u-boot-orangepi-v2021_10-sunxi"
       },
       "locked": {
-        "lastModified": 1703712739,
+        "lastModified": 1703723279,
         "narHash": "sha256-bK2lR1xeL5D+TWyN1PagdbqY3a/Oh2GWYnk+GK4GnvA=",
         "owner": "nathanregner",
         "repo": "orangepi-nix",
-        "rev": "6ab2cd0df483422fb90afe5baeeb915c15b742a3",
+        "rev": "afe43361ac42d2c455fcdbf3b2691b98f45cc11e",
         "type": "github"
       },
       "original": {
         "owner": "nathanregner",
-        "ref": "orangepi-zero2-2",
         "repo": "orangepi-nix",
         "type": "github"
       }
