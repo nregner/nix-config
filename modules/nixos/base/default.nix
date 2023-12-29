@@ -17,7 +17,7 @@
   users.users.nregner.shell = pkgs.zsh;
 
   # basic system utilities
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = with pkgs.unstable; [
     git # needed by flakes
 
     # text manipulation

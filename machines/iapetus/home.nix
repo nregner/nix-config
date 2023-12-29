@@ -11,25 +11,22 @@
     flakePath = "/home/nregner/nix-config/iapetus";
   };
 
-  home.packages = with pkgs; [
+  home.packages = with pkgs.unstable; [
     # apps
     openrgb
     insync
     discord
-    # firefox
+    firefox
     # gparted
 
     awscli2
-    fd
     gh
     jq
-    nushell
     nushellFull
     pkgs.attic
     pv
     rclone
     restic
-    ripgrep
     screen
     xclip
 
@@ -38,7 +35,7 @@
     kubernetes-helm
 
     # 3d printer
-    unstable.super-slicer-latest
+    super-slicer-latest
 
     # nix
     comma # auto-run from nix-index: https://github.com/nix-community/comma
