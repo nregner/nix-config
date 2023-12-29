@@ -50,6 +50,7 @@
     nil
     nixd
     nodePackages_latest.typescript-language-server
+    nodePackages_latest.prettier
     prettierd
     stylua
     terraform-ls
