@@ -234,6 +234,26 @@
           };
         }) nixosConfigurations;
 
+      # https://github.com/zhaofengli/colmena
+      colmena = let
+        nixosConfigurations = lib.filterAttrs (name: _:
+          builtins.match "kraken.*" name != null || name == "sagittarius"
+          || name == "voron") self.nixosConfigurations;
+      in {
+        # map nixosConfigurations to deployments: https://github.com/zhaofengli/colmena/issues/60#issuecomment-1510496861
+        meta = {
+          nixpkgs = import inputs.nixpkgs { system = "x86_64-linux"; };
+          nodeNixpkgs =
+            builtins.mapAttrs (name: value: value.pkgs) nixosConfigurations;
+          nodeSpecialArgs =
+            builtins.mapAttrs (name: value: value._module.specialArgs)
+            nixosConfigurations;
+          allowApplyAll = false;
+        };
+      } // builtins.mapAttrs
+      (name: value: { imports = value._module.args.modules; })
+      nixosConfigurations;
+
       # TODO: Derive from nixosConfigurations
       deploy.nodes = forEachNode (hostname: {
         inherit hostname;
