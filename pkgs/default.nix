@@ -1,7 +1,8 @@
 # Custom packages, that can be defined similarly to ones from nixpkgs
 # You can build them using 'nix build .#example' or (legacy) 'nix-build -A example'
 
-{ inputs, pkgs }: {
+{ inputs, pkgs }:
+{
   gitea-github-mirror = pkgs.unstable.callPackage ./gitea-github-mirror { };
 
   route53-ddns = pkgs.unstable.callPackage ./route53-ddns { };
@@ -32,3 +33,33 @@
     '';
   };
 }
+
+//
+
+(let
+  build-klipper-firmware = firmwareConfig:
+    (pkgs.unstable.klipper-firmware.override {
+      avrdude = pkgs.avrdude.override { docSupport = false; };
+      inherit firmwareConfig;
+    }).overrideAttrs (prev: {
+      nativeBuildInputs =
+        (builtins.filter (pkg: builtins.match "wxwidgets.*" pkg.name == null)
+          prev.nativeBuildInputs);
+    });
+in {
+  klipper-firmware-sunlu-s8 = let
+    firmware = build-klipper-firmware ../machines/kraken/klipper/firmware.cfg;
+  in firmware // {
+    passthru.klipper-flash = pkgs.writeShellApplication {
+      name = "klipper-flash-sunlu-s8";
+      runtimeInputs = [ (pkgs.avrdude.override { docSupport = false; }) ];
+      text = ''
+        avrdude -cwiring -patmega2560 "-P$1" -D -Uflash:w:${firmware}/klipper.elf:i
+      '';
+    };
+  };
+
+  klipper-firmare-voron-2_4 =
+    build-klipper-firmware ../machines/voron/firmware.cfg;
+})
+
