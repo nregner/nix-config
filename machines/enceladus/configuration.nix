@@ -71,5 +71,8 @@
     enable = true;
     package = pkgs.unstable.tailscale;
   };
-  environment.systemPackages = [ config.services.tailscale.package ];
+  environment.systemPackages = [
+    config.services.tailscale.package
+    config.nix.linux-builder.package # keep the base image around in case we need to rebuild
+  ];
 }
