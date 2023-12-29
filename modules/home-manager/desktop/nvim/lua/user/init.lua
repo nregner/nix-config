@@ -69,6 +69,9 @@ require("lazy").setup({
 
       -- Adds a number of user-friendly snippets
       "rafamadriz/friendly-snippets",
+
+      -- Filesystem completion
+      "hrsh7th/cmp-path",
     },
   },
 
@@ -712,12 +715,9 @@ cmp.setup({
     end, { "i", "s" }),
   }),
   sources = {
-    -- Copilot Source
-    { name = "copilot", group_index = 2 },
-    -- Other Sources
-    { name = "nvim_lsp", group_index = 2 },
-    { name = "path", group_index = 2 },
+    { name = "nvim_lsp", group_index = 1 },
     { name = "luasnip", group_index = 2 },
+    { name = "path", group_index = 3 },
   },
 })
 
