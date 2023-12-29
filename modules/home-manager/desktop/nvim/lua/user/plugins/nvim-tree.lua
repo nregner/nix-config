@@ -1,3 +1,5 @@
+-- https://github.com/nvim-tree/nvim-tree.lua
+
 -- disable netrw
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
@@ -17,5 +19,8 @@ return {
       desc = "[F]ind file in [T]ree",
     },
   },
-  opts = {},
+  opts = {
+    update_cwd = true,
+    hijack_cursor = true,
+  },
 }
