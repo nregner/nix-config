@@ -2,13 +2,16 @@
   imports = [
     inputs.orangepi-nix.nixosModules.zero2
     ../../modules/nixos/server
-    ./octoprint.nix
+    ./octoprint
   ];
 
   nixpkgs.overlays = [ inputs.orangepi-nix.overlays.default ];
 
   nixpkgs.hostPlatform = lib.mkForce "aarch64-linux";
   networking.hostName = hostname;
+
+  # keep a reference to the flake source that was used to build
+  environment.etc."nix/flake-channels/system".source = inputs.self;
 
   # save on limited sd card space
   nix.settings = {
