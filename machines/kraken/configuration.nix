@@ -5,6 +5,8 @@
     ./octoprint
   ];
 
+  sdImage.imageName = "orangepi-zero2";
+
   nixpkgs.overlays = [ inputs.orangepi-nix.overlays.default ];
 
   nixpkgs.hostPlatform = lib.mkForce "aarch64-linux";
@@ -12,12 +14,6 @@
 
   # keep a reference to the flake source that was used to build
   environment.etc."nix/flake-channels/system".source = inputs.self;
-
-  # save on limited sd card space
-  nix.settings = {
-    keep-derivations = lib.mkForce true;
-    keep-outputs = lib.mkForce true;
-  };
 
   users.users.root = {
     password = "root"; # ssh password auth disabled, so whatever :)

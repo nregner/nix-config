@@ -3,6 +3,7 @@
     ../../modules/home-manager/desktop
     ../../modules/home-manager/desktop/gnome
     ../../terraform/tailscale
+    ../print-farm/secrets.nix
   ];
 
   home = {
