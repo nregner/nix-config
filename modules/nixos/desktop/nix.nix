@@ -12,17 +12,14 @@
       nixpkgs-unstable.flake = inputs.nixpkgs-unstable;
     };
 
-    # https://discourse.nixos.org/t/do-flakes-also-set-the-system-channel/19798
-    # pin system channels to flake inputs
-    nixPath = [
-      "nixpkgs=/etc/nix/flake-channels/nixpkgs"
-      "nixpkgs-unstable=/etc/nix/flake-channels/nixpkgs-unstable"
-    ];
-
     settings = {
       # keep build dependencies for direnv GC roots
       keep-derivations = true;
       keep-outputs = true;
+
+      # https://discourse.nixos.org/t/do-flakes-also-set-the-system-channel/19798
+      # pin system channels to flake inputs
+      nix-path = "nixpkgs=/etc/nix/flake-channels/nixpkgs";
     };
   };
 }
