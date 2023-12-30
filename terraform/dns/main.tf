@@ -39,7 +39,7 @@ module "ddns" {
   for_each = {
     sagittarius = { subdomain = null }
     voron       = { subdomain = "voron" }
-    kraken      = { subdomain = "kraken-*" }
+    print-farm  = { subdomain = "*.print" }
   }
   hosted_zone = aws_route53_zone.primary
   username    = each.key

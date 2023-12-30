@@ -27,10 +27,6 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    deploy-rs = {
-      url = "github:serokell/deploy-rs";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nix-index-database = {
       url = "github:Mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -79,8 +75,8 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, nix-darwin, home-manager
-    , deploy-rs, ... }@inputs:
+  outputs =
+    { self, nixpkgs, nixpkgs-unstable, nix-darwin, home-manager, ... }@inputs:
     let
       inherit (self) outputs;
       inherit (nixpkgs) lib;
@@ -90,22 +86,6 @@
         "aarch64-darwin"
         "x86_64-darwin"
       ];
-      forEachNode = lib.trivial.pipe 5 [
-        (lib.lists.range 0)
-        (map (n: "kraken-${toString n}"))
-        lib.genAttrs
-      ];
-
-      machines = [ import ./machines/iapetus import ./machines/callisto ];
-
-      forEachMachine = attr: wrap:
-        builtins.map (machine:
-          lib.mapAttrs (_: args: (wrap args))
-          (if builtins.hasAttr attr machine then
-            builtins.getAttr attr machine
-          else
-            { })) machines;
-
     in rec {
       # Your custom packages
       # Acessible through 'nix build', 'nix shell', etc
@@ -166,13 +146,7 @@
           modules = [ ./machines/voron/configuration.nix ];
           system = "aarch64-linux";
         };
-      } // forEachNode (hostname:
-        # 3d print farm node
-        nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit self inputs outputs nixpkgs hostname; };
-          modules = [ ./machines/kraken/configuration.nix ];
-          system = "aarch64-linux";
-        });
+      } // (import ./machines/print-farm { inherit self inputs outputs; });
 
       darwinConfigurations = {
         "Nathans-MacBook-Pro" = nix-darwin.lib.darwinSystem {
@@ -238,8 +212,8 @@
       colmena = let
         # map nixosConfigurations to deployments: https://github.com/zhaofengli/colmena/issues/60#issuecomment-1510496861
         nixosConfigurations = lib.filterAttrs (name: _:
-          builtins.match "kraken.*" name != null || name == "sagittarius"
-          || name == "voron") self.nixosConfigurations;
+          builtins.match "sunlu-*" name != null || name == "sagittarius" || name
+          == "voron") self.nixosConfigurations;
       in {
         meta = {
           nixpkgs = import inputs.nixpkgs { system = "x86_64-linux"; };
@@ -258,73 +232,5 @@
         # https://colmena.cli.rs/unstable/reference/deployment.html
         # deployment.buildOnTarget = true;
       }) nixosConfigurations;
-
-      # TODO: Derive from nixosConfigurations
-      deploy.nodes = forEachNode (hostname: {
-        inherit hostname;
-        sshUser = "root";
-        fastConnection = false;
-        remoteBuild = false;
-        profiles.system = {
-          path = deploy-rs.lib.aarch64-linux.activate.nixos
-            self.nixosConfigurations.${hostname};
-        };
-      }) // {
-        ec2-aarch64 = (let hostname = "ec2-aarch64";
-        in {
-          inherit hostname;
-          fastConnection = false;
-          remoteBuild = true;
-          sshUser = "root";
-          profiles.system = {
-            user = "root";
-            path = deploy-rs.lib.aarch64-linux.activate.nixos
-              self.nixosConfigurations.${hostname};
-          };
-        });
-        voron = (let
-          hostname = "voron";
-          system = "aarch64-linux";
-          pkgs = nixpkgs.legacyPackages.${system};
-          # nixpkgs with deploy-rs overlay but force the nixpkgs package
-          deployPkgs = import nixpkgs {
-            inherit system;
-            overlays = [
-              deploy-rs.overlay
-              (self: super: {
-                deploy-rs = {
-                  inherit (pkgs) deploy-rs;
-                  lib = super.deploy-rs.lib;
-                };
-              })
-            ];
-          };
-        in {
-          inherit hostname;
-          fastConnection = false;
-          remoteBuild = true;
-          sshUser = "nregner";
-          profiles.system = {
-            user = "root";
-            path = deployPkgs.deploy-rs.lib.activate.nixos
-              self.nixosConfigurations.${hostname};
-          };
-        });
-        sagittarius = (let hostname = "sagittarius";
-        in {
-          inherit hostname;
-          fastConnection = false;
-          remoteBuild = true;
-          sshUser = "nregner";
-          profiles.system = {
-            user = "root";
-            path = deploy-rs.lib.x86_64-linux.activate.nixos
-              self.nixosConfigurations.${hostname};
-          };
-        });
-      };
-
-      checks = builtins.mapAttrs
-        (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
     };
 }

@@ -1,23 +1,5 @@
-{ inputs, config, hostname, lib, ... }: {
-  imports = [
-    inputs.orangepi-nix.nixosModules.zero2
-    ../../modules/nixos/server
-    ./octoprint
-  ];
-
-  sdImage.imageName = "orangepi-zero2";
-
-  nixpkgs.overlays = [ inputs.orangepi-nix.overlays.default ];
-
-  nixpkgs.hostPlatform = lib.mkForce "aarch64-linux";
-  networking.hostName = hostname;
-
-  # keep a reference to the flake source that was used to build
-  environment.etc."nix/flake-channels/system".source = inputs.self;
-
-  users.users.root = {
-    password = "root"; # ssh password auth disabled, so whatever :)
-  };
+{ self, config, hostname, lib, ... }: {
+  imports = [ ../../modules/nixos/server ./klipper ];
 
   boot = {
     supportedFilesystems = lib.mkForce [ "vfat" "ext4" "ntfs" "cifs" ];
@@ -25,18 +7,16 @@
     initrd = { supportedFilesystems = lib.mkForce [ "vfat" "ext4" ]; };
   };
 
+  users.users.root.password = "root";
+  services.openssh.settings.PasswordAuthentication = false;
+
   sops.defaultSopsFile = ./secrets.yaml;
 
-  # Networking
-  sops.secrets.ddns.key = "route53/ddns";
-  services.route53-ddns = {
-    enable = true;
-    domain = "${hostname}.nregner.net";
-    ipType = "lan";
-    ttl = 60;
-    environmentFile = config.sops.secrets.ddns.path;
-  };
+  # keep record of flake source
+  environment.etc."nix/flake-channels/system".source = self;
 
+  # Networking
+  networking.hostName = hostname;
   sops.secrets.wireless.sopsFile = ./secrets.yaml;
   networking.wireless = {
     enable = true;
@@ -50,6 +30,15 @@
       priority = 2;
       psk = "@REGNERD@";
     };
+  };
+
+  sops.secrets.ddns.key = "route53/ddns";
+  services.route53-ddns = {
+    enable = true;
+    domain = "${hostname}.print.nregner.net";
+    ipType = "lan";
+    ttl = 60;
+    environmentFile = config.sops.secrets.ddns.path;
   };
 
   # This value determines the NixOS release from which the default
