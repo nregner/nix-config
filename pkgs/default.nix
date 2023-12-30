@@ -45,6 +45,12 @@
       nativeBuildInputs =
         (builtins.filter (pkg: builtins.match "wxwidgets.*" pkg.name == null)
           prev.nativeBuildInputs);
+      patches = prev.patches or [ ]
+        ++ [ ./0001-Add-default-klipper.elf.hex-target.patch ];
+      installPhase = ''
+        ${prev.installPhase or ""}
+        cp out/klipper.elf.hex $out/klipper.elf.hex
+      '';
     });
 in {
   klipper-firmware-sunlu-s8 = let
@@ -54,7 +60,7 @@ in {
       name = "klipper-flash-sunlu-s8";
       runtimeInputs = [ (pkgs.avrdude.override { docSupport = false; }) ];
       text = ''
-        avrdude -cwiring -patmega2560 "-P$1" -D -Uflash:w:${firmware}/klipper.elf:i
+        avrdude -c stk500v2 -p m2560 -P "$1" -D -Uflash:w:${firmware}/klipper.elf.hex:i
       '';
     };
   };
