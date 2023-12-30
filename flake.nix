@@ -236,11 +236,11 @@
 
       # https://github.com/zhaofengli/colmena
       colmena = let
+        # map nixosConfigurations to deployments: https://github.com/zhaofengli/colmena/issues/60#issuecomment-1510496861
         nixosConfigurations = lib.filterAttrs (name: _:
           builtins.match "kraken.*" name != null || name == "sagittarius"
           || name == "voron") self.nixosConfigurations;
       in {
-        # map nixosConfigurations to deployments: https://github.com/zhaofengli/colmena/issues/60#issuecomment-1510496861
         meta = {
           nixpkgs = import inputs.nixpkgs { system = "x86_64-linux"; };
           nodeNixpkgs =
@@ -248,11 +248,16 @@
           nodeSpecialArgs =
             builtins.mapAttrs (name: value: value._module.specialArgs)
             nixosConfigurations;
+          # https://colmena.cli.rs/unstable/reference/meta.html
           allowApplyAll = false;
+          # cat /etc/nix/machines > ./colmena-machines
+          machinesFile = ./colmena-machines;
         };
-      } // builtins.mapAttrs
-      (name: value: { imports = value._module.args.modules; })
-      nixosConfigurations;
+      } // builtins.mapAttrs (name: value: {
+        imports = value._module.args.modules;
+        # https://colmena.cli.rs/unstable/reference/deployment.html
+        # deployment.buildOnTarget = true;
+      }) nixosConfigurations;
 
       # TODO: Derive from nixosConfigurations
       deploy.nodes = forEachNode (hostname: {

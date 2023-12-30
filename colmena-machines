@@ -1,0 +1,3 @@
+ssh://nregner@iapetus x86_64-linux - 12 2 nixos-test,benchmark,big-parallel,kvm - -
+ssh://nregner@sagittarius x86_64-linux - 10 1 nixos-test,benchmark,big-parallel,kvm - -
+ssh://root@m3-linux-builder aarch64-linux - 8 1 nixos-test,benchmark,big-parallel,kvm,gccarch-armv8-a - -
