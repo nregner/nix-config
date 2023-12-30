@@ -2,6 +2,7 @@
   imports = [
     inputs.orangepi-nix.nixosModules.zero2
     ../../modules/nixos/server
+    ../../modules/nixos/server/home-manager.nix
     ./octoprint
   ];
 
