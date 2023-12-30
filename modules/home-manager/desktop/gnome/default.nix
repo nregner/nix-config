@@ -10,6 +10,26 @@
     gpick
   ];
 
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Catppuccin-Mocha-Compact-Blue-Dark";
+      package = pkgs.unstable.catppuccin-gtk.override {
+        accents = [ "blue" ];
+        size = "compact";
+        tweaks = [ "rimless" ];
+        variant = "mocha";
+      };
+    };
+  };
+
+  home.pointerCursor = {
+    name = "Catppuccin-Mocha-Dark-Cursors";
+    package = pkgs.unstable.catppuccin-cursors.mochaDark;
+    size = 24;
+    gtk.enable = true;
+  };
+
   # Generated via dconf2nix: https://github.com/gvolpe/dconf2nix
   dconf.settings = with lib.hm.gvariant; {
     "com/github/wwmm/easyeffects/streamoutputs/bassenhancer/0" = {
