@@ -13,7 +13,8 @@ let
 in (nodes {
   hostnames = [ "sunlu-s8-0" ];
   modules = [
-    ./hardware/orange-pi-zero2.nix
+    # ./hardware/orange-pi-zero2.nix
+    ./hardware/raspberry-pi-zero2w.nix
     ({ pkgs, ... }: {
       print-farm.klipper = {
         enable = true;
