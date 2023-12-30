@@ -6,7 +6,7 @@ keys:
   - &aarch64_linux_builder age13rrpdnr7f9knpgdvafvjkp74ejacuhcvzhdw2j8h5xjwyrmrhv4s4tvr8j
   - &host_iapetus age1pfp278lmacxxj9xj9zez9pgh3yuh64vp0syh6cx6xapvx0c9yfhssl8ed5
   - &host_server age1g2mgt0s80nc5yzkjnwmn6qwf8udnapx92vhwussjpa9d4et5v5zskgap5y
-  - &host_kraken age16zk73cejuepyskjeq0625ecf727y3nmmw32qq0ta97q9e4uj2sqstq6240
+  - &host_print_farm age16zk73cejuepyskjeq0625ecf727y3nmmw32qq0ta97q9e4uj2sqstq6240
   - &host_voron age1vzn4vh7xe7tqx0czgayafr208pjwegmus0l3gxn4v5yeemwch58sahxpee
   - &host_sagittarius age1yfflu4pxlt32sy4xaa04m5gs7kyrccyj9y5hh0qvndmxtrxrtpns7mf682
   - &host_callisto age1h7223qs8fq2v8nta352jqd7kjffl0sxmrpvmcls0q3gm4j5m8d6q7ynsrr
@@ -26,7 +26,7 @@ creation_rules:
           - *host_callisto
           - *host_server
           - *host_voron
-          - *host_kraken
+          - *host_print_farm
           - *host_sagittarius
           - *aarch64_linux_builder
         kms:
@@ -36,11 +36,11 @@ creation_rules:
       - age:
           - *user_nregner
           - *host_voron
-  - path_regex: machines/kraken/secrets.yaml
+  - path_regex: machines/print-farm/secrets.yaml
     key_groups:
       - age:
           - *user_nregner
-          - *host_kraken
+          - *host_print_farm
   - path_regex: machines/ec2-aarch64/secrets.yaml
     key_groups:
       - age:
