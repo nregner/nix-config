@@ -26,9 +26,11 @@
     gh
     jq
     nushell
+    pkgs.attic
     pv
     ripgrep
     rsync
+    util-linux
 
     libiconv
     rustup
@@ -40,6 +42,7 @@
     nixfmt
     # nix-du # nix-du -s=500MB | xdot -
     pkgs.xdot-darwin
+    nixos-rebuild
   ];
 
   programs.zsh = {
