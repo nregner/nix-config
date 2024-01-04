@@ -1,5 +1,5 @@
 { self, config, hostname, lib, ... }: {
-  imports = [ ../../modules/nixos/server ./klipper ];
+  imports = [ ../../modules/nixos/server ./disko.nix ./klipper ];
 
   boot = {
     supportedFilesystems = lib.mkForce [ "vfat" "ext4" "ntfs" "cifs" ];
@@ -12,23 +12,8 @@
 
   sops.defaultSopsFile = ./secrets.yaml;
 
-<<<<<<< HEAD:machines/print-farm/configuration.nix
   # keep record of flake source
   environment.etc."nix/flake-channels/system".source = self;
-=======
-  # Networking
-  sops.secrets.ddns = {
-    key = "route53/ddns";
-    group = config.services.route53-ddns.group;
-  };
-  services.route53-ddns = {
-    enable = true;
-    domain = "${hostname}.nregner.net";
-    ipType = "lan";
-    ttl = 60;
-    environmentFile = config.sops.secrets.ddns.path;
-  };
->>>>>>> 34e07d5 (wip: non-root route53-ddns service user):machines/kraken/configuration.nix
 
   # Networking
   networking.hostName = hostname;
