@@ -1,10 +1,6 @@
 { config, lib, pkgs, ... }: {
-  imports = [
-    ../../modules/nixos/desktop
-    ./builders.nix
-    ./hardware-configuration.nix
-    ./vfio.nix
-  ];
+  imports =
+    [ ../../modules/nixos/desktop ./hardware-configuration.nix ./vfio.nix ];
 
   # bootloader
   boot.loader.systemd-boot.enable = true;
