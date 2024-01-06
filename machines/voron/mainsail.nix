@@ -7,6 +7,12 @@
     script = with pkgs; ''
       ${ustreamer}/bin/ustreamer --device /dev/video0 --host 0.0.0.0 --port 81
     '';
+    serviceConfig = {
+      Restart = "on-failure";
+      RestartSec = "1s";
+      RestartSteps = 10;
+      RestartMaxDelaySec = "1m";
+    };
   };
 
   # restart ustreamer when webcam is plugged in
