@@ -77,7 +77,10 @@ in {
     security.polkit.enable = true;
 
     # mainsail
-    services.mainsail = { enable = true; };
+    services.mainsail = {
+      enable = true;
+      package = pkgs.mainsail-develop;
+    };
     services.nginx = { clientMaxBodySize = "1G"; };
 
     networking.firewall = let
