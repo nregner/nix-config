@@ -45,7 +45,7 @@ in {
     }));
   };
 
-  config = lib.mkIf (!lib.matchAttrs cfg { }) {
+  config = lib.mkIf (!lib.matchAttrs cfg { }) ({
     sops.secrets.restic-password.key = "restic_password";
     sops.secrets.restic-s3-env.key = "restic/s3_env";
   } // (let
@@ -69,5 +69,5 @@ in {
         }) restic))
       (lists.foldl (acc: attrs: acc // attrs) { })
     ];
-  in { services.restic.backups = resticJobs; });
+  in { services.restic.backups = resticJobs; }));
 }
