@@ -54,6 +54,8 @@
   programs.zsh.shellAliases = { vimdiff = "nvim -d"; };
 
   home.packages = with pkgs.unstable; [
+
+    # language servers
     clojure-lsp
     gopls
     lua-language-server
@@ -61,6 +63,11 @@
     nixd
     nodePackages_latest.graphql-language-service-cli
     nodePackages_latest.typescript-language-server
+    terraform-ls
+
+    codespell
+
+    # formatters
     nodePackages_latest.prettier
     (prettierd.overrideAttrs {
       src = fetchFromGitHub {
@@ -71,6 +78,6 @@
       };
     })
     stylua
-    terraform-ls
+
   ];
 }
