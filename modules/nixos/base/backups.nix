@@ -56,6 +56,11 @@ in {
         initialize = true;
         passwordFile = args.config.sops.secrets.restic-password.path;
         environmentFile = args.config.sops.secrets.restic-s3-env.path;
+        pruneOpts = [
+          "--keep-within 1m"
+          "--keep-within-weekly 6m"
+          "--keep-within-monthly 1y"
+        ];
       };
     };
     resticJobs = trivial.pipe cfg [

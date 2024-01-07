@@ -21,6 +21,17 @@ resource "aws_s3_bucket_versioning" "restic" {
   }
 }
 
+resource "aws_s3_bucket_lifecycle_configuration" "restic" {
+  bucket = aws_s3_bucket.restic.bucket
+  rule {
+    id     = "expire-noncurrent-versions"
+    status = "Enabled"
+    noncurrent_version_expiration {
+      noncurrent_days = 7
+    }
+  }
+}
+
 resource "aws_iam_user" "nix_restic" {
   name = local.username
 }
