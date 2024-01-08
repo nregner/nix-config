@@ -17,7 +17,7 @@
 
   # restart ustreamer when webcam is plugged in
   services.udev.extraRules = ''
-    ACTION=="add", ENV{SUBSYSTEM}=="video4linux", RUN+="${pkgs.bash} -c 'systemctl restart ustreamer.service'"
+    ACTION=="add", ENV{SUBSYSTEM}=="video4linux", RUN+="${pkgs.systemd}/bin/systemctl restart ustreamer.service"
   '';
 
   networking.firewall = let ports = [ 80 81 ];
