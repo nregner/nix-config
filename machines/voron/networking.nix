@@ -1,15 +1,8 @@
 { config, ... }: {
-  networking.hostName = "voron";
-
-  systemd.network = {
-    enable = true;
-    networks = {
-      "10-eth0" = {
-        matchConfig.Name = "end1";
-        networkConfig = { DHCP = "yes"; };
-        linkConfig.RequiredForOnline = "routable";
-      };
-    };
+  networking = {
+    hostName = "voron";
+    useNetworkd = true;
+    interfaces.end1.useDHCP = true;
   };
 
   sops.secrets.ddns.key = "route53/ddns";

@@ -1,15 +1,9 @@
 { config, ... }: {
-  networking.hostName = "sagittarius";
-
-  systemd.network = {
-    enable = true;
-    networks = {
-      "10-eth0" = {
-        matchConfig.Name = "enp4s0";
-        networkConfig = { DHCP = "yes"; };
-        linkConfig.RequiredForOnline = "routable";
-      };
-    };
+  networking = {
+    hostName = "sagittarius";
+    useDHCP = true;
+    interfaces.enp4s0.useDHCP = true;
+    interfaces.enp5s0.useDHCP = true;
   };
 
   sops.secrets.ddns.key = "route53/ddns";
