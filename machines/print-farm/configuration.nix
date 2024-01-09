@@ -1,4 +1,4 @@
-{ self, config, hostname, lib, ... }: {
+{ self, config, lib, ... }: {
   imports = [ ../../modules/nixos/server ./klipper ];
 
   boot = {
@@ -16,7 +16,6 @@
   environment.etc."nix/flake-channels/system".source = self;
 
   # Networking
-  networking.hostName = hostname;
   sops.secrets.wireless.sopsFile = ./secrets.yaml;
   networking.wireless = {
     enable = true;
@@ -35,7 +34,7 @@
   sops.secrets.ddns.key = "route53/ddns";
   services.route53-ddns = {
     enable = true;
-    domain = "${hostname}.print.nregner.net";
+    domain = "${config.networking.hostName}.print.nregner.net";
     ipType = "lan";
     ttl = 60;
     environmentFile = config.sops.secrets.ddns.path;

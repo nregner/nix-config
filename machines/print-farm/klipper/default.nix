@@ -1,4 +1,4 @@
-{ hostname, config, lib, pkgs, ... }:
+{ inputs, hostname, config, lib, pkgs, ... }:
 let cfg = config.print-farm.klipper;
 in {
   options.print-farm.klipper = {
@@ -19,50 +19,57 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    nixpkgs.overlays =
-      [ (final: prev: { inherit (final.unstable) moonraker klipper; }) ];
-
-    networking.firewall = let ports = [ 80 81 7125 ];
-    in {
-      allowedTCPPorts = ports;
-      allowedUDPPorts = ports;
-    };
 
     # klipper
     services.klipper = {
       enable = true;
+      package = pkgs.unstable.klipper;
       user = "moonraker";
       group = "moonraker";
       configFile = pkgs.writeText "printer.cfg" ''
         [include /etc/klipper/printer.cfg]
+
+        [bltouch]
+        z_offset: 3.998
       '';
       mutableConfig = true;
     };
 
-    environment.etc."klipper/printer.cfg".source =
-      pkgs.writeText "printer.immutable.cfg" ''
+    environment.etc = {
+      "klipper/KAMP".source = "${inputs.kamp}/Configuration";
+      "klipper/adxl.cfg".source = ./adxl.cfg;
+      "klipper/printer.cfg".source = pkgs.writeText "printer.immutable.cfg" ''
         [include ${cfg.configFile}]
+        # [include /etc/klipper/adxl.cfg]
         [include ${./macros.cfg}]
         [include ${./mainsail.cfg}]
+        [include ${./kamp.cfg}]
       '';
+    };
 
     # restart Klipper when printer is powered on
     # https://github.com/Klipper3d/klipper/issues/835
     services.udev.extraRules = ''
-      ACTION=="add", ATTRS{idProduct}=="614e", ATTRS{idVendor}=="1d50", RUN+="${pkgs.bash} -c 'systemctl restart klipper.service'"
+      ACTION=="add", ATTRS{idProduct}=="614e", ATTRS{idVendor}=="1d50", RUN+="${pkgs.systemd}/bin/systemctl restart klipper.service"
     '';
 
     # moonraker
     services.moonraker = {
       enable = true;
+      package = pkgs.unstable.moonraker;
+      # package = pkgs.writeShellScriptBin "moonraker" ''
+      #   ${pkgs.unstable.moonraker}/bin/moonraker -v $@
+      # '';
       allowSystemControl = true;
       address = "0.0.0.0";
       settings = {
         authorization = {
-          cors_domains = [ "*://*.nregner.net" "*://${hostname}" ];
+          cors_domains = [ "*" ];
           trusted_clients = [ "127.0.0.0/8" "192.168.0.0/16" "100.0.0.0/8" ];
         };
         history = { };
+        # required by KAMP
+        file_manager.enable_object_processing = "True";
       };
     };
 
@@ -72,5 +79,15 @@ in {
     # mainsail
     services.mainsail = { enable = true; };
     services.nginx = { clientMaxBodySize = "1G"; };
+
+    networking.firewall = let
+      ports = [
+        config.services.nginx.defaultHTTPListenPort
+        config.services.moonraker.port
+      ];
+    in {
+      allowedTCPPorts = ports;
+      allowedUDPPorts = ports;
+    };
   };
 }
