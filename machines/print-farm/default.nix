@@ -5,8 +5,9 @@ let
   nodes = { hostnames, modules }:
     lib.genAttrs hostnames (hostname:
       lib.nixosSystem {
-        specialArgs = { inherit self inputs outputs hostname; };
-        modules = [ ./configuration.nix ] ++ modules;
+        specialArgs = { inherit self inputs outputs; };
+        modules = [ ./configuration.nix { networking.hostName = hostname; } ]
+          ++ modules;
         system = "aarch64-linux";
       });
 in (nodes {
