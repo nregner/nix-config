@@ -20,7 +20,7 @@ in (nodes {
         productId = "614e";
         vendorId = "1d50";
       };
-      environment.systemPackages = [ pkgs.klipper-flash-sunlu-s8 ];
+      environment.systemPackages = [ pkgs.klipperPkgs.flash-sunlu-s8 ];
     })
   ];
 })

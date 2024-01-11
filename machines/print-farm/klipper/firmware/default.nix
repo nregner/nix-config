@@ -16,7 +16,7 @@ let
       '';
     });
 in {
-  klipper-flash-sunlu-s8 = writeShellApplication {
+  flash-sunlu-s8 = writeShellApplication {
     name = "klipper-flash-sunlu-s8";
     runtimeInputs = [ avrdudeNoDoc ];
     text = ''

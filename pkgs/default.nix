@@ -1,8 +1,7 @@
 # Custom packages, that can be defined similarly to ones from nixpkgs
 # You can build them using 'nix build .#example' or (legacy) 'nix-build -A example'
 
-{ inputs, pkgs }:
-{
+{ inputs, pkgs }: {
   gitea-github-mirror = pkgs.unstable.callPackage ./gitea-github-mirror { };
 
   route53-ddns = pkgs.unstable.callPackage ./route53-ddns { };
@@ -32,11 +31,6 @@
       echo "$tmp"
     '';
   };
-}
 
-// {
-  inherit (pkgs.unstable.callPackage ../machines/print-farm/klipper/firmware
-    { })
-    klipper-flash-sunlu-s8;
+  klipperPkgs = pkgs.unstable.callPackage ./klipper { };
 }
-
