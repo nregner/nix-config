@@ -32,6 +32,8 @@
       echo "$tmp"
     '';
   };
+
+  klipper = pkgs.unstable.callPackage ./klipper { };
 }
 
 // {
