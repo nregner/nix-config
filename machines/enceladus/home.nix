@@ -43,6 +43,7 @@
     comma # auto-run from nix-index: https://github.com/nix-community/comma
     nix-output-monitor
     nix-prefetch
+    nixd
     nixfmt
     # nix-du # nix-du -s=500MB | xdot -
     pkgs.xdot-darwin
