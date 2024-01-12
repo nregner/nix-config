@@ -15,8 +15,6 @@
 
       bindkey -M viins 'jk' vi-cmd-mode
 
-      export EDITOR=nvim
-
       # https://github.com/nix-community/nix-direnv/wiki/Shell-integration
       flakify() {
         if [ ! -e flake.nix ]; then
