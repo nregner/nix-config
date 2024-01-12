@@ -6,6 +6,8 @@
     ./nix.nix
   ];
 
+  home.file.".vimrc".source = ./vimrc;
+
   home.packages = with pkgs.unstable; [
     # text manipulation
     gawk
