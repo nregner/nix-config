@@ -1,5 +1,5 @@
 { self, config, hostname, lib, ... }: {
-  imports = [ ../../modules/nixos/server ./klipper ];
+  imports = [ ../../modules/nixos/server ./klipper ./disko.nix ];
 
   boot = {
     supportedFilesystems = lib.mkForce [ "vfat" "ext4" "ntfs" "cifs" ];

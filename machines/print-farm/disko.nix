@@ -1,5 +1,15 @@
-{ inputs, ... }: {
-  imports = [ inputs.disko.nixosModules.disko ];
+{ inputs, lib, ... }: {
+  imports = [ inputs.disko.nixosModules.disko ../../modules/disko-images.nix ];
+
+  diskoImages.compress = true;
+
+  # FIXME: disko/sd-image conflicts...
+  fileSystems."/" = {
+    fsType = lib.mkForce "btrfs";
+    device = lib.mkForce "/dev/disk/by-label/disk-NIXOS_SD-root";
+  };
+  fileSystems."/boot".neededForBoot = true;
+  fileSystems."/var/log".neededForBoot = true;
 
   disko = {
     devices = {
