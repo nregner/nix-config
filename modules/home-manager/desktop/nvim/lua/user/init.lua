@@ -215,6 +215,7 @@ require("lazy").setup({
     "nvim-treesitter/nvim-treesitter",
     dependencies = {
       "nvim-treesitter/nvim-treesitter-textobjects",
+      "nushell/tree-sitter-nu",
     },
     build = ":TSUpdate",
   },
@@ -612,6 +613,7 @@ local servers = {
   graphql = {},
   html = { filetypes = { "html", "twig", "hbs" } },
   nil_ls = {},
+  nushell = {},
   rust_analyzer = {
     -- https://rust-analyzer.github.io/manual.html#configuration
     ["rust-analyzer"] = {
