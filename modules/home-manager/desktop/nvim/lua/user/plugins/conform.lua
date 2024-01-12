@@ -36,7 +36,7 @@ return {
       yaml = { "prettierd" },
 
       -- all filetypes
-      ["*"] = { "codespell", "trim_whitespace" },
+      ["*"] = { "trim_whitespace" },
 
       -- unspecified filetypes
       ["_"] = { "trim_whitespace" },
