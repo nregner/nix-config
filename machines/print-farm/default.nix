@@ -23,5 +23,13 @@ in (nodes {
       environment.systemPackages = [ pkgs.klipper-flash-sunlu-s8 ];
     })
   ];
+
+  # FIXME: disko/sd-image conflicts...
+  fileSystems."/" = {
+    fsType = lib.mkForce "btrfs";
+    device = lib.mkForce "/dev/disk/by-label/disk-NIXOS_SD-root";
+  };
+  fileSystems."/boot".neededForBoot = true;
+  fileSystems."/var/log".neededForBoot = true;
 })
 

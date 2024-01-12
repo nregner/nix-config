@@ -1,18 +1,5 @@
-{ inputs, lib, ... }: {
-  imports = [
-    inputs.disko.nixosModules.disko
-    # ../../modules/nixos/disko-sd-image.nix
-    # ../../modules/nixos/btrfs-sd-image.nix
-    # "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
-  ];
-  fileSystems."/" = {
-    fsType = lib.mkForce "btrfs";
-    device = lib.mkForce "/dev/disk/by-label/disk-NIXOS_SD-root";
-  };
-  fileSystems."/boot".neededForBoot = true;
-  fileSystems."/var/log".neededForBoot = true;
-
-  # diskoSdImage.disk = "NIXOS_SD";
+{ inputs, ... }: {
+  imports = [ inputs.disko.nixosModules.disko ];
 
   disko = {
     devices = {
