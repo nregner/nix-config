@@ -12,7 +12,6 @@
     gnused
     jq
     ripgrep
-    vim
 
     # filesystem
     fd

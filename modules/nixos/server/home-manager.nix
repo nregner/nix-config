@@ -7,7 +7,7 @@
     useGlobalPkgs = true;
     useUserPackages = true;
     users.nregner = {
-      imports = [ ../../home-manager/base ];
+      imports = [ ../../home-manager/server ];
       # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
       home.stateVersion = "23.05";
     };

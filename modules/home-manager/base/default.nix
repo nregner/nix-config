@@ -1,1 +1,10 @@
-{ imports = [ ../lib ./fzf.nix ./tmux.nix ./zsh.nix ]; }
+{
+  imports = [
+    #
+    ../lib
+    ./fzf.nix
+    ./tmux.nix
+    ./vim.nix
+    ./zsh.nix
+  ];
+}
