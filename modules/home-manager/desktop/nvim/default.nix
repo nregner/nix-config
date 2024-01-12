@@ -1,8 +1,4 @@
 { config, pkgs, ... }: {
-  xdg.configFile."nvim/lua".source = config.lib.file.mkFlakeSymlink ./lua;
-  xdg.configFile."nvim/lazy-lock.json".source =
-    config.lib.file.mkFlakeSymlink ./lazy-lock.json;
-
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -12,28 +8,42 @@
       require('user')
     '';
 
-    plugins = with pkgs.unstable.vimPlugins; [
-      lazy-nvim
+    plugins = with pkgs.unstable.vimPlugins; [ lazy-nvim ];
 
-      # tmux <-> nvim navigation
-      # Navigator-nvim
+    extraPackages = with pkgs.unstable; [
 
-      # git
-      # conflict-marker-vim
-      # diffview-nvim
+      # language servers
+      clojure-lsp
+      gopls
+      lua-language-server
+      nil
+      nixd
+      nodePackages_latest.graphql-language-service-cli
+      nodePackages_latest.typescript-language-server
+      terraform-ls
 
-      # file type/syntax highlighting
-      # (let plugin = nvim-treesitter;
-      # in plugin.withAllGrammars.overrideAttrs (prev: {
-      #   passthru.dependencies = prev.passthru.dependencies
-      #     ++ [ (plugin.passthru.grammarToPlugin pkgs.tree-sitter-nu) ];
-      # }))
-      nvim-treesitter.withAllGrammars
-      vim-nix
+      # formatters/linters
+      codespell
+      nodePackages_latest.prettier
+      (prettierd.overrideAttrs {
+        src = fetchFromGitHub {
+          owner = "fsouza";
+          repo = "prettierd";
+          rev = "0d077fe55711bba2c6c6756a953cf04e5acce86c";
+          hash = "sha256-EQHnQo8NQLP1+2QmtmeV4t/b1yFmrwC6Fdoe69/QEAE=";
+        };
+      })
+      stylua
 
-      # formatting
-      # pkgs.conform-nvim
+      # misc
+      clang # for compiling tree-sitter parsers
     ];
+  };
+
+  xdg.configFile = {
+    "nvim/lua".source = config.lib.file.mkFlakeSymlink ./lua;
+    "nvim/lazy-lock.json".source =
+      config.lib.file.mkFlakeSymlink ./lazy-lock.json;
   };
 
   # https://github.com/sindrets/diffview.nvim/issues/324
@@ -45,39 +55,11 @@
     };
     merge = { tool = "nvim"; };
     mergetool = {
-      propmt = false;
+      prompt = false;
       keepBackup = false;
       nvim.cmd = ''nvim -n -c "DiffviewOpen" "$MERGE"'';
     };
   };
 
   programs.zsh.shellAliases = { vimdiff = "nvim -d"; };
-
-  home.packages = with pkgs.unstable; [
-
-    # language servers
-    clojure-lsp
-    gopls
-    lua-language-server
-    nil
-    nixd
-    nodePackages_latest.graphql-language-service-cli
-    nodePackages_latest.typescript-language-server
-    terraform-ls
-
-    codespell
-
-    # formatters
-    nodePackages_latest.prettier
-    (prettierd.overrideAttrs {
-      src = fetchFromGitHub {
-        owner = "fsouza";
-        repo = "prettierd";
-        rev = "0d077fe55711bba2c6c6756a953cf04e5acce86c";
-        hash = "sha256-EQHnQo8NQLP1+2QmtmeV4t/b1yFmrwC6Fdoe69/QEAE=";
-      };
-    })
-    stylua
-
-  ];
 }
