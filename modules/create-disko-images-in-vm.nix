@@ -2,7 +2,7 @@
 , postInstallScript ? "", compress ? false, emulateUEFI ? false, memory ? 1024,
 }:
 let
-  compress_args = if compress then "-c" else "";
+  compressArgs = if compress then "-c" else "";
   channelSources = let nixpkgs = lib.cleanSource pkgs.path;
   in pkgs.runCommand "nixos-${config.system.nixos.version}" { } ''
     mkdir -p $out
@@ -35,9 +35,11 @@ let
     zfs
   ]);
 
-  disk_paths = with builtins;
-    map (disk: disk.device) (attrValues config.disko.devices.disk);
-  disk_names = with builtins; attrNames config.disko.devices.disk;
+  qemu = pkgs.buildPackages.qemu.override { toolsOnly = true; };
+
+  diskPaths = builtins.map (disk: disk.device)
+    (builtins.attrValues config.disko.devices.disk);
+  diskNames = builtins.attrNames config.disko.devices.disk;
 
   OVMF_CODE = "${pkgs.OVMF.fd}/" + (if pkgs.system == "x86_64-linux" then
     "FV/OVMF_CODE.fd"
@@ -49,29 +51,29 @@ let
     "FV/AAVMF_VARS.fd");
 
   images = (pkgs.vmTools.override {
-    rootModules = [
-      "virtio_pci"
-      "virtio_mmio"
-      "virtio_blk"
-      "virtio_balloon"
-      "virtio_rng"
-      "ext4"
-      "unix"
-      "9p"
-      "9pnet_virtio"
-      "crc32c_generic"
-    ] ++ [ "zfs" ]
-      ++ (pkgs.lib.optional pkgs.stdenv.hostPlatform.isx86 "rtc_cmos");
-    kernel = modulesTree;
+    # rootModules = [
+    #   "virtio_pci"
+    #   "virtio_mmio"
+    #   "virtio_blk"
+    #   "virtio_balloon"
+    #   "virtio_rng"
+    #   "ext4"
+    #   "unix"
+    #   "9p"
+    #   "9pnet_virtio"
+    #   "crc32c_generic"
+    # ] ++ [ "zfs" ]
+    #   ++ (pkgs.lib.optional pkgs.stdenv.hostPlatform.isx86 "rtc_cmos");
+    # kernel = modulesTree;
   }).runInLinuxVM (pkgs.runCommand "${config.system.name}" {
     memSize = memory;
     QEMU_OPTS = lib.strings.escapeShellArgs (lib.lists.flatten ((builtins.map
-      (disk_name: [
+      (diskName: [
         "-drive"
         "file=${
-          builtins.baseNameOf disk_name
+          builtins.baseNameOf diskName
         }.qcow2,if=virtio,cache=unsafe,werror=report"
-      ]) disk_names) ++ (lib.optionals emulateUEFI [
+      ]) diskNames) ++ (lib.optionals emulateUEFI [
         #"-pflash" "${OVMF_CODE}"
         #"-bios" "${OVMF_CODE}"
         "-smbios"
@@ -85,18 +87,18 @@ let
       ])));
     preVM = ''
       set -x
-      PATH=$PATH:${pkgs.qemu_kvm}/bin
+      PATH=$PATH:${qemu}/bin
       mkdir -p $out
 
     '' + (lib.strings.optionalString emulateUEFI ''
       echo "Creating efidisk.qcow2 from ${OVMF_VARS} with size 64M"
-      ${pkgs.qemu}/bin/qemu-img convert -cp -f raw -O qcow2 ${OVMF_VARS} efidisk.qcow2
-      ${pkgs.qemu}/bin/qemu-img resize efidisk.qcow2 64M
+      ${qemu}/bin/qemu-img convert -cp -f raw -O qcow2 ${OVMF_VARS} efidisk.qcow2
+      ${qemu}/bin/qemu-img resize efidisk.qcow2 64M
     '') + ''
 
-      for disk_image in ${toString (map baseNameOf disk_names)}; do
+      for disk_image in ${toString (map baseNameOf diskNames)}; do
         echo "Creating ''${disk_image}.qcow2 with size ${toString size}"
-        ${pkgs.qemu}/bin/qemu-img create -f qcow2 "''${disk_image}.qcow2" ${
+        ${qemu}/bin/qemu-img create -f qcow2 "''${disk_image}.qcow2" ${
           toString size
         }
       done
@@ -105,14 +107,14 @@ let
     postVM = ''
       set -x
 
-    '' + (lib.strings.optionalString emulateUEFI ''
-      echo Compressing efidisk.qcow2
-      ${pkgs.qemu}/bin/qemu-img convert -cp -f qcow2 -O qcow2 efidisk.qcow2 ''${out}/efidisk.qcow2
-    '') + ''
+      ${lib.strings.optionalString emulateUEFI ''
+        echo Compressing efidisk.qcow2
+        ${qemu}/bin/qemu-img convert -cp -f qcow2 -O qcow2 efidisk.qcow2 ''${out}/efidisk.qcow2
+      ''}
 
-      for disk_image in ${toString (map baseNameOf disk_names)}; do
+      for disk_image in ${toString (map baseNameOf diskNames)}; do
         echo Compressing "''${disk_image}.qcow2"
-        ${pkgs.qemu}/bin/qemu-img convert -p -f qcow2 -O qcow2 ${compress_args} "''${disk_image}.qcow2" "''${out}/''${disk_image}.qcow2"
+        ${qemu}/bin/qemu-img convert -p -f qcow2 -O qcow2 ${compressArgs} "''${disk_image}.qcow2" "''${out}/''${disk_image}.qcow2"
       done
       ${postVM}
     '';
@@ -120,16 +122,16 @@ let
     export PATH=${tools}:$PATH
     set -x
 
-  '' + (lib.strings.optionalString emulateUEFI ''
-    # Mount efivars
-    mount -t efivarfs efivarfs /sys/firmware/efi/efivars
-  '') + ''
+    ${lib.strings.optionalString emulateUEFI ''
+      # Mount efivars
+      mount -t efivarfs efivarfs /sys/firmware/efi/efivars
+    ''}
 
     # Create symlinks with disko device paths pointing to /dev/vdX
     # It's stupid, but it works
     local_disks=( /dev/vd{a..z} )
     index=0
-    for to in ${toString disk_paths}; do
+    for to in ${toString diskPaths}; do
       from="''${local_disks[$index]}"
       if [ "$from" == "$to" ]; then continue; fi
       mkdir -p $( dirname $( realpath -s "$to" ) )

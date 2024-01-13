@@ -32,6 +32,8 @@
       echo "$tmp"
     '';
   };
+
+  vmrun = pkgs.unstable.callPackage ./vmrun.nix { };
 }
 
 // {
