@@ -35,7 +35,14 @@ let
     zfs
   ]);
 
-  qemu = pkgs.buildPackages.qemu.override { toolsOnly = true; };
+  qemu = pkgs.qemu
+    /* .override {
+         pipewireSupport = false;
+         pulseSupport = false;
+         gtkSupport = false;
+       }
+    */
+  ;
 
   diskPaths = builtins.map (disk: disk.device)
     (builtins.attrValues config.disko.devices.disk);

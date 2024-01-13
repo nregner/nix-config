@@ -56,5 +56,18 @@ in {
     };
   };
 
-  config = { system.build.diskoPartyImages = diskoImages.images; };
+  config = {
+    system.build.diskoPartyImages = diskoImages.images;
+
+    # FIXME: required for disko
+    nixpkgs.overlays = [
+      (final: prev: {
+        qemu = prev.qemu.override {
+          pipewireSupport = false;
+          pulseSupport = false;
+          gtkSupport = false;
+        };
+      })
+    ];
+  };
 }
