@@ -10,8 +10,6 @@
 
       source-file ${config.xdg.configHome}/tmux/user.conf
     '';
-    plugins = with pkgs.unstable.tmuxPlugins; [ resurrect yank ];
+    plugins = with pkgs.unstable.tmuxPlugins; [ resurrect tmux-fzf yank ];
   };
-
-  home.packages = with pkgs.unstable; [ tmux-sessionizer ];
 }
