@@ -14,7 +14,9 @@
   home.packages = with pkgs.unstable; [
     # apps
     openrgb
-    insync
+    pkgs.insync
+    google-drive-ocamlfuse
+    # pkgs.insync.passthru.insync-pkg
     discord
     firefox
     # gparted

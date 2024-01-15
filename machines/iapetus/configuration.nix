@@ -58,8 +58,16 @@
 
   zramSwap.enable = true;
 
-  environment.systemPackages =
-    [ config.boot.kernelPackages.perf pkgs.virt-manager ];
+  environment.systemPackages = [
+    config.boot.kernelPackages.perf
+    pkgs.virt-manager
+    pkgs.gnome.nautilus-python
+    pkgs.insync-nautilus
+  ];
+
+  # Adds to `environment.pathsToLink` the path: `/share/nautilus-python/extensions`
+  # needed for nautilus Python extensions to work.
+  services.gnome.core-utilities.enable = true;
 
   # boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 

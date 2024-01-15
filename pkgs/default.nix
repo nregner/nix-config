@@ -34,6 +34,10 @@
   };
 
   klipper = pkgs.unstable.callPackage ./klipper { };
+
+  insync-nautilus = pkgs.unstable.callPackage ./insync-nautilus { };
+
+  insync = pkgs.unstable.callPackage ./insync.nix { };
 }
 
 // {
