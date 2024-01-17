@@ -34,6 +34,7 @@
 
     libiconv
     rustup
+    devbox
 
     # nix
     comma # auto-run from nix-index: https://github.com/nix-community/comma
