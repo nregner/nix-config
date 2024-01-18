@@ -32,6 +32,19 @@
       echo "$tmp"
     '';
   };
+
+  super-slicer-latest = (pkgs.super-slicer-latest.override {
+    # workaround for `std::binary_function` removal in c++17
+    stdenv = pkgs.llvmPackages_11.stdenv;
+    boost = pkgs.boost.override { enableStatic = true; };
+  }).overrideAttrs (oldAttrs: {
+    cmakeFlags = oldAttrs.cmakeFlags ++ [
+      ''-DCMAKE_OSX_DEPLOYMENT_TARGET="10.14"''
+      "-DSLIC3R_STATIC=1"
+      "-DCMAKE_BUILD_TYPE=Debug"
+      "-DCMAKE_OSX_ARCHITECTURES:STRING=arm64"
+    ];
+  });
 }
 
 // {

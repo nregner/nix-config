@@ -19,10 +19,6 @@
   home.packages = with pkgs.unstable; [
     # apps
     rectangle
-    (pkgs.super-slicer-latest.override {
-      # workaround for `std::binary_function` removal in c++17
-      stdenv = pkgs.llvmPackages_11.stdenv;
-    })
 
     # tools
     awscli2
