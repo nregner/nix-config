@@ -1,6 +1,8 @@
 { modulesPath, pkgs, lib, ... }: {
   imports = [
     "${modulesPath}/profiles/minimal.nix"
+    ./disko-image.nix
+    ../disko.nix
     # "${modulesPath}/installer/sd-card/sd-image-aarch64.nix"
     # ./sd-image.nix
   ];
