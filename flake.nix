@@ -94,16 +94,7 @@
           pkgs = nixpkgs.legacyPackages.${system} // {
             unstable = nixpkgs-unstable.legacyPackages.${system};
           };
-        in import ./pkgs { inherit inputs pkgs; }) // forAllSystems (system:
-          let pkgs = nixpkgs.legacyPackages.${system};
-          in {
-            kraken-image = pkgs.callPackage ./pkgs/make-disk-image.nix {
-              inherit (inputs) disko;
-              inherit pkgs;
-              inherit (pkgs) lib;
-              nixosConfig = self.nixosConfigurations.sunlu-s8-0;
-            };
-          });
+        in import ./pkgs { inherit inputs pkgs; });
 
       # Devshells for flake development
       devShells = forAllSystems (system:
