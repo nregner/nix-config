@@ -23,9 +23,8 @@ let
   systemToInstall = pkgs.nixos [{
     imports = [ disko.nixosModules.disko ];
     disko.devices = lib.mkForce cleanedConfig.disko.devices;
-    boot.loader.grub.devices =
-      lib.mkForce cleanedConfig.boot.loader.grub.devices;
-    # boot.loader = nixosConfig.config.boot.loader;
+    boot.loader.grub.enable = false;
+    boot.loader.generic-extlinux-compatible.enable = true;
   }];
   dependencies = with pkgs;
     [
@@ -36,6 +35,7 @@ let
       systemdMinimal
       nix
       util-linux
+      findutils # xargs
     ] ++ nixosConfig.config.disko.extraDependencies;
   preVM = ''
     ${lib.concatMapStringsSep "\n" (disk:
@@ -75,14 +75,24 @@ let
 
     ${systemToInstall.config.system.build.diskoScript}
   '';
-  installer = ''
-    ${systemToInstall.config.system.build.nixos-install}/bin/nixos-install --system ${nixosConfig.config.system.build.toplevel} --keep-going --no-channel-copy -v --no-root-password --option binary-caches ""
 
-    pushd ${systemToInstall.config.disko.rootMountPoint}
-    ${nixosConfig.config.system.build.installBootLoader}
-    ${if postInstallScript != null then "(${postInstallScript})" else ""}
-    popd
-    umount -Rv ${systemToInstall.config.disko.rootMountPoint}
+  sdClosureInfo = pkgs.buildPackages.closureInfo {
+    rootPaths = [ nixosConfig.config.system.build.toplevel ];
+  };
+  root = systemToInstall.config.disko.rootMountPoint;
+  installer = ''
+    echo ${root}
+    mkdir -p ${root}/nix/store
+
+    xargs -P 8 -I % cp -a --reflink=auto % -t ${root}/nix/store/ < ${sdClosureInfo}/store-paths
+    cp ${sdClosureInfo}/registration ${root}/nix-path-registration
+
+    mkdir -p ${root}/nix/var/nix/profiles
+    ${systemToInstall.config.boot.loader.generic-extlinux-compatible.populateCmd} -c ${nixosConfig.config.system.build.toplevel} -d ${root}/boot
+
+    cp -r --reflink=auto ${postInstallScript}/* -t ${root}
+
+    umount -Rv ${root}
   '';
   QEMU_OPTS = lib.concatMapStringsSep " " (disk:
     "-drive file=${disk.name}.qcow2,if=virtio,cache=unsafe,werror=report,format=qcow2")
@@ -194,4 +204,7 @@ in {
     ${pkgs.bash}/bin/sh -e ${vmTools.vmRunCommand vmTools.qemuCommandLinux}
     cd /
   '';
+
+  inherit sdClosureInfo;
+  inherit postInstallScript;
 }
