@@ -1,4 +1,4 @@
-{ modulesPath, pkgs, lib, ... }: {
+{ inputs, modulesPath, pkgs, lib, ... }: {
   imports = [
     inputs.disko.nixosModules.disko
     "${modulesPath}/profiles/minimal.nix"
@@ -34,18 +34,6 @@
     # See: https://github.com/NixOS/nixpkgs/issues/254807
     # swraid.enable = lib.mkForce false;
   };
-
-  imports = [
-    # ../../modules/nixos/disko-sd-image.nix
-    # ../../modules/nixos/btrfs-sd-image.nix
-    # "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
-  ];
-  # fileSystems."/" = {
-  #   fsType = lib.mkForce "btrfs";
-  #   device = lib.mkForce "/dev/disk/by-label/disk-NIXOS_SD-root";
-  # };
-  # fileSystems."/boot".neededForBoot = true;
-  # fileSystems."/var/log".neededForBoot = true;
 
   disko.devices.disk.NIXOS_SD = {
     type = "disk";
@@ -104,6 +92,7 @@
     grub.enable = false;
     raspberryPi = {
       enable = true;
+      uboot.enable = true;
       version = 3;
       firmwareConfig = ''
         # Give up VRAM for more Free System Memory
