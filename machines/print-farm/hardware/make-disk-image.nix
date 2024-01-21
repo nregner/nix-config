@@ -1,6 +1,6 @@
 { nixosConfig, disko, pkgs ? nixosConfig.pkgs, lib ? pkgs.lib
 , name ? "${nixosConfig.config.networking.hostName}-disko-images"
-, extraPostVM ? "", checked ? false }:
+, extraPostVM ? "", postInstallScript, checked ? false }:
 let
   diskoLib = disko.lib;
   vmTools = pkgs.vmTools.override {
@@ -25,6 +25,7 @@ let
     disko.devices = lib.mkForce cleanedConfig.disko.devices;
     boot.loader.grub.devices =
       lib.mkForce cleanedConfig.boot.loader.grub.devices;
+    # boot.loader = nixosConfig.config.boot.loader;
   }];
   dependencies = with pkgs;
     [
@@ -37,15 +38,15 @@ let
       util-linux
     ] ++ nixosConfig.config.disko.extraDependencies;
   preVM = ''
-    ${lib.concatMapStringsSep "\n"
-    (disk: "truncate -s ${disk.imageSize} ${disk.name}.raw")
+    ${lib.concatMapStringsSep "\n" (disk:
+      " ${pkgs.qemu}/bin/qemu-img create -f qcow2 ${disk.name}.qcow2 ${disk.imageSize}")
     (lib.attrValues nixosConfig.config.disko.devices.disk)}
   '';
   postVM = ''
     # shellcheck disable=SC2154
     mkdir -p "$out"
     ${lib.concatMapStringsSep "\n"
-    (disk: ''mv ${disk.name}.raw "$out"/${disk.name}.raw'')
+    (disk: ''mv ${disk.name}.qcow2 "$out"/${disk.name}.qcow2'')
     (lib.attrValues nixosConfig.config.disko.devices.disk)}
     ${extraPostVM}
   '';
@@ -75,11 +76,16 @@ let
     ${systemToInstall.config.system.build.diskoScript}
   '';
   installer = ''
-    ${systemToInstall.config.system.build.nixos-install}/bin/nixos-install --system ${systemToInstall.config.system.build.toplevel} --keep-going --no-channel-copy -v --no-root-password --option binary-caches ""
+    ${systemToInstall.config.system.build.nixos-install}/bin/nixos-install --system ${nixosConfig.config.system.build.toplevel} --keep-going --no-channel-copy -v --no-root-password --option binary-caches ""
+
+    pushd ${systemToInstall.config.disko.rootMountPoint}
+    ${nixosConfig.config.system.build.installBootLoader}
+    ${if postInstallScript != null then "(${postInstallScript})" else ""}
+    popd
     umount -Rv ${systemToInstall.config.disko.rootMountPoint}
   '';
   QEMU_OPTS = lib.concatMapStringsSep " " (disk:
-    "-drive file=${disk.name}.raw,if=virtio,cache=unsafe,werror=report,format=raw")
+    "-drive file=${disk.name}.qcow2,if=virtio,cache=unsafe,werror=report,format=qcow2")
     (lib.attrValues nixosConfig.config.disko.devices.disk);
 in {
   pure = vmTools.runInLinuxVM (pkgs.runCommand name {
