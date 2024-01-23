@@ -5,4 +5,6 @@ set highlightedyank
 set incsearch
 
 let mapleader = " "
-nnoremap <leader>R :action RenameElement<CR>
+nnoremap <leader>rn :action RenameElement<CR>
+nnoremap ]c :action VcsShowNextChangeMarker<CR>
+nnoremap [c :action VcsShowPrevChangeMarker<CR>

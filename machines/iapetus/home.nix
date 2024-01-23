@@ -13,11 +13,12 @@
 
   home.packages = with pkgs.unstable; [
     # apps
-    openrgb
-    insync
     discord
     firefox
-    # gparted
+    gparted
+    insync
+    jetbrains-toolbox
+    openrgb
 
     awscli2
     gh
@@ -27,6 +28,7 @@
     pv
     rclone
     restic
+    rustup
     screen
     xclip
 
