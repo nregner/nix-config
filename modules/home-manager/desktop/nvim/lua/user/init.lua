@@ -339,6 +339,12 @@ vim.keymap.set("n", "<leader>sv", function()
   vim.notify("Config reloaded", vim.log.levels.INFO)
 end, { desc = "[S]ource [V]imrc" })
 
+-- Quickfix keymaps
+vim.keymap.set("n", "[q", "<CMD>cprev<CR>", { desc = "Go to previous quickfix item" })
+vim.keymap.set("n", "]q", "<CMD>cnext<CR>", { desc = "Go to next quickfix item" })
+vim.keymap.set("n", "[Q", "<CMD>cfirst<CR>", { desc = "Go to first quickfix item" })
+vim.keymap.set("n", "]Q", "<CMD>clast<CR>", { desc = "Go to last quickfix item" })
+
 -- URL handling
 -- source: https://sbulav.github.io/vim/neovim-opening-urls/
 if vim.fn.has("mac") == 1 then
