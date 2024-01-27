@@ -78,7 +78,7 @@
       flake = false;
     };
     mainsail = {
-      url = "github:nathanregner/mainsail/develop";
+      url = "github:mainsail-crew/mainsail/develop";
       flake = false;
     };
   };

@@ -384,15 +384,15 @@
     "mainsail": {
       "flake": false,
       "locked": {
-        "lastModified": 1704578074,
-        "narHash": "sha256-TJHKzZKh8H69bvE8dGOd6NVccdJH3OkZhO4YHE3WN3g=",
-        "owner": "nathanregner",
+        "lastModified": 1706265931,
+        "narHash": "sha256-P8EPblLfnDI6wn8fwSPJG3uFcS8aljiGSdGXcIxLckU=",
+        "owner": "mainsail-crew",
         "repo": "mainsail",
-        "rev": "5b837d0a51fa431c781f369ecc17ded2f7324af8",
+        "rev": "65a62cb89024b653347612d747a9fcfb4d62a4e3",
         "type": "github"
       },
       "original": {
-        "owner": "nathanregner",
+        "owner": "mainsail-crew",
         "ref": "develop",
         "repo": "mainsail",
         "type": "github"
