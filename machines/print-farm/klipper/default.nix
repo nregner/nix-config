@@ -19,7 +19,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-
     # klipper
     services.klipper = {
       enable = true;
@@ -56,7 +55,7 @@ in {
     # moonraker
     services.moonraker = {
       enable = true;
-      package = pkgs.unstable.moonraker;
+      package = pkgs.moonraker-develop;
       # package = pkgs.writeShellScriptBin "moonraker" ''
       #   ${pkgs.unstable.moonraker}/bin/moonraker -v $@
       # '';
