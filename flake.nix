@@ -27,6 +27,10 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    mealie = {
+      url = "github:nathanregner/mealie-nix";
+      # inputs.nixpkgs.follows = "nixpkgs";
+    };
     nix-index-database = {
       url = "github:Mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -59,27 +63,22 @@
       flake = false;
     };
 
-    # Misc
-    # https://github.com/realthunder/FreeCAD/releases
-    linux-rockchip = {
-      url = "github:armbian/linux-rockchip/rk-5.10-rkr4";
-      flake = false;
-    };
-    mealie = {
-      url = "github:nathanregner/mealie-nix";
-      # inputs.nixpkgs.follows = "nixpkgs";
-    };
-    orangepi-nix = {
-      url = "github:nathanregner/orangepi-nix";
-      # inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # 3d printing
     kamp = {
       url = "github:kyleisah/Klipper-Adaptive-Meshing-Purging";
+      flake = false;
+    };
+    linux-rockchip = {
+      url = "github:armbian/linux-rockchip/rk-5.10-rkr4";
       flake = false;
     };
     mainsail = {
       url = "github:mainsail-crew/mainsail/develop";
       flake = false;
+    };
+    orangepi-nix = {
+      url = "github:nathanregner/orangepi-nix";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
