@@ -81,15 +81,5 @@ in {
       package = pkgs.mainsail-develop;
     };
     services.nginx = { clientMaxBodySize = "1G"; };
-
-    networking.firewall = let
-      ports = [
-        config.services.nginx.defaultHTTPListenPort
-        config.services.moonraker.port
-      ];
-    in {
-      allowedTCPPorts = ports;
-      allowedUDPPorts = ports;
-    };
   };
 }

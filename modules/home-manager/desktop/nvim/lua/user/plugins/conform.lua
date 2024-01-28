@@ -27,6 +27,7 @@ return {
       go = { "gofmt" },
       html = { "prettierd" },
       javascript = { "prettierd" },
+      javascriptreact = { "prettierd" },
       json = { "prettierd" },
       lua = { "stylua" },
       markdown = { "prettierd", "injected" },
@@ -34,6 +35,7 @@ return {
       rust = { "rustfmt" },
       terraform = { "terraform_fmt" },
       typescript = { "prettierd" },
+      typescriptreact = { "prettierd" },
       vue = { "prettierd" },
       yaml = { "prettierd" },
 

@@ -43,6 +43,7 @@
 
   xdg.configFile = {
     "nvim/lua".source = config.lib.file.mkFlakeSymlink ./lua;
+    "nvim/after".source = config.lib.file.mkFlakeSymlink ./after;
     "nvim/lazy-lock.json".source =
       config.lib.file.mkFlakeSymlink ./lazy-lock.json;
   };

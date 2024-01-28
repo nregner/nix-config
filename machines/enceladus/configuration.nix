@@ -1,5 +1,5 @@
 { inputs, outputs, config, pkgs, ... }@args: {
-  imports = [ ./builder.nix ];
+  imports = [ ./builder.nix ../../modules/darwin ];
 
   nix = {
     distributedBuilds = true;
@@ -30,6 +30,24 @@
       # remove /var/lib/darwin-builder/*.img to force a reset
       config = import ./linux-builder.nix args;
     };
+
+    buildMachines = [{
+      hostName = "sagittarius";
+      protocol = "ssh";
+      sshUser = "nregner";
+      system = "x86_64-linux";
+      supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+      maxJobs = 10;
+      speedFactor = 1;
+    }];
+
+  };
+
+  programs.ssh.knownHosts = {
+    iapetus.publicKey =
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOhre0L0AW87qYkI5Os8U2+DS5yvAOnjpEY+Lmn5f0l7";
+    sagittarius.publicKey =
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIQOaeRY07hRIPpeFYRWoQOzP+toxZjveC5jVHF+vpIj";
   };
 
   launchd.daemons.linux-builder = {
