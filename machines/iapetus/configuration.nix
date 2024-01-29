@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }: {
   imports =
-    [ ../../modules/nixos/desktop ./hardware-configuration.nix ./vfio.nix ];
+    [ ../../modules/nixos/desktop ./hardware-configuration.nix ./windows-vm ];
 
   # bootloader
   boot.loader.systemd-boot.enable = true;
@@ -49,10 +49,6 @@
     pulse.enable = true;
     # jack.enable = true;
   };
-
-  # Windows VM
-  vfio.enable = true;
-  virtualisation.libvirtd.enable = true;
 
   # Misc
   services.hardware.openrgb = {

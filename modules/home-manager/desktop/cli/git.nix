@@ -20,6 +20,7 @@
         difft = "difftool";
         dlog = "!f() { GIT_EXTERNAL_DIFF=difft git log -p --ext-diff; }; f";
       };
+      safe.directory = "/armbian/cache/git-bare/kernel";
     };
   };
 
