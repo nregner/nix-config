@@ -46,6 +46,9 @@
     nixfmt
     nix-du # nix-du -s=500MB | xdot -
     pkgs.xdot-darwin
+
+    # rc
+    betaflight-configurator
   ];
 
   programs.alacritty.settings = { font = { size = lib.mkForce 11; }; };
