@@ -48,20 +48,15 @@
       config.lib.file.mkFlakeSymlink ./lazy-lock.json;
   };
 
-  # https://github.com/sindrets/diffview.nvim/issues/324
-  programs.git.extraConfig = {
-    diff.tool = "nvim";
-    difftool = {
-      prompt = false;
-      nvim.cmd = ''nvim -d \"$LOCAL\" \"$REMOTE\" -c \"DiffviewOpen\"'';
-    };
-    merge = { tool = "nvim"; };
-    mergetool = {
-      prompt = false;
-      keepBackup = false;
-      nvim.cmd = ''nvim -n -c "DiffviewOpen" "$MERGE"'';
-    };
-  };
+  programs.zsh.shellAliases.vimdiff = "nvim -d";
 
-  programs.zsh.shellAliases = { vimdiff = "nvim -d"; };
+  # https://github.com/jesseduffield/lazygit/wiki/Custom-Commands-Compendium
+  programs.lazygit.settings.customCommands = [{
+    key = "M";
+    command = "nvim -c DiffviewOpen";
+    description = "Open diffview.nvim";
+    context = "files";
+    loadingText = "opening diffview.nvim";
+    subprocess = true;
+  }];
 }
