@@ -1,4 +1,4 @@
-{ inputs, outputs, ... }: {
+{ inputs, outputs, pkgs, lib, ... }: {
   imports = [
     #
     ../base
@@ -15,7 +15,7 @@
 
   programs.zsh = {
     enable = true;
-    shellAliases = {
+    shellAliases = lib.optionalAttrs (!pkgs.stdenv.isDarwin) {
       open = "xdg-open";
       pbcopy = "xclip -selection clipboard";
       pbpaste = "xclip -selection clipboard -o";
