@@ -1,10 +1,35 @@
-{ lib, ... }: {
+{ lib, pkgs, ... }: {
   imports =
     [ ../../modules/nixos/server ../../modules/nixos/server/home-manager.nix ];
+
+  # remove rm --force $out/bin/{nix-instantiate,nix-build,nix-shell,nix-prefetch*,nix}
+  environment.extraSetup = lib.mkForce "";
 
   virtualisation = {
     cores = 8; # TODO: Figure out why this can't be > 8
     diskSize = lib.mkForce (64 * 1024);
+
+    # sharedDirectories.dev = {
+    #   source = "/Users/nregner/dev";
+    #   target = "/home/nregner/dev";
+    # };
+
+    # don't use sharedDirectories directly - want to use set `security_model=mapped`
+    fileSystems = let
+      mkSharedDir = tag: share: {
+        name = share.target;
+        value.device = tag;
+        value.fsType = "9p";
+        value.neededForBoot = true;
+        value.options =
+          [ "trans=virtio" "version=9p2000.L" "msize=${toString 16384}" ];
+      };
+    in lib.mapAttrs' mkSharedDir {
+      dev = {
+        source = "/Users/nregner/dev";
+        target = "/home/nregner/dev";
+      };
+    };
   };
 
   networking.hostName = "m3-linux-builder-vm";

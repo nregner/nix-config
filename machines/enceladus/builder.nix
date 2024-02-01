@@ -10,7 +10,6 @@ let
   system = "aarch64-darwin";
   inherit (inputs) nixpkgs;
   pkgs = nixpkgs.legacyPackages."${system}";
-  linuxSystem = builtins.replaceStrings [ "darwin" ] [ "linux" ] system;
 
   darwin-builder =
     let toGuest = builtins.replaceStrings [ "darwin" ] [ "linux" ];
@@ -106,6 +105,8 @@ in {
     launchd.daemons.linux-builder = {
       environment = {
         inherit (config.environment.variables) NIX_SSL_CERT_FILE;
+        QEMU_OPTS =
+          "-virtfs local,path=/Volumes/dev,security_model=mapped,mount_tag=dev";
       };
       serviceConfig = {
         ProgramArguments = [
@@ -139,5 +140,7 @@ in {
     }];
 
     nix.settings.builders-use-substitutes = true;
+
+    # system.build.darwin-builder = darwin-builder;
   };
 }
