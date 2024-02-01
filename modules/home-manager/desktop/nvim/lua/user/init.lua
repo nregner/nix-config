@@ -166,7 +166,12 @@ require("lazy").setup({
     "catppuccin/nvim",
     name = "catppuccin",
     priority = 1000,
-    opts = { flavour = "mocha" },
+    opts = {
+      flavour = "mocha",
+      styles = {
+        conditionals = {}, -- disable italics
+      },
+    },
     init = function()
       vim.cmd.colorscheme("catppuccin")
     end,
