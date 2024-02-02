@@ -31,8 +31,6 @@
     rsync
     util-linux
 
-    libiconv
-    rustup
 
     # nix
     comma # auto-run from nix-index: https://github.com/nix-community/comma
