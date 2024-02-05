@@ -1,5 +1,16 @@
 return {
-  { "Olical/conjure", ft = { "clojure" } },
+  {
+    "Olical/conjure",
+    ft = { "clojure" },
+    init = function()
+      vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+        pattern = { "conjure-log-*.cljc" },
+        callback = function(ev)
+          vim.diagnostic.disable(ev.buf)
+        end,
+      })
+    end,
+  },
 
   -- Structural editing, optional
   -- https://github.com/guns/vim-sexp
