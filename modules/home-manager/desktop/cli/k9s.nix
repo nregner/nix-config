@@ -1,7 +1,7 @@
 { inputs, config, ... }: {
   programs.k9s = {
     enable = true;
-    skin = config.lib.formats.fromYAML
+    skins.skin = config.lib.formats.fromYAML
       "${inputs.catppuccin-k9s}/dist/catppuccin-mocha.yaml";
   };
 }

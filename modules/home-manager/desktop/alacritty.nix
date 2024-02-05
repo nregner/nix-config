@@ -1,8 +1,9 @@
-{ config, inputs, pkgs, lib, ... }: {
+{ inputs, pkgs, lib, ... }: {
   programs.alacritty = {
     enable = true;
+    package = pkgs.unstable.alacritty;
     settings = {
-      import = [ "${config.xdg.configHome}/alacritty/theme.yml" ];
+      import = [ "${inputs.catppuccin-alacritty}/catppuccin-mocha.toml" ];
       selection = { save_to_clipboard = true; };
       window = { dynamic_padding = true; };
       font = {
@@ -14,92 +15,86 @@
       };
       env = { TERM = "alacritty"; };
       # https://github.com/alacritty/alacritty/issues/93#issuecomment-1364783147
-      key_bindings = lib.optionals pkgs.stdenv.isDarwin (builtins.map (bind: {
-        key = builtins.elemAt bind 0;
-        mods = builtins.elemAt bind 1;
-        chars = builtins.elemAt bind 2;
-      }) [
-        [ "A" "Alt" "\\x1ba" ]
-        [ "B" "Alt" "\\x1bb" ]
-        [ "C" "Alt" "\\x1bc" ]
-        [ "D" "Alt" "\\x1bd" ]
-        [ "E" "Alt" "\\x1be" ]
-        [ "F" "Alt" "\\x1bf" ]
-        [ "G" "Alt" "\\x1bg" ]
-        [ "H" "Alt" "\\x1bh" ]
-        [ "I" "Alt" "\\x1bi" ]
-        [ "J" "Alt" "\\x1bj" ]
-        [ "K" "Alt" "\\x1bk" ]
-        [ "L" "Alt" "\\x1bl" ]
-        [ "M" "Alt" "\\x1bm" ]
-        [ "N" "Alt" "\\x1bn" ]
-        [ "O" "Alt" "\\x1bo" ]
-        [ "P" "Alt" "\\x1bp" ]
-        [ "Q" "Alt" "\\x1bq" ]
-        [ "R" "Alt" "\\x1br" ]
-        [ "S" "Alt" "\\x1bs" ]
-        [ "T" "Alt" "\\x1bt" ]
-        [ "U" "Alt" "\\x1bu" ]
-        [ "V" "Alt" "\\x1bv" ]
-        [ "W" "Alt" "\\x1bw" ]
-        [ "X" "Alt" "\\x1bx" ]
-        [ "Y" "Alt" "\\x1by" ]
-        [ "Z" "Alt" "\\x1bz" ]
-        [ "A" "Alt|Shift" "\\x1bA" ]
-        [ "B" "Alt|Shift" "\\x1bB" ]
-        [ "C" "Alt|Shift" "\\x1bC" ]
-        [ "D" "Alt|Shift" "\\x1bD" ]
-        [ "E" "Alt|Shift" "\\x1bE" ]
-        [ "F" "Alt|Shift" "\\x1bF" ]
-        [ "G" "Alt|Shift" "\\x1bG" ]
-        [ "H" "Alt|Shift" "\\x1bH" ]
-        [ "I" "Alt|Shift" "\\x1bI" ]
-        [ "J" "Alt|Shift" "\\x1bJ" ]
-        [ "K" "Alt|Shift" "\\x1bK" ]
-        [ "L" "Alt|Shift" "\\x1bL" ]
-        [ "M" "Alt|Shift" "\\x1bM" ]
-        [ "N" "Alt|Shift" "\\x1bN" ]
-        [ "O" "Alt|Shift" "\\x1bO" ]
-        [ "P" "Alt|Shift" "\\x1bP" ]
-        [ "Q" "Alt|Shift" "\\x1bQ" ]
-        [ "R" "Alt|Shift" "\\x1bR" ]
-        [ "S" "Alt|Shift" "\\x1bS" ]
-        [ "T" "Alt|Shift" "\\x1bT" ]
-        [ "U" "Alt|Shift" "\\x1bU" ]
-        [ "V" "Alt|Shift" "\\x1bV" ]
-        [ "W" "Alt|Shift" "\\x1bW" ]
-        [ "X" "Alt|Shift" "\\x1bX" ]
-        [ "Y" "Alt|Shift" "\\x1bY" ]
-        [ "Z" "Alt|Shift" "\\x1bZ" ]
-        [ "Key1" "Alt" "\\x1b1" ]
-        [ "Key2" "Alt" "\\x1b2" ]
-        [ "Key3" "Alt" "\\x1b3" ]
-        [ "Key4" "Alt" "\\x1b4" ]
-        [ "Key5" "Alt" "\\x1b5" ]
-        [ "Key6" "Alt" "\\x1b6" ]
-        [ "Key7" "Alt" "\\x1b7" ]
-        [ "Key8" "Alt" "\\x1b8" ]
-        [ "Key9" "Alt" "\\x1b9" ]
-        [ "Key0" "Alt" "\\x1b0" ]
-        [ "Space" "Control" "\\x00" ] # Ctrl +Space
-        [ "Grave" "Alt" "\\x1b`" ] # Alt +`
-        [ "Grave" "Alt|Shift" "\\x1b~" ] # Alt +~
-        [ "Period" "Alt" "\\x1b." ] # Alt +.
-        [ "Key8" "Alt|Shift" "\\x1b*" ] # Alt +*
-        [ "Key3" "Alt|Shift" "\\x1b#" ] # Alt +#
-        [ "Period" "Alt|Shift" "\\x1b>" ] # Alt +>
-        [ "Comma" "Alt|Shift" "\\x1b<" ] # Alt +<
-        [ "Minus" "Alt|Shift" "\\x1b_" ] # Alt +_
-        [ "Key5" "Alt|Shift" "\\x1b%" ] # Alt +%
-        [ "Backslash" "Alt|Shift" "\\x1b|" ] # Alt +|```
-      ]);
+      keyboard.bindings = lib.optionals pkgs.stdenv.isDarwin (builtins.map
+        (bind: {
+          key = builtins.elemAt bind 0;
+          mods = builtins.elemAt bind 1;
+          chars = builtins.elemAt bind 2;
+        }) [
+          [ "A" "Alt" "\\u001Ba" ]
+          [ "B" "Alt" "\\u001Bb" ]
+          [ "C" "Alt" "\\u001Bc" ]
+          [ "D" "Alt" "\\u001Bd" ]
+          [ "E" "Alt" "\\u001Be" ]
+          [ "F" "Alt" "\\u001Bf" ]
+          [ "G" "Alt" "\\u001Bg" ]
+          [ "H" "Alt" "\\u001Bh" ]
+          [ "I" "Alt" "\\u001Bi" ]
+          [ "J" "Alt" "\\u001Bj" ]
+          [ "K" "Alt" "\\u001Bk" ]
+          [ "L" "Alt" "\\u001Bl" ]
+          [ "M" "Alt" "\\u001Bm" ]
+          [ "N" "Alt" "\\u001Bn" ]
+          [ "O" "Alt" "\\u001Bo" ]
+          [ "P" "Alt" "\\u001Bp" ]
+          [ "Q" "Alt" "\\u001Bq" ]
+          [ "R" "Alt" "\\u001Br" ]
+          [ "S" "Alt" "\\u001Bs" ]
+          [ "T" "Alt" "\\u001Bt" ]
+          [ "U" "Alt" "\\u001Bu" ]
+          [ "V" "Alt" "\\u001Bv" ]
+          [ "W" "Alt" "\\u001Bw" ]
+          [ "X" "Alt" "\\u001Bx" ]
+          [ "Y" "Alt" "\\u001By" ]
+          [ "Z" "Alt" "\\u001Bz" ]
+          [ "A" "Alt|Shift" "\\u001BA" ]
+          [ "B" "Alt|Shift" "\\u001BB" ]
+          [ "C" "Alt|Shift" "\\u001BC" ]
+          [ "D" "Alt|Shift" "\\u001BD" ]
+          [ "E" "Alt|Shift" "\\u001BE" ]
+          [ "F" "Alt|Shift" "\\u001BF" ]
+          [ "G" "Alt|Shift" "\\u001BG" ]
+          [ "H" "Alt|Shift" "\\u001BH" ]
+          [ "I" "Alt|Shift" "\\u001BI" ]
+          [ "J" "Alt|Shift" "\\u001BJ" ]
+          [ "K" "Alt|Shift" "\\u001BK" ]
+          [ "L" "Alt|Shift" "\\u001BL" ]
+          [ "M" "Alt|Shift" "\\u001BM" ]
+          [ "N" "Alt|Shift" "\\u001BN" ]
+          [ "O" "Alt|Shift" "\\u001BO" ]
+          [ "P" "Alt|Shift" "\\u001BP" ]
+          [ "Q" "Alt|Shift" "\\u001BQ" ]
+          [ "R" "Alt|Shift" "\\u001BR" ]
+          [ "S" "Alt|Shift" "\\u001BS" ]
+          [ "T" "Alt|Shift" "\\u001BT" ]
+          [ "U" "Alt|Shift" "\\u001BU" ]
+          [ "V" "Alt|Shift" "\\u001BV" ]
+          [ "W" "Alt|Shift" "\\u001BW" ]
+          [ "X" "Alt|Shift" "\\u001BX" ]
+          [ "Y" "Alt|Shift" "\\u001BY" ]
+          [ "Z" "Alt|Shift" "\\u001BZ" ]
+          [ "Key1" "Alt" "\\u001B1" ]
+          [ "Key2" "Alt" "\\u001B2" ]
+          [ "Key3" "Alt" "\\u001B3" ]
+          [ "Key4" "Alt" "\\u001B4" ]
+          [ "Key5" "Alt" "\\u001B5" ]
+          [ "Key6" "Alt" "\\u001B6" ]
+          [ "Key7" "Alt" "\\u001B7" ]
+          [ "Key8" "Alt" "\\u001B8" ]
+          [ "Key9" "Alt" "\\u001B9" ]
+          [ "Key0" "Alt" "\\u001B0" ]
+          [ "Space" "Control" "\\u0000" ] # Ctrl +Space
+          [ "`" "Alt" "\\u001B`" ] # Alt +`
+          [ "`" "Alt|Shift" "\\u001B~" ] # Alt +~
+          [ "Period" "Alt" "\\u001B." ] # Alt +.
+          [ "Key8" "Alt|Shift" "\\u001B*" ] # Alt +*
+          [ "Key3" "Alt|Shift" "\\u001B#" ] # Alt +#
+          [ "Period" "Alt|Shift" "\\u001B>" ] # Alt +>
+          [ "Comma" "Alt|Shift" "\\u001B<" ] # Alt +<
+          [ "Minus" "Alt|Shift" "\\u001B_" ] # Alt +_
+          [ "Key5" "Alt|Shift" "\\u001B%" ] # Alt +%
+          [ "Backslash" "Alt|Shift" "\\u001B|" ] # Alt +|```
+        ]);
     };
   };
-
-  xdg.configFile."alacritty/theme.yml".source =
-    pkgs.runCommand "alacritty-theme" {
-      nativeBuildInputs = [ pkgs.remarshal ];
-    } ''
-      remarshal ${inputs.catppuccin-alacritty}/catppuccin-mocha.toml -if toml -of yaml -o $out;
-    '';
 }
