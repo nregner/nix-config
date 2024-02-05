@@ -45,13 +45,6 @@
     nixos-rebuild
   ];
 
-  programs.zsh = {
-    shellAliases = {
-      snr = lib.mkForce "sudo darwin-rebuild --flake .";
-      snrs = lib.mkForce "sudo darwin-rebuild --flake . switch";
-    };
-  };
-
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "23.05";
 }

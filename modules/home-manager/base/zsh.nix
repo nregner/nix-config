@@ -32,13 +32,17 @@
       plugins = [ "aws" "git" "vi-mode" ];
       # theme = "robbyrussell";
     };
-    shellAliases = {
+    shellAliases = let
+      nixRebuild =
+        if pkgs.stdenv.isDarwin then "darwin-rebuild" else "nixos-rebuild";
+    in {
       jqless = "jq -C | less -r";
 
-      nr = "nixos-rebuild --flake .";
-      nrs = "nixos-rebuild --flake . switch";
-      snr = "sudo nixos-rebuild --flake .";
-      snrs = "sudo nixos-rebuild --flake . switch";
+      nr = "${nixRebuild} --flake .";
+      nrs = "${nixRebuild} --flake . switch";
+      snr = "sudo ${nixRebuild} --flake .";
+      snrs = "sudo ${nixRebuild} --flake . switch";
+
       hm = "home-manager --flake .";
       hms = "home-manager --flake . switch";
 

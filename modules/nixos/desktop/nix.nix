@@ -1,6 +1,6 @@
-{ inputs, ... }: {
+{ self, inputs, ... }: {
   environment.etc = {
-    "nix/flake-channels/system".source = inputs.self;
+    "nix/flake-channels/system".source = self;
     "nix/flake-channels/nixpkgs".source = inputs.nixpkgs;
     "nix/flake-channels/nixpkgs-unstable".source = inputs.nixpkgs-unstable;
   };

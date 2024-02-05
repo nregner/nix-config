@@ -1,4 +1,4 @@
-{ inputs, outputs, config, pkgs, ... }@args: {
+{ inputs, config, pkgs, ... }@args: {
   imports = [ ./builder.nix ../../modules/darwin ];
 
   nix = {
@@ -56,23 +56,6 @@
       StandardErrorPath = "/var/log/darwin-builder.log";
     };
   };
-
-  nixpkgs = import ../../nixpkgs.nix { inherit inputs outputs; } // {
-    hostPlatform = "aarch64-darwin";
-  };
-
-  # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
-  # nix.package = pkgs.nix;
-
-  # Use a case-sensitive file system for nix builds
-  services.nix-daemon.tempDir = "/Volumes/tmp";
-
-  # Create /etc/zshrc that loads the nix-darwin environment.
-  programs.zsh.enable = true;
-
-  # Set Git commit hash for darwin-version.
-  # system.configurationRevision = self.rev or self.dirtyRev or null;
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog

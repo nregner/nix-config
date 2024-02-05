@@ -4,7 +4,7 @@
   nixpkgs = import ../../nixpkgs.nix { inherit inputs outputs; };
 
   nix = {
-    package = lib.mkDefault pkgs.unstable.nix;
+    # package = lib.mkDefault pkgs.unstable.nix;
 
     gc = {
       automatic = true;
