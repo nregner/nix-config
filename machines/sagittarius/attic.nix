@@ -1,4 +1,4 @@
-{ inputs, config, ... }: {
+{ inputs, config, pkgs, ... }: {
   imports = [ inputs.attic.nixosModules.atticd ];
 
   users = {
@@ -18,6 +18,7 @@
 
   services.atticd = {
     enable = true;
+    package = pkgs.attic;
     user = config.users.users.atticd.name;
     credentialsFile = config.sops.secrets.atticd.path;
 
