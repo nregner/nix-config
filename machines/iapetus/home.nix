@@ -13,13 +13,12 @@
 
   home.packages = with pkgs.unstable; [
     # apps
-    openrgb
-    pkgs.insync
-    google-drive-ocamlfuse
-    # pkgs.insync.passthru.insync-pkg
     discord
     firefox
-    # gparted
+    google-drive-ocamlfuse
+    jetbrains-toolbox
+    openrgb
+    pkgs.insync
 
     awscli2
     gh
