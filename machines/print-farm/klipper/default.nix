@@ -19,6 +19,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+
     # klipper
     services.klipper = {
       enable = true;
@@ -81,5 +82,10 @@ in {
       package = pkgs.mainsail-develop;
     };
     services.nginx = { clientMaxBodySize = "1G"; };
+
+    networking.firewall = {
+      allowedTCPPorts = [ 80 config.services.moonraker.port ];
+      allowedUDPPorts = [ 80 config.services.moonraker.port ];
+    };
   };
 }
