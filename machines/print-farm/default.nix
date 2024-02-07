@@ -21,7 +21,9 @@ in (nodes {
         productId = "614e";
         vendorId = "1d50";
       };
-      environment.systemPackages = [ pkgs.klipper-flash-sunlu-s8 ];
+      environment.systemPackages =
+        [ (pkgs.callPackage ./klipper/firmware { }).flash-sunlu-s8 ];
+      time.timeZone = "America/Boise";
     })
   ];
 })

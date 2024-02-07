@@ -19,11 +19,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    networking.firewall = let ports = [ 80 81 7125 ];
-    in {
-      allowedTCPPorts = ports;
-      allowedUDPPorts = ports;
-    };
 
     # klipper
     services.klipper = {
