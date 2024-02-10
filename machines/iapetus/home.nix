@@ -24,7 +24,6 @@
     gh
     jq
     nushellFull
-    pkgs.attic
     pv
     rclone
     restic

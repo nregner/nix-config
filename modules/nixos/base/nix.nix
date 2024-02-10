@@ -19,7 +19,7 @@
       trusted-users = [ "@wheel" ];
 
       substituters = [
-        "http://sagittarius:8080/default?priority=10"
+        "http://sagittarius:8000?priority=10"
         "https://cache.nixos.org?priority=9"
       ];
 

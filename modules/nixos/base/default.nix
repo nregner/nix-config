@@ -1,8 +1,8 @@
 { inputs, pkgs, ... }: {
   imports = [
     inputs.nixos-generators.nixosModules.all-formats
-    ./builders.nix
     ./backups.nix
+    ./builders.nix
     ./networking.nix
     ./nix.nix
     ./sops.nix

@@ -21,8 +21,7 @@ resource "tailscale_acl" "acl" {
         action = "accept"
         src    = ["tag:server"]
         dst = [
-          "tag:server:8080",  # atticd
-          "tag:server:19999", # netdata
+          "tag:server:8000",  # binary cache
           "tag:server:7125",  # moonraker
         ]
       }

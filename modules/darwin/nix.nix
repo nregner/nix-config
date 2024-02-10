@@ -17,8 +17,12 @@
       experimental-features = [ "nix-command" "flakes" "repl-flake" ];
       trusted-users = [ "@wheel" ];
 
+      # keep build dependencies for direnv GC roots
+      keep-derivations = true;
+      keep-outputs = true;
+
       substituters = [
-        "http://sagittarius:8080/default?priority=10"
+        "http://sagittarius:8000?priority=10"
         "https://cache.nixos.org?priority=9"
       ];
 

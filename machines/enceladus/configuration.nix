@@ -6,20 +6,6 @@
     settings = {
       builders-use-substitutes = true;
       trusted-users = [ "nregner" ];
-      auto-optimise-store = true;
-      experimental-features = [ "nix-command" "flakes" "repl-flake" ];
-
-      # keep build dependencies for direnv GC roots
-      keep-derivations = true;
-      keep-outputs = true;
-
-      substituters = [
-        "http://sagittarius:8080/default?priority=10"
-        "https://cache.nixos.org?priority=9"
-      ];
-
-      trusted-public-keys =
-        [ "default:h0V4pJnSGtvqgGKLO3KF0VJ0iOaiVBfa4OjmnnR2ob8=" ];
     };
 
     linux-builder-2 = {
@@ -40,7 +26,6 @@
       maxJobs = 10;
       speedFactor = 1;
     }];
-
   };
 
   programs.ssh.knownHosts = {

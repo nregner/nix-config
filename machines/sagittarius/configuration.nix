@@ -4,12 +4,12 @@
     ../../modules/nixos/server/default.nix
     ../../modules/nixos/server/home-manager.nix
     ./hardware-configuration.nix
-    ./attic.nix
     ./gitea.nix
     ./k8s.nix
     ./mealie.nix
     ./networking.nix
     ./nginx.nix
+    ./nix-serve.nix
     ./qbittorrent.nix
   ];
 
@@ -32,7 +32,7 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [ attic docker-compose ];
+  environment.systemPackages = with pkgs; [ docker-compose ];
   services.dockerRegistry = {
     enable = true;
     listenAddress = "0.0.0.0";

@@ -6,7 +6,6 @@
   };
 
   overlays = [
-    inputs.attic.overlays.default
     outputs.overlays.additions
     outputs.overlays.modifications
     outputs.overlays.unstable-packages

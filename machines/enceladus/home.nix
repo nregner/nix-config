@@ -26,7 +26,6 @@
     gh
     jq
     nushell
-    pkgs.attic
     pv
     ripgrep
     rsync
