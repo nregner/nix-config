@@ -282,6 +282,23 @@
         "type": "github"
       }
     },
+    "linux-orangepi-orange-pi-6-6-rk35xx": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1699408641,
+        "narHash": "sha256-WW+HFgaNoVArnEQQ4wWadUNmOQgfz0Owz9dipXNb6IQ=",
+        "owner": "orangepi-xunlong",
+        "repo": "linux-orangepi",
+        "rev": "d2e9e37e71bcc1da8056da907330d959852e967f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "orangepi-xunlong",
+        "ref": "orange-pi-6.6-rk35xx",
+        "repo": "linux-orangepi",
+        "type": "github"
+      }
+    },
     "linux-orangepi-sun50iw9": {
       "flake": false,
       "locked": {
@@ -564,11 +581,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1706826059,
-        "narHash": "sha256-N69Oab+cbt3flLvYv8fYnEHlBsWwdKciNZHUbynVEOA=",
+        "lastModified": 1706098335,
+        "narHash": "sha256-r3dWjT8P9/Ah5m5ul4WqIWD8muj5F+/gbCdjiNVBKmU=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "25e3d4c0d3591c99929b1ec07883177f6ea70c9d",
+        "rev": "a77ab169a83a4175169d78684ddd2e54486ac651",
         "type": "github"
       },
       "original": {
@@ -614,6 +631,7 @@
       "inputs": {
         "armbian-build": "armbian-build",
         "flakelight": "flakelight_2",
+        "linux-orangepi-orange-pi-6-6-rk35xx": "linux-orangepi-orange-pi-6-6-rk35xx",
         "linux-orangepi-sun50iw9": "linux-orangepi-sun50iw9",
         "nixpkgs": "nixpkgs_3",
         "orangepi-build": "orangepi-build",
@@ -621,15 +639,16 @@
         "u-boot-orangepi-v2021_10-sunxi": "u-boot-orangepi-v2021_10-sunxi"
       },
       "locked": {
-        "lastModified": 1703723279,
-        "narHash": "sha256-bK2lR1xeL5D+TWyN1PagdbqY3a/Oh2GWYnk+GK4GnvA=",
+        "lastModified": 1707602277,
+        "narHash": "sha256-0QTmepPWG3MdkqrPtIcJqiZrymr+SiNriYMxaILSjVM=",
         "owner": "nathanregner",
         "repo": "orangepi-nix",
-        "rev": "afe43361ac42d2c455fcdbf3b2691b98f45cc11e",
+        "rev": "e1c16c5c79c54eeb8943eabe958e933429f9beb1",
         "type": "github"
       },
       "original": {
         "owner": "nathanregner",
+        "ref": "linux-6.6",
         "repo": "orangepi-nix",
         "type": "github"
       }

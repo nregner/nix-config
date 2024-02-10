@@ -72,7 +72,7 @@
       flake = false;
     };
     orangepi-nix = {
-      url = "github:nathanregner/orangepi-nix";
+      url = "github:nathanregner/orangepi-nix/linux-6.6";
       # inputs.nixpkgs.follows = "nixpkgs";
     };
     preprocess-cancellation = {
