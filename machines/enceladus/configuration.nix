@@ -10,13 +10,13 @@
       trusted-users = [ "nregner" ];
     };
 
-    linux-builder-2 = {
+    linux-builder = {
       enable = true;
       # package = pkgs.darwin.linux-builder;
       maxJobs = 12;
       # comment out for inital setup (pulls vm image via cache.nixos.org)
       # remove /var/lib/darwin-builder/*.img to force a reset
-      config = import ./linux-builder.nix args;
+      # config = import ./linux-builder.nix args;
     };
 
     buildMachines = [{
