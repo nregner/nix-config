@@ -5,23 +5,17 @@ def add_root [store_path: string, tag: string] {
         root=\"/nix/var/nix/gcroots/per-user/$USER/($tag)\"
         dir=\"$\(dirname \$root\)\"
         mkdir -p \"$dir\"
-        ln -sfn ($store_path) \"$root\"
+        rm -i \"$root\"
+        ln -srf ($store_path) \"$root\"
         echo \"linked $root\"
     "
 }
 
-export def "main current-system" [machine: string] {
+export def "main system" [machine: string] {
     let path = (ssh $machine -- realpath /run/current-system)
     echo $"copying ($path)"
-    nix copy --from $"ssh-ng://($machine)" --to ssh-ng://sagittarius $path
+    nix copy --from $"ssh://($machine)" --to ssh://sagittarius $path
     add_root $path $"($machine)/$\(cat ($path)/nixos-version\)"
-}
-
-export def "main toplevel" [machine: string] {
-    let path = (nix build $".#nixosConfigurations.($machine).config.system.build.toplevel" --print-out-paths --no-link)
-    echo $"copying ($path)"
-    nix copy --to ssh-ng://sagittarius $path --derivation
-    add_root $path $"($machine)/(cat $"($path)/nixos-version")"
 }
 
 export def main [
@@ -31,7 +25,7 @@ export def main [
 ] {
     let path = (realpath $path)
     echo $"copying ($path)"
-    nix copy --to ssh-ng://sagittarius $path ...$args
+    nix copy --to ssh://sagittarius $path ...$args
     if ($tag != null) {
         add_root $path $"misc/($tag)"
     }
