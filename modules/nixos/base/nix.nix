@@ -1,17 +1,8 @@
-{ self, inputs, outputs, config, lib, pkgs, ... }: {
+{ inputs, outputs, config, lib, pkgs, ... }: {
   nixpkgs = import ../../../nixpkgs.nix { inherit inputs outputs; };
 
   nix = {
     package = lib.mkDefault pkgs.unstable.nix;
-
-    # remove nix-channel related tools & configs
-    channel.enable = false;
-
-    gc = {
-      automatic = true;
-      options = "--delete-older-than 7d";
-      dates = "weekly";
-    };
 
     settings = {
       auto-optimise-store = true;
@@ -25,8 +16,6 @@
     };
   };
 
-  system.nixos.tags = [ self.sourceInfo.shortRev or "dirty" ];
-
   # show config changes on switch
   # https://discourse.nixos.org/t/nvd-simple-nix-nixos-version-diff-tool/12397/33
   system.activationScripts.report-changes = ''
@@ -34,3 +23,4 @@
     nvd diff $(ls -dv /nix/var/nix/profiles/system-*-link | tail -2)
   '';
 }
+

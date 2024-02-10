@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }: {
+{ self, inputs, pkgs, ... }: {
   imports = [
     inputs.nixos-generators.nixosModules.all-formats
     ./backups.nix
@@ -10,11 +10,15 @@
     ./users.nix
   ];
 
-  boot.tmp.cleanOnBoot = true;
+  nix.gc = {
+    automatic = true;
+    options = "--delete-older-than 7d";
+    dates = "weekly";
+  };
 
-  # login shell
-  programs.zsh.enable = true;
-  users.users.nregner.shell = pkgs.zsh;
+  system.nixos.tags = [ self.sourceInfo.shortRev or "dirty" ];
+
+  boot.tmp.cleanOnBoot = true;
 
   # basic system utilities
   environment.systemPackages = with pkgs.unstable; [
