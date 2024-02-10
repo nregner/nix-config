@@ -22,7 +22,7 @@
       keep-outputs = true;
 
       substituters = [
-        "http://sagittarius:8000?priority=10"
+        "http://sagittarius:8000?priority=10&trusted=1"
         "https://cache.nixos.org?priority=9"
       ];
 
