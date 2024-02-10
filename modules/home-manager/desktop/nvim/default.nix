@@ -21,7 +21,7 @@
       nodePackages_latest.graphql-language-service-cli
       nodePackages_latest.typescript-language-server
       nodePackages_latest.volar
-      rust-analyzer
+      rust-analyzer-unwrapped
       terraform-ls
 
       # formatters/linters
