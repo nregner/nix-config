@@ -1,6 +1,8 @@
 { inputs, config, pkgs, ... }@args: {
   imports = [ ./builder.nix ../../modules/darwin ];
 
+  nixpkgs.hostPlatform = "aarch64-darwin";
+
   nix = {
     distributedBuilds = true;
     settings = {

@@ -1,6 +1,5 @@
 { lib, ... }: {
-  imports =
-    [ ../../modules/nixos/server ../../modules/nixos/server/home-manager.nix ];
+  imports = [ ../../modules/nixos/server ];
 
   virtualisation = {
     cores = 8; # TODO: Figure out why this can't be > 8
@@ -26,8 +25,5 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJbDjUMsVH2t2f+pldWmU23ahMShVIlws1icrn66Jexu"
     ];
   };
-
-  # TODO: Remove
-  nix.settings.substituters = lib.mkForce [ "https://cache.nixos.org" ];
 }
 
