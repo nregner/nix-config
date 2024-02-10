@@ -11,7 +11,7 @@
     buildMachines = [
       {
         hostName = "iapetus";
-        protocol = "ssh";
+        protocol = "ssh-ng";
         sshUser = "nregner";
         system = "x86_64-linux";
         supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
@@ -21,7 +21,7 @@
       }
       {
         hostName = "m3-linux-builder";
-        protocol = "ssh";
+        protocol = "ssh-ng";
         sshUser = "nregner";
         system = "aarch64-linux";
         supportedFeatures =
