@@ -3,7 +3,7 @@
 
   services.mealie = {
     enable = true;
-    package = inputs.mealie.packages.${pkgs.stdenv.hostPlatform.system}.default;
+    package = inputs.mealie.packages.${pkgs.stdenv.hostPlatform.system}.mealie;
   };
 
   nginx.subdomain.mealie = {
