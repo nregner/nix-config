@@ -49,6 +49,13 @@
     betaflight-configurator
   ];
 
+  # rustc -Z unstable-options --print target-spec-json | jq '.["llvm-target"]' -r
+  home.file.".cargo/config.toml".source = pkgs.writeText "config.toml" ''
+    [target.x86_64-unknown-linux-gnu]
+    linker = "${pkgs.clang}/bin/clang"
+    rustflags = ["-C", "link-arg=-fuse-ld=${pkgs.unstable.mold}/bin/mold", "-C", "target-cpu=native"]
+  '';
+
   programs.alacritty.settings = { font = { size = lib.mkForce 11; }; };
 
   services.easyeffects.enable = true;
