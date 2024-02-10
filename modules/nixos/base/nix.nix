@@ -18,10 +18,7 @@
       experimental-features = [ "nix-command" "flakes" "repl-flake" ];
       trusted-users = [ "@wheel" ];
 
-      substituters = [
-        "http://sagittarius:8000?priority=10&trusted=1"
-        "https://cache.nixos.org?priority=9"
-      ];
+      substituters = [ "http://sagittarius:8000?priority=99&trusted=1" ];
 
       trusted-public-keys =
         [ "default:h0V4pJnSGtvqgGKLO3KF0VJ0iOaiVBfa4OjmnnR2ob8=" ];
