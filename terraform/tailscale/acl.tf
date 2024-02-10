@@ -3,7 +3,10 @@
 resource "tailscale_acl" "acl" {
   acl = jsonencode({
     groups = {
-      "group:admin" = ["nathanregner@gmail.com"]
+      "group:admin" = [
+        "nathanregner@gmail.com",
+        "regnerbrian@gmail.com",
+      ]
     }
     tagOwners = {
       "tag:admin"  = ["group:admin"]
@@ -21,8 +24,8 @@ resource "tailscale_acl" "acl" {
         action = "accept"
         src    = ["tag:server"]
         dst = [
-          "tag:server:8000",  # binary cache
-          "tag:server:7125",  # moonraker
+          "tag:server:8000", # binary cache
+          "tag:server:7125", # moonraker
         ]
       }
     ]
