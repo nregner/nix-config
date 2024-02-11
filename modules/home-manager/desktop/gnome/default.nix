@@ -13,6 +13,8 @@
   gtk = {
     enable = true;
     theme = {
+      # nix build .\#homeConfigurations.nregner@iapetus.config.gtk.theme.package
+      # ls result/share/themes
       name = "Catppuccin-Mocha-Compact-Blue-Dark";
       package = pkgs.unstable.catppuccin-gtk.override {
         accents = [ "blue" ];

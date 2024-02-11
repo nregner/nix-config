@@ -8,6 +8,7 @@
     ./nvim
     ./sops.nix
     ./theme.nix
+    ./wezterm.nix
   ];
 
   # standalone install - reimport nixpkgs
