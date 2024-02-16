@@ -38,7 +38,8 @@
 
   disko.devices.disk.NIXOS_SD = {
     type = "disk";
-    device = "/dev/disk/by-label/NIXOS_SD";
+    # device = "/dev/disk/by-label/NIXOS_SD";
+    device = "/dev/vda";
     imageSize = "3G";
     content = {
       type = "table";
@@ -57,7 +58,9 @@
         }
         {
           name = "root";
+          start = "64MiB";
           end = "100%";
+          part-type = "primary";
           bootable = true;
           content = {
             type = "btrfs";
