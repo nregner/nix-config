@@ -1,6 +1,7 @@
 { nixosConfig, disko, pkgs ? nixosConfig.pkgs, lib ? pkgs.lib
 , name ? "${nixosConfig.config.networking.hostName}-disko-images"
 , extraPostVM ? "", postInstallScript, checked ? false }:
+# TODO: rename postInstallScript to postInstallFiles
 let
   diskoLib = disko.lib;
   vmTools = pkgs.vmTools.override {
@@ -56,6 +57,7 @@ let
   dependencies = with pkgs;
     [
       bash
+      btrfs-progs
       coreutils
       gnused
       parted # for partprobe
@@ -63,6 +65,7 @@ let
       nix
       util-linux
       findutils # xargs
+      systemToInstall.config.system.build.nixos-install
     ] ++ nixosConfig.config.disko.extraDependencies;
   preVM = ''
     ${lib.concatMapStringsSep "\n" (disk:
@@ -72,8 +75,9 @@ let
   postVM = ''
     # shellcheck disable=SC2154
     mkdir -p "$out"
-    ${lib.concatMapStringsSep "\n"
-    (disk: ''mv ${disk.name}.qcow2 "$out"/${disk.name}.qcow2'')
+    ${lib.concatMapStringsSep "\n" (disk:
+      ''
+        ${pkgs.qemu}/bin/qemu-img convert ${disk.name}.qcow2 -O raw "$out"/${disk.name}.img'')
     (lib.attrValues nixosConfig.config.disko.devices.disk)}
     ${extraPostVM}
   '';
@@ -107,24 +111,35 @@ let
     rootPaths = [ nixosConfig.config.system.build.toplevel ];
   };
   root = systemToInstall.config.disko.rootMountPoint;
-  inherit ((import
-    "${nixosConfig.modulesPath}/system/boot/loader/generic-extlinux-compatible" {
-      inherit (nixosConfig) pkgs config lib;
-    }).config.content.boot.loader.generic-extlinux-compatible)
-    populateCmd;
+  # inherit ((import
+  #   "${nixosConfig.modulesPath}/system/boot/loader/generic-extlinux-compatible" {
+  #     inherit (nixosConfig) pkgs config lib;
+  #   }).config.content.boot.loader.generic-extlinux-compatible)
+  #   populateCmd;
   installer = ''
     echo ${root}
     mkdir -p ${root}/nix/store
 
-    xargs -P 8 -I % cp -a --reflink=auto % -t ${root}/nix/store/ < ${sdClosureInfo}/store-paths
-    cp ${sdClosureInfo}/registration ${root}/nix-path-registration
+    export NIX_STATE_DIR=$TMPDIR/state
+    nix-store < ${sdClosureInfo}/registration \
+      --load-db \
+      --option build-users-group ""
 
-    mkdir -p ${root}/nix/var/nix/profiles
-    ${systemToInstall.config.boot.loader.generic-extlinux-compatible.populateCmd} -c ${nixosConfig.config.system.build.toplevel} -d ${root}/boot
+    cp ${sdClosureInfo}/registration /mnt/nix-path-registration
 
-    ${populateCmd} -c ${nixosConfig.config.system.build.toplevel} -d "${root}/boot" -g 0
+    echo "running nixos-install..."
+    nixos-install \
+      --max-jobs auto \
+      --cores 0 \
+      --root /mnt \
+      --no-root-passwd \
+      --no-bootloader \
+      --substituters "" \
+      --option build-users-group "" \
+      --system ${nixosConfig.config.system.build.toplevel}
 
-    cp -r --reflink=auto ${postInstallScript}/* -t ${root}
+    echo "running postInstallScript..."
+    cp -r ${postInstallScript}/* /mnt/boot/firmware
 
     shrinkBTRFSFs() {
       local mpoint shrinkBy
@@ -184,9 +199,10 @@ let
       btrfs filesystem usage -b /mnt |
       awk '/Device size:/ { print ($NF / 1024) "KiB" }'
     )
-    shrinkLastPartition /dev/vda "$sizeInK"
 
     umount -Rv ${root}
+
+    shrinkLastPartition /dev/vda "$sizeInK"
   '';
   QEMU_OPTS = lib.concatMapStringsSep " " (disk:
     "-drive file=${disk.name}.qcow2,if=virtio,cache=unsafe,werror=report,format=qcow2")

@@ -99,10 +99,10 @@
   };
 
   # TODO: Device tree config instead?
-  disko.sdImage.postInstallScript = { pkgs }:
+  disko.sdImage.postInstallScript = { pkgs, hostPkgs }:
     let
-      piPkgs = pkgs.pkgsCross.raspberryPi;
-      configTxt = pkgs.writeText "config.txt" ''
+      piPkgs = hostPkgs.pkgsCross.raspberryPi;
+      configTxt = hostPkgs.writeText "config.txt" ''
         # Prevent the firmware from smashing the framebuffer setup done by the mainline kernel
         # when attempting to show low-voltage or overtemperature warnings.
         avoid_warnings=1
@@ -124,13 +124,12 @@
         hdmi_group=2;
         hdmi_mode=8;
       '';
-    in pkgs.runCommand "firmware" { } ''
-      firmware=$out/boot/firmware
+    in hostPkgs.runCommand "firmware" { } ''
+      firmware=$out
       mkdir -p $firmware
       (cd ${piPkgs.raspberrypifw}/share/raspberrypi/boot && cp bootcode.bin fixup*.dat start*.elf $firmware)
       cp ${piPkgs.ubootRaspberryPiZero}/u-boot.bin $firmware/u-boot-rpi0.bin
       cp ${piPkgs.ubootRaspberryPi}/u-boot.bin $firmware/u-boot-rpi1.bin
       cp ${configTxt} $firmware/config.txt
     '';
-
 }

@@ -73,7 +73,8 @@ in {
   pure = vmTools.runInLinuxVM (pkgs.runCommand name {
     buildInputs = dependencies;
     inherit preVM postVM QEMU_OPTS;
-    memSize = nixosConfig.config.disko.memSize;
+    # memSize = nixosConfig.config.disko.memSize;
+    memSize = 4096;
   } (let cfg = nixosConfig.config;
   in ''
     ls /dev

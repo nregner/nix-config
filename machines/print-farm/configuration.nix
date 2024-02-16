@@ -13,7 +13,7 @@
   sops.defaultSopsFile = ./secrets.yaml;
 
   # keep record of flake source
-  environment.etc."nix/flake-channels/system".source = self;
+  # environment.etc."nix/flake-channels/system".source = self;
 
   # Networking
   networking.hostName = hostname;
