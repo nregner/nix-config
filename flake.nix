@@ -5,6 +5,10 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     # hardware.url = "github:nixos/nixos-hardware";
     home-manager = {
+      url = "github:nix-community/home-manager/release-23.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    home-manager-unstable = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
@@ -81,8 +85,8 @@
     };
   };
 
-  outputs =
-    { self, nixpkgs, nixpkgs-unstable, nix-darwin, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, nix-darwin, home-manager
+    , home-manager-unstable, ... }@inputs:
     let
       inherit (self) outputs;
       inherit (nixpkgs) lib;
@@ -164,17 +168,18 @@
       # Standalone home-manager configuration entrypoint
       # Available through 'home-manager --flake .#'
       homeConfigurations = {
-        "nregner@iapetus" = home-manager.lib.homeManagerConfiguration {
+        "nregner@iapetus" = home-manager-unstable.lib.homeManagerConfiguration {
           pkgs = nixpkgs-unstable.legacyPackages.x86_64-linux;
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [ ./machines/iapetus/home.nix ];
         };
-        "nregner@callisto" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs-unstable.legacyPackages.x86_64-linux;
-          extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ ./machines/callisto/home.nix ];
-        };
-        "nregner" = home-manager.lib.homeManagerConfiguration {
+        "nregner@callisto" =
+          home-manager-unstable.lib.homeManagerConfiguration {
+            pkgs = nixpkgs-unstable.legacyPackages.x86_64-linux;
+            extraSpecialArgs = { inherit inputs outputs; };
+            modules = [ ./machines/callisto/home.nix ];
+          };
+        "nregner" = home-manager-unstable.lib.homeManagerConfiguration {
           pkgs = nixpkgs-unstable.legacyPackages.aarch64-darwin;
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [ ./machines/enceladus/home.nix ];
