@@ -1,5 +1,29 @@
+-- https://github.com/rktjmp/hotpot.nvim?tab=readme-ov-file#install
+-- Bootstap hotpot into lazy plugin dir if it does not exist yet.
+local hotpotpath = vim.fn.stdpath("data") .. "/lazy/hotpot.nvim"
+if not vim.loop.fs_stat(hotpotpath) then
+  vim.notify("Bootstrapping hotpot.nvim...", vim.log.levels.INFO)
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "--single-branch",
+    -- You may with to pin a known version tag with `--branch=vX.Y.Z`
+    "--branch=v0.9.6",
+    "https://github.com/rktjmp/hotpot.nvim.git",
+    hotpotpath,
+  })
+end
+
+-- As per lazy's install instructions, but insert hotpots path at the front
+vim.opt.runtimepath:prepend({ hotpotpath })
+
+require("hotpot") -- optionally you may call require("hotpot").setup(...) here
+
 -- https://github.com/folke/lazy.nvim#-plugin-spec
 require("lazy").setup({
+  "rktjmp/hotpot.nvim",
+
   -- Git
   "tpope/vim-fugitive",
   "tpope/vim-rhubarb",
@@ -271,6 +295,9 @@ require("lazy").setup({
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
   { import = "user.plugins" },
 }, {})
+
+require("say-hello")
+require("user.editing")
 
 -- [[ Setting options ]]
 -- See `:help vim.o`

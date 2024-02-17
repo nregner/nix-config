@@ -8,7 +8,7 @@
       require('user')
     '';
 
-    plugins = with pkgs.unstable.vimPlugins; [ lazy-nvim ];
+    plugins = with pkgs.unstable.vimPlugins; [ hotpot-nvim lazy-nvim ];
 
     extraPackages = with pkgs.unstable; [
 
@@ -26,6 +26,7 @@
 
       # formatters/linters
       codespell
+      fnlfmt
       nodePackages_latest.prettier
       (prettierd.overrideAttrs {
         src = fetchFromGitHub {
@@ -44,6 +45,7 @@
 
   xdg.configFile = {
     "nvim/lua".source = config.lib.file.mkFlakeSymlink ./lua;
+    "nvim/fnl".source = config.lib.file.mkFlakeSymlink ./fnl;
     "nvim/after".source = config.lib.file.mkFlakeSymlink ./after;
     "nvim/lazy-lock.json".source =
       config.lib.file.mkFlakeSymlink ./lazy-lock.json;
