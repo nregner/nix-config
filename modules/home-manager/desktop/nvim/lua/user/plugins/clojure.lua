@@ -1,7 +1,7 @@
 return {
   {
     "Olical/conjure",
-    ft = { "clojure" },
+    ft = { "clojure", "fennel" },
     init = function()
       vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
         pattern = { "conjure-log-*.cljc" },
