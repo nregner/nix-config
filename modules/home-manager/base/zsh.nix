@@ -3,16 +3,6 @@
   programs.zsh = {
     enable = true;
     initExtra = ''
-      # Auto-start tmux
-      if command -v tmux &> /dev/null \
-          && [ -n "$PS1" ] \
-          && [[ ! "$TERM" =~ screen ]] \
-          && [[ ! "$TERM" =~ tmux ]] \
-          && [ -z "$TMUX" ] \
-          && [[ ! "$TERMINAL_EMULATOR" =~ "JetBrains" ]]; then
-        tmux attach -t 0 || tmux new -s 0
-      fi
-
       bindkey -M viins 'jk' vi-cmd-mode
 
       # https://github.com/nix-community/nix-direnv/wiki/Shell-integration

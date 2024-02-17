@@ -14,4 +14,5 @@
   };
 
   home.packages = with pkgs.unstable; [ tmux-sessionizer ];
+
 }
