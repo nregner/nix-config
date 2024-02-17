@@ -77,6 +77,7 @@
     };
     orangepi-nix = {
       url = "github:nathanregner/orangepi-nix";
+      # url = "git+file:///home/nregner/dev/orangepi-nix";
       # inputs.nixpkgs.follows = "nixpkgs";
     };
     preprocess-cancellation = {

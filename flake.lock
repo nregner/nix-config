@@ -1,21 +1,5 @@
 {
   "nodes": {
-    "armbian-build": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1703681983,
-        "narHash": "sha256-wdwPBJFJLVakZlVL8V8D7Pqr6EfqjXxNrzlYQGfR268=",
-        "owner": "armbian",
-        "repo": "build",
-        "rev": "e612895fed92c7c72de7857839034e5d433c7df2",
-        "type": "github"
-      },
-      "original": {
-        "owner": "armbian",
-        "repo": "build",
-        "type": "github"
-      }
-    },
     "catppuccin-alacritty": {
       "flake": false,
       "locked": {
@@ -224,27 +208,6 @@
         "type": "github"
       }
     },
-    "flakelight_2": {
-      "inputs": {
-        "nixpkgs": [
-          "orangepi-nix",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1702964795,
-        "narHash": "sha256-0BRhruTFTHb38Cg/d6cnqcI0R311wSzPimsgYs5Q/dU=",
-        "owner": "accelbread",
-        "repo": "flakelight",
-        "rev": "2d82ec80e7d10fa6b4b43a1412ec81b78cf67716",
-        "type": "github"
-      },
-      "original": {
-        "owner": "accelbread",
-        "repo": "flakelight",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -303,20 +266,20 @@
         "type": "github"
       }
     },
-    "linux-orangepi-sun50iw9": {
+    "linux-orangepi-zero2-armbian-6_6_y": {
       "flake": false,
       "locked": {
-        "lastModified": 1694076176,
-        "narHash": "sha256-MKlhbqORiwzFe84VEbcHbz4ZfRwNYxK5bZD5AKyopGw=",
-        "owner": "orangepi-xunlong",
-        "repo": "linux-orangepi",
-        "rev": "3495b5ee0594566c9fed930b96b1cae90600412e",
+        "lastModified": 1708740584,
+        "narHash": "sha256-pI4nLCfIqZvd7iImcCbpHPS3CbdQj6W4RleBnLOHo9k=",
+        "owner": "nathanregner",
+        "repo": "linux",
+        "rev": "55b09b3ffcbff85823d51a8423fbb91d31342ab3",
         "type": "github"
       },
       "original": {
-        "owner": "orangepi-xunlong",
-        "ref": "orange-pi-6.1-sun50iw9",
-        "repo": "linux-orangepi",
+        "owner": "nathanregner",
+        "ref": "orangepi-zero2/armbian-6.6.y",
+        "repo": "linux",
         "type": "github"
       }
     },
@@ -585,11 +548,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1707978831,
-        "narHash": "sha256-UblFdWQ2MMZNzD9C/w8+7RjAJ2QIbebbzHUniQ/a44o=",
+        "lastModified": 1706098335,
+        "narHash": "sha256-r3dWjT8P9/Ah5m5ul4WqIWD8muj5F+/gbCdjiNVBKmU=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "c68a9fc85c2cb3a313be6ff40511635544dde8da",
+        "rev": "a77ab169a83a4175169d78684ddd2e54486ac651",
         "type": "github"
       },
       "original": {
@@ -599,54 +562,17 @@
         "type": "github"
       }
     },
-    "orangepi-build": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1703249007,
-        "narHash": "sha256-L1Qphwkqb0GlHiqWVR7fcFK5xk/J2a63ZjHKF5LbdLo=",
-        "owner": "orangepi-xunlong",
-        "repo": "orangepi-build",
-        "rev": "a8686ef79c020c4070068b020e86e0d87a309409",
-        "type": "github"
-      },
-      "original": {
-        "owner": "orangepi-xunlong",
-        "repo": "orangepi-build",
-        "type": "github"
-      }
-    },
-    "orangepi-firmware": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1693213694,
-        "narHash": "sha256-cLSkfm25st6lyV/PJtUMM+Wu2r0IfLmVDGAYzafcC2Q=",
-        "owner": "orangepi-xunlong",
-        "repo": "firmware",
-        "rev": "b2809d6c7a79ab874a91b84b9b0d9169cb41a749",
-        "type": "github"
-      },
-      "original": {
-        "owner": "orangepi-xunlong",
-        "repo": "firmware",
-        "type": "github"
-      }
-    },
     "orangepi-nix": {
       "inputs": {
-        "armbian-build": "armbian-build",
-        "flakelight": "flakelight_2",
-        "linux-orangepi-sun50iw9": "linux-orangepi-sun50iw9",
-        "nixpkgs": "nixpkgs_3",
-        "orangepi-build": "orangepi-build",
-        "orangepi-firmware": "orangepi-firmware",
-        "u-boot-orangepi-v2021_10-sunxi": "u-boot-orangepi-v2021_10-sunxi"
+        "linux-orangepi-zero2-armbian-6_6_y": "linux-orangepi-zero2-armbian-6_6_y",
+        "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1703723279,
-        "narHash": "sha256-bK2lR1xeL5D+TWyN1PagdbqY3a/Oh2GWYnk+GK4GnvA=",
+        "lastModified": 1708740960,
+        "narHash": "sha256-uedfe9sJ9eq3sBFQZV7fTB3SiTFjo+gr7yKe+qEpmv0=",
         "owner": "nathanregner",
         "repo": "orangepi-nix",
-        "rev": "afe43361ac42d2c455fcdbf3b2691b98f45cc11e",
+        "rev": "4e3e994cef4555818855ee257cc18e9865c5a7e5",
         "type": "github"
       },
       "original": {
@@ -864,23 +790,6 @@
       "original": {
         "owner": "numtide",
         "repo": "treefmt-nix",
-        "type": "github"
-      }
-    },
-    "u-boot-orangepi-v2021_10-sunxi": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1660654371,
-        "narHash": "sha256-sNsLKzsuLUiH9qcmEgJ5wzrGn0KMSGRHMJchk22r2ys=",
-        "owner": "orangepi-xunlong",
-        "repo": "u-boot-orangepi",
-        "rev": "0b91e222a025640182ea986f3c8e8db98cdc962a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "orangepi-xunlong",
-        "ref": "v2021.10-sunxi",
-        "repo": "u-boot-orangepi",
         "type": "github"
       }
     }

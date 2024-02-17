@@ -16,7 +16,7 @@ in (nodes {
     ./hardware/orange-pi-zero2.nix
     ({ pkgs, ... }: {
       print-farm.klipper = {
-        enable = true;
+        enable = false;
         configFile = ./klipper/sunlu-s8.cfg;
         productId = "614e";
         vendorId = "1d50";

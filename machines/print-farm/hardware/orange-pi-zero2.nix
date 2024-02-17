@@ -1,5 +1,10 @@
 { inputs, lib, ... }: {
   imports = [ inputs.orangepi-nix.nixosModules.zero2 ];
-  nixpkgs.overlays = [ inputs.orangepi-nix.overlays.default ];
-  nixpkgs.hostPlatform = lib.mkForce "aarch64-linux";
+
+  hardware.orangepi-zero2 = {
+    pkgs = inputs.orangepi-nix.packages.x86_64-linux.pkgsCross;
+  };
+
+  # TODO: FIXME
+  system.requiredKernelConfig = lib.mkForce [ ];
 }
