@@ -88,7 +88,7 @@ in {
     };
 
     systemd.tmpfiles.rules = [
-      "d '${cfg.dataDir}' - ${cfg.user} ${cfg.group} - -"
+      "d '${cfg.dataDir}' 0770 ${cfg.user} ${cfg.group} - -"
       "L+ ${configDir}/qBittorrent/config/qBittorrent.conf - ${cfg.user} ${cfg.group} - ${qBittorrentConf}"
     ];
 
