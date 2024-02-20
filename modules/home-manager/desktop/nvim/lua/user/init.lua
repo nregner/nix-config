@@ -86,6 +86,12 @@ require("lazy").setup({
         enabled = true,
         auto_trigger = true,
       },
+      filetypes = {
+        yaml = true,
+        markdown = true,
+        gitcommit = true,
+        gitrebase = true,
+      },
     },
   },
 
