@@ -38,6 +38,7 @@
       stylua
 
       # misc
+      gnumake
       clang # for compiling tree-sitter parsers
     ];
   };

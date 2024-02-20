@@ -226,7 +226,10 @@ require("lazy").setup({
     "nvim-telescope/telescope.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope-fzf-native.nvim",
+      {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        build = "make",
+      },
     },
   },
 
@@ -403,8 +406,7 @@ require("telescope").setup({
   },
 })
 
--- Enable telescope fzf native, if installed
-pcall(require("telescope").load_extension, "fzf")
+require("telescope").load_extension("fzf")
 
 -- Telescope live_grep in git root
 -- Function to find the git root directory based on the current buffer's path
