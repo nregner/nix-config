@@ -16,7 +16,7 @@
           && [[ ! "$TERM" =~ tmux ]] \
           && [ -z "$TMUX" ] \
           && [[ ! "$TERMINAL_EMULATOR" =~ "JetBrains" ]]; then
-        tmux attach -t 0 || tmux new -s 0
+        tmux attach || tmux
       fi
     '';
 
