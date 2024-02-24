@@ -4,7 +4,7 @@ buildNpmPackage {
   version = "develop";
   src = inputs.mainsail;
 
-  npmDepsHash = "sha256-5N+LeAZFwANplWX+YcUbHgP4YhjCLoBLyrS0aVMI8m0=";
+  npmDepsHash = "sha256-W1hVA5GWYAwMDf8LRf64Le6JNKlspRYQL5fM54auWdM=";
 
   CYPRESS_INSTALL_BINARY = "0";
 
