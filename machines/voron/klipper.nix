@@ -1,20 +1,13 @@
 { inputs, lib, pkgs, ... }: {
   services.klipper = {
     enable = true;
+    package = pkgs.unstable.klipper;
     user = "moonraker";
     group = "moonraker";
     configFile = pkgs.writeText "printer.cfg" ''
       [include /etc/klipper/printer.cfg]
     '';
     mutableConfig = true;
-    firmwares = {
-      mcu = {
-        enable = true;
-        configFile = ./firmware.cfg;
-        serial =
-          "/dev/serial/by-id/usb-Klipper_stm32f446xx_450016000450335331383520-if00";
-      };
-    };
   };
 
   environment.etc = {
@@ -38,8 +31,6 @@
 
   nixpkgs.overlays = [
     (final: prev: {
-      inherit (final.unstable) klipper;
-
       # build without massive gui dependencies
       # TODO: submit patch to nixpkgs to make optional?
       klipper-firmware = final.unstable.klipper-firmware.overrideAttrs (prev: {
