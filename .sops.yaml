@@ -47,7 +47,7 @@ creation_rules:
           - *user_nregner
         kms:
           - arn: arn:aws:kms:us-west-2:544292031362:key/mrk-2b49806343894488949fb1943c932e64
-  - path_regex: nixos/sagittarius/secrets.yaml
+  - path_regex: machines/sagittarius/secrets.yaml
     key_groups:
       - age:
           - *user_nregner

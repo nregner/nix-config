@@ -26,26 +26,31 @@ func sync() error {
 	githubClient := github.NewClient(nil).WithAuthToken(githubToken)
 	giteaToken := os.Getenv("GITEA_TOKEN")
 	if giteaToken == "" {
-		return errors.New("GITEA_TOKEN is not set")
+		log.Fatalf("GITEA_TOKEN is not set")
+		return errors.New("")
 	}
 	giteaClient, err := gitea.NewClient("http://sagittarius:3000", gitea.SetToken(giteaToken))
 	if err != nil {
-		return err
+		log.Fatalf("Failed to init client: %v", err)
 	}
 
 	githubRepos, err := listGithubRepos(githubClient)
 	if err != nil {
-		return err
+		log.Fatalf("Failed to list GitHub repos: %v", err)
 	}
 
 	giteaRepos, err := listGiteaRepos(giteaClient)
 	if err != nil {
-		return err
+		log.Fatalf("Failed to list Gitea repos: %v", err)
 	}
 
 	for _, src := range githubRepos {
 		mirror := giteaRepos[*src.Name]
 		if mirror != nil {
+			if !mirror.Mirror {
+				log.Fatalf("Cannot mirror %s: already exists", *src.Name)
+			}
+
 			if mirror.Archived {
 				_, _, err := giteaClient.EditRepo(
 					mirror.Owner.UserName,
@@ -53,7 +58,7 @@ func sync() error {
 					gitea.EditRepoOption{Archived: new(bool)},
 				)
 				if err != nil {
-					return err
+					log.Fatalf("Failed to edit %s: %v", *src.Name, err)
 				}
 			}
 			continue
@@ -68,7 +73,7 @@ func sync() error {
 		}
 		_, _, err := giteaClient.MigrateRepo(option)
 		if err != nil {
-			return err
+			log.Fatalf("Failed to mirror %s: %v", *src.Name, err)
 		}
 
 	}
@@ -80,11 +85,12 @@ func listGithubRepos(client *github.Client) (map[string]*github.Repository, erro
 	page := 0
 
 	for {
-		repos, _, err := client.Search.Repositories(
+		repos, response, err := client.Search.Repositories(
 			context.Background(),
 			"user:nathanregner",
 			&github.SearchOptions{
 				ListOptions: github.ListOptions{
+					Page:    page,
 					PerPage: 1000,
 				},
 			},
@@ -97,10 +103,10 @@ func listGithubRepos(client *github.Client) (map[string]*github.Repository, erro
 			reposByName[*repo.Name] = repo
 		}
 
-		if !repos.GetIncompleteResults() {
+		page = response.NextPage
+		if page == 0 {
 			break
 		}
-		page += 1
 	}
 
 	return reposByName, nil
