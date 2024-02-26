@@ -24,7 +24,7 @@
     };
   };
 
-  home.packages = with pkgs.unstable; [ commitizen difftastic ];
+  home.packages = with pkgs.unstable; [ difftastic ];
 
   programs.lazygit = {
     enable = true;
@@ -64,16 +64,6 @@
           moveUpCommit = "<c-P>";
         };
       };
-
-      # https://github.com/jesseduffield/lazygit/wiki/Custom-Commands-Compendium
-      customCommands = [{
-        key = "C";
-        command = "git cz c";
-        description = "commit with commitizen";
-        context = "files";
-        loadingText = "opening commitizen commit tool";
-        subprocess = true;
-      }];
     };
   };
 }
