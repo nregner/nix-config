@@ -12,7 +12,7 @@
 
   services.tailscaled-autoconnect = {
     enable = true;
-    secret-key = "tailscale/builder_key";
+    secret-key = "tailscale/server_key";
   };
 
   users.users = {
