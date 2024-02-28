@@ -29,8 +29,8 @@
     pv
     ripgrep
     rsync
+    sops
     util-linux
-
 
     # nix
     comma # auto-run from nix-index: https://github.com/nix-community/comma

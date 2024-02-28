@@ -4,4 +4,4 @@ let secrets = terraform -chdir=terraform/tailscale output -json |
   update value { |secret| $secret.value.value } |
   transpose -r -d
 
-sops --set $'["tailscale"] ($secrets | to json -r)' "nixos/common/server/secrets.yaml"
+sops --set $'["tailscale"] ($secrets | to json -r)' "modules/nixos/server/secrets.yaml"
