@@ -28,6 +28,7 @@ return {
       html = { "prettierd" },
       javascript = { "prettierd" },
       javascriptreact = { "prettierd" },
+      graphql = { "prettierd" },
       json = { "prettierd" },
       lua = { "stylua" },
       markdown = { "prettierd", "injected" },
