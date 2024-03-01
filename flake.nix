@@ -68,7 +68,7 @@
       flake = false;
     };
     linux-rockchip = {
-      url = "github:armbian/linux-rockchip/rk-5.10-rkr4";
+      url = "github:armbian/linux-rockchip/rk-5.10-rkr6";
       flake = false;
     };
     orangepi-nix = {
