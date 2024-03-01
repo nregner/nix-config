@@ -13,8 +13,6 @@
     (oldAttrs: { nativeCheckInputs = [ ]; })).overrideAttrs
     (oldAttrs: { doInstallCheck = false; });
 
-  mainsail-develop = pkgs.callPackage ./mainsail.nix { inherit inputs; };
-
   moonraker-develop = (pkgs.unstable.moonraker.override (prev: rec {
     python3 = prev.python3.override {
       packageOverrides = self: super:

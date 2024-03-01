@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   services.mainsail = {
-    package = pkgs.mainsail-develop;
     enable = true;
+    package = pkgs.unstable.mainsail;
   };
   services.nginx = { clientMaxBodySize = "1G"; };
 

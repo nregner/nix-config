@@ -79,7 +79,7 @@ in {
     # mainsail
     services.mainsail = {
       enable = true;
-      package = pkgs.mainsail-develop;
+      package = pkgs.unstable.mainsail;
     };
     services.nginx = { clientMaxBodySize = "1G"; };
 

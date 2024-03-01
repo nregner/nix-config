@@ -71,10 +71,6 @@
       url = "github:armbian/linux-rockchip/rk-5.10-rkr4";
       flake = false;
     };
-    mainsail = {
-      url = "github:mainsail-crew/mainsail/develop";
-      flake = false;
-    };
     orangepi-nix = {
       url = "github:nathanregner/orangepi-nix";
       # inputs.nixpkgs.follows = "nixpkgs";

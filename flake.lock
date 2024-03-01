@@ -360,23 +360,6 @@
         "type": "github"
       }
     },
-    "mainsail": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1708276152,
-        "narHash": "sha256-6WwvABuQ54ErqnlcWzNuXlwbG/B7lKDB6W/x9I5QfzI=",
-        "owner": "mainsail-crew",
-        "repo": "mainsail",
-        "rev": "e0bcd7464c89856e0d0c5f35984d198f1eeb830e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "mainsail-crew",
-        "ref": "develop",
-        "repo": "mainsail",
-        "type": "github"
-      }
-    },
     "mealie": {
       "inputs": {
         "flakelight": "flakelight",
@@ -714,7 +697,6 @@
         "kamp": "kamp",
         "linux-rockchip": "linux-rockchip",
         "mac-app-util": "mac-app-util",
-        "mainsail": "mainsail",
         "mealie": "mealie",
         "nix-darwin": "nix-darwin",
         "nix-index-database": "nix-index-database",
