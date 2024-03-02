@@ -25,16 +25,13 @@
     displayManager.sddm.wayland.enable = true;
     desktopManager.plasma6.enable = true;
 
-    layout = "us";
-    xkbVariant = "";
+    displayManager.autoLogin.enable = true;
+    displayManager.autoLogin.user = "nregner";
   };
 
   # fix conflicting values
   programs.ssh.askPassword =
     lib.mkForce "${pkgs.kdePackages.ksshaskpass.out}/bin/ksshaskpass";
-
-  services.xserver.displayManager.autoLogin.enable = true;
-  services.xserver.displayManager.autoLogin.user = "nregner";
 
   # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
   systemd.services."getty@tty1".enable = false;
