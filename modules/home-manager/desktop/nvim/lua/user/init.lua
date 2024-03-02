@@ -23,6 +23,15 @@ require("lazy").setup({
   },
 
   {
+    "ton/vim-bufsurf",
+    init = function()
+      vim.keymap.set({ "n", "i", "v" }, "]b", "<CMD>BufSurfForward<CR>")
+      vim.keymap.set({ "n", "i", "v" }, "[b", "<CMD>BufSurfBack<CR>")
+      vim.g.BufSurfIgnore = "NvimTree,qf,undotree,diffview"
+    end,
+  },
+
+  {
     "NeogitOrg/neogit",
     dependencies = {
       "nvim-lua/plenary.nvim", -- required
