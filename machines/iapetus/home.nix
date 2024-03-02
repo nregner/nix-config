@@ -38,6 +38,7 @@
     super-slicer-latest
 
     # nix
+    cachix
     comma # auto-run from nix-index: https://github.com/nix-community/comma
     nix-output-monitor
     nix-prefetch
