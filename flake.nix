@@ -122,7 +122,7 @@
       # Available through 'nixos-rebuild --flake .#'
       nixosConfigurations = {
         # Desktop
-        iapetus = lib.nixosSystem {
+        iapetus = nixpkgs-unstable.lib.nixosSystem {
           specialArgs = { inherit self inputs outputs; };
           modules = [ ./machines/iapetus/configuration.nix ];
         };

@@ -18,13 +18,20 @@
     enable = true;
     videoDrivers = [ "nvidia" ];
 
-    displayManager.gdm.enable = true;
-    displayManager.gdm.wayland = false;
-    desktopManager.gnome.enable = true;
+    # displayManager.gdm.enable = true;
+    # displayManager.gdm.wayland = false;
+    # desktopManager.gnome.enable = true;
+    displayManager.sddm.enable = true;
+    displayManager.sddm.wayland.enable = true;
+    desktopManager.plasma6.enable = true;
 
     layout = "us";
     xkbVariant = "";
   };
+
+  # fix conflicting values
+  programs.ssh.askPassword =
+    lib.mkForce "${pkgs.kdePackages.ksshaskpass.out}/bin/ksshaskpass";
 
   services.xserver.displayManager.autoLogin.enable = true;
   services.xserver.displayManager.autoLogin.user = "nregner";

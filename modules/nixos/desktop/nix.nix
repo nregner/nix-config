@@ -8,7 +8,7 @@
   nix = {
     # pin the flake registry to flake input
     registry = {
-      nixpkgs.flake = inputs.nixpkgs;
+      # nixpkgs.flake = inputs.nixpkgs;
       nixpkgs-unstable.flake = inputs.nixpkgs-unstable;
     };
 
