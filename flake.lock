@@ -332,11 +332,11 @@
         "poetry2nix": "poetry2nix"
       },
       "locked": {
-        "lastModified": 1708914789,
-        "narHash": "sha256-bX9MseBFyXPXp9OJwXlxC0VFU2VIxsExrJGrmQFvmn0=",
+        "lastModified": 1709345989,
+        "narHash": "sha256-uk1pUSFc6gzNcgi1+Iw3JKsyyiJ0EzgbJ1nKmn7S0+Q=",
         "owner": "nathanregner",
         "repo": "mealie-nix",
-        "rev": "eafc73feed43199986d1ea5f74f41c770b350945",
+        "rev": "62aa91ec61b9b630c9854eaa0f7cada2c4da9806",
         "type": "github"
       },
       "original": {
