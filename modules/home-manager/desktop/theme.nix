@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, ... }: {
   fonts.fontconfig.enable = true;
   home.packages = with pkgs.unstable;
     [
@@ -7,7 +7,7 @@
     ];
 
   gtk = {
-    enable = true;
+    enable = pkgs.hostPlatform.isLinux;
     theme = {
       # nix build .\#homeConfigurations.nregner@iapetus.config.gtk.theme.package
       # ls result/share/themes
@@ -21,7 +21,7 @@
     };
   };
 
-  home.pointerCursor = {
+  home.pointerCursor = lib.mkIf pkgs.hostPlatform.isLinux {
     name = "Catppuccin-Mocha-Dark-Cursors";
     package = pkgs.unstable.catppuccin-cursors.mochaDark;
     size = 24;
@@ -29,7 +29,7 @@
   };
 
   # https://github.com/catppuccin/gtk
-  xdg.configFile = {
+  xdg.configFile = lib.mkIf pkgs.hostPlatform.isLinux {
     "gtk-4.0/assets".source =
       "${config.gtk.theme.package}/share/themes/${config.gtk.theme.name}/gtk-4.0/assets";
     "gtk-4.0/gtk.css".source =
