@@ -16,13 +16,21 @@ nnoremap <leader>rn :action RenameElement<CR>
 " Navigation
 nnoremap ]c :action VcsShowNextChangeMarker<CR>
 nnoremap [c :action VcsShowPrevChangeMarker<CR>
+nnoremap ]c :action NextDiff<CR>
+nnoremap [c :action PreviousDiff<CR>
 nnoremap ]d :action GotoNextError<CR>
 nnoremap [d :action GotoPreviousError<CR>
-nnoremap <leader>ft <Action>(SelectInProjectView)
+nnoremap <leader>ft :action SelectInProjectView<CR>
 nnoremap gr :action GotoDeclaration<CR>
 nnoremap gD :action GotoSuperMethod<CR>
 nnoremap gI :action GotoImplementation<CR>
+nnoremap <leader>ca :action ShowIntentionActions<CR>
+noremap gcc :action CommentByLineComment<CR>
 " nnoremap <C-q> :action FindUsages<CR>
+
+" nnoremap ]C :action Diff.NextChange<CR>
+" nnoremap [C :action Diff.PreviousChange<CR>
+" map <Tab> :action Diff.NextChange<CR>
 
 " VCS
 nnoremap hr :action Vcs.RollbackChangedLines<CR>
