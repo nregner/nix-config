@@ -1,10 +1,31 @@
-source ~/.vimrc
-set ideajoin
-set surround
+inoremap jk <esc>
+
 set highlightedyank
+set number relativenumber
+
+set ideajoin
 set incsearch
+set smartcase
+set surround
 
 let mapleader = " "
+
+" Refactoring
 nnoremap <leader>rn :action RenameElement<CR>
+
+" Navigation
 nnoremap ]c :action VcsShowNextChangeMarker<CR>
 nnoremap [c :action VcsShowPrevChangeMarker<CR>
+nnoremap ]d :action GotoNextError<CR>
+nnoremap [d :action GotoPreviousError<CR>
+nnoremap <leader>ft <Action>(SelectInProjectView)
+nnoremap gr :action GotoDeclaration<CR>
+nnoremap gD :action GotoSuperMethod<CR>
+nnoremap gI :action GotoImplementation<CR>
+" nnoremap <C-q> :action FindUsages<CR>
+
+" VCS
+nnoremap hr :action Vcs.RollbackChangedLines<CR>
+
+" Debugging
+nnoremap <leader>b :action ToggleLineBreakpoint<CR>
