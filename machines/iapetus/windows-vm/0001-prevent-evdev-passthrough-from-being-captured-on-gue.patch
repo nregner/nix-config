@@ -15,7 +15,7 @@ index e572a2e90..a9d76ba16 100644
 +++ b/ui/input-linux.c
 @@ -397,12 +397,6 @@ static void input_linux_complete(UserCreatable *uc, Error **errp)
      }
- 
+
      qemu_set_fd_handler(il->fd, input_linux_event, NULL, il);
 -    if (il->keycount) {
 -        /* delay grab until all keys are released */
@@ -26,6 +26,6 @@ index e572a2e90..a9d76ba16 100644
      QTAILQ_INSERT_TAIL(&inputs, il, next);
      il->initialized = true;
      return;
--- 
+--
 2.43.1
 
