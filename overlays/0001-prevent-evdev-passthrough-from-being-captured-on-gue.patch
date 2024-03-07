@@ -1,0 +1,31 @@
+From e0932d92b70a3654193e9730c403cfdef2a2447d Mon Sep 17 00:00:00 2001
+From: Nathan Regner <nathanregner@gmail.com>
+Date: Wed, 6 Mar 2024 18:26:54 -0700
+Subject: [PATCH] prevent evdev passthrough from being captured on guest
+ startup
+
+https://gist.github.com/thnikk/92d8ac016c1667d4963735865d487df3#file-qemu-dont-capture-on-start-patch
+---
+ ui/input-linux.c | 6 ------
+ 1 file changed, 6 deletions(-)
+
+diff --git a/ui/input-linux.c b/ui/input-linux.c
+index e572a2e90..a9d76ba16 100644
+--- a/ui/input-linux.c
++++ b/ui/input-linux.c
+@@ -397,12 +397,6 @@ static void input_linux_complete(UserCreatable *uc, Error **errp)
+     }
+ 
+     qemu_set_fd_handler(il->fd, input_linux_event, NULL, il);
+-    if (il->keycount) {
+-        /* delay grab until all keys are released */
+-        il->grab_request = true;
+-    } else {
+-        input_linux_toggle_grab(il);
+-    }
+     QTAILQ_INSERT_TAIL(&inputs, il, next);
+     il->initialized = true;
+     return;
+-- 
+2.43.1
+

@@ -19,6 +19,12 @@
     # https://github.com/NixOS/nixpkgs/issues/154163#issuecomment-1350599022
     makeModulesClosure = x:
       prev.makeModulesClosure (x // { allowMissing = true; });
+
+    qemu = prev.qemu.overrideAttrs (prev: {
+      patches = prev.patches ++ [
+        ./0001-prevent-evdev-passthrough-from-being-captured-on-gue.patch
+      ];
+    });
   };
 
   # When applied, the unstable nixpkgs set (declared in the flake inputs) will
