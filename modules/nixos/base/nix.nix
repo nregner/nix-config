@@ -2,9 +2,7 @@
   nixpkgs = import ../../../nixpkgs.nix { inherit inputs outputs; };
 
   nix = {
-    # bump to fix https://github.com/NixOS/nix/issues/9591
-    package = let pkg = pkgs.unstable.nixVersions.nix_2_19;
-    in assert (lib.versionAtLeast pkg.version pkgs.unstable.nix.version); pkg;
+    package = lib.mkDefault pkgs.unstable.nix;
 
     settings = {
       auto-optimise-store = true;
