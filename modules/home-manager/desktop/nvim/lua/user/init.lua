@@ -23,6 +23,11 @@ require("lazy").setup({
   },
 
   {
+    "/chentoast/marks.nvim",
+    config = true,
+  },
+
+  {
     "NeogitOrg/neogit",
     dependencies = {
       "nvim-lua/plenary.nvim", -- required
