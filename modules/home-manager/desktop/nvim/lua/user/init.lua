@@ -230,6 +230,7 @@ require("lazy").setup({
         "nvim-telescope/telescope-fzf-native.nvim",
         build = "make",
       },
+      "catgoose/telescope-helpgrep.nvim",
     },
   },
 
@@ -400,13 +401,28 @@ require("telescope").setup({
     mappings = {
       i = {
         ["<C-u>"] = false,
-        ["<C-d>"] = false,
+        ["<C-d>"] = "delete_buffer",
+        -- map actions.which_key to <C-h> (default: <C-/>)
+        -- actions.which_key shows the mappings for your picker,
+        -- e.g. git_{create, delete, ...}_branch for the git_branches picker
+        -- ["<C-h>"] = "which_key",
+      },
+      n = {
+        ["d"] = "delete_buffer",
+      },
+    },
+  },
+  extensions = {
+    helpgrep = {
+      ignore_paths = {
+        vim.fn.stdpath("state") .. "/lazy/readme",
       },
     },
   },
 })
 
 require("telescope").load_extension("fzf")
+require("telescope").load_extension("helpgrep")
 
 -- Telescope live_grep in git root
 -- Function to find the git root directory based on the current buffer's path
@@ -502,6 +518,12 @@ vim.keymap.set(
   { desc = "[F]ind [D]iagnostics" }
 )
 vim.keymap.set("n", "<leader>fr", require("telescope.builtin").resume, { desc = "[F]ind [R]esume" })
+vim.keymap.set(
+  "n",
+  "<leader>fc",
+  require("telescope.builtin").command_history,
+  { desc = "[F]ind [C]ommand History" }
+)
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
