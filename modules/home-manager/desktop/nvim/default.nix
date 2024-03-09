@@ -13,16 +13,16 @@
     extraPackages = with pkgs.unstable; [
 
       # language servers
-      clojure-lsp
-      gopls
-      lua-language-server
-      nil
-      nixd
-      nodePackages_latest.graphql-language-service-cli
-      nodePackages_latest.typescript-language-server
-      nodePackages_latest.volar
-      rust-analyzer-unwrapped
-      terraform-ls
+      # clojure-lsp
+      # gopls
+      # lua-language-server
+      # nil
+      # nixd
+      # nodePackages_latest.graphql-language-service-cli
+      # nodePackages_latest.typescript-language-server
+      # nodePackages_latest.volar
+      # rust-analyzer-unwrapped
+      # terraform-ls
 
       # formatters/linters
       codespell
