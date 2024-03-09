@@ -1,14 +1,7 @@
-{
+{ config, ... }: {
   programs.vim.enable = true;
-
-  # expose file to ideavimrc
-  home.file.".vimrc".text = ''
-    inoremap jk <esc>
-
-    set smartcase
-    set number relativenumber
-
-    " Allow saving of files as sudo
-    cmap w!! w !sudo tee %
+  programs.vim.extraConfig = ''
+    :so ${config.xdg.configHome}/vim/user.vim
   '';
+  xdg.configFile."user.vim".source = config.lib.file.mkFlakeSymlink ./vimrc;
 }
