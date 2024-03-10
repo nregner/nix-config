@@ -35,7 +35,7 @@
     kubernetes-helm
 
     # 3d printer
-    super-slicer-latest
+    pkgs.super-slicer-latest
 
     # nix
     cachix
