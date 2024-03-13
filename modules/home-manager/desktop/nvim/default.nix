@@ -14,6 +14,23 @@
     extraConfig = builtins.readFile ./init.vim;
     extraLuaConfig = ''
       vim.g.copilot_node_command = '${pkgs.unstable.nodejs_20}/bin/node'
+      vim.g.lombok_jar = '${
+        pkgs.fetchurl {
+          url = "https://repo1.maven.org/maven2/org/projectlombok/lombok/1.18.34/lombok-1.18.34.jar";
+          sha256 = "06mqsj33x0hxxd73gxw05i1np7khhfqwdg7w0wdis92nzwm6nzf2";
+        }
+      }'
+      vim.g.java_home = '${pkgs.jdk21_headless}'
+      vim.g.java_runtimes = {
+        {
+          name = "JavaSE-11",
+          path = "${pkgs.jdk11_headless}",
+        },
+        {
+          name = "JavaSE-17",
+          path = "${pkgs.jdk17_headless}",
+        },
+      }
       require('user')
     '';
 
@@ -37,6 +54,7 @@
       terraform-ls
       vscode-langservers-extracted
       yaml-language-server
+      pkgs.jdtls
       pkgs.vtsls
 
       # formatters/linters
