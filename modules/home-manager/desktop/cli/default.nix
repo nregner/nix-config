@@ -33,6 +33,7 @@
     gnused
     jq
     ripgrep
+    parallel
 
     # filesystem
     fd

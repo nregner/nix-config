@@ -22,13 +22,8 @@
 
     # tools
     awscli2
-    fd
     gh
-    jq
     nushell
-    pv
-    ripgrep
-    rsync
     sops
     util-linux
 
