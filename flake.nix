@@ -30,6 +30,14 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    joker = {
+      url = "github:candid82/joker";
+      flake = false;
+    };
+    lazygit = {
+      url = "github:jesseduffield/lazygit";
+      flake = false;
+    };
     mealie = {
       url = "github:nathanregner/mealie-nix";
       # inputs.nixpkgs.follows = "nixpkgs";

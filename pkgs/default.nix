@@ -54,4 +54,14 @@
   insync-nautilus = pkgs.unstable.callPackage ./insync-nautilus { };
 
   insync = pkgs.unstable.callPackage ./insync.nix { };
+
+  joker = pkgs.unstable.buildGoModule ({
+    pname = "joker";
+    src = inputs.joker;
+    version = inputs.joker.rev;
+    vendorHash = "sha256-k17BthjOjZs0WB88AVVIM00HcSZl2S5u8n9eB2NFdrk=";
+    preBuild = ''
+      go generate ./...
+    '';
+  });
 }

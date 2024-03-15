@@ -22,6 +22,7 @@ return {
   "stevearc/conform.nvim",
   opts = {
     formatters_by_ft = {
+      clojure = { "joker" },
       css = { "prettierd" },
       gitcommit = { "prettier", "injected" }, -- FIXME: prettierd erroring out
       go = { "gofmt" },

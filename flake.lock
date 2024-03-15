@@ -252,6 +252,22 @@
         "type": "github"
       }
     },
+    "joker": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1709776744,
+        "narHash": "sha256-aBZ0KlXWKAF70xFxc+WWXucLPnxyaCxu97IYkPuKcCA=",
+        "owner": "candid82",
+        "repo": "joker",
+        "rev": "91339ce156e405099e136d8ea8ec74cf9436fe25",
+        "type": "github"
+      },
+      "original": {
+        "owner": "candid82",
+        "repo": "joker",
+        "type": "github"
+      }
+    },
     "kamp": {
       "flake": false,
       "locked": {
@@ -265,6 +281,22 @@
       "original": {
         "owner": "kyleisah",
         "repo": "Klipper-Adaptive-Meshing-Purging",
+        "type": "github"
+      }
+    },
+    "lazygit": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1710848300,
+        "narHash": "sha256-1UhSMbX4MpDPHqbviaL7KLKAjgeFuvPZh5eZRRmIrGU=",
+        "owner": "jesseduffield",
+        "repo": "lazygit",
+        "rev": "fadc2893d21c798e2b64b7f7929927347cf242dd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jesseduffield",
+        "repo": "lazygit",
         "type": "github"
       }
     },
@@ -661,7 +693,9 @@
         "disko": "disko",
         "home-manager": "home-manager",
         "home-manager-unstable": "home-manager-unstable",
+        "joker": "joker",
         "kamp": "kamp",
+        "lazygit": "lazygit",
         "linux-rockchip": "linux-rockchip",
         "mac-app-util": "mac-app-util",
         "mealie": "mealie",

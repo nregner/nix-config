@@ -35,6 +35,7 @@
         };
       })
       stylua
+      pkgs.joker
 
       # misc
       gnumake
