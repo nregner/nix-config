@@ -16,7 +16,7 @@ creation_rules:
       - age:
           - *user_nregner
           - *user_nregner_mac
-  - path_regex: modules/nixos/server/secrets.yaml
+  - path_regex: modules/nixos/server/.*/secrets.yaml
     key_groups:
       - age:
           - *user_nregner

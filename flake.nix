@@ -27,7 +27,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hydra-sentinel = {
-      url = "git+ssh://git@github.com/nathanregner/hydra-sentinel";
+      url = "github:nathanregner/hydra-sentinel";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     mealie = {
