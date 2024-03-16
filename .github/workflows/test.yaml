@@ -11,6 +11,9 @@ jobs:
     runs-on: [self-hosted]
     steps:
       - uses: actions/checkout@v4
-      - uses: cachix/install-nix-action@v25
+      # - uses: cachix/install-nix-action@v25
+      # - uses: DeterminateSystems/nix-installer-action@e279ba56d8266c08a0e65738145aabb824f308ed # pin@main
+      - name: List files
+        run: ls
       - name: Run `nix flake check`
         run: nix flake check
