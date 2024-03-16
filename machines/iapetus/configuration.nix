@@ -112,6 +112,17 @@
       true; # Open ports in the firewall for Source Dedicated Server
   };
 
+  sops.secrets.github-runner-token = {
+    sopsFile = ../../modules/nixos/server/secrets.yaml;
+    key = "github_runner_token";
+  };
+  services.github-runners.nix-config = {
+    enable = true;
+    url = "https://github.com/nathanregner/nix-config";
+    tokenFile = config.sops.secrets.github-runner-token.path;
+    replace = true;
+  };
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
