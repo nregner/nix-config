@@ -144,11 +144,11 @@
         };
 
         # Builder VM
-        ec2-aarch64 = lib.nixosSystem {
-          specialArgs = { inherit self inputs outputs; };
-          modules = [ ./machines/ec2-aarch64/configuration.nix ];
-          system = "aarch64-linux";
-        };
+        # ec2-aarch64 = lib.nixosSystem {
+        #   specialArgs = { inherit self inputs outputs; };
+        #   modules = [ ./machines/ec2-aarch64/configuration.nix ];
+        #   system = "aarch64-linux";
+        # };
 
         # Voron 2.4r2 Klipper machine
         voron = lib.nixosSystem {
@@ -223,6 +223,12 @@
         checks = {
           x86_64-linux = { inherit (nixosConfigurations) iapetus sagittarius; };
         };
+      };
+
+      matrix = {
+        include = lib.mapAttrsToList (name: nixosConfiguration: {
+          attr = "nixosConfigurations.${name}.config.system.build.toplevel";
+        }) nixosConfigurations;
       };
 
       # checks = (lib.mapAttrs (name: nixosConfiguration:
