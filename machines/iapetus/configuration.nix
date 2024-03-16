@@ -63,7 +63,9 @@
   programs.ccache.enable = true;
   nix.settings.extra-sandbox-paths = [ config.programs.ccache.cacheDir ];
   systemd.tmpfiles.rules =
-    [ "d ${config.programs.ccache.cacheDir} 0770 root nixbld" ];
+    [ "d ${config.programs.ccache.cacheDir} 0770 root nixbld" ]
+    ++ (let cfg = config.services.github-runners.nix-config;
+    in [ "d '${cfg.workDir}' 0777 - - - -" ]);
 
   environment.systemPackages = [
     config.boot.kernelPackages.perf
@@ -112,16 +114,21 @@
       true; # Open ports in the firewall for Source Dedicated Server
   };
 
+  # https://docs.github.com/en/rest/actions/self-hosted-runners#create-a-registration-token-for-a-repository
   sops.secrets.github-runner-token = {
     sopsFile = ../../modules/nixos/server/secrets.yaml;
     key = "github_runner_token";
   };
   services.github-runners.nix-config = {
     enable = true;
+    name = "iapetus";
     url = "https://github.com/nathanregner/nix-config";
     tokenFile = config.sops.secrets.github-runner-token.path;
     replace = true;
+    workDir = "/tmp/nix-config";
+    user = "github";
   };
+  nix.settings.trusted-users = [ "github" ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
