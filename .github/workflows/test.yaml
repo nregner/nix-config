@@ -7,13 +7,36 @@ on:
   # - cron: "0 0 * * 0" # runs weekly on Sunday at 00:00
 
 jobs:
-  check:
+  # check:
+  #   runs-on: [self-hosted]
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     # - uses: cachix/install-nix-action@v25
+  #     # - uses: DeterminateSystems/nix-installer-action@e279ba56d8266c08a0e65738145aabb824f308ed # pin@main
+  #     - name: List files
+  #       run: ls
+  #     - name: Run `nix flake check`
+  #       run: nix flake check
+
+  nix-matrix:
     runs-on: [self-hosted]
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - uses: actions/checkout@v4
-      # - uses: cachix/install-nix-action@v25
-      # - uses: DeterminateSystems/nix-installer-action@e279ba56d8266c08a0e65738145aabb824f308ed # pin@main
-      - name: List files
-        run: ls
-      - name: Run `nix flake check`
-        run: nix flake check
+      - uses: cachix/install-nix-action@v24
+      - id: set-matrix
+        name: Generate Nix Matrix
+        run: |
+          set -Eeu
+          matrix="$(nix eval --json '.#githubActions.matrix')"
+          echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
+
+  nix-build:
+    needs: nix-matrix
+    runs-on: [self-hosted]
+    strategy:
+      matrix: ${{fromJSON(needs.nix-matrix.outputs.matrix)}}
+    steps:
+      - uses: actions/checkout@v4
+      - run: nix build -L ".#${{ matrix.attr }}"

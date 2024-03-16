@@ -46,7 +46,8 @@
     '';
   };
 
-  klipperPkgs = pkgs.unstable.callPackage ./klipper { };
+  # klipperPkgs =
+  # pkgs.lib.recurseIntoAttrs (pkgs.unstable.callPackage ./klipper { });
 
   insync-nautilus = pkgs.unstable.callPackage ./insync-nautilus { };
 

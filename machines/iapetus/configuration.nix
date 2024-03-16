@@ -62,10 +62,12 @@
   # man tmpfiles.d
   programs.ccache.enable = true;
   nix.settings.extra-sandbox-paths = [ config.programs.ccache.cacheDir ];
-  systemd.tmpfiles.rules =
-    [ "d ${config.programs.ccache.cacheDir} 0770 root nixbld" ]
-    ++ (let cfg = config.services.github-runners.nix-config;
-    in [ "d '${cfg.workDir}' 0777 - - - -" ]);
+  systemd.tmpfiles.rules = [
+    "d ${config.programs.ccache.cacheDir} 0770 root nixbld"
+  ]
+  # ++ (let cfg = config.services.github-runners.nix-config;
+  # in [ "d '${cfg.workDir}' 0777 - - - -" ])
+  ;
 
   environment.systemPackages = [
     config.boot.kernelPackages.perf
@@ -125,7 +127,7 @@
     url = "https://github.com/nathanregner/nix-config";
     tokenFile = config.sops.secrets.github-runner-token.path;
     replace = true;
-    workDir = "/tmp/nix-config";
+    # workDir = "/tmp/nix-config";
     user = "github";
   };
   nix.settings.trusted-users = [ "github" ];

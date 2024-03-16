@@ -425,6 +425,26 @@
         "type": "github"
       }
     },
+    "nix-github-actions_3": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1703863825,
+        "narHash": "sha256-rXwqjtwiGKJheXB43ybM8NwWB8rO2dSRrEqes0S7F5Y=",
+        "owner": "nix-community",
+        "repo": "nix-github-actions",
+        "rev": "5163432afc817cf8bd1f031418d1869e4c9d5547",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nix-github-actions",
+        "type": "github"
+      }
+    },
     "nix-index-database": {
       "inputs": {
         "nixpkgs": [
@@ -625,6 +645,7 @@
         "mac-app-util": "mac-app-util",
         "mealie": "mealie",
         "nix-darwin": "nix-darwin",
+        "nix-github-actions": "nix-github-actions_3",
         "nix-index-database": "nix-index-database",
         "nixos-generators": "nixos-generators",
         "nixpkgs": "nixpkgs_2",

@@ -20,6 +20,10 @@
       url = "github:hraban/mac-app-util";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    nix-github-actions = {
+      url = "github:nix-community/nix-github-actions";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Tools
     disko = {
@@ -214,6 +218,16 @@
             format = "install-iso";
           };
         }) nixosConfigurations;
+
+      githubActions = inputs.nix-github-actions.lib.mkGithubMatrix {
+        checks = {
+          x86_64-linux = { inherit (nixosConfigurations) iapetus sagittarius; };
+        };
+      };
+
+      # checks = (lib.mapAttrs (name: nixosConfiguration:
+      #   let inherit (nixosConfiguration.config.nixpkgs.hostPlatform) system;
+      #   in { ${system}.name = nixosConfigurations; }) nixosConfigurations);
 
       # https://github.com/zhaofengli/colmena
       colmena = let
