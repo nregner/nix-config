@@ -19,6 +19,10 @@
         variant = "mocha";
       };
     };
+    iconTheme = {
+      package = pkgs.unstable.catppuccin-papirus-folders;
+      name = "Papirus-Dark";
+    };
   };
 
   home.pointerCursor = lib.mkIf pkgs.hostPlatform.isLinux {

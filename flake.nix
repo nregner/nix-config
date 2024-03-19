@@ -57,10 +57,6 @@
       url = "github:catppuccin/lazygit";
       flake = false;
     };
-    catppuccin-papirus-folders = {
-      url = "github:catppuccin/papirus-folders";
-      flake = false;
-    };
 
     # 3d printing
     kamp = {
