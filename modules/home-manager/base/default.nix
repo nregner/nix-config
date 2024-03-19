@@ -4,6 +4,7 @@
     ../lib
     ./fzf.nix
     ./tmux.nix
+    ./tmux-sessionizer.nix
     ./vim.nix
     ./zsh.nix
   ];
