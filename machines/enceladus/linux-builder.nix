@@ -1,4 +1,4 @@
-{ lib, ... }: {
+{ self, lib, ... }: {
   imports = [ ../../modules/nixos/server ];
 
   virtualisation = {
@@ -12,18 +12,12 @@
 
   services.tailscaled-autoconnect = {
     enable = true;
-    secret-key = "tailscale/server_key";
+    secret-key = "tailscale/builder_key";
   };
 
   users.users = {
-    nregner.openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJN0UxPvRjkqYdq8OFtzO/borc4lU4QNYSJiGhgx3MkI"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOhre0L0AW87qYkI5Os8U2+DS5yvAOnjpEY+Lmn5f0l7"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJBWcxb/Blaqt1auOtE+F8QUWrUotiC5qBJ+UuEWdVCb"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKs6KBP0vkY+EHrtZvIq9KsWGQ83iet0Enu7AA1nhyAP"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIQOaeRY07hRIPpeFYRWoQOzP+toxZjveC5jVHF+vpIj"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJbDjUMsVH2t2f+pldWmU23ahMShVIlws1icrn66Jexu"
-    ];
+    nregner.openssh.authorizedKeys.keys =
+      lib.attrValues self.globals.ssh.allKeys;
   };
 }
 

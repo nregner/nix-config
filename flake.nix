@@ -89,6 +89,8 @@
         "x86_64-darwin"
       ];
     in rec {
+      globals = import ./globals.nix { inherit lib; };
+
       # Your custom packages
       # Acessible through 'nix build', 'nix shell', etc
       packages = forAllSystems (system:
@@ -151,7 +153,7 @@
       } // (import ./machines/print-farm { inherit self inputs outputs; });
 
       darwinConfigurations = {
-        "Nathans-MacBook-Pro" = nix-darwin.lib.darwinSystem {
+        "enceladus" = nix-darwin.lib.darwinSystem {
           specialArgs = { inherit self inputs outputs; };
           modules = [ ./machines/enceladus/configuration.nix ];
         };

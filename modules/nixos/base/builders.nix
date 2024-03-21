@@ -34,7 +34,7 @@
 
   programs.ssh.extraConfig = ''
     Host m3-linux-builder
-      ProxyCommand ssh -W localhost:31022 nregner@nathans-macbook-pro
+      ProxyCommand ssh -W localhost:31022 nregner@enceladus
       User nregner
       IdentityFile /etc/ssh/ssh_host_ed25519_key
   '';

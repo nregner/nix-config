@@ -1,14 +1,12 @@
-{ inputs, config, pkgs, ... }@args: {
+{ self, config, pkgs, lib, ... }@args: {
   imports = [ ./builder.nix ../../modules/darwin ];
 
   nixpkgs.hostPlatform = "aarch64-darwin";
 
+  networking.hostName = "enceladus";
+
   nix = {
     distributedBuilds = true;
-    settings = {
-      builders-use-substitutes = true;
-      trusted-users = [ "nregner" ];
-    };
 
     linux-builder-2 = {
       enable = true;
@@ -30,13 +28,6 @@
     }];
   };
 
-  programs.ssh.knownHosts = {
-    iapetus.publicKey =
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOhre0L0AW87qYkI5Os8U2+DS5yvAOnjpEY+Lmn5f0l7";
-    sagittarius.publicKey =
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIQOaeRY07hRIPpeFYRWoQOzP+toxZjveC5jVHF+vpIj";
-  };
-
   launchd.daemons.linux-builder = {
     serviceConfig = {
       StandardOutPath = "/var/log/darwin-builder.log";
@@ -44,15 +35,9 @@
     };
   };
 
-  # Used for backwards compatibility, please read the changelog before changing.
-  # $ darwin-rebuild changelog
-  system.stateVersion = 4;
-
-  environment.etc = {
-    "nix/flake-channels/system".source = inputs.self;
-    "nix/flake-channels/nixpkgs".source = inputs.nixpkgs;
-    "nix/flake-channels/nixpkgs-unstable".source = inputs.nixpkgs-unstable;
-    "nix/flake-channels/home-manager".source = inputs.home-manager;
+  users.users = {
+    nregner.openssh.authorizedKeys.keys =
+      lib.attrValues self.globals.ssh.allKeys;
   };
 
   services.tailscale = {
@@ -63,4 +48,8 @@
     config.services.tailscale.package
     config.nix.linux-builder.package # keep the base image around in case we need to rebuild
   ];
+
+  # Used for backwards compatibility, please read the changelog before changing.
+  # $ darwin-rebuild changelog
+  system.stateVersion = 4;
 }

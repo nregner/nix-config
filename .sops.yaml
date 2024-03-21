@@ -11,13 +11,11 @@ keys:
   - &host_sagittarius age1yfflu4pxlt32sy4xaa04m5gs7kyrccyj9y5hh0qvndmxtrxrtpns7mf682
   - &host_callisto age1h7223qs8fq2v8nta352jqd7kjffl0sxmrpvmcls0q3gm4j5m8d6q7ynsrr
 creation_rules:
-  - path_regex: terraform/tailscale/secrets.yaml
+  - path_regex: terraform/.*/secrets.yaml
     key_groups:
       - age:
           - *user_nregner
           - *user_nregner_mac
-          - *host_iapetus
-          - *host_callisto
   - path_regex: modules/nixos/server/secrets.yaml
     key_groups:
       - age:

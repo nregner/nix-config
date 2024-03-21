@@ -2,12 +2,14 @@
   nixpkgs = import ../../../nixpkgs.nix { inherit inputs outputs; };
 
   nix = {
+    distributedBuilds = true;
     package = lib.mkDefault pkgs.unstable.nix;
 
     settings = {
       auto-optimise-store = true;
+      builders-use-substitutes = true;
       experimental-features = [ "nix-command" "flakes" "repl-flake" ];
-      trusted-users = [ "@wheel" ];
+      trusted-users = [ "@wheel" "nregner" ];
 
       substituters = [
         "http://sagittarius:8000?priority=99&trusted=1"

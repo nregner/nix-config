@@ -7,14 +7,12 @@ terraform {
   required_providers {
     tailscale = {
       source  = "tailscale/tailscale"
-      version = "0.13.10"
+      version = ">= 0.15"
     }
   }
 }
 
 provider "tailscale" {
-  oauth_client_id     = file("~/run/secrets/tailscale/client_id")
-  oauth_client_secret = file("~/run/secrets/tailscale/client_secret")
 }
 
 resource "tailscale_tailnet_key" "server" {
