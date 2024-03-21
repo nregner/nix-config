@@ -1,5 +1,10 @@
-{ self, ... }: {
+{ self, pkgs, ... }: {
   imports = [ ./nix.nix ];
+
+  environment.systemPackages = with pkgs.unstable; [
+    util-linux
+    coreutils-full
+  ];
 
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
