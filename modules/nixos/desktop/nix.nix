@@ -1,6 +1,5 @@
-{ self, inputs, ... }: {
+{ inputs, ... }: {
   environment.etc = {
-    "nix/flake-channels/system".source = self;
     "nix/flake-channels/nixpkgs".source = inputs.nixpkgs;
     "nix/flake-channels/nixpkgs-unstable".source = inputs.nixpkgs-unstable;
   };
@@ -8,8 +7,18 @@
   nix = {
     # pin the flake registry to flake input
     registry = {
-      nixpkgs.flake = inputs.nixpkgs;
-      nixpkgs-unstable.flake = inputs.nixpkgs-unstable;
+      nixpkgs.to = {
+        owner = "NixOS";
+        repo = "nixpkgs";
+        rev = inputs.nixpkgs.rev;
+        type = "github";
+      };
+      nixpkgs-unstable.to = {
+        owner = "NixOS";
+        repo = "nixpkgs";
+        rev = inputs.nixpkgs-unstable.rev;
+        type = "github";
+      };
     };
 
     settings = {
