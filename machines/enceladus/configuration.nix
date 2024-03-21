@@ -17,15 +17,26 @@
       config = import ./linux-builder.nix args;
     };
 
-    buildMachines = [{
-      hostName = "sagittarius";
-      protocol = "ssh-ng";
-      sshUser = "nregner";
-      system = "x86_64-linux";
-      supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
-      maxJobs = 10;
-      speedFactor = 1;
-    }];
+    buildMachines = [
+      {
+        hostName = "sagittarius";
+        protocol = "ssh-ng";
+        sshUser = "nregner";
+        system = "x86_64-linux";
+        supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+        maxJobs = 10;
+        speedFactor = 1;
+      }
+      {
+        hostName = "iapetus";
+        protocol = "ssh-ng";
+        sshUser = "nregner";
+        system = "x86_64-linux";
+        supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+        maxJobs = 12;
+        speedFactor = 2;
+      }
+    ];
   };
 
   launchd.daemons.linux-builder = {

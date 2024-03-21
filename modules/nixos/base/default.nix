@@ -2,7 +2,6 @@
   imports = [
     inputs.nixos-generators.nixosModules.all-formats
     ./backups.nix
-    ./builders.nix
     ./networking.nix
     ./nix.nix
     ./sops.nix

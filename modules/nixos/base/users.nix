@@ -15,8 +15,6 @@ in {
     ];
   };
 
-  nix.settings.trusted-users = [ "nregner" ];
-
   security.sudo = {
     wheelNeedsPassword = false;
     # https://github.com/NixOS/nixpkgs/issues/118655#issuecomment-1537131599

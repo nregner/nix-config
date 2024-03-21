@@ -20,6 +20,10 @@
       url = "github:hraban/mac-app-util";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    nix-fast-build = {
+      url = "github:Mic92/nix-fast-build";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
 
     # Tools
     disko = {
@@ -123,25 +127,21 @@
         iapetus = lib.nixosSystem {
           specialArgs = { inherit self inputs outputs; };
           modules = [ ./machines/iapetus/configuration.nix ];
+          system = "x86_64-linux";
         };
 
         # GE73VR Laptop
         callisto = lib.nixosSystem {
           specialArgs = { inherit self inputs outputs; };
           modules = [ ./machines/callisto/configuration.nix ];
+          system = "x86_64-linux";
         };
 
         # Server
         sagittarius = lib.nixosSystem {
           specialArgs = { inherit self inputs outputs; };
           modules = [ ./machines/sagittarius/configuration.nix ];
-        };
-
-        # Builder VM
-        ec2-aarch64 = lib.nixosSystem {
-          specialArgs = { inherit self inputs outputs; };
-          modules = [ ./machines/ec2-aarch64/configuration.nix ];
-          system = "aarch64-linux";
+          system = "x86_64-linux";
         };
 
         # Voron 2.4r2 Klipper machine
@@ -213,29 +213,18 @@
           };
         }) nixosConfigurations;
 
-      # https://github.com/zhaofengli/colmena
-      colmena = let
-        # map nixosConfigurations to deployments: https://github.com/zhaofengli/colmena/issues/60#issuecomment-1510496861
-        nixosConfigurations = lib.filterAttrs (name: _:
-          builtins.match "sunlu-*" name != null || name == "sagittarius" || name
-          == "voron") self.nixosConfigurations;
-      in {
-        meta = {
-          nixpkgs = import inputs.nixpkgs { system = "x86_64-linux"; };
-          nodeNixpkgs =
-            builtins.mapAttrs (name: value: value.pkgs) nixosConfigurations;
-          nodeSpecialArgs =
-            builtins.mapAttrs (name: value: value._module.specialArgs)
-            nixosConfigurations;
-          # https://colmena.cli.rs/unstable/reference/meta.html
-          allowApplyAll = false;
-          # cat /etc/nix/machines > ./colmena-machines
-          machinesFile = ./colmena-machines;
-        };
-      } // builtins.mapAttrs (name: value: {
-        imports = value._module.args.modules;
-        # https://colmena.cli.rs/unstable/reference/deployment.html
-        # deployment.buildOnTarget = true;
-      }) nixosConfigurations;
+      hydraJobs = {
+        nixosConfigurations =
+          (lib.mapAttrs (name: { config, ... }: config.system.build.toplevel)
+            nixosConfigurations);
+
+        darwinConfigurations =
+          (lib.mapAttrs (name: { config, ... }: config.system.build.toplevel)
+            darwinConfigurations);
+
+        homeConfigurations =
+          (lib.mapAttrs (name: { activation-script, ... }: activation-script)
+            homeConfigurations);
+      };
     };
 }

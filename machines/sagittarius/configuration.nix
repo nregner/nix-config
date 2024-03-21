@@ -5,6 +5,7 @@
     ../../modules/nixos/server/home-manager.nix
     ./hardware-configuration.nix
     ./gitea.nix
+    ./hydra.nix
     ./k8s.nix
     ./mealie.nix
     ./networking.nix

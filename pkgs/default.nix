@@ -2,6 +2,9 @@
 # You can build them using 'nix build .#example' or (legacy) 'nix-build -A example'
 
 { inputs, pkgs }: {
+  inherit (inputs.nix-fast-build.outputs.packages.${pkgs.system})
+    nix-fast-build;
+
   gitea-github-mirror = pkgs.unstable.callPackage ./gitea-github-mirror { };
 
   route53-ddns = pkgs.unstable.callPackage ./route53-ddns { };

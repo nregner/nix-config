@@ -2,7 +2,6 @@
   imports = [
     ../../modules/home-manager/desktop
     ../../modules/home-manager/desktop/gnome
-    ../../terraform/tailscale
   ];
 
   home = {
@@ -44,6 +43,7 @@
     nix-prefetch
     nixfmt
     nix-du # nix-du -s=500MB | xdot -
+    hydra-cli
     pkgs.xdot-darwin
 
     # rc

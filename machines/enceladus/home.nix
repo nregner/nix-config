@@ -2,7 +2,6 @@
   imports = [
     ../../modules/home-manager/desktop
     ../../modules/home-manager/desktop/jetbrains
-    ../../terraform/tailscale
     inputs.mac-app-util.homeManagerModules.default
   ];
 
