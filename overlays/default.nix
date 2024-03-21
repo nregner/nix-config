@@ -1,19 +1,18 @@
-# This file defines overlays
-{ inputs, ... }: {
-  # This one brings our custom packages from the 'pkgs' directory
+{ inputs, ... }: rec {
   additions = final: _prev:
     import ../pkgs {
       inherit inputs;
       pkgs = final;
     };
 
-  # This one contains whatever you want to overlay
-  # You can change versions, add patches, set compilation flags, anything really.
-  # https://nixos.wiki/wiki/Overlays
   modifications = final: prev: {
-    # example = prev.example.overrideAttrs (oldAttrs: rec {
-    # ...
-    # });
+    super-slicer-latest = prev.super-slicer-latest.overrideAttrs (oldAttrs: {
+      # https://bugs.gentoo.org/924105
+      patches = oldAttrs.patches ++ [
+        ./super-slicer-latest/fix-MeshBoolean-const.patch
+        ./super-slicer-latest/superslicer-2.5.59.8-boost-replace-load-string-file.patch
+      ];
+    });
 
     # FIXME: hack to bypass "FATAL: Module ahci not found" error
     # https://github.com/NixOS/nixpkgs/issues/154163#issuecomment-1350599022
@@ -21,12 +20,11 @@
       prev.makeModulesClosure (x // { allowMissing = true; });
   };
 
-  # When applied, the unstable nixpkgs set (declared in the flake inputs) will
-  # be accessible through 'pkgs.unstable'
   unstable-packages = final: _prev: {
     unstable = import inputs.nixpkgs-unstable {
       system = final.system;
       config.allowUnfree = true;
+      overlays = [ modifications ];
     };
   };
 }
