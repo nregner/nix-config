@@ -43,19 +43,20 @@ data "aws_iam_policy_document" "nix_acme" {
     effect    = "Allow"
     actions   = ["route53:ChangeResourceRecordSets"]
     resources = [var.hosted_zone.arn]
-    condition {
-      test     = "ForAllValues:StringEquals"
-      variable = "route53:ChangeResourceRecordSetsNormalizedRecordNames"
-      values = [
-        "_acme-challenge.${var.hosted_zone.name}",
-        "_acme-challenge._.${var.hosted_zone.name}"
-      ]
-    }
-    condition {
-      test     = "ForAllValues:StringEquals"
-      variable = "route53:ChangeResourceRecordSetsRecordTypes"
-      values   = ["TXT"]
-    }
+    # FIXME
+    # condition {
+    #   test     = "ForAllValues:StringEquals"
+    #   variable = "route53:ChangeResourceRecordSetsNormalizedRecordNames"
+    #   values = [
+    #     "_acme-challenge.${var.hosted_zone.name}",
+    #     "_acme-challenge._.${var.hosted_zone.name}"
+    #   ]
+    # }
+    # condition {
+    #   test     = "ForAllValues:StringEquals"
+    #   variable = "route53:ChangeResourceRecordSetsRecordTypes"
+    #   values   = ["TXT"]
+    # }
   }
 }
 
