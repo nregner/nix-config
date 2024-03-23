@@ -19,6 +19,15 @@
       alias = {
         difft = "difftool";
         dlog = "!f() { GIT_EXTERNAL_DIFF=difft git log -p --ext-diff; }; f";
+        # https://github.com/orgs/community/discussions/9632#discussioncomment-4702442
+        diff-refactor = ''
+          -c color.diff.oldMoved='white dim'
+          -c color.diff.oldMovedAlternative='white dim'
+          -c color.diff.newMoved='white dim'
+          -c color.diff.newMovedAlternative='white dim'
+          -c color.diff.newMovedDimmed='white dim'
+          -c color.diff.newMovedAlternativeDimmed='white dim'
+          diff --ignore-blank-lines --color-moved=dimmed-zebra --color-moved-ws=ignore-all-space --minimal'';
       };
       include = { path = "${config.xdg.configHome}/git/local"; };
     };
