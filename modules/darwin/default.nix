@@ -6,6 +6,11 @@
     coreutils-full
   ];
 
+  nix.settings = {
+    # https://github.com/NixOS/nix/issues/7273
+    auto-optimise-store = lib.mkForce false;
+  };
+
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
   # nix.package = pkgs.nix;
