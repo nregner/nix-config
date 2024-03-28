@@ -13,6 +13,7 @@
     ../nixos/desktop/nix.nix
     ./hydra-builder.nix
     ./nix.nix
+    ./preferences.nix
   ];
 
   nix = {
@@ -21,6 +22,11 @@
     settings = {
       # https://github.com/NixOS/nix/issues/7273
       auto-optimise-store = lib.mkForce false;
+    };
+    gc = {
+      automatic = true;
+      options = "--delete-older-than 7d";
+      user = "root";
     };
   };
 
