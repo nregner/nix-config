@@ -25,15 +25,7 @@
 
       # formatters/linters
       codespell
-      nodePackages_latest.prettier
-      (prettierd.overrideAttrs {
-        src = fetchFromGitHub {
-          owner = "fsouza";
-          repo = "prettierd";
-          rev = "0d077fe55711bba2c6c6756a953cf04e5acce86c";
-          hash = "sha256-EQHnQo8NQLP1+2QmtmeV4t/b1yFmrwC6Fdoe69/QEAE=";
-        };
-      })
+      prettierd
       stylua
       pkgs.joker
 
