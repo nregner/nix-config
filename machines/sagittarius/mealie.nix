@@ -3,7 +3,8 @@
 
   services.mealie-nightly = {
     enable = true;
-    package = inputs.mealie.packages.${pkgs.stdenv.hostPlatform.system}.mealie;
+    package =
+      inputs.mealie.packages.${pkgs.stdenv.hostPlatform.system}.mealie-nightly;
   };
 
   nginx.subdomain.mealie = {

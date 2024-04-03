@@ -6,14 +6,6 @@
     };
 
   modifications = final: prev: {
-    super-slicer-latest = prev.super-slicer-latest.overrideAttrs (oldAttrs: {
-      # https://bugs.gentoo.org/924105
-      patches = oldAttrs.patches ++ [
-        ./super-slicer-latest/fix-MeshBoolean-const.patch
-        ./super-slicer-latest/superslicer-2.5.59.8-boost-replace-load-string-file.patch
-      ];
-    });
-
     # FIXME: hack to bypass "FATAL: Module ahci not found" error
     # https://github.com/NixOS/nixpkgs/issues/154163#issuecomment-1350599022
     makeModulesClosure = x:
