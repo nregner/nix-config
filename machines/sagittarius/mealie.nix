@@ -16,4 +16,11 @@
     paths = [ config.services.mealie-nightly.stateDir ];
     restic = { s3 = { }; };
   };
+
+  # nix.settings = {
+  #   substituters = [ "https://nathanregner-mealie-nix.cachix.org" ];
+  #   trusted-public-keys = [
+  #     "nathanregner-mealie-nix.cachix.org-1:Ir3Z9UXjCcKwULpHZ8BveGbg7Az7edKLs4RPlrM1USM="
+  #   ];
+  # };
 }

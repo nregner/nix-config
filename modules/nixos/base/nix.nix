@@ -11,16 +11,11 @@
       experimental-features = [ "nix-command" "flakes" "repl-flake" ];
       trusted-users = [ "@wheel" "nregner" ];
 
-      substituters = [
-        "http://sagittarius:8000?priority=99&trusted=1"
-        "https://nathanregner-mealie-nix.cachix.org"
-      ];
+      substituters = [ "http://sagittarius:8000?priority=99&trusted=1" ];
       connect-timeout = 5;
 
-      trusted-public-keys = [
-        "default:h0V4pJnSGtvqgGKLO3KF0VJ0iOaiVBfa4OjmnnR2ob8="
-        "nathanregner-mealie-nix.cachix.org-1:Ir3Z9UXjCcKwULpHZ8BveGbg7Az7edKLs4RPlrM1USM="
-      ];
+      trusted-public-keys =
+        [ "default:h0V4pJnSGtvqgGKLO3KF0VJ0iOaiVBfa4OjmnnR2ob8=" ];
     };
   };
 
