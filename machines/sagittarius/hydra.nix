@@ -46,6 +46,10 @@
       "/etc/nix/machines"
       # "/etc/nix/hydra-machines"
     ];
+    extraConfig = ''
+      evaluator_workers = 10
+      max_output_size = ${toString (4 * 1024 * 1024 * 1024)}
+    '';
   };
 
   # FIXME
