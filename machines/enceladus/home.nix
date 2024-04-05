@@ -1,4 +1,4 @@
-{ inputs, lib, pkgs, ... }: {
+{ inputs, config, lib, pkgs, ... }: {
   imports = [
     ../../modules/home-manager/desktop
     ../../modules/home-manager/desktop/jetbrains
@@ -34,6 +34,11 @@
     pkgs.xdot-darwin
     nixos-rebuild
   ];
+
+  programs.tmux-sessionizer = {
+    # fix permission denied errors trying to read /Volumes/dev
+    excluded_dirs = [ ".Trashes" ".fseventsd" ".Spotlight-V100" ".pnpm-store" ];
+  };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "23.05";

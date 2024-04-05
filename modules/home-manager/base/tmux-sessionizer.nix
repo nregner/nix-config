@@ -10,14 +10,22 @@ let
 in {
   options.programs.tmux-sessionizer = {
     enable = lib.mkEnableOption "Enable tmux-sessionizer";
-    settings = lib.mkOption {
-      type = tomlFormat.type;
+
+    session_sort_order = lib.mkOption {
+      type = lib.types.str;
+      default = "LastAttached";
+    };
+
+    excluded_dirs = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [ ];
+    };
+
+    search_dirs = lib.mkOption {
+      type = lib.types.attrsOf tomlFormat.type;
       default = {
-        session_sort_order = "LastAttached";
-        search_dirs = [{
-          path = "${config.home.homeDirectory}/dev";
-          depth = 2;
-        }];
+        "${config.home.homeDirectory}/dev" = { depth = 2; };
+        "${config.home.homeDirectory}/nix-config" = { depth = 2; };
       };
     };
   };
@@ -25,6 +33,10 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = [ pkgs.unstable.tmux-sessionizer ];
     home.file."${configDir}/tms/config.toml".source =
-      tomlFormat.generate "tms-config" cfg.settings;
+      tomlFormat.generate "tms-config" {
+        inherit (cfg) excluded_dirs session_sort_order;
+        search_dirs = lib.mapAttrsToList (path: cfg: cfg // { inherit path; })
+          cfg.search_dirs;
+      };
   };
 }
