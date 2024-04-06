@@ -15,6 +15,7 @@
       # language servers
       clojure-lsp
       gopls
+      libclang # clangd
       lua-language-server
       nil
       nodePackages_latest.graphql-language-service-cli

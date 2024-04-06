@@ -179,6 +179,7 @@ require("lazy").setup({
       end
 
       local servers = {
+        clangd = {},
         clojure_lsp = {},
         eslint = {},
         gopls = {},
@@ -236,6 +237,7 @@ require("lazy").setup({
     "stevearc/conform.nvim",
     opts = {
       formatters_by_ft = {
+        cpp = { "clang_format" },
         clojure = { "joker" },
         css = { "prettier", "prettierd" },
         gitcommit = { "prettier", "injected" }, -- FIXME: prettierd erroring out
