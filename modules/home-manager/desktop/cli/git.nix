@@ -30,6 +30,8 @@
           diff --ignore-blank-lines --color-moved=dimmed-zebra --color-moved-ws=ignore-all-space --minimal'';
       };
       include = { path = "${config.xdg.configHome}/git/local"; };
+      rebase.updateRefs = true;
+      pull.rebase = true;
     };
   };
 
