@@ -51,6 +51,8 @@
       lib.attrValues self.globals.ssh.allKeys;
   };
 
+  nregner.hydra-builder.enable = true;
+
   services.tailscale = {
     enable = true;
     package = pkgs.unstable.tailscale;

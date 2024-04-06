@@ -26,6 +26,6 @@ resource "hydra_project" "nix-config" {
   declarative {
     file  = ".hydra/spec.json"
     type  = "git"
-    value = "https://github.com/nathanregner/nix-config.git hydra"
+    value = "https://github.com/nregner/nix-config.git hydra"
   }
 }

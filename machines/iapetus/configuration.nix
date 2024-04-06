@@ -56,6 +56,8 @@
     motherboard = "amd";
   };
 
+  nregner.hydra-builder.enable = true;
+
   zramSwap.enable = true;
 
   # https://nixos.wiki/wiki/CCache#Derivation_CCache_2

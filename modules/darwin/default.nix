@@ -1,5 +1,5 @@
 { self, pkgs, ... }: {
-  imports = [ ./nix.nix ];
+  imports = [ ./nix.nix ./hydra-builder.nix ];
 
   environment.systemPackages = with pkgs.unstable; [
     util-linux

@@ -120,16 +120,16 @@ in {
     };
 
     environment.etc."ssh/ssh_config.d/100-linux-builder.conf".text = ''
-      Host m3-linux-builder
+      Host enceladus-linux-vm
         Hostname localhost
-        HostKeyAlias m3-linux-builder
+        HostKeyAlias enceladus-linux-vm
         Port 31022
     '';
 
     nix.distributedBuilds = true;
 
     nix.buildMachines = [{
-      hostName = "m3-linux-builder";
+      hostName = "enceladus-linux-vm";
       sshUser = "builder";
       sshKey = "/etc/nix/builder_ed25519";
       system = "${stdenv.hostPlatform.uname.processor}-linux";

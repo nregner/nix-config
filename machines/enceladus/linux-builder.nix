@@ -6,7 +6,7 @@
     diskSize = lib.mkForce (64 * 1024);
   };
 
-  networking.hostName = "m3-linux-builder-vm";
+  networking.hostName = "enceladus-linux-vm";
   # FIXME: Have to manually run /run/current-system/activate to get secrets to show up...
   sops.defaultSopsFile = null;
 

@@ -42,14 +42,14 @@ resource "tailscale_acl" "acl" {
       {
         action = "accept"
         src    = ["group:admin", "tag:admin"]
-        dst    = ["tag:server", "tag:server", "tag:admin"]
+        dst    = ["tag:builder", "tag:server", "tag:admin"]
         users  = ["autogroup:nonroot", "root"]
       },
       {
         action = "accept"
         src    = ["tag:hydra"]
         dst    = ["tag:builder"]
-        users  = ["autogroup:nonroot"]
+        users  = ["autogroup:nonroot", "root"]
       },
     ]
   })

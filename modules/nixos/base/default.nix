@@ -2,6 +2,7 @@
   imports = [
     inputs.nixos-generators.nixosModules.all-formats
     ./backups.nix
+    ./hydra-builder.nix
     ./networking.nix
     ./nix.nix
     ./sops.nix

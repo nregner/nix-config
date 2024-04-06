@@ -1,0 +1,54 @@
+From 6958fb210e085adbcf1c1491b4ddb0436ebed2c5 Mon Sep 17 00:00:00 2001
+From: Nathan Regner <nathanregner@gmail.com>
+Date: Sat, 6 Apr 2024 11:34:44 -0600
+Subject: [PATCH] Add always_supported_system_types option
+
+Don't abort jobs for machines that may not be online
+---
+ src/hydra-queue-runner/dispatcher.cc         | 4 ++++
+ src/hydra-queue-runner/hydra-queue-runner.cc | 1 +
+ src/hydra-queue-runner/state.hh              | 1 +
+ 3 files changed, 6 insertions(+)
+
+diff --git a/src/hydra-queue-runner/dispatcher.cc b/src/hydra-queue-runner/dispatcher.cc
+index 6d738ded..ce879d33 100644
+--- a/src/hydra-queue-runner/dispatcher.cc
++++ b/src/hydra-queue-runner/dispatcher.cc
+@@ -345,6 +345,10 @@ void State::abortUnsupported()
+ 
+         bool supported = false;
+         for (auto & machine : machines2) {
++            if (alwaysSupportedSystemTypes.count(step->drv->platform)) {
++                supported = true;
++                break;
++            }
+             if (machine.second->supportsStep(step)) {
+                 step->state.lock()->lastSupported = now;
+                 supported = true;
+diff --git a/src/hydra-queue-runner/hydra-queue-runner.cc b/src/hydra-queue-runner/hydra-queue-runner.cc
+index 5ffa7fe6..a96cba27 100644
+--- a/src/hydra-queue-runner/hydra-queue-runner.cc
++++ b/src/hydra-queue-runner/hydra-queue-runner.cc
+@@ -853,6 +853,7 @@ void State::run(BuildID buildOne)
+     _destStore = storeUri == "" ? localStore : openStore(storeUri);
+ 
+     useSubstitutes = config->getBoolOption("use-substitutes", false);
++    alwaysSupportedSystemTypes = tokenizeString<StringSet>(config->getStrOption("always_supported_system_types", ""), ",");
+ 
+     // FIXME: hacky mechanism for configuring determinism checks.
+     for (auto & s : tokenizeString<Strings>(config->getStrOption("xxx-jobset-repeats"))) {
+diff --git a/src/hydra-queue-runner/state.hh b/src/hydra-queue-runner/state.hh
+index 5d242cdf..1d65ada8 100644
+--- a/src/hydra-queue-runner/state.hh
++++ b/src/hydra-queue-runner/state.hh
+@@ -328,6 +328,7 @@ private:
+     nix::Path hydraData, logDir;
+ 
+     bool useSubstitutes = false;
++    std::set<std::string> alwaysSupportedSystemTypes;
+ 
+     /* The queued builds. */
+     typedef std::map<BuildID, Build::ptr> Builds;
+-- 
+2.40.1
+
