@@ -662,10 +662,21 @@ require("lazy").setup({
     -- Highlight, edit, and navigate code
     "nvim-treesitter/nvim-treesitter",
     dependencies = {
+      "nvim-treesitter/nvim-treesitter-context",
       "nvim-treesitter/nvim-treesitter-textobjects",
       "nushell/tree-sitter-nu",
     },
     build = ":TSUpdate",
+    keys = {
+      {
+        "[C",
+        function()
+          require("treesitter-context").go_to_context(vim.v.count1)
+        end,
+        silent = true,
+      },
+    },
+    lazy = false,
     opts = {
       auto_install = true,
       highlight = { enable = true },
@@ -724,6 +735,7 @@ require("lazy").setup({
     },
     config = function(_, opts)
       require("nvim-treesitter.configs").setup(opts)
+      require("treesitter-context").setup()
 
       -- There are additional nvim-treesitter modules that you can use to interact
       -- with nvim-treesitter. You should go explore a few and see what interests you:
