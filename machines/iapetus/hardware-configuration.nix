@@ -71,6 +71,12 @@
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
+    # Override broken nvidia config which depends on 32 bit `pkgsi686Linux.nvidia-vaapi-driver`
+    # for `opengl.driSupport32Bit` which is enabled by the steam config.
+    # https://github.com/NixOS/nixpkgs/blob/6d6682772b62652b5019ffd7572cea1f39b72b20/nixos/modules/hardware/video/nvidia.nix#L395C45-L395C45
+    # https://github.com/skykanin/dotfiles/commit/a6c71c022efb8e4ec404f8718edd9661b850876f
+    extraPackages32 =
+      pkgs.lib.mkForce [ pkgs.linuxPackages_latest.nvidia_x11.lib32 ];
   };
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
