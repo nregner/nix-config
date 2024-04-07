@@ -185,11 +185,12 @@
             extraSpecialArgs = { inherit inputs outputs; };
             modules = [ ./machines/callisto/home.nix ];
           };
-        "nregner" = home-manager-unstable.lib.homeManagerConfiguration {
-          pkgs = nixpkgs-unstable.legacyPackages.aarch64-darwin;
-          extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ ./machines/enceladus/home.nix ];
-        };
+        "nregner@enceladus" =
+          home-manager-unstable.lib.homeManagerConfiguration {
+            pkgs = nixpkgs-unstable.legacyPackages.aarch64-darwin;
+            extraSpecialArgs = { inherit inputs outputs; };
+            modules = [ ./machines/enceladus/home.nix ];
+          };
       };
 
       images = lib.mapAttrs (name: nixosConfiguration:
