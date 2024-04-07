@@ -226,6 +226,18 @@
         }) nixosConfigurations;
 
       hydraJobs = {
+        flakeInputs = let
+          pkgs = inputs.nixpkgs-unstable.legacyPackages.x86_64-linux;
+          recurse = (parent: inputs:
+            (lib.mapAttrsToList (name: input: {
+              name = "${parent}${name}";
+              path = input.outPath;
+            }) inputs) ++ (builtins.concatLists (builtins.attrValues
+              (builtins.mapAttrs
+                (name: input: recurse "${parent}${name}." input.inputs or { })
+                inputs))));
+        in pkgs.linkFarm "flake-inputs" (lib.unique (recurse "" inputs));
+
         nixosConfigurations =
           (lib.mapAttrs (name: { config, ... }: config.system.build.toplevel)
             nixosConfigurations);
