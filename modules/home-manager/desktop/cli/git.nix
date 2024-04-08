@@ -37,21 +37,30 @@
 
   home.packages = with pkgs.unstable; [ difftastic ];
 
-  programs.lazygit = {
+  programs.lazygit = rec {
     enable = true;
-    package = pkgs.unstable.lazygit.override {
-      buildGoModule = args:
-        pkgs.unstable.buildGoModule (args // {
-          src = inputs.lazygit;
-          version = inputs.lazygit.rev;
-        });
-    };
+    # https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md#overriding-default-config-file-location
+    package = pkgs.unstable.callPackage
+      ({ runCommand, makeWrapper, lazygit, formats, remarshal, jq, ... }:
+        let
+          yamlFormat = formats.yaml { };
+          settingsFile = yamlFormat.generate "lazygit.yaml" settings;
+          theme = runCommand "lazygit-theme" {
+            nativeBuildInputs = [ jq remarshal ];
+          } ''
+            remarshal -i "${inputs.catppuccin-lazygit}/themes/mocha/blue.yml" -of json \
+              | jq '{"gui": .}' \
+              >$out
+          '';
+        in runCommand "lazygit-wrapper" {
+          nativeBuildInputs = [ makeWrapper ];
+        } ''
+          makeWrapper ${lazygit}/bin/lazygit $out/bin/lazygit \
+            --add-flags '--use-config-file="${theme},${settingsFile}"'
+        '') { };
     # https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
     settings = {
-      gui = (config.lib.formats.fromYAML
-        "${inputs.catppuccin-lazygit}/themes/mocha/blue.yml") // {
-          nerdFontsVersion = "3";
-        };
+      gui = { nerdFontsVersion = "3"; };
 
       keybinding = {
         universal = {

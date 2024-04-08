@@ -34,10 +34,6 @@
       url = "github:candid82/joker";
       flake = false;
     };
-    lazygit = {
-      url = "github:jesseduffield/lazygit";
-      flake = false;
-    };
     hydra-sentinel = {
       url = "git+ssh://git@github.com/nathanregner/hydra-sentinel";
       inputs.nixpkgs.follows = "nixpkgs-unstable";

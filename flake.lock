@@ -302,22 +302,6 @@
         "type": "github"
       }
     },
-    "lazygit": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1712404191,
-        "narHash": "sha256-SiaLv9ijipGrnyChcWqzCvN5cNYguAXg+lHHt/2DANk=",
-        "owner": "jesseduffield",
-        "repo": "lazygit",
-        "rev": "c02408bba0755f88d5d94ed624958edf0fb3199a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "jesseduffield",
-        "repo": "lazygit",
-        "type": "github"
-      }
-    },
     "linux-orangepi-zero2-armbian-6_6_y": {
       "flake": false,
       "locked": {
@@ -691,7 +675,6 @@
         "hydra-sentinel": "hydra-sentinel",
         "joker": "joker",
         "kamp": "kamp",
-        "lazygit": "lazygit",
         "linux-rockchip": "linux-rockchip",
         "mac-app-util": "mac-app-util",
         "mealie": "mealie",
