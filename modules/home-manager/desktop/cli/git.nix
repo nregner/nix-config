@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, lib, ... }: {
+{ config, pkgs, lib, ... }: {
   programs.git = {
     enable = true;
     userName = "Nathan Regner";
@@ -6,6 +6,9 @@
     lfs.enable = true;
     extraConfig = {
       push = { autoSetupRemote = true; };
+      pull.rebase = true;
+      rebase.updateRefs = true;
+      rebase.autostash = true;
       diff = {
         # use difftastic as difftool: https://difftastic.wilfred.me.uk/git.html
         tool = lib.mkDefault "difftastic";
@@ -30,8 +33,6 @@
           diff --ignore-blank-lines --color-moved=dimmed-zebra --color-moved-ws=ignore-all-space --minimal'';
       };
       include = { path = "${config.xdg.configHome}/git/local"; };
-      rebase.updateRefs = true;
-      pull.rebase = true;
     };
   };
 
