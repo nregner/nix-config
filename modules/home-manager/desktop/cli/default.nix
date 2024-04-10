@@ -3,6 +3,7 @@
     #
     ./git.nix
     ./k9s.nix
+    ./lazygit.nix
     ./nix.nix
   ];
 
