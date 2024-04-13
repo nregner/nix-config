@@ -56,19 +56,8 @@
       inputs.nixpkgs-stable.follows = "nixpkgs";
     };
 
-    # Themes
-    catppuccin-alacritty = {
-      url = "github:catppuccin/alacritty";
-      flake = false;
-    };
-    catppuccin-k9s = {
-      url = "github:catppuccin/k9s";
-      flake = false;
-    };
-    catppuccin-lazygit = {
-      url = "github:catppuccin/lazygit";
-      flake = false;
-    };
+    # Desktop
+    catppuccin-nix.url = "github:catppuccin/nix";
 
     # 3d printing
     kamp = {
@@ -100,6 +89,7 @@
         "aarch64-darwin"
         "x86_64-darwin"
       ];
+      mkSources = import ./lib/mkSources.nix inputs;
     in rec {
       globals = import ./globals.nix { inherit lib; };
 
@@ -134,36 +124,38 @@
         # Desktop
         iapetus = lib.nixosSystem {
           specialArgs = { inherit self inputs outputs; };
-          modules = [ ./machines/iapetus/configuration.nix ];
+          modules = mkSources ./machines/iapetus/configuration.nix;
           system = "x86_64-linux";
         };
 
         # GE73VR Laptop
         callisto = lib.nixosSystem {
           specialArgs = { inherit self inputs outputs; };
-          modules = [ ./machines/callisto/configuration.nix ];
+          modules = mkSources ./machines/callisto/configuration.nix;
           system = "x86_64-linux";
         };
 
         # Server
         sagittarius = lib.nixosSystem {
           specialArgs = { inherit self inputs outputs; };
-          modules = [ ./machines/sagittarius/configuration.nix ];
+          modules = mkSources ./machines/sagittarius/configuration.nix;
           system = "x86_64-linux";
         };
 
         # Voron 2.4r2 Klipper machine
         voron = lib.nixosSystem {
           specialArgs = { inherit self inputs outputs; };
-          modules = [ ./machines/voron/configuration.nix ];
+          modules = mkSources ./machines/voron/configuration.nix;
           system = "aarch64-linux";
         };
-      } // (import ./machines/print-farm { inherit self inputs outputs; });
+      } // (import ./machines/print-farm {
+        inherit self inputs outputs mkSources;
+      });
 
       darwinConfigurations = {
         "enceladus" = nix-darwin.lib.darwinSystem {
           specialArgs = { inherit self inputs outputs; };
-          modules = [ ./machines/enceladus/configuration.nix ];
+          modules = mkSources ./machines/enceladus/configuration.nix;
         };
       };
 
@@ -172,20 +164,20 @@
       homeConfigurations = {
         "nregner@iapetus" = home-manager-unstable.lib.homeManagerConfiguration {
           pkgs = nixpkgs-unstable.legacyPackages.x86_64-linux;
-          extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ ./machines/iapetus/home.nix ];
+          extraSpecialArgs = { inherit self inputs outputs; };
+          modules = mkSources ./machines/iapetus/home.nix;
         };
         "nregner@callisto" =
           home-manager-unstable.lib.homeManagerConfiguration {
             pkgs = nixpkgs-unstable.legacyPackages.x86_64-linux;
-            extraSpecialArgs = { inherit inputs outputs; };
-            modules = [ ./machines/callisto/home.nix ];
+            extraSpecialArgs = { inherit self inputs outputs; };
+            modules = mkSources ./machines/callisto/home.nix;
           };
         "nregner@enceladus" =
           home-manager-unstable.lib.homeManagerConfiguration {
             pkgs = nixpkgs-unstable.legacyPackages.aarch64-darwin;
-            extraSpecialArgs = { inherit inputs outputs; };
-            modules = [ ./machines/enceladus/home.nix ];
+            extraSpecialArgs = { inherit self inputs outputs; };
+            modules = mkSources ./machines/enceladus/home.nix;
           };
       };
 

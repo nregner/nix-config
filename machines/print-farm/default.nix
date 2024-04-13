@@ -1,4 +1,4 @@
-{ self, inputs, outputs }:
+{ self, inputs, outputs, mkSources }:
 let
   inherit (inputs) nixpkgs;
   inherit (nixpkgs) lib;
@@ -6,8 +6,8 @@ let
     lib.genAttrs hostnames (hostname:
       lib.nixosSystem {
         specialArgs = { inherit self inputs outputs; };
-        modules = [ ./configuration.nix { networking.hostName = hostname; } ]
-          ++ modules;
+        modules = (mkSources ./configuration.nix)
+          ++ [{ networking.hostName = hostname; }] ++ modules;
         system = "aarch64-linux";
       });
 in (nodes {

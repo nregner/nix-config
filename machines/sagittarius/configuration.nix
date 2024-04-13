@@ -1,6 +1,5 @@
-{ inputs, lib, pkgs, ... }: {
+{ lib, pkgs, ... }: {
   imports = [
-    inputs.nixos-generators.nixosModules.all-formats
     ../../modules/nixos/server/default.nix
     ../../modules/nixos/server/home-manager.nix
     ./hardware-configuration.nix

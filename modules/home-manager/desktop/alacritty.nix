@@ -1,9 +1,9 @@
-{ inputs, pkgs, lib, ... }: {
+{ pkgs, lib, ... }: {
   programs.alacritty = {
     enable = true;
     package = pkgs.unstable.alacritty;
+    catppuccin.enable = true;
     settings = {
-      import = [ "${inputs.catppuccin-alacritty}/catppuccin-mocha.toml" ];
       selection = { save_to_clipboard = true; };
       window = { dynamic_padding = true; };
       font = {

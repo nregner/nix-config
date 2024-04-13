@@ -1,6 +1,7 @@
 { self, inputs, pkgs, ... }: {
   imports = [
     inputs.nixos-generators.nixosModules.all-formats
+    inputs.catppuccin-nix.nixosModules.catppuccin
     ./backups.nix
     ./hydra-builder.nix
     ./networking.nix
@@ -9,6 +10,9 @@
     ./tailscale.nix
     ./users.nix
   ];
+
+  # theme
+  catppuccin.flavour = "mocha";
 
   nix.gc = {
     automatic = true;
