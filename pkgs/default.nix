@@ -1,7 +1,7 @@
-# Custom packages, that can be defined similarly to ones from nixpkgs
-# You can build them using 'nix build .#example' or (legacy) 'nix-build -A example'
+{ inputs, pkgs }:
+let sources = pkgs.callPackage ../_sources/generated.nix { };
+in {
 
-{ inputs, pkgs }: {
   inherit (inputs.nix-fast-build.outputs.packages.${pkgs.system})
     nix-fast-build;
 
@@ -55,10 +55,7 @@
 
   insync = pkgs.unstable.callPackage ./insync.nix { };
 
-  joker = pkgs.unstable.buildGoModule ({
-    pname = "joker";
-    src = inputs.joker;
-    version = inputs.joker.rev;
+  joker = pkgs.unstable.buildGoModule (sources.joker // {
     vendorHash = "sha256-k17BthjOjZs0WB88AVVIM00HcSZl2S5u8n9eB2NFdrk=";
     preBuild = ''
       go generate ./...

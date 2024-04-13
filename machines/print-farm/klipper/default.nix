@@ -1,4 +1,4 @@
-{ inputs, config, lib, pkgs, ... }:
+{ sources, config, lib, pkgs, ... }:
 let cfg = config.print-farm.klipper;
 in {
   options.print-farm.klipper = {
@@ -36,7 +36,7 @@ in {
     };
 
     environment.etc = {
-      "klipper/KAMP".source = "${inputs.kamp}/Configuration";
+      "klipper/KAMP".source = "${sources.kamp.src}/Configuration";
       "klipper/adxl.cfg".source = ./adxl.cfg;
       "klipper/printer.cfg".source = pkgs.writeText "printer.immutable.cfg" ''
         [include ${cfg.configFile}]

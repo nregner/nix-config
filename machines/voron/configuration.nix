@@ -1,4 +1,4 @@
-{ inputs, modulesPath, config, lib, pkgs, ... }: {
+{ sources, modulesPath, config, lib, pkgs, ... }: {
   imports = [
     "${modulesPath}/installer/sd-card/sd-image-aarch64.nix"
     "${modulesPath}/profiles/minimal.nix"
@@ -16,7 +16,7 @@
 
   boot = {
     kernelPackages = pkgs.linuxPackagesFor
-      (pkgs.callPackage ./kernel { src = inputs.linux-rockchip; });
+      (pkgs.callPackage ./kernel { inherit (sources.linux-rockchip) src; });
 
     supportedFilesystems = lib.mkForce [ "vfat" "fat32" "exfat" "ext4" ];
 

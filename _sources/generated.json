@@ -1,0 +1,62 @@
+{
+    "joker": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "joker",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "candid82",
+            "repo": "joker",
+            "rev": "v1.3.5",
+            "sha256": "sha256-aBZ0KlXWKAF70xFxc+WWXucLPnxyaCxu97IYkPuKcCA=",
+            "type": "github"
+        },
+        "version": "v1.3.5"
+    },
+    "kamp": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "kamp",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "kyleisah",
+            "repo": "Klipper-Adaptive-Meshing-Purging",
+            "rev": "v1.1.2",
+            "sha256": "sha256-anBGjLtYlyrxeNVy1TEMcAGTVUFrGClLuoJZuo3xlDM=",
+            "type": "github"
+        },
+        "version": "v1.1.2"
+    },
+    "linux-rockchip": {
+        "cargoLocks": null,
+        "date": "2024-04-06",
+        "extract": null,
+        "name": "linux-rockchip",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "armbian",
+            "repo": "linux-rockchip",
+            "rev": "3229486f5d77df39e2ef5bf954f3e263240ea01e",
+            "sha256": "sha256-tZxlgvgG2OcJXzQ2lefULMFnuIVBv2IiaWQ0B4+hSkE=",
+            "type": "github"
+        },
+        "version": "3229486f5d77df39e2ef5bf954f3e263240ea01e"
+    }
+}

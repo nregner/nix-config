@@ -1,4 +1,4 @@
-{ inputs, lib, pkgs, ... }: {
+{ sources, inputs, lib, pkgs, ... }: {
   services.klipper = {
     enable = true;
     package = pkgs.unstable.klipper;
@@ -11,7 +11,7 @@
   };
 
   environment.etc = {
-    "klipper/KAMP".source = "${inputs.kamp}/Configuration";
+    "klipper/KAMP".source = "${sources.kamp.src}/Configuration";
     "klipper/printer.cfg".source = pkgs.writeText "printer.immutable.cfg" ''
       [include ${./printer.cfg}]
       [include ${./kamp.cfg}]

@@ -30,10 +30,6 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    joker = {
-      url = "github:candid82/joker";
-      flake = false;
-    };
     hydra-sentinel = {
       url = "git+ssh://git@github.com/nathanregner/hydra-sentinel";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -60,14 +56,6 @@
     catppuccin-nix.url = "github:catppuccin/nix";
 
     # 3d printing
-    kamp = {
-      url = "github:kyleisah/Klipper-Adaptive-Meshing-Purging";
-      flake = false;
-    };
-    linux-rockchip = {
-      url = "github:armbian/linux-rockchip/rk-5.10-rkr6";
-      flake = false;
-    };
     orangepi-nix = {
       url = "github:nathanregner/orangepi-nix";
       # inputs.nixpkgs.follows = "nixpkgs";
