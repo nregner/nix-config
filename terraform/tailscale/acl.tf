@@ -32,7 +32,7 @@ resource "tailscale_acl" "acl" {
       },
       {
         action = "accept"
-        src    = ["tag:hydra"]
+        src    = ["group:admin", "tag:admin", "tag:hydra"]
         dst    = ["tag:builder:22"]
       },
     ]
@@ -47,7 +47,7 @@ resource "tailscale_acl" "acl" {
       },
       {
         action = "accept"
-        src    = ["tag:hydra"]
+        src    = ["group:admin", "tag:admin", "tag:hydra"]
         dst    = ["tag:builder"]
         users  = ["autogroup:nonroot", "root"]
       },
