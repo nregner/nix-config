@@ -1,4 +1,4 @@
-{ inputs, config, lib, pkgs, ... }: {
+{ inputs, lib, pkgs, ... }: {
   imports = [
     ../../modules/home-manager/desktop
     ../../modules/home-manager/desktop/jetbrains
