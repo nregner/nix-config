@@ -9,7 +9,9 @@
 
   extraMeta.branch = "5.10";
 
-  allowImportFromDerivation = true;
+  # nix eval .\#nixosConfigurations.voron.config.system.build.kernel.config > machines/voron/kernel/config.nix
+  # allowImportFromDerivation = true;
+  config = import ./config.nix;
 }).overrideAttrs (old: {
   name = "k"; # dodge uboot length limits
   nativeBuildInputs = old.nativeBuildInputs ++ [ ubootTools ];
