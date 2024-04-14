@@ -1,8 +1,7 @@
-extern crate core;
-
 use std::error::Error;
 use std::net::IpAddr;
 
+use aws_config::BehaviorVersion;
 use aws_sdk_route53::operation::list_resource_record_sets::ListResourceRecordSetsOutput;
 use aws_sdk_route53::types::{Change, ChangeAction, ResourceRecord, ResourceRecordSet};
 use aws_sdk_route53::types::{ChangeBatch, RrType};
@@ -44,7 +43,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
     };
     println!("Using IP: {}", ip);
 
-    let config = aws_config::from_env().load().await;
+    let config = aws_config::load_defaults(BehaviorVersion::latest()).await;
     let client = aws_sdk_route53::Client::new(&config);
 
     let updated = Record {
@@ -55,7 +54,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
     };
     let record_sets = list_record_sets(&client, &args.hosted_zone_id, &updated).await?;
 
-    let current = extract_record(&record_sets, &args.domain, RrType::A);
+    let current = extract_record(&record_sets, &args.domain, "A");
 
     if Some(&updated) == current.as_ref() {
         println!("No update required");
@@ -77,12 +76,12 @@ async fn update(
         .name(record.name)
         .r#type(RrType::A)
         .ttl(record.ttl as i64)
-        .resource_records(ResourceRecord::builder().value(record.value).build())
-        .build();
+        .resource_records(ResourceRecord::builder().value(record.value).build()?)
+        .build()?;
     let change = Change::builder()
         .action(ChangeAction::Upsert)
         .resource_record_set(record_set)
-        .build();
+        .build()?;
     let result = client
         .change_resource_record_sets()
         .hosted_zone_id(hosted_zone_id)
@@ -90,7 +89,7 @@ async fn update(
             ChangeBatch::builder()
                 .comment("DDNS Update")
                 .changes(change)
-                .build(),
+                .build()?,
         )
         .send()
         .await?;
@@ -133,19 +132,19 @@ async fn list_record_sets(
 fn extract_record<'a>(
     output: &'a ListResourceRecordSetsOutput,
     name: &str,
-    ty: RrType,
+    ty: &str,
 ) -> Option<Record<'a>> {
-    let [ref records] = output.resource_record_sets.as_ref()?[..] else {
+    let [ref records] = output.resource_record_sets[..] else {
         return None;
     };
     let [ref record] = records.resource_records.as_ref()?[..] else {
         return None;
     };
-    if records.name.as_ref()? == name && records.r#type.as_ref()? == &ty {
+    if records.name == name && records.r#type.as_ref() == ty {
         Some(Record {
-            name: records.name.as_ref()?,
-            ty: records.r#type.clone()?,
-            value: record.value.as_ref()?,
+            name: records.name.as_ref(),
+            ty: records.r#type.clone(),
+            value: record.value.as_ref(),
             ttl: records
                 .ttl
                 .and_then(|ttl| u32::try_from(ttl).ok())
