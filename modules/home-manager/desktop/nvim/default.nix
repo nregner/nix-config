@@ -22,6 +22,7 @@
       nodePackages_latest.volar
       rust-analyzer-unwrapped
       terraform-ls
+      vscode-langservers-extracted
 
       # formatters/linters
       codespell

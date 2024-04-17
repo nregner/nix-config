@@ -178,6 +178,7 @@ require("lazy").setup({
 
       local servers = {
         clojure_lsp = {},
+        eslint = {},
         gopls = {},
         graphql = {},
         html = { filetypes = { "html", "twig", "hbs" } },
