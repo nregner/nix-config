@@ -12,7 +12,7 @@
       "http://127.0.0.1:${toString config.services.mealie-nightly.port}/";
   };
 
-  services.backups.mealie = {
+  services.nregner.backups.mealie = {
     paths = [ config.services.mealie-nightly.stateDir ];
     restic = { s3 = { }; };
   };

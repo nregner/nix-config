@@ -35,9 +35,6 @@
 
   programs.dconf.enable = true;
 
-  time.timeZone = "America/Boise";
-  i18n.defaultLocale = "en_US.UTF-8";
-
   # sound
   sound.enable = true;
   hardware.pulseaudio.enable = false;

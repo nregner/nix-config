@@ -2,9 +2,9 @@
 with lib;
 let
   inherit (utils.systemdUtils.unitOptions) unitOption;
-  cfg = config.services.backups;
+  cfg = config.services.nregner.backups;
 in {
-  options.services.backups = mkOption {
+  options.services.nregner.backups = mkOption {
     default = { };
     type = types.attrsOf (types.submodule ({ config, name, ... }: {
       options = {

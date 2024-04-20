@@ -24,7 +24,6 @@ in (nodes {
       };
       environment.systemPackages =
         [ (pkgs.callPackage ./klipper/firmware { }).flash-sunlu-s8 ];
-      time.timeZone = "America/Boise";
     })
   ];
 })

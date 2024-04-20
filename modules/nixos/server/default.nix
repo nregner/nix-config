@@ -1,9 +1,5 @@
 { lib, ... }: {
-  imports = [
-    ../base
-    ./qbittorrent.nix
-    ./route53-ddns.nix
-    ./tailscaled-autoconnect.nix
-  ];
+  imports = [ ../base ./services ./programs ];
   services.tailscaled-autoconnect.enable = lib.mkDefault true;
+  services.nregner.metrics.enable = lib.mkDefault true;
 }

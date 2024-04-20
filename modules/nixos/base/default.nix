@@ -2,14 +2,16 @@
   imports = [
     inputs.nixos-generators.nixosModules.all-formats
     inputs.catppuccin-nix.nixosModules.catppuccin
-    ./backups.nix
-    ./hydra-builder.nix
+    ./services
     ./networking.nix
     ./nix.nix
     ./sops.nix
     ./tailscale.nix
     ./users.nix
   ];
+
+  time.timeZone = "America/Boise";
+  i18n.defaultLocale = "en_US.UTF-8";
 
   # theme
   catppuccin.flavour = "mocha";

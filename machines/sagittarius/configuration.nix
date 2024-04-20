@@ -1,45 +1,14 @@
-{ lib, pkgs, ... }: {
+{ config, lib, ... }: {
   imports = [
-    ../../modules/nixos/server/default.nix
-    ../../modules/nixos/server/home-manager.nix
+    #
+    ../../modules/nixos/server
     ./hardware-configuration.nix
-    ./gitea.nix
-    ./hydra.nix
-    ./k8s.nix
-    ./mealie.nix
-    ./networking.nix
-    ./nginx.nix
-    ./nix-serve.nix
-    ./qbittorrent.nix
+    ./services
   ];
 
-  nixpkgs.hostPlatform = lib.mkForce "x86_64-linux";
+  networking.hostName = "sagittarius";
 
-  time.timeZone = "America/Boise";
-
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelParams = [ "console=tty0" ];
-  boot.supportedFilesystems =
-    lib.mkForce [ "vfat" "fat32" "exfat" "ext4" "btrfs" ];
-
-  virtualisation.docker = {
-    enable = true;
-    package = pkgs.unstable.docker_24;
-    daemon.settings = {
-      live-restore = false;
-      insecure-registries = [ "http://sagittarius:5000" ];
-    };
-  };
-
-  environment.systemPackages = with pkgs; [ docker-compose ];
-  services.dockerRegistry = {
-    enable = true;
-    listenAddress = "0.0.0.0";
-    port = 5000;
-  };
-
-  sops.defaultSopsFile = ./secrets.yaml;
+  programs.nregner.home-manager.enable = true;
 
   nix.buildMachines = lib.mkForce [{
     protocol = "ssh-ng";
@@ -50,6 +19,17 @@
     maxJobs = 12;
     speedFactor = 2;
   }];
+
+  sops.defaultSopsFile = ./secrets.yaml;
+
+  sops.secrets.ddns.key = "route53/ddns";
+  services.route53-ddns = {
+    enable = true;
+    domain = "nregner.net";
+    ipType = "public";
+    ttl = 900;
+    environmentFile = config.sops.secrets.ddns.path;
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

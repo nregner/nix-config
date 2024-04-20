@@ -1,19 +1,13 @@
-{ config, lib, pkgs, ... }: {
+{ config, pkgs, ... }: {
   imports =
     [ ../../modules/nixos/desktop ./hardware-configuration.nix ./windows-vm ];
 
-  # bootloader
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.supportedFilesystems =
-    lib.mkForce [ "vfat" "fat32" "exfat" "ext4" "btrfs" "ntfs" ];
-
-  # networking
+  # Networking
   networking.hostName = "iapetus";
   networking.networkmanager.enable = true;
   systemd.services.NetworkManager-wait-online.enable = false;
 
-  # desktop environment
+  # Desktop environment
   services.xserver = {
     enable = true;
     videoDrivers = [ "nvidia" ];
@@ -35,10 +29,11 @@
 
   programs.dconf.enable = true;
 
-  time.timeZone = "America/Boise";
-  i18n.defaultLocale = "en_US.UTF-8";
+  # Adds to `environment.pathsToLink` the path: `/share/nautilus-python/extensions`
+  # needed for nautilus Python extensions to work.
+  services.gnome.core-utilities.enable = true;
 
-  # sound
+  # Sound
   sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -56,9 +51,7 @@
     motherboard = "amd";
   };
 
-  nregner.hydra-builder.enable = true;
-
-  zramSwap.enable = true;
+  services.nregner.hydra-builder.enable = true;
 
   # https://nixos.wiki/wiki/CCache#Derivation_CCache_2
   # man tmpfiles.d
@@ -73,10 +66,6 @@
     pkgs.gnome.nautilus-python
     pkgs.insync-nautilus
   ];
-
-  # Adds to `environment.pathsToLink` the path: `/share/nautilus-python/extensions`
-  # needed for nautilus Python extensions to work.
-  services.gnome.core-utilities.enable = true;
 
   # boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 

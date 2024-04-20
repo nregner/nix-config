@@ -27,7 +27,7 @@ in {
         type = types.str;
         default = "*-*-* *:00/15:00";
         description = lib.mdDoc ''
-          Systemd calendar expression when to check for ip changes. 
+          Systemd calendar expression when to check for ip changes.
           See {manpage}`systemd.time(7)`.
         '';
       };

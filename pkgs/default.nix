@@ -1,6 +1,7 @@
 { inputs, pkgs }:
 let sources = pkgs.callPackage ../_sources/generated.nix { };
 in {
+  inherit sources;
 
   inherit (inputs.nix-fast-build.outputs.packages.${pkgs.system})
     nix-fast-build;

@@ -1,4 +1,44 @@
 {
+    "elasticsearch": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "elasticsearch",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "arch": null,
+            "finalImageName": null,
+            "finalImageTag": null,
+            "imageDigest": "sha256:2479cc342a6414a920b7fb3c2f55232a174f53e10612c8f15eece7e66eb7c97e",
+            "imageName": "library/elasticsearch",
+            "imageTag": "7.17.20",
+            "os": null,
+            "sha256": "sha256-DyjQ8oewT8F4L22Rsxxy4/Noj24d5JgEgjK5KgA9ADk=",
+            "tlsVerify": null
+        },
+        "version": "7.17.20"
+    },
+    "filebeat": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "filebeat",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "arch": null,
+            "finalImageName": null,
+            "finalImageTag": null,
+            "imageDigest": "sha256:e78123162c038cd86855bc631b003e60bbd6d35881dc042775db0c92dff861ae",
+            "imageName": "elastic/filebeat",
+            "imageTag": "7.17.20",
+            "os": null,
+            "sha256": "sha256-0nEJ9rt42bTaTCxLCdSIyZze8p2YXN/NSIfLUDlAnbc=",
+            "tlsVerify": null
+        },
+        "version": "7.17.20"
+    },
     "joker": {
         "cargoLocks": null,
         "date": null,
@@ -38,6 +78,26 @@
             "type": "github"
         },
         "version": "v1.1.2"
+    },
+    "kibana": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "kibana",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "arch": null,
+            "finalImageName": null,
+            "finalImageTag": null,
+            "imageDigest": "sha256:c0ddf0774457cf2035d8be9430fb96aa03d4f1c1596455efa678c49ca097ef13",
+            "imageName": "library/kibana",
+            "imageTag": "7.17.20",
+            "os": null,
+            "sha256": "sha256-2fxaejRbsFW2BdEAD1/s4YOqAdUdT/d6zITdiBFbyFw=",
+            "tlsVerify": null
+        },
+        "version": "7.17.20"
     },
     "linux-rockchip": {
         "cargoLocks": null,
