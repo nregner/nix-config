@@ -1,4 +1,4 @@
-{ inputs, options, lib, ... }: {
+{ inputs, options, pkgs, lib, ... }: {
   imports = [
     inputs.catppuccin-nix.homeManagerModules.catppuccin
     ../lib
@@ -17,6 +17,8 @@
         flavour = "mocha";
         accent = "blue";
       };
+
+      home.packages = with pkgs.unstable; [ nix-tree nix-du ];
     }
     # TODO: Remove check when home-manager is updated to 24.11
     (lib.optionalAttrs (builtins.hasAttr "gc" options.nix) {
