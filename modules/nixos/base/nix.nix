@@ -3,7 +3,7 @@
 
   nix = {
     distributedBuilds = true;
-    package = lib.mkDefault pkgs.unstable.nix;
+    package = pkgs.unstable.nixVersions.nix_2_21;
 
     settings = {
       auto-optimise-store = true;
@@ -18,6 +18,10 @@
         [ "default:h0V4pJnSGtvqgGKLO3KF0VJ0iOaiVBfa4OjmnnR2ob8=" ];
     };
   };
+
+  warnings =
+    (lib.optional (lib.versionOlder config.nix.package.version pkgs.nix.version)
+      "`nix.package` is outdated (${config.nix.package.version} < ${pkgs.nix.version})");
 
   # show config changes on switch
   # https://discourse.nixos.org/t/nvd-simple-nix-nixos-version-diff-tool/12397/33
