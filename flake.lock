@@ -224,11 +224,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1712451445,
-        "narHash": "sha256-sTN1oHqg0EkYMZSmLVTPLCInWOxs6R8io8zkV6DqgCw=",
+        "lastModified": 1713667899,
+        "narHash": "sha256-hx1OUND3teiSwOst7fe8gXB687kgMNcBHpNi7RdGg1k=",
         "ref": "refs/heads/master",
-        "rev": "5428f738315bf70407099c65af607c53326f6193",
-        "revCount": 39,
+        "rev": "dce34b59b0146aa37b2a651311b07576860fcaca",
+        "revCount": 3,
         "type": "git",
         "url": "ssh://git@github.com/nathanregner/hydra-sentinel"
       },
