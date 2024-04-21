@@ -15,6 +15,9 @@ resource "tailscale_acl" "acl" {
       "tag:hydra"   = ["nathanregner@gmail.com"]
       "tag:builder" = ["nathanregner@gmail.com"]
     }
+    hosts = {
+      sagittarius = data.tailscale_device.sagittarius.addresses[0]
+    }
 
     acls = [
       {
@@ -26,13 +29,19 @@ resource "tailscale_acl" "acl" {
         action = "accept"
         src    = ["*"]
         dst = [
-          "tag:server:8000", # binary cache
-          "tag:server:7125", # moonraker
+          "sagittarius:8000", # binary cache
         ]
       },
       {
         action = "accept"
-        src    = ["group:admin", "tag:admin", "tag:hydra"]
+        src    = ["group:admin", "tag:admin", "tag:server"]
+        dst = [
+          "sagittarius:9201" # elasticsearch
+        ]
+      },
+      {
+        action = "accept"
+        src    = ["group:admin", "tag:admin", "sagittarius"]
         dst    = ["tag:builder:22"]
       },
     ]

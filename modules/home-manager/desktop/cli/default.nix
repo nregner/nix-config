@@ -55,6 +55,9 @@
 
     # system monitoring
     htop-vim
+
+    # misc
+    sops
   ];
 }
 
