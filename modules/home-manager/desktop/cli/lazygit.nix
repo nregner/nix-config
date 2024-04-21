@@ -1,12 +1,13 @@
 { sources, config, pkgs, ... }: {
-  programs.lazygit = rec {
+  programs.lazygit = {
     enable = true;
     # https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md#overriding-default-config-file-location
     package = pkgs.unstable.callPackage
       ({ runCommand, makeWrapper, lazygit, formats, remarshal, jq, ... }:
         let
           yamlFormat = formats.yaml { };
-          settingsFile = yamlFormat.generate "lazygit.yaml" settings;
+          settingsFile =
+            yamlFormat.generate "lazygit.yaml" config.programs.lazygit.settings;
           catppuccin = config.programs.lazygit.catppuccin;
           theme =
             "${sources.catppuccin.lazygit}/themes-mergable/${catppuccin.flavour}/${catppuccin.accent}.yml";
