@@ -1,4 +1,24 @@
 {
+    "hyprland-workspaces": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "hyprland-workspaces",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "FieldofClay",
+            "repo": "hyprland-workspaces",
+            "rev": "v2.0.1",
+            "sha256": "sha256-GhUjvFMlgjTdgtV9ASW7IqE2dBktPyOlRwg6qM1r7vc=",
+            "type": "github"
+        },
+        "version": "v2.0.1"
+    },
     "joker": {
         "cargoLocks": null,
         "date": null,
@@ -98,6 +118,26 @@
             "type": "github"
         },
         "version": "v1.9.1"
+    },
+    "sf-mono-nerd-font": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "sf-mono-nerd-font",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "epk",
+            "repo": "SF-Mono-Nerd-Font",
+            "rev": "v18.0d1e1.0",
+            "sha256": "sha256-f5A/vTKCUxdMhCqv0/ikF46tRrx5yZfIkvfExb3/XEQ=",
+            "type": "github"
+        },
+        "version": "v18.0d1e1.0"
     },
     "tfautomv": {
         "cargoLocks": null,

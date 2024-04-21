@@ -1,11 +1,6 @@
-{ inputs, ... }: rec {
-  additions = final: _prev:
-    import ../pkgs {
-      inherit inputs;
-      pkgs = final;
-    };
-
-  modifications = final: prev: {
+{ inputs, ... }:
+let
+  sharedModifications = final: prev: {
     # FIXME: hack to bypass "FATAL: Module ahci not found" error
     # https://github.com/NixOS/nixpkgs/issues/154163#issuecomment-1350599022
     makeModulesClosure = x:
@@ -24,12 +19,23 @@
       (oldAttrs: { nativeCheckInputs = [ ]; })).overrideAttrs
       (oldAttrs: { doInstallCheck = false; });
   };
+in {
+  additions = final: _prev:
+    import ../pkgs {
+      inherit inputs;
+      pkgs = final;
+    };
+
+  modifications = final: prev:
+    {
+      hyprland = final.unstable.hyprland;
+    } // sharedModifications final prev;
 
   unstable-packages = final: _prev: {
     unstable = import inputs.nixpkgs-unstable {
       system = final.system;
       config.allowUnfree = true;
-      overlays = [ modifications ];
+      overlays = [ sharedModifications ];
     };
   };
 }

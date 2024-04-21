@@ -1,4 +1,7 @@
 # https://github.com/berberman/nvfetcher?tab=readme-ov-file#keyfile
+[hyprland-workspaces]
+src.github = "FieldofClay/hyprland-workspaces"
+fetch.github = "FieldofClay/hyprland-workspaces"
 
 [joker]
 src.github_tag = "candid82/joker"
@@ -21,6 +24,10 @@ fetch.github = "armbian/linux-rockchip"
 [pin-github-action]
 src.github_tag = "mheap/pin-github-action"
 fetch.github = "mheap/pin-github-action"
+
+[sf-mono-nerd-font]
+src.github = "epk/SF-Mono-Nerd-Font"
+fetch.github = "epk/SF-Mono-Nerd-Font"
 
 [tfautomv]
 src.github_tag = "busser/tfautomv"
