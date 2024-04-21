@@ -3,8 +3,6 @@
     inputs.catppuccin-nix.homeManagerModules.catppuccin
     ../lib
     ./fzf.nix
-    ./starship.nix
-    ./tmux-sessionizer.nix
     ./tmux.nix
     ./vim.nix
     ./zsh.nix
