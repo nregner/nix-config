@@ -20,10 +20,6 @@
       url = "github:hraban/mac-app-util";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-    nix-fast-build = {
-      url = "github:Mic92/nix-fast-build";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
 
     # Tools
     disko = {

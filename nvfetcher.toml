@@ -14,17 +14,6 @@ src.branch = "rk-5.10-rkr6"
 fetch.github = "armbian/linux-rockchip"
 
 
-
-[elasticsearch]
-src.container = "library/elasticsearch"
-src.include_regex = "7\\..*"
-fetch.docker = "library/elasticsearch"
-
-[filebeat]
-src.container = "elastic/filebeat"
-src.include_regex = "7\\..*"
-fetch.docker = "elastic/filebeat"
-
 [kibana]
 src.container = "library/kibana"
 src.include_regex = "7\\..*"
