@@ -55,14 +55,14 @@
   };
   linux-rockchip = {
     pname = "linux-rockchip";
-    version = "3229486f5d77df39e2ef5bf954f3e263240ea01e";
+    version = "66c7a5a6dae8eda74bcfad69bd0d2afe6d3b8ed4";
     src = fetchFromGitHub {
       owner = "armbian";
       repo = "linux-rockchip";
-      rev = "3229486f5d77df39e2ef5bf954f3e263240ea01e";
+      rev = "66c7a5a6dae8eda74bcfad69bd0d2afe6d3b8ed4";
       fetchSubmodules = false;
-      sha256 = "sha256-tZxlgvgG2OcJXzQ2lefULMFnuIVBv2IiaWQ0B4+hSkE=";
+      sha256 = "sha256-nQoBrskmeZVg9mKPoyc42PRJ8mi7K5kqxK1nSdKEJTs=";
     };
-    date = "2024-04-06";
+    date = "2024-04-20";
   };
 }
