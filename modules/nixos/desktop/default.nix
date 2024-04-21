@@ -1,5 +1,10 @@
 { pkgs, ... }: {
-  imports = [ ../base ./nix.nix ];
+  imports = [
+    #
+    ../base
+    ./fhs.nix
+    ./nix.nix
+  ];
 
   users.mutableUsers = true;
 

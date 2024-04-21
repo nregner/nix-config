@@ -10,11 +10,15 @@
     flakePath = "/home/nregner/nix-config/iapetus";
   };
 
+  programs.zsh.initExtra = ''
+    export PATH="$PATH:$HOME/.cargo/bin"
+    #export PATH="$PATH:$HOME/.local/share/JetBrains/Toolbox/scripts"
+  '';
+
   home.packages = with pkgs.unstable; [
     # apps
     discord
     firefox
-    google-drive-ocamlfuse
     jetbrains-toolbox
     openrgb
     pkgs.insync
