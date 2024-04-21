@@ -1,6 +1,7 @@
 {
   imports = [
     ./docker.nix
+    ./elk.nix
     ./gitea.nix
     ./hydra.nix
     ./k8s.nix
