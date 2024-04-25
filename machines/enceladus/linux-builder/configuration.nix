@@ -12,5 +12,8 @@
   };
 
   services.tailscaled-autoconnect.enable = true;
+
+  # don't rebuild vm image on every commit
+  system.nixos.tags = lib.mkForce [ ];
 }
 
