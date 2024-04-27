@@ -3,9 +3,6 @@ let sources = pkgs.callPackage ../_sources/generated.nix { };
 in {
   inherit sources;
 
-  inherit (inputs.nix-fast-build.outputs.packages.${pkgs.system})
-    nix-fast-build;
-
   gitea-github-mirror = pkgs.unstable.callPackage ./gitea-github-mirror { };
 
   route53-ddns = pkgs.unstable.callPackage ./route53-ddns { };
@@ -62,4 +59,11 @@ in {
       go generate ./...
     '';
   });
+
+  pin-github-action = pkgs.unstable.buildNpmPackage (sources.pin-github-action
+    // {
+      npmDepsHash = "sha256-UTOPQSQwZZ9U940zz8z4S/eAO9yPX4c1nsTXTlwlUfc=";
+      NODE_OPTIONS = "--openssl-legacy-provider";
+      dontNpmBuild = true;
+    });
 }
