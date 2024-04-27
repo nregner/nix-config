@@ -28,10 +28,10 @@
     # remove /var/lib/darwin-builder/*.img to force a reset
     package = lib.makeOverridable ({ modules }:
       let
-        inherit (inputs) nixpkgs-unstable;
-        nixos = nixpkgs-unstable.lib.nixosSystem {
+        inherit (inputs) nixpkgs;
+        nixos = nixpkgs.lib.nixosSystem {
           modules = [
-            "${nixpkgs-unstable}/nixos/modules/profiles/macos-builder.nix"
+            "${nixpkgs}/nixos/modules/profiles/macos-builder.nix"
             ./linux-builder/configuration.nix
           ] ++ [{
             virtualisation = {

@@ -3,12 +3,12 @@
 
   nix = {
     distributedBuilds = true;
-    package = pkgs.unstable.nixVersions.nix_2_21;
+    package = pkgs.unstable.nixVersions.nix_2_22;
 
     settings = {
       auto-optimise-store = true;
       builders-use-substitutes = true;
-      experimental-features = [ "nix-command" "flakes" "repl-flake" ];
+      experimental-features = [ "nix-command" "flakes" ];
       trusted-users = [ "@wheel" "nregner" ];
 
       substituters = [ "http://sagittarius:8000?priority=99&trusted=1" ];
