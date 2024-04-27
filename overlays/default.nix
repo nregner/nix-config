@@ -13,9 +13,9 @@
 
     hydra_unstable = prev.hydra_unstable.overrideAttrs (oldAttrs: {
       patches = (oldAttrs.patches or [ ]) ++ [
-        ./hydra/0001-Add-always_supported_system_types-option.patch
-        # https://github.com/NixOS/nix/issues/7098
-        ./hydra/hydra-restrict-eval.diff
+        ./hydra/0001-fix-hydra-queue-runner-gets-stuck-while-there-are-it.patch
+        ./hydra/0002-fix-restrict-eval-does-not-allow-access-to-git-flake.patch
+        ./hydra/0003-feat-add-always_supported_system_types-option.patch
       ];
     });
   };

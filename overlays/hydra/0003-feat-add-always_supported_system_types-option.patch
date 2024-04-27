@@ -1,9 +1,9 @@
-From 6958fb210e085adbcf1c1491b4ddb0436ebed2c5 Mon Sep 17 00:00:00 2001
+From 0f280a8686cdb3faf51bcee5e4991572ff7c2220 Mon Sep 17 00:00:00 2001
 From: Nathan Regner <nathanregner@gmail.com>
 Date: Sat, 6 Apr 2024 11:34:44 -0600
-Subject: [PATCH] Add always_supported_system_types option
+Subject: [PATCH 3/3] feat: add always_supported_system_types option
 
-Don't abort jobs for machines that may not be online
+Don't immediately abort jobs for build machines that aren't online
 ---
  src/hydra-queue-runner/dispatcher.cc         | 4 ++++
  src/hydra-queue-runner/hydra-queue-runner.cc | 1 +
@@ -26,7 +26,7 @@ index 6d738ded..ce879d33 100644
                  step->state.lock()->lastSupported = now;
                  supported = true;
 diff --git a/src/hydra-queue-runner/hydra-queue-runner.cc b/src/hydra-queue-runner/hydra-queue-runner.cc
-index 5ffa7fe6..a96cba27 100644
+index 0ee710cb..3de5edb6 100644
 --- a/src/hydra-queue-runner/hydra-queue-runner.cc
 +++ b/src/hydra-queue-runner/hydra-queue-runner.cc
 @@ -853,6 +853,7 @@ void State::run(BuildID buildOne)
@@ -38,7 +38,7 @@ index 5ffa7fe6..a96cba27 100644
      // FIXME: hacky mechanism for configuring determinism checks.
      for (auto & s : tokenizeString<Strings>(config->getStrOption("xxx-jobset-repeats"))) {
 diff --git a/src/hydra-queue-runner/state.hh b/src/hydra-queue-runner/state.hh
-index 5d242cdf..1d65ada8 100644
+index cda238ae..a44697b9 100644
 --- a/src/hydra-queue-runner/state.hh
 +++ b/src/hydra-queue-runner/state.hh
 @@ -328,6 +328,7 @@ private:

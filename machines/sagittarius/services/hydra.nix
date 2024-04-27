@@ -6,7 +6,7 @@
 
   services.hydra = {
     enable = true;
-    package = pkgs.hydra_unstable.overrideAttrs { doCheck = false; };
+    package = pkgs.unstable.hydra_unstable.overrideAttrs { doCheck = false; };
     hydraURL = "https://hydra.nregner.net";
     notificationSender = "hydra@nregner.net";
     useSubstitutes = true;
@@ -16,7 +16,7 @@
       (pkgs.writeTextFile {
         name = "local-machine";
         text =
-          "ssh://localhost ${pkgs.system} - 10 1 nixos-test,benchmark,big-parallel,kvm - -";
+          "localhost ${pkgs.system} - 10 1 nixos-test,benchmark,big-parallel,kvm - -";
       })
     ];
     extraConfig = ''
