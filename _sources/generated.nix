@@ -28,22 +28,22 @@
     version = "7.17.20";
     src = dockerTools.pullImage {
       imageName = "library/kibana";
-      imageDigest = "sha256:c0ddf0774457cf2035d8be9430fb96aa03d4f1c1596455efa678c49ca097ef13";
-      sha256 = "sha256-2fxaejRbsFW2BdEAD1/s4YOqAdUdT/d6zITdiBFbyFw=";
+      imageDigest = "sha256:a37d81cb7c4f1735776ee5a1a15afaf3c1c1000a048bc43808da121ba880789b";
+      sha256 = "sha256-RSgA0vliLx9iqhxylThtrc/U7D0CQDuoa9wl40hTXhI=";
       finalImageTag = "7.17.20";
     };
   };
   linux-rockchip = {
     pname = "linux-rockchip";
-    version = "66c7a5a6dae8eda74bcfad69bd0d2afe6d3b8ed4";
+    version = "c744a541767d0beb179be56a6883cb0fc922b416";
     src = fetchFromGitHub {
       owner = "armbian";
       repo = "linux-rockchip";
-      rev = "66c7a5a6dae8eda74bcfad69bd0d2afe6d3b8ed4";
+      rev = "c744a541767d0beb179be56a6883cb0fc922b416";
       fetchSubmodules = false;
-      sha256 = "sha256-nQoBrskmeZVg9mKPoyc42PRJ8mi7K5kqxK1nSdKEJTs=";
+      sha256 = "sha256-KJTddMbCVbN7OqANNe4uLrJNQzNSGgL8EOqOA1NF/kg=";
     };
-    date = "2024-04-20";
+    date = "2024-04-26";
   };
   pin-github-action = {
     pname = "pin-github-action";
