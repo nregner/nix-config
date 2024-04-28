@@ -1,34 +1,32 @@
 { inputs, ... }: {
-  environment.etc = {
-    "nix/flake-channels/nixpkgs".source = inputs.nixpkgs;
-    "nix/flake-channels/nixpkgs-unstable".source = inputs.nixpkgs-unstable;
+  nix.registry = {
+    # pin the flake registry to inputs to avoid extra downloads
+    nixpkgs.to = inputs.nixpkgs;
+    nixpkgs-stable.to = inputs.nixpkgs;
+
+    # also pin a "github" entry for use of `nix flake lock --override-input nixpkgs "flake:nixpkgs-git"` in other flakes
+    # unlike the above entries, this won't result in a store path in the lockfile
+    nixpkgs-git.to = {
+      owner = "NixOS";
+      repo = "nixpkgs";
+      rev = inputs.nixpkgs-unstable.rev;
+      type = "github";
+    };
+    nixpkgs-stable-git.to = {
+      owner = "NixOS";
+      repo = "nixpkgs";
+      rev = inputs.nixpkgs.rev;
+      type = "github";
+    };
   };
 
-  nix = {
-    # pin the flake registry to flake input
-    registry = {
-      nixpkgs.to = {
-        owner = "NixOS";
-        repo = "nixpkgs";
-        rev = inputs.nixpkgs.rev;
-        type = "github";
-      };
-      nixpkgs-unstable.to = {
-        owner = "NixOS";
-        repo = "nixpkgs";
-        rev = inputs.nixpkgs-unstable.rev;
-        type = "github";
-      };
-    };
+  nix.settings = {
+    # keep build dependencies for direnv GC roots
+    keep-derivations = true;
+    keep-outputs = true;
 
-    settings = {
-      # keep build dependencies for direnv GC roots
-      keep-derivations = true;
-      keep-outputs = true;
-
-      # https://discourse.nixos.org/t/do-flakes-also-set-the-system-channel/19798
-      # pin system channels to flake inputs
-      nix-path = "nixpkgs=/etc/nix/flake-channels/nixpkgs";
-    };
+    # https://discourse.nixos.org/t/do-flakes-also-set-the-system-channel/19798
+    # pin system channels to flake inputs
+    nix-path = "${inputs.nixpkgs-unstable}";
   };
 }
