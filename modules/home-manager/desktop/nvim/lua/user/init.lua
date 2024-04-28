@@ -150,6 +150,8 @@ require("lazy").setup({
 
         nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
         nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
+        nmap("<leader>fci", vim.lsp.buf.incoming_calls, "[F]ind [C]allers [I]ncoming")
+        nmap("<leader>fca", vim.lsp.buf.outgoing_calls, "[F]ind [C]allers [O]outgoing")
 
         nmap("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
         nmap("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
@@ -878,6 +880,38 @@ require("lazy").setup({
           textobject = "gc",
         },
       })
+    end,
+  },
+
+  {
+    "ldelossa/litee.nvim",
+    event = "VeryLazy",
+    opts = {
+      notify = { enabled = false },
+      panel = {
+        orientation = "bottom",
+        panel_size = 10,
+      },
+    },
+    config = function(_, opts)
+      require("litee.lib").setup(opts)
+    end,
+  },
+
+  { -- Calltree
+    "ldelossa/litee-calltree.nvim",
+    dependencies = "ldelossa/litee.nvim",
+    event = "VeryLazy",
+    opts = {
+      on_open = "panel",
+      keymaps = {
+        expand = "l",
+        collapse = "h",
+        collapse_all = "H",
+      },
+    },
+    config = function(_, opts)
+      require("litee.calltree").setup(opts)
     end,
   },
 
