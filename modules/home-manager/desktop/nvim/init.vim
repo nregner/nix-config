@@ -9,6 +9,15 @@ inoremap jk <esc>
 " _S_ource _V_imrc
 " nnoremap <leader>sv :source $MYVIMRC<CR>
 
+" Delete a file before writing it
+" Useful for temporarily overriding symlinked nix files
+function DeleteWrite()
+  !rm %
+  w!
+endfunction
+
+command DeleteWrite call DeleteWrite()
+
 " Open new split panes to right and bottom, which feels more natural
 set splitbelow
 set splitright
