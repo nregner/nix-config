@@ -16,6 +16,15 @@
         accent = "blue";
       };
 
+      programs.ssh = {
+        enable = true;
+        # https://docs.ssh.com/manuals/server-zos-user/64/disabling-agent-forwarding.html
+        forwardAgent = false;
+        # share connections
+        controlMaster = "auto";
+        controlPersist = "10m";
+      };
+
       home.packages = with pkgs.unstable; [ nix-tree nix-du ];
     }
     # TODO: Remove check when home-manager is updated to 24.11
