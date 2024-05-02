@@ -1,5 +1,9 @@
-{ config, lib, pkgs, modulesPath, ... }: {
-  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
+{ inputs, config, lib, pkgs, modulesPath, ... }: {
+  imports = [
+    "${modulesPath}/installer/scan/not-detected.nix"
+    inputs.nixos-hardware.nixosModules.common-cpu-amd
+    inputs.nixos-hardware.nixosModules.common-pc-ssd
+  ];
 
   boot = {
     loader.systemd-boot.enable = true;
