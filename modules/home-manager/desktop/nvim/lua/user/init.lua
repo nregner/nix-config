@@ -1012,8 +1012,29 @@ vim.keymap.set("n", "<leader>q", "q", { noremap = true })
 vim.keymap.set("n", "q", "<nop>", { noremap = true })
 
 -- Diagnostic keymaps
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
+
+-- https://github.com/neovim/neovim/discussions/25588#discussioncomment-8700283
+local function pos_equal(p1, p2)
+  local r1, c1 = unpack(p1)
+  local r2, c2 = unpack(p2)
+  return r1 == r2 and c1 == c2
+end
+
+local function goto_error_diagnostic(f)
+  return function()
+    local pos_before = vim.api.nvim_win_get_cursor(0)
+    f({ severity = vim.diagnostic.severity.ERROR, wrap = true })
+    local pos_after = vim.api.nvim_win_get_cursor(0)
+    if pos_equal(pos_before, pos_after) then
+      f({ wrap = true })
+    end
+  end
+end
+
+vim.keymap.set("n", "[e", goto_error_diagnostic(vim.diagnostic.goto_prev), { desc = "Go to previous error diagnostic" })
+vim.keymap.set("n", "]e", goto_error_diagnostic(vim.diagnostic.goto_next), { desc = "Go to next diagnostic" })
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 vim.keymap.set("n", "<leader>d", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 
