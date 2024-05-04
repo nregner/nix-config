@@ -50,18 +50,18 @@
             "arch": null,
             "finalImageName": null,
             "finalImageTag": null,
-            "imageDigest": "sha256:a37d81cb7c4f1735776ee5a1a15afaf3c1c1000a048bc43808da121ba880789b",
+            "imageDigest": "sha256:00b785bb827cabf10be518ee03958fe233ba3a1f906ba18a6534dcc02f6c0da6",
             "imageName": "library/kibana",
-            "imageTag": "7.17.20",
+            "imageTag": "7.17.21",
             "os": null,
-            "sha256": "sha256-RSgA0vliLx9iqhxylThtrc/U7D0CQDuoa9wl40hTXhI=",
+            "sha256": "sha256-DPWkjukZzOvgecm09lA9y8a5PF4BckKs0BZH+Cv9OeU=",
             "tlsVerify": null
         },
-        "version": "7.17.20"
+        "version": "7.17.21"
     },
     "linux-rockchip": {
         "cargoLocks": null,
-        "date": "2024-04-26",
+        "date": "2024-04-29",
         "extract": null,
         "name": "linux-rockchip",
         "passthru": null,
@@ -73,11 +73,11 @@
             "name": null,
             "owner": "armbian",
             "repo": "linux-rockchip",
-            "rev": "c744a541767d0beb179be56a6883cb0fc922b416",
-            "sha256": "sha256-KJTddMbCVbN7OqANNe4uLrJNQzNSGgL8EOqOA1NF/kg=",
+            "rev": "a51cda56da76e1b0a7ae2f31b91d6a51f5d74a69",
+            "sha256": "sha256-/6TmH7KXwq6onMn12K7e54Pdt6ejzk7L9HY/+ZAqoqU=",
             "type": "github"
         },
-        "version": "c744a541767d0beb179be56a6883cb0fc922b416"
+        "version": "a51cda56da76e1b0a7ae2f31b91d6a51f5d74a69"
     },
     "pin-github-action": {
         "cargoLocks": null,

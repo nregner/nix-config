@@ -16,12 +16,9 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    mac-app-util = {
-      url = "github:hraban/mac-app-util";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
 
     # Tools
+    catppuccin-nix.url = "github:catppuccin/nix";
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -29,6 +26,10 @@
     hydra-sentinel = {
       url = "github:nathanregner/hydra-sentinel";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+    mac-app-util = {
+      url = "github:hraban/mac-app-util";
+      # inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     mealie = {
       url = "github:nathanregner/mealie-nix";
@@ -47,9 +48,6 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       inputs.nixpkgs-stable.follows = "nixpkgs";
     };
-
-    # Desktop
-    catppuccin-nix.url = "github:catppuccin/nix";
 
     # 3d printing
     orangepi-nix = {
