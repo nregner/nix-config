@@ -10,6 +10,8 @@
       lib.attrValues self.globals.ssh.allKeys;
   };
 
+  security.pam.enableSudoTouchIdAuth = true;
+
   services.nregner.hydra-builder.enable = true;
 
   services.tailscale = {

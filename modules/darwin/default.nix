@@ -1,4 +1,4 @@
-{ self, pkgs, ... }: {
+{ self, config, pkgs, lib, ... }: {
   imports = [ ./nix.nix ./hydra-builder.nix ];
 
   environment.systemPackages = with pkgs.unstable; [
@@ -15,6 +15,15 @@
 
   # Set Git commit hash for darwin-version.
   system.configurationRevision = self.rev or self.dirtyRev or null;
+
+  # Hack to make pam-reattach work
+  # until https://github.com/LnL7/nix-darwin/pull/662
+  environment.etc."pam.d/sudo_local".text =
+    lib.mkIf config.security.pam.enableSudoTouchIdAuth ''
+      # Written by nix-darwin
+      auth       optional       ${pkgs.pam-reattach}/lib/pam/pam_reattach.so
+      auth       sufficient     pam_tid.so
+    '';
 
   programs.ssh.knownHosts = self.globals.ssh.knownHosts;
 }
