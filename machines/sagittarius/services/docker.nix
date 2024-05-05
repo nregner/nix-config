@@ -1,7 +1,7 @@
-{ pkgs, config, ... }: {
+{ config, pkgs, lib, ... }: {
   virtualisation.docker = {
     enable = true;
-    package = pkgs.unstable.docker_24;
+    package = pkgs.unstable.docker;
     daemon.settings = {
       live-restore = false;
       insecure-registries = [

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, ... }: {
   imports =
     [ ../../modules/nixos/desktop ./hardware-configuration.nix ./windows-vm ];
 
@@ -71,7 +71,7 @@
 
   virtualisation.docker = {
     enable = true;
-    package = pkgs.unstable.docker_24;
+    package = pkgs.unstable.docker;
     # enableOnBoot = false; # lazy start with docker.socket
     # extraOptions = "--insecure-registry sagittarius:5000";
     daemon.settings = {
