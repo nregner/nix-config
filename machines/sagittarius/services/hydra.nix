@@ -78,7 +78,7 @@
           supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
           maxJobs = 12;
           speedFactor = 2;
-          macAddress = "00:d8:61:a3:ea:8c";
+          # macAddress = "00:d8:61:a3:ea:8c";
         }
       ];
     };

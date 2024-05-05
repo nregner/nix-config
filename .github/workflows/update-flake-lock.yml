@@ -1,9 +1,9 @@
 name: Update Dependencies
 
 on:
-  workflow_dispatch: # allows manual triggering
+  workflow_dispatch: # allow manual trigger
   schedule:
-    - cron: "0 0 * * 0" # runs weekly on Sunday at 00:00
+    - cron: "0 16 * * 6" # min hour day-of-month month day-of-week
 
 jobs:
   lockfile:
