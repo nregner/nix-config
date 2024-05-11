@@ -1,6 +1,6 @@
-{ inputs, options, pkgs, lib, ... }: {
+{ options, pkgs, lib, ... }: {
   imports = [
-    inputs.catppuccin-nix.homeManagerModules.catppuccin
+    #
     ../lib
     ./fzf.nix
     ./tmux.nix
@@ -10,12 +10,6 @@
 
   config = lib.mkMerge [
     {
-      # theme
-      catppuccin = {
-        flavour = "mocha";
-        accent = "blue";
-      };
-
       programs.ssh = {
         enable = true;
         # https://docs.ssh.com/manuals/server-zos-user/64/disabling-agent-forwarding.html

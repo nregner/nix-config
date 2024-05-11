@@ -35,15 +35,15 @@
   };
   linux-rockchip = {
     pname = "linux-rockchip";
-    version = "a51cda56da76e1b0a7ae2f31b91d6a51f5d74a69";
+    version = "491a34796b384213e106432a86a9c366e4c1d0cb";
     src = fetchFromGitHub {
       owner = "armbian";
       repo = "linux-rockchip";
-      rev = "a51cda56da76e1b0a7ae2f31b91d6a51f5d74a69";
+      rev = "491a34796b384213e106432a86a9c366e4c1d0cb";
       fetchSubmodules = false;
-      sha256 = "sha256-/6TmH7KXwq6onMn12K7e54Pdt6ejzk7L9HY/+ZAqoqU=";
+      sha256 = "sha256-bxwvMNl9cBMyYo0zK0xq381QpuQ1SFgeuPr8ZaMtOIg=";
     };
-    date = "2024-04-29";
+    date = "2024-05-09";
   };
   pin-github-action = {
     pname = "pin-github-action";

@@ -1,4 +1,11 @@
-{ pkgs, lib, ... }: {
+{ inputs, pkgs, lib, ... }: {
+  imports = [ inputs.catppuccin-nix.homeManagerModules.catppuccin ];
+
+  catppuccin = {
+    flavour = "mocha";
+    accent = "blue";
+  };
+
   fonts.fontconfig.enable = true;
   home.packages = with pkgs.unstable;
     [
