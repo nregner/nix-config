@@ -739,7 +739,11 @@ require("lazy").setup({
     },
     config = function(_, opts)
       require("nvim-treesitter.configs").setup(opts)
-      require("treesitter-context").setup()
+      require("treesitter-context").setup({
+        max_lines = 10,
+        multiline_threshold = 1,
+        -- mode = "topline",
+      })
 
       -- There are additional nvim-treesitter modules that you can use to interact
       -- with nvim-treesitter. You should go explore a few and see what interests you:
