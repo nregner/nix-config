@@ -22,10 +22,7 @@
       gui = { nerdFontsVersion = "3"; };
 
       keybinding = {
-        universal = {
-          quit = "<c-c>";
-          return = "q";
-        };
+        universal = { quit = "<c-c>"; };
         files = {
           # always commit with EDITOR (also prevents us from getting stuck thanks to "q" remap)
           commitChanges = "";
