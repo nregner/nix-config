@@ -10,11 +10,6 @@
     firefox
     insync
     openrgb
-
-    # tools
-    rclone
-    restic
-    screen
   ];
 
   programs.alacritty.settings = { font = { size = lib.mkForce 11; }; };

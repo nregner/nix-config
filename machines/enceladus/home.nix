@@ -27,7 +27,6 @@
 
     # nix
     nix-output-monitor
-    nixfmt
     # nix-du # nix-du -s=500MB | xdot -
     xdot
     nixos-rebuild

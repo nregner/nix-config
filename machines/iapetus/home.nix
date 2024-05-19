@@ -43,7 +43,6 @@
     # nix
     cachix
     nix-output-monitor
-    nixfmt
     nix-du # nix-du -s=500MB | xdot -
     hydra-cli
     xdot
