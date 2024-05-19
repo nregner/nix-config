@@ -917,6 +917,71 @@ require("lazy").setup({
     end,
   },
 
+  { -- Neotest
+    "nvim-neotest/neotest",
+    dependencies = {
+      "nvim-neotest/nvim-nio",
+      "nvim-lua/plenary.nvim",
+      "antoinemadec/FixCursorHold.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      -- Adapters
+      "nvim-neotest/neotest-jest",
+      "rouge8/neotest-rust",
+    },
+    config = function()
+      local neotest = require("neotest")
+      neotest.setup({
+        adapters = {
+          require("neotest-rust")({
+            args = { "--no-capture", "--cargo-quiet", "--cargo-quiet" },
+          }),
+          require("neotest-jest")({}),
+        },
+        diagnostic = {
+          enabled = true,
+          severity = vim.diagnostic.severity.WARN,
+        },
+        output = {
+          open_on_run = true,
+          enter = true,
+        },
+      })
+
+      -- :run_all_tests "ta"
+      -- :run_current_ns_tests "tn"
+      -- :run_alternate_ns_tests "tN"
+      -- :run_current_test "tc"
+      local nmap = function(keys, func, desc)
+        vim.keymap.set("n", keys, func, { desc = desc })
+      end
+
+      local show_summary = function()
+        neotest.summary.open()
+      end
+
+      nmap("<localleader>tt", function(args)
+        neotest.run.run(args)
+        show_summary()
+      end, "[T]est [T]his")
+      nmap("<localleader>tf", function()
+        neotest.run.run(vim.fn.expand("%"))
+        show_summary()
+      end, "[T]est [F]ile")
+      nmap("<localleader>tq", function()
+        neotest.run.stop()
+        neotest.watch.stop()
+        neotest.summary.close()
+      end, "[T]est [Q]uit")
+      nmap("<localleader>twt", function()
+        neotest.watch.watch()
+        show_summary()
+      end, "[T]est [W]atch [T]his")
+      nmap("<localleader>twq", function()
+        neotest.watch.stop()
+      end, "[T]est [W]atch [Q]uit")
+    end,
+  },
+
   { -- REPL
     "Olical/conjure",
     ft = { "clojure", "lua" },
