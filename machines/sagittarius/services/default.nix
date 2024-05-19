@@ -5,6 +5,7 @@
     ./gitea.nix
     ./github-actions.nix
     ./hydra.nix
+    ./jellyfin.nix
     ./k8s.nix
     ./mealie.nix
     ./nginx.nix
