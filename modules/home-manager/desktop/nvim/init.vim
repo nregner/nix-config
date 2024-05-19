@@ -11,12 +11,12 @@ inoremap jk <esc>
 
 " Delete a file before writing it
 " Useful for temporarily overriding symlinked nix files
-function DeleteWrite()
-  !rm %
+function! DeleteWrite()
+  :exe "! rm " shellescape(expand('%:p'))
   w!
 endfunction
 
-command DeleteWrite call DeleteWrite()
+command! DeleteWrite call DeleteWrite()
 
 " Open new split panes to right and bottom, which feels more natural
 set splitbelow
