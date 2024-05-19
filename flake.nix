@@ -89,7 +89,13 @@
         let
           config = import ./nixpkgs.nix { inherit inputs outputs; };
           pkgs = import nixpkgs-unstable ({ inherit system; } // config);
-        in import ./shells.nix { inherit inputs pkgs; });
+          shells = import ./shells.nix { inherit inputs pkgs; };
+        in shells // {
+          _aggregate = pkgs.releaseTools.aggregate {
+            name = "devshell-${system}";
+            constituents = lib.attrValues shells;
+          };
+        });
 
       # Your custom packages and modifications, exported as overlays
       overlays = import ./overlays { inherit inputs; };
@@ -220,6 +226,9 @@
         homeConfigurations =
           (lib.mapAttrs (name: { activation-script, ... }: activation-script)
             homeConfigurations);
+
+        devShells = lib.mapAttrs (system: { _aggregate, ... }: _aggregate)
+          (lib.getAttrs [ "x86_64-linux" "aarch64-darwin" ] outputs.devShells);
       };
     };
 }

@@ -9,6 +9,4 @@
       inputs.home-manager.packages.${pkgs.stdenv.hostPlatform.system}.home-manager
     ];
   };
-
-  rust = pkgs.mkShell { packages = with pkgs; [ cargo rustfmt ]; };
 }
