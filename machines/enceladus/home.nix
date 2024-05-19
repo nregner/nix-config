@@ -27,10 +27,9 @@
 
     # nix
     nix-output-monitor
-    nix-prefetch
     nixfmt
     # nix-du # nix-du -s=500MB | xdot -
-    pkgs.xdot-darwin
+    xdot
     nixos-rebuild
   ];
 

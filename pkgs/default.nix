@@ -7,13 +7,6 @@ in {
 
   route53-ddns = pkgs.unstable.callPackage ./route53-ddns { };
 
-  netdata-latest = pkgs.unstable.callPackage ./netdata.nix { };
-
-  # disable xvfb-run tests
-  xdot-darwin = (pkgs.unstable.xdot.overridePythonAttrs
-    (oldAttrs: { nativeCheckInputs = [ ]; })).overrideAttrs
-    (oldAttrs: { doInstallCheck = false; });
-
   moonraker-develop = (pkgs.unstable.moonraker.override (prev: rec {
     python3 = prev.python3.override {
       packageOverrides = self: super:
@@ -47,7 +40,7 @@ in {
     '';
   };
 
-  klipperPkgs = pkgs.unstable.callPackage ./klipper { };
+  klipper-tools = pkgs.unstable.callPackage ./klipper { };
 
   insync-nautilus = pkgs.unstable.callPackage ./insync-nautilus { };
 

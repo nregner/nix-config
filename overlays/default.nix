@@ -18,6 +18,11 @@
         ./hydra/0003-feat-add-always_supported_system_types-option.patch
       ];
     });
+
+    # disable xvfb-run tests to fix build on darwin
+    xdot = (prev.xdot.overridePythonAttrs
+      (oldAttrs: { nativeCheckInputs = [ ]; })).overrideAttrs
+      (oldAttrs: { doInstallCheck = false; });
   };
 
   unstable-packages = final: _prev: {
