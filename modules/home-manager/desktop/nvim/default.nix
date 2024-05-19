@@ -30,6 +30,9 @@
       stylua
       pkgs.joker
 
+      # test runners
+      cargo-nextest # for rouge8/neotest-rust
+
       # misc
       gnumake
       clang # for compiling tree-sitter parsers
