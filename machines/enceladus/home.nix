@@ -36,7 +36,14 @@
 
   programs.tmux-sessionizer = {
     # fix permission denied errors trying to read /Volumes/dev
-    excluded_dirs = [ ".Trashes" ".fseventsd" ".Spotlight-V100" ".pnpm-store" ];
+    excluded_dirs = [
+      ".DocumentRevisions-V100"
+      ".Spotlight-V100"
+      ".TemporaryItems"
+      ".Trashes"
+      ".fseventsd"
+      ".pnpm-store"
+    ];
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
