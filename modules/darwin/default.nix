@@ -30,7 +30,10 @@
       auth       sufficient     pam_tid.so
     '';
 
-  system.keyboard.remapCapsLockToEscape = true;
+  system.keyboard = {
+    enableKeyMapping = true;
+    remapCapsLockToEscape = true;
+  };
 
   programs.ssh.knownHosts = self.globals.ssh.knownHosts;
 }
