@@ -19,6 +19,7 @@
         difftastic.cmd = ''difft "$LOCAL" "$REMOTE"'';
       };
       pager.difftool = true;
+      rerere.enabled = true;
       alias = {
         difft = "difftool";
         dlog = "!f() { GIT_EXTERNAL_DIFF=difft git log -p --ext-diff; }; f";
