@@ -20,6 +20,7 @@ require("lazy").setup({
   -- https://github.com/sindrets/diffview.nvim#configuration
   {
     "sindrets/diffview.nvim",
+    dev = true,
     opts = {
       view = {
         merge_tool = {
@@ -1231,7 +1232,7 @@ require("lazy").setup({
 
   { -- REPL
     "Olical/conjure",
-    ft = { "clojure", "lua" },
+    ft = { "clojure" },
     dependencies = {
       -- https://github.com/guns/vim-sexp
       "guns/vim-sexp",
@@ -1268,7 +1269,11 @@ require("lazy").setup({
       vim.g["conjure#extract#tree_sitter#enabled"] = true
     end,
   },
-}, {})
+}, {
+  dev = {
+    path = "~/dev/github/",
+  },
+})
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
