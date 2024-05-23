@@ -38,11 +38,14 @@ func sync() error {
 	if err != nil {
 		log.Fatalf("Failed to list GitHub repos: %v", err)
 	}
+	log.Printf("githubRepos: %v", githubRepos)
 
 	giteaRepos, err := listGiteaRepos(giteaClient)
 	if err != nil {
 		log.Fatalf("Failed to list Gitea repos: %v", err)
 	}
+
+	log.Printf("giteaRepos: %v", giteaRepos)
 
 	for _, src := range githubRepos {
 		mirror := giteaRepos[*src.Name]
