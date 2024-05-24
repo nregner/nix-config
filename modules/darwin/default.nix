@@ -1,5 +1,11 @@
-{ self, config, pkgs, lib, ... }: {
-  imports = [ ./nix.nix ./hydra-builder.nix ];
+{ inputs, self, config, pkgs, lib, ... }: {
+  imports = [
+    inputs.mac-app-util.darwinModules.default
+    ../nixos/base/nix.nix
+    ../nixos/desktop/nix.nix
+    ./hydra-builder.nix
+    ./nix.nix
+  ];
 
   environment.systemPackages = with pkgs.unstable; [
     util-linux
@@ -32,7 +38,7 @@
 
   system.keyboard = {
     enableKeyMapping = true;
-    remapCapsLockToEscape = true;
+    remapCapsLockToControl = true; # required by Spoons/ControlEscape
   };
 
   programs.ssh.knownHosts = self.globals.ssh.knownHosts;

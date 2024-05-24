@@ -1,5 +1,6 @@
 { inputs, lib, pkgs, ... }: {
   imports = [
+    ../../modules/home-manager/darwin
     ../../modules/home-manager/desktop
     ../../modules/home-manager/desktop/jetbrains
     inputs.mac-app-util.homeManagerModules.default

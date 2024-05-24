@@ -42,6 +42,8 @@ in {
 
   klipper-tools = pkgs.unstable.callPackage ./klipper { };
 
+  hammerspoon = pkgs.unstable.callPackage ./hammerspoon.nix { };
+
   insync-nautilus = pkgs.unstable.callPackage ./insync-nautilus { };
 
   insync = pkgs.unstable.callPackage ./insync.nix { };
