@@ -41,7 +41,7 @@
       repo = "linux-rockchip";
       rev = "9fb8c4cc0ec516870dea431c83e2d546bb57df7d";
       fetchSubmodules = false;
-      sha256 = "sha256-bbUJbw8DgTKql/z4f18KloCU2KUuSbsg4UbcWiMfNyU=";
+      sha256 = "sha256-iyMCeJ7Mby7YN0Cexx2EiFcqCYJcy5YwKEJdl57kDyE=";
     };
     date = "2024-05-15";
   };
@@ -54,6 +54,17 @@
       rev = "v1.9.1";
       fetchSubmodules = false;
       sha256 = "sha256-FBNdK+d1gXvC7uxARZrM7RHdwiPX/Vi1bp84R78t6wI=";
+    };
+  };
+  tfautomv = {
+    pname = "tfautomv";
+    version = "v0.6.2";
+    src = fetchFromGitHub {
+      owner = "busser";
+      repo = "tfautomv";
+      rev = "v0.6.2";
+      fetchSubmodules = false;
+      sha256 = "sha256-qUeIbHJqxGkt2esMm4w6fM52ZE16jWnxugVXxqBh1Qc=";
     };
   };
 }

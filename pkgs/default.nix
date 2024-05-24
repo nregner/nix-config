@@ -61,4 +61,7 @@ in {
       NODE_OPTIONS = "--openssl-legacy-provider";
       dontNpmBuild = true;
     });
+
+  tfautomv =
+    pkgs.unstable.callPackage ./tfautomv.nix { source = sources.tfautomv; };
 }
