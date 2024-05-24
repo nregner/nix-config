@@ -56,4 +56,15 @@
       sha256 = "sha256-FBNdK+d1gXvC7uxARZrM7RHdwiPX/Vi1bp84R78t6wI=";
     };
   };
+  tfautomv = {
+    pname = "tfautomv";
+    version = "v0.6.2";
+    src = fetchFromGitHub {
+      owner = "busser";
+      repo = "tfautomv";
+      rev = "v0.6.2";
+      fetchSubmodules = false;
+      sha256 = "sha256-qUeIbHJqxGkt2esMm4w6fM52ZE16jWnxugVXxqBh1Qc=";
+    };
+  };
 }

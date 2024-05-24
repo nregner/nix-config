@@ -98,5 +98,25 @@
             "type": "github"
         },
         "version": "v1.9.1"
+    },
+    "tfautomv": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "tfautomv",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "busser",
+            "repo": "tfautomv",
+            "rev": "v0.6.2",
+            "sha256": "sha256-qUeIbHJqxGkt2esMm4w6fM52ZE16jWnxugVXxqBh1Qc=",
+            "type": "github"
+        },
+        "version": "v0.6.2"
     }
 }

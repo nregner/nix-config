@@ -21,3 +21,7 @@ fetch.github = "armbian/linux-rockchip"
 [pin-github-action]
 src.github_tag = "mheap/pin-github-action"
 fetch.github = "mheap/pin-github-action"
+
+[tfautomv]
+src.github_tag = "busser/tfautomv"
+fetch.github = "busser/tfautomv"
