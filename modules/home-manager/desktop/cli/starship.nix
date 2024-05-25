@@ -10,7 +10,9 @@
       package.disabled = true;
       aws.disabled = true;
       nix_shell.disabled = true;
-      docker_context = { only_with_files = false; };
+      docker_context = {
+        only_with_files = false;
+      };
       direnv = {
         # disabled = false;
         symbol = "";

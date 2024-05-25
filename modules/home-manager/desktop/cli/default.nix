@@ -1,6 +1,6 @@
-{ pkgs, lib, ... }: {
+{ pkgs, lib, ... }:
+{
   imports = [
-    #
     ./git.nix
     ./k9s.nix
     ./lazygit.nix
@@ -62,4 +62,3 @@
     sops
   ];
 }
-

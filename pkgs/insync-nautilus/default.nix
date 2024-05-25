@@ -1,18 +1,28 @@
-{ lib, stdenv, fetchurl, gnome, dpkg, python3 }:
+{
+  lib,
+  stdenv,
+  fetchurl,
+  gnome,
+  dpkg,
+  python3,
+}:
 
 stdenv.mkDerivation rec {
   pname = "insync-nautilus";
   version = "3.8.2.50468";
 
   src = fetchurl {
-    url =
-      "https://cdn.insynchq.com/builds/linux/insync-nautilus_${version}_all.deb";
+    url = "https://cdn.insynchq.com/builds/linux/insync-nautilus_${version}_all.deb";
     sha256 = "sha256-GGxVH/oz2G0BAlcbBGwfNM8aH0invh319azSqgflMXs=";
   };
 
   strictDeps = true;
   nativeBuildInputs = [ dpkg ];
-  buildInputs = [ gnome.nautilus gnome.nautilus-python python3 ];
+  buildInputs = [
+    gnome.nautilus
+    gnome.nautilus-python
+    python3
+  ];
 
   dontBuild = true;
 

@@ -1,4 +1,12 @@
-{ self, inputs, outputs, pkgs, lib, ... }: {
+{
+  self,
+  inputs,
+  outputs,
+  pkgs,
+  lib,
+  ...
+}:
+{
   nix.distributedBuilds = true;
   nix.buildMachines = [
     {
@@ -6,7 +14,12 @@
       protocol = "ssh-ng";
       sshUser = "nregner";
       system = "x86_64-linux";
-      supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+      supportedFeatures = [
+        "nixos-test"
+        "benchmark"
+        "big-parallel"
+        "kvm"
+      ];
       maxJobs = 10;
       speedFactor = 1;
     }
@@ -15,7 +28,12 @@
       protocol = "ssh-ng";
       sshUser = "nregner";
       system = "x86_64-linux";
-      supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+      supportedFeatures = [
+        "nixos-test"
+        "benchmark"
+        "big-parallel"
+        "kvm"
+      ];
       maxJobs = 12;
       speedFactor = 2;
     }
@@ -26,24 +44,35 @@
     maxJobs = 8;
     # comment out for inital setup (pulls vm image via cache.nixos.org)
     # remove /var/lib/darwin-builder/*.img to force a reset
-    package = lib.makeOverridable ({ modules }:
+    package = lib.makeOverridable (
+      { modules }:
       let
         inherit (inputs) nixpkgs;
         nixos = nixpkgs.lib.nixosSystem {
-          modules = [
-            "${nixpkgs}/nixos/modules/profiles/macos-builder.nix"
-            ./linux-builder/configuration.nix
-          ] ++ [{
-            virtualisation = {
-              host = { inherit pkgs; };
-              cores = 8; # TODO: Figure out why this can't be > 8
-              diskSize = lib.mkForce (64 * 1024);
-            };
-          }];
-          specialArgs = { inherit self inputs outputs; };
+          modules =
+            [
+              "${nixpkgs}/nixos/modules/profiles/macos-builder.nix"
+              ./linux-builder/configuration.nix
+            ]
+            ++ [
+              {
+                virtualisation = {
+                  host = {
+                    inherit pkgs;
+                  };
+                  cores = 8; # TODO: Figure out why this can't be > 8
+                  diskSize = lib.mkForce (64 * 1024);
+                };
+              }
+            ];
+          specialArgs = {
+            inherit self inputs outputs;
+          };
           system = "aarch64-linux";
         };
-      in nixos.config.system.build.macos-builder-installer) { modules = [ ]; };
+      in
+      nixos.config.system.build.macos-builder-installer
+    ) { modules = [ ]; };
   };
 
   launchd.daemons.linux-builder.serviceConfig = {

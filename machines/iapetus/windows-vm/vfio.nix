@@ -1,5 +1,10 @@
 # https://astrid.tech/2022/09/22/0/nixos-gpu-vfio/
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
 let
   cfg = config.vfio;
@@ -13,9 +18,9 @@ let
       mkisofs -o $out $src
     '';
   };
-in {
-  options.vfio.enable = with lib;
-    mkEnableOption "Configure the machine for VFIO";
+in
+{
+  options.vfio.enable = with lib; mkEnableOption "Configure the machine for VFIO";
 
   config = {
     boot = {
@@ -36,11 +41,19 @@ in {
       ];
 
       kernelParams =
-        let gpuIDs = [ "10de:1e84" "10de:10f8" "10de:1ad8" "10de:1ad9" ];
-        in [
+        let
+          gpuIDs = [
+            "10de:1e84"
+            "10de:10f8"
+            "10de:1ad8"
+            "10de:1ad9"
+          ];
+        in
+        [
           # enable IOMMU
           "amd_iommu=on"
-        ] ++ optionals cfg.enable [
+        ]
+        ++ optionals cfg.enable [
           # isolate the GPU
           "vfio-pci.ids=${concatStringsSep "," gpuIDs}"
           # fix for using secondary GPU as primary?
@@ -53,7 +66,6 @@ in {
     environment.systemPackages = with pkgs; [ virt-manager ];
 
     # mount VFIO drivers in a consistent location
-    systemd.tmpfiles.rules =
-      [ "L+ /var/lib/libvirt/drivers/win-virtio - - - - ${win-virtio-iso}" ];
+    systemd.tmpfiles.rules = [ "L+ /var/lib/libvirt/drivers/win-virtio - - - - ${win-virtio-iso}" ];
   };
 }

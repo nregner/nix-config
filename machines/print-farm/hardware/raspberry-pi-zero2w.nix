@@ -1,4 +1,11 @@
-{ config, modulesPath, pkgs, lib, ... }: {
+{
+  config,
+  modulesPath,
+  pkgs,
+  lib,
+  ...
+}:
+{
   imports = [
     # "${modulesPath}/profiles/minimal.nix"
     "${modulesPath}/installer/sd-card/sd-image-aarch64.nix"
@@ -36,7 +43,11 @@
     # TODO doesn't work
     # kernelPackages = pkgs.linuxKernel.packages.linux_rpi3;
 
-    initrd.availableKernelModules = [ "xhci_pci" "usbhid" "usb_storage" ];
+    initrd.availableKernelModules = [
+      "xhci_pci"
+      "usbhid"
+      "usb_storage"
+    ];
     loader = {
       grub.enable = false;
       generic-extlinux-compatible.enable = true;

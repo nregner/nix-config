@@ -1,4 +1,12 @@
-{ inputs, self, config, pkgs, lib, ... }: {
+{
+  inputs,
+  self,
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
   imports = [
     inputs.mac-app-util.darwinModules.default
     ../nixos/base/nix.nix
@@ -29,12 +37,11 @@
 
   # Hack to make pam-reattach work
   # until https://github.com/LnL7/nix-darwin/pull/662
-  environment.etc."pam.d/sudo_local".text =
-    lib.mkIf config.security.pam.enableSudoTouchIdAuth ''
-      # Written by nix-darwin
-      auth       optional       ${pkgs.pam-reattach}/lib/pam/pam_reattach.so
-      auth       sufficient     pam_tid.so
-    '';
+  environment.etc."pam.d/sudo_local".text = lib.mkIf config.security.pam.enableSudoTouchIdAuth ''
+    # Written by nix-darwin
+    auth       optional       ${pkgs.pam-reattach}/lib/pam/pam_reattach.so
+    auth       sufficient     pam_tid.so
+  '';
 
   system.keyboard = {
     enableKeyMapping = true;

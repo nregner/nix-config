@@ -1,6 +1,18 @@
-{ pkgsCross, stdenv, klipper, python3, gnumake, pkg-config, libusb
-, writeShellApplication, mkShell, wrapCCWith, gcc-arm-embedded, bintools
-, newlib-nano }:
+{
+  pkgsCross,
+  stdenv,
+  klipper,
+  python3,
+  gnumake,
+  pkg-config,
+  libusb,
+  writeShellApplication,
+  mkShell,
+  wrapCCWith,
+  gcc-arm-embedded,
+  bintools,
+  newlib-nano,
+}:
 let
   firmware = stdenv.mkDerivation {
     name = "klipper-rp2040-firmware";
@@ -11,12 +23,16 @@ let
       gnumake
       pkg-config
       libusb
-      (let libc = pkgsCross.arm-embedded.newlib-nano;
-      in wrapCCWith {
-        cc = gcc-arm-embedded;
-        inherit libc;
-        bintools = bintools.override { inherit libc; };
-      })
+      (
+        let
+          libc = pkgsCross.arm-embedded.newlib-nano;
+        in
+        wrapCCWith {
+          cc = gcc-arm-embedded;
+          inherit libc;
+          bintools = bintools.override { inherit libc; };
+        }
+      )
     ];
 
     configurePhase = ''
@@ -38,9 +54,13 @@ let
       cp out/klipper.uf2 $out
     '';
   };
-in writeShellApplication {
+in
+writeShellApplication {
   name = "klipper-flash-rp2040";
   text = ''${firmware}/rp2040_flash ${firmware}/klipper.uf2 "$@"'';
-} // {
-  passthru = { inherit firmware; };
+}
+// {
+  passthru = {
+    inherit firmware;
+  };
 }

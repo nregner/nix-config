@@ -1,6 +1,6 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   imports = [
-    #
     ../base
     ./fhs.nix
     ./nix.nix

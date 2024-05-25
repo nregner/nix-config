@@ -1,8 +1,11 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+{
   services.gitea = {
     enable = true;
     package = pkgs.unstable.gitea;
-    lfs = { enable = true; };
+    lfs = {
+      enable = true;
+    };
     settings = {
       service.DISABLE_REGISTRATION = true;
       server.DOMAIN = "git.nregner.net";
@@ -11,9 +14,7 @@
   };
 
   nginx.subdomain.git = {
-    "/".proxyPass = "http://127.0.0.1:${
-        toString config.services.gitea.settings.server.HTTP_PORT
-      }/";
+    "/".proxyPass = "http://127.0.0.1:${toString config.services.gitea.settings.server.HTTP_PORT}/";
   };
 
   sops.secrets.gitea-github-mirror = { };
@@ -23,7 +24,9 @@
     requires = [ "network-online.target" ];
     wantedBy = [ "timers.target" ];
 
-    timerConfig = { OnCalendar = "daily"; };
+    timerConfig = {
+      OnCalendar = "daily";
+    };
   };
 
   systemd.services.gitea-github-mirror = {
@@ -41,6 +44,8 @@
 
   services.nregner.backups.gitea = {
     paths = [ config.services.gitea.stateDir ];
-    restic = { s3 = { }; };
+    restic = {
+      s3 = { };
+    };
   };
 }

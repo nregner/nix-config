@@ -1,4 +1,10 @@
-{ inputs, config, lib, ... }: {
+{
+  inputs,
+  config,
+  lib,
+  ...
+}:
+{
   imports = [ inputs.hydra-sentinel.darwinModules.client ];
 
   options.services.nregner.hydra-builder = {
@@ -8,7 +14,9 @@
   config = lib.mkIf config.services.nregner.hydra-builder.enable {
     services.hydra-sentinel-client = {
       enable = true;
-      settings = { server_addr = "sagittarius:3002"; };
+      settings = {
+        server_addr = "sagittarius:3002";
+      };
     };
   };
 }

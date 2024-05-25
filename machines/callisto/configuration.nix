@@ -1,12 +1,27 @@
-{ config, lib, pkgs, ... }: {
-  imports =
-    [ ../../modules/nixos/desktop ./disko.nix ./hardware-configuration.nix ];
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
+  imports = [
+    ../../modules/nixos/desktop
+    ./disko.nix
+    ./hardware-configuration.nix
+  ];
 
   # bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.supportedFilesystems =
-    lib.mkForce [ "vfat" "fat32" "exfat" "ext4" "btrfs" "ntfs" ];
+  boot.supportedFilesystems = lib.mkForce [
+    "vfat"
+    "fat32"
+    "exfat"
+    "ext4"
+    "btrfs"
+    "ntfs"
+  ];
 
   # networking
   networking.hostName = "callisto";
@@ -65,8 +80,10 @@
     # enableOnBoot = false; # lazy start with docker.socket
     # extraOptions = "--insecure-registry sagittarius:5000";
     daemon.settings = {
-      insecure-registries =
-        [ "http://sagittarius:5000" "http://100.92.148.118:5000" ];
+      insecure-registries = [
+        "http://sagittarius:5000"
+        "http://100.92.148.118:5000"
+      ];
     };
     storageDriver = "btrfs";
   };
@@ -85,10 +102,12 @@
     freeMemThreshold = 1; # no swap, let it get pretty full...
   };
 
-  formatConfigs.install-iso = { config, ... }: {
-    networking.wireless.enable = false;
-    isoImage.squashfsCompression = "zstd"; # -Xcompression-level 1
-  };
+  formatConfigs.install-iso =
+    { config, ... }:
+    {
+      networking.wireless.enable = false;
+      isoImage.squashfsCompression = "zstd"; # -Xcompression-level 1
+    };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

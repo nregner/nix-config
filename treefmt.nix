@@ -1,7 +1,11 @@
-{ pkgs }: {
+{ pkgs }:
+{
   projectRootFile = "flake.nix";
   programs = {
-    nixfmt.enable = true;
+    nixfmt-rfc-style = {
+      enable = true;
+      package = pkgs.unstable.nixfmt-rfc-style;
+    };
     rustfmt.enable = true;
     taplo.enable = true;
   };

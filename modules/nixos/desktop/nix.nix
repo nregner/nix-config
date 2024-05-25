@@ -1,4 +1,5 @@
-{ inputs, ... }: {
+{ inputs, ... }:
+{
   nix.registry = {
     # pin the flake registry to inputs to avoid extra downloads
     nixpkgs.flake = inputs.nixpkgs;

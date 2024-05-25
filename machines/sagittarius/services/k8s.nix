@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
   services.k3s = {
     enable = true;
     package = pkgs.unstable.k3s;

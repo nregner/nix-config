@@ -1,15 +1,23 @@
-{ sources, config, pkgs, ... }:
+{
+  sources,
+  config,
+  pkgs,
+  ...
+}:
 let
   yamlFormat = pkgs.formats.yaml { };
-  elasticsearchHost =
-    "http://127.0.0.1:${toString config.services.elasticsearch.port}";
-in {
+  elasticsearchHost = "http://127.0.0.1:${toString config.services.elasticsearch.port}";
+in
+{
   services.elasticsearch = {
     enable = true;
     package = pkgs.unstable.elasticsearch7;
     listenAddress = "0.0.0.0";
     port = 9201;
-    extraJavaOptions = [ "-Xms4G" "-Xmx4G" ];
+    extraJavaOptions = [
+      "-Xms4G"
+      "-Xmx4G"
+    ];
     extraConf = ''
       xpack.security.enabled: false
       xpack.security.transport.ssl.enabled: false
@@ -30,12 +38,14 @@ in {
         # since = "-7d";
 
         # https://www.elastic.co/guide/en/beats/filebeat/7.17/defining-processors.html
-        processors = [{
-          drop_event = {
-            "when.equals.systemd.unit" = "hydra-queue-runner.service";
-            "when.gt.syslog.priority" = 5;
-          };
-        }];
+        processors = [
+          {
+            drop_event = {
+              "when.equals.systemd.unit" = "hydra-queue-runner.service";
+              "when.gt.syslog.priority" = 5;
+            };
+          }
+        ];
       };
     };
     settings.output.elasticsearch.hosts = [ elasticsearchHost ];
@@ -82,7 +92,10 @@ in {
         enabled = true;
         period = "10s";
         processes = [ ".*" ];
-        cpu.metrics = [ "percentages" "normalized_percentages" ];
+        cpu.metrics = [
+          "percentages"
+          "normalized_percentages"
+        ];
         core.metrics = [ "percentages" ];
       };
       # https://www.elastic.co/guide/en/beats/metricbeat/7.17/metricbeat-module-docker.html
@@ -113,12 +126,15 @@ in {
     imageFile = sources.kibana.src;
     image = "${imageFile.imageName}:${imageFile.imageTag}";
     volumes = [
-      (let
-        kibana = yamlFormat.generate "kibana.yml" {
-          "server.publicBaseUrl" = "https://kibana.nregner.net";
-          "elasticsearch.hosts" = [ elasticsearchHost ];
-        };
-      in "${kibana}:/usr/share/kibana/config/kibana.yml")
+      (
+        let
+          kibana = yamlFormat.generate "kibana.yml" {
+            "server.publicBaseUrl" = "https://kibana.nregner.net";
+            "elasticsearch.hosts" = [ elasticsearchHost ];
+          };
+        in
+        "${kibana}:/usr/share/kibana/config/kibana.yml"
+      )
     ];
     extraOptions = [ "--net=host" ];
   };

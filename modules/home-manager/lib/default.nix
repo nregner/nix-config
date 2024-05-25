@@ -1,1 +1,6 @@
-{ imports = [ ./flake-symlink.nix ./formats.nix ]; }
+{
+  imports = [
+    ./flake-symlink.nix
+    ./formats.nix
+  ];
+}

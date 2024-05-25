@@ -1,6 +1,14 @@
-{ sources, config, lib, pkgs, ... }:
-let cfg = config.print-farm.klipper;
-in {
+{
+  sources,
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+let
+  cfg = config.print-farm.klipper;
+in
+{
   options.print-farm.klipper = {
     enable = lib.mkEnableOption (lib.mkDoc "Enable Klipper profile");
 
@@ -65,7 +73,11 @@ in {
       settings = {
         authorization = {
           cors_domains = [ "*" ];
-          trusted_clients = [ "127.0.0.0/8" "192.168.0.0/16" "100.0.0.0/8" ];
+          trusted_clients = [
+            "127.0.0.0/8"
+            "192.168.0.0/16"
+            "100.0.0.0/8"
+          ];
         };
         history = { };
         # required by KAMP
@@ -81,16 +93,20 @@ in {
       enable = true;
       package = pkgs.unstable.mainsail;
     };
-    services.nginx = { clientMaxBodySize = "1G"; };
-
-    networking.firewall = let
-      ports = [
-        config.services.nginx.defaultHTTPListenPort
-        config.services.moonraker.port
-      ];
-    in {
-      allowedTCPPorts = ports;
-      allowedUDPPorts = ports;
+    services.nginx = {
+      clientMaxBodySize = "1G";
     };
+
+    networking.firewall =
+      let
+        ports = [
+          config.services.nginx.defaultHTTPListenPort
+          config.services.moonraker.port
+        ];
+      in
+      {
+        allowedTCPPorts = ports;
+        allowedUDPPorts = ports;
+      };
   };
 }

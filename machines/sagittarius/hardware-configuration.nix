@@ -1,4 +1,11 @@
-{ inputs, config, lib, modulesPath, ... }: {
+{
+  inputs,
+  config,
+  lib,
+  modulesPath,
+  ...
+}:
+{
   imports = [
     "${modulesPath}/installer/scan/not-detected.nix"
     inputs.nixos-hardware.nixosModules.common-cpu-intel
@@ -9,10 +16,20 @@
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
     kernelParams = [ "console=tty0" ];
-    supportedFilesystems =
-      lib.mkForce [ "vfat" "fat32" "exfat" "ext4" "btrfs" ];
-    initrd.availableKernelModules =
-      [ "ahci" "xhci_pci" "ehci_pci" "usb_storage" "sd_mod" ];
+    supportedFilesystems = lib.mkForce [
+      "vfat"
+      "fat32"
+      "exfat"
+      "ext4"
+      "btrfs"
+    ];
+    initrd.availableKernelModules = [
+      "ahci"
+      "xhci_pci"
+      "ehci_pci"
+      "usb_storage"
+      "sd_mod"
+    ];
     initrd.kernelModules = [ ];
     kernelModules = [ "kvm-intel" ];
     extraModulePackages = [ ];
@@ -21,31 +38,46 @@
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/bed76273-18ca-45c6-9008-93a5332f7608";
     fsType = "btrfs";
-    options = [ "subvol=@" "noatime" ];
+    options = [
+      "subvol=@"
+      "noatime"
+    ];
   };
 
   fileSystems."/home" = {
     device = "/dev/disk/by-uuid/bed76273-18ca-45c6-9008-93a5332f7608";
     fsType = "btrfs";
-    options = [ "subvol=@home" "noatime" ];
+    options = [
+      "subvol=@home"
+      "noatime"
+    ];
   };
 
   fileSystems."/var/log" = {
     device = "/dev/disk/by-uuid/bed76273-18ca-45c6-9008-93a5332f7608";
     fsType = "btrfs";
-    options = [ "subvol=@var-lib" "noatime" ];
+    options = [
+      "subvol=@var-lib"
+      "noatime"
+    ];
   };
 
   fileSystems."/var/lib" = {
     device = "/dev/disk/by-uuid/bed76273-18ca-45c6-9008-93a5332f7608";
     fsType = "btrfs";
-    options = [ "subvol=@var-log" "noatime" ];
+    options = [
+      "subvol=@var-log"
+      "noatime"
+    ];
   };
 
   fileSystems."/nix" = {
     device = "/dev/disk/by-uuid/bed76273-18ca-45c6-9008-93a5332f7608";
     fsType = "btrfs";
-    options = [ "subvol=@nix" "noatime" ];
+    options = [
+      "subvol=@nix"
+      "noatime"
+    ];
   };
 
   fileSystems."/boot" = {
@@ -73,6 +105,5 @@
   };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.intel.updateMicrocode =
-    lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

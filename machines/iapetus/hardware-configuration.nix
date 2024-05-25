@@ -1,4 +1,12 @@
-{ inputs, config, lib, pkgs, modulesPath, ... }: {
+{
+  inputs,
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
+}:
+{
   imports = [
     "${modulesPath}/installer/scan/not-detected.nix"
     inputs.nixos-hardware.nixosModules.common-cpu-amd
@@ -8,10 +16,22 @@
   boot = {
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
-    supportedFilesystems =
-      lib.mkForce [ "vfat" "fat32" "exfat" "ext4" "btrfs" "ntfs" ];
-    initrd.availableKernelModules =
-      [ "nvme" "ahci" "xhci_pci" "usbhid" "uas" "sd_mod" ];
+    supportedFilesystems = lib.mkForce [
+      "vfat"
+      "fat32"
+      "exfat"
+      "ext4"
+      "btrfs"
+      "ntfs"
+    ];
+    initrd.availableKernelModules = [
+      "nvme"
+      "ahci"
+      "xhci_pci"
+      "usbhid"
+      "uas"
+      "sd_mod"
+    ];
     initrd.kernelModules = [ ];
     kernelModules = [ "kvm-amd" ];
     extraModulePackages = [ ];
@@ -26,31 +46,46 @@
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/432fbe74-ed01-4696-aecb-59028c69531b";
     fsType = "btrfs";
-    options = [ "subvol=root" "noatime" ];
+    options = [
+      "subvol=root"
+      "noatime"
+    ];
   };
 
   fileSystems."/home" = {
     device = "/dev/disk/by-uuid/432fbe74-ed01-4696-aecb-59028c69531b";
     fsType = "btrfs";
-    options = [ "subvol=home" "noatime" ];
+    options = [
+      "subvol=home"
+      "noatime"
+    ];
   };
 
   fileSystems."/nix" = {
     device = "/dev/disk/by-uuid/432fbe74-ed01-4696-aecb-59028c69531b";
     fsType = "btrfs";
-    options = [ "subvol=nix" "noatime" ];
+    options = [
+      "subvol=nix"
+      "noatime"
+    ];
   };
 
   fileSystems."/var/lib" = {
     device = "/dev/disk/by-uuid/432fbe74-ed01-4696-aecb-59028c69531b";
     fsType = "btrfs";
-    options = [ "subvol=var-lib" "noatime" ];
+    options = [
+      "subvol=var-lib"
+      "noatime"
+    ];
   };
 
   fileSystems."/var/log" = {
     device = "/dev/disk/by-uuid/432fbe74-ed01-4696-aecb-59028c69531b";
     fsType = "btrfs";
-    options = [ "subvol=var-log" "noatime" ];
+    options = [
+      "subvol=var-log"
+      "noatime"
+    ];
     neededForBoot = true;
   };
 
@@ -87,8 +122,7 @@
     # for `opengl.driSupport32Bit` which is enabled by the steam config.
     # https://github.com/NixOS/nixpkgs/blob/6d6682772b62652b5019ffd7572cea1f39b72b20/nixos/modules/hardware/video/nvidia.nix#L395C45-L395C45
     # https://github.com/skykanin/dotfiles/commit/a6c71c022efb8e4ec404f8718edd9661b850876f
-    extraPackages32 =
-      pkgs.lib.mkForce [ pkgs.linuxPackages_latest.nvidia_x11.lib32 ];
+    extraPackages32 = pkgs.lib.mkForce [ pkgs.linuxPackages_latest.nvidia_x11.lib32 ];
   };
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
@@ -100,6 +134,5 @@
   # networking.interfaces.wlo1.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.amd.updateMicrocode =
-    lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

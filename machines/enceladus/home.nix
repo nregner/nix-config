@@ -1,4 +1,10 @@
-{ inputs, lib, pkgs, ... }: {
+{
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
+{
   imports = [
     ../../modules/home-manager/darwin
     ../../modules/home-manager/desktop
@@ -6,14 +12,20 @@
     inputs.mac-app-util.homeManagerModules.default
   ];
 
-  programs.alacritty.settings = { font = { size = lib.mkForce 11; }; };
+  programs.alacritty.settings = {
+    font = {
+      size = lib.mkForce 11;
+    };
+  };
 
   home = {
     username = "nregner";
     homeDirectory = "/Users/nregner";
     flakePath = "/Users/nregner/nix-config";
     # Use a case-sensitive file system for nix builds
-    sessionVariables = { TMPDIR = "/Volumes/tmp"; };
+    sessionVariables = {
+      TMPDIR = "/Volumes/tmp";
+    };
   };
 
   home.packages = with pkgs.unstable; [
@@ -28,7 +40,7 @@
 
     # nix
     nix-output-monitor
-    nixfmt
+    nixfmt-rfc-style
     # nix-du # nix-du -s=500MB | xdot -
     xdot
     nixos-rebuild

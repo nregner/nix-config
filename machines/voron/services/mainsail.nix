@@ -1,9 +1,12 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   services.mainsail = {
     enable = true;
     package = pkgs.unstable.mainsail;
   };
-  services.nginx = { clientMaxBodySize = "1G"; };
+  services.nginx = {
+    clientMaxBodySize = "1G";
+  };
 
   systemd.services.ustreamer = {
     description = "Mainsail webcam stream";
@@ -23,9 +26,15 @@
     ACTION=="add", ENV{SUBSYSTEM}=="video4linux", RUN+="${pkgs.systemd}/bin/systemctl restart ustreamer.service"
   '';
 
-  networking.firewall = let ports = [ 80 81 ];
-  in {
-    allowedTCPPorts = ports;
-    allowedUDPPorts = ports;
-  };
+  networking.firewall =
+    let
+      ports = [
+        80
+        81
+      ];
+    in
+    {
+      allowedTCPPorts = ports;
+      allowedUDPPorts = ports;
+    };
 }

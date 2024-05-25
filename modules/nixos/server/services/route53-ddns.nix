@@ -1,8 +1,15 @@
 # derived from https://github.com/NixOS/nixpkgs/blob/nixos-23.05/nixos/modules/services/networking/r53-ddns.nix
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
-let cfg = config.services.route53-ddns;
-in {
+let
+  cfg = config.services.route53-ddns;
+in
+{
   options = {
     services.route53-ddns = {
       enable = mkEnableOption "route53-ddns";
@@ -13,7 +20,10 @@ in {
       };
 
       ipType = mkOption {
-        type = types.enum [ "public" "lan" ];
+        type = types.enum [
+          "public"
+          "lan"
+        ];
         description = "IP address to use";
       };
 
@@ -50,7 +60,9 @@ in {
       requires = [ "network-online.target" ];
       wantedBy = [ "timers.target" ];
 
-      timerConfig = { OnCalendar = cfg.interval; };
+      timerConfig = {
+        OnCalendar = cfg.interval;
+      };
     };
 
     systemd.services.route53-ddns = {

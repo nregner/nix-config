@@ -1,5 +1,10 @@
 # source: https://github.com/hercules-ci/nixflk
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 let
   cfg = config.services.qbittorrent;
@@ -9,7 +14,8 @@ let
     name = "qBittorrent.conf";
     text = lib.generators.toINI { } cfg.settings;
   };
-in {
+in
+{
   options.services.qbittorrent = {
     enable = mkOption {
       type = types.bool;
@@ -77,9 +83,7 @@ in {
     environment.systemPackages = [ pkgs.qbittorrent ];
 
     nixpkgs.overlays = [
-      (final: prev: {
-        qbittorrent = prev.qbittorrent.override { guiSupport = false; };
-      })
+      (final: prev: { qbittorrent = prev.qbittorrent.override { guiSupport = false; }; })
     ];
 
     networking.firewall = mkIf cfg.openFirewall {
@@ -124,7 +128,10 @@ in {
       };
     };
 
-    users.groups =
-      mkIf (cfg.group == "qbittorrent") { qbittorrent = { gid = null; }; };
+    users.groups = mkIf (cfg.group == "qbittorrent") {
+      qbittorrent = {
+        gid = null;
+      };
+    };
   };
 }

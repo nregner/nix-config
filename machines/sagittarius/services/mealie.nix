@@ -1,20 +1,26 @@
-{ inputs, config, pkgs, ... }: {
+{
+  inputs,
+  config,
+  pkgs,
+  ...
+}:
+{
   imports = [ inputs.mealie.nixosModules.default ];
 
   services.mealie-nightly = {
     enable = true;
-    package =
-      inputs.mealie.packages.${pkgs.stdenv.hostPlatform.system}.mealie-nightly;
+    package = inputs.mealie.packages.${pkgs.stdenv.hostPlatform.system}.mealie-nightly;
   };
 
   nginx.subdomain.mealie = {
-    "/".proxyPass =
-      "http://127.0.0.1:${toString config.services.mealie-nightly.port}/";
+    "/".proxyPass = "http://127.0.0.1:${toString config.services.mealie-nightly.port}/";
   };
 
   services.nregner.backups.mealie = {
     paths = [ config.services.mealie-nightly.stateDir ];
-    restic = { s3 = { }; };
+    restic = {
+      s3 = { };
+    };
   };
 
   # nix.settings = {

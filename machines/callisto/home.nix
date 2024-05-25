@@ -1,4 +1,5 @@
-{ lib, pkgs, ... }: {
+{ lib, pkgs, ... }:
+{
   imports = [
     ../../modules/home-manager/desktop
     ../../modules/home-manager/desktop/gnome
@@ -16,7 +17,11 @@
     screen
   ];
 
-  programs.alacritty.settings = { font = { size = lib.mkForce 11; }; };
+  programs.alacritty.settings = {
+    font = {
+      size = lib.mkForce 11;
+    };
+  };
 
   services.easyeffects.enable = true;
 

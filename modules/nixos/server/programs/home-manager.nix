@@ -1,9 +1,18 @@
-{ self, sources, inputs, outputs, config, pkgs, lib, ... }: {
+{
+  self,
+  sources,
+  inputs,
+  outputs,
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
   imports = [ inputs.home-manager.nixosModules.home-manager ];
 
   options.programs.nregner.home-manager = {
-    enable =
-      lib.mkEnableOption "Enable minimal home-manager profile for server usage";
+    enable = lib.mkEnableOption "Enable minimal home-manager profile for server usage";
   };
 
   config = lib.mkIf config.programs.nregner.home-manager.enable {
@@ -13,7 +22,14 @@
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
-      extraSpecialArgs = { inherit self inputs outputs sources; };
+      extraSpecialArgs = {
+        inherit
+          self
+          inputs
+          outputs
+          sources
+          ;
+      };
       users.nregner = {
         imports = [ ../../../home-manager/server ];
 

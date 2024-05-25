@@ -1,4 +1,11 @@
-{ inputs, pkgs, lib, ... }: {
+{
+  self,
+  inputs,
+  pkgs,
+  lib,
+  ...
+}:
+{
   imports = [ inputs.catppuccin-nix.homeManagerModules.catppuccin ];
 
   catppuccin = {

@@ -1,5 +1,10 @@
 # https://github.com/NixOS/nixpkgs/blob/master/doc/languages-frameworks/rust.section.md
-{ lib, rustPlatform, cmake, mkShell }:
+{
+  lib,
+  rustPlatform,
+  cmake,
+  mkShell,
+}:
 let
   pkg = rustPlatform.buildRustPackage {
     pname = "route53-ddns";
@@ -22,5 +27,5 @@ let
       packages = pkg.nativeBuildInputs ++ pkg.buildInputs;
     };
   };
-in pkg
-
+in
+pkg

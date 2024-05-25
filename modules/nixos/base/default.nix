@@ -1,4 +1,11 @@
-{ self, inputs, pkgs, lib, ... }: {
+{
+  self,
+  inputs,
+  pkgs,
+  lib,
+  ...
+}:
+{
   imports = [
     inputs.nixos-generators.nixosModules.all-formats
     inputs.catppuccin-nix.nixosModules.catppuccin
@@ -25,14 +32,17 @@
     dates = "weekly";
   };
 
-  system.nixos.tags = let src = self.sourceInfo;
-  in [
-    "${src.shortRev or src.dirtyShortRev}-${
-      (lib.concatStringsSep "-"
-        (builtins.match "([[:digit:]]{4})([[:digit:]]{2})([[:digit:]]{2}).*"
-          (src.lastModifiedDate or "")))
-    }"
-  ];
+  system.nixos.tags =
+    let
+      src = self.sourceInfo;
+    in
+    [
+      "${src.shortRev or src.dirtyShortRev}-${
+        (lib.concatStringsSep "-" (
+          builtins.match "([[:digit:]]{4})([[:digit:]]{2})([[:digit:]]{2}).*" (src.lastModifiedDate or "")
+        ))
+      }"
+    ];
 
   boot.tmp.cleanOnBoot = true;
 

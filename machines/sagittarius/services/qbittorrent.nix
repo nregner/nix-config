@@ -1,4 +1,5 @@
-{ config, ... }: {
+{ config, ... }:
+{
   services.qbittorrent = {
     enable = true;
     port = 8081;
@@ -13,8 +14,7 @@
   };
 
   nginx.subdomain.qb = {
-    "/".proxyPass =
-      "http://127.0.0.1:${toString config.services.qbittorrent.port}/";
+    "/".proxyPass = "http://127.0.0.1:${toString config.services.qbittorrent.port}/";
   };
 
   users.users.nregner.extraGroups = [ config.services.qbittorrent.group ];

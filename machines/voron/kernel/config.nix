@@ -430,8 +430,7 @@
   CONFIG_CC_HAVE_STACKPROTECTOR_SYSREG = "y";
   CONFIG_CC_IS_GCC = "y";
   CONFIG_CC_OPTIMIZE_FOR_SIZE = "y";
-  CONFIG_CC_VERSION_TEXT =
-    "aarch64-linux-gnu-gcc (Ubuntu 11.3.0-1ubuntu1~22.04) 11.3.0";
+  CONFIG_CC_VERSION_TEXT = "aarch64-linux-gnu-gcc (Ubuntu 11.3.0-1ubuntu1~22.04) 11.3.0";
   CONFIG_CDROM = "y";
   CONFIG_CEC_CORE = "y";
   CONFIG_CEC_NOTIFIER = "y";

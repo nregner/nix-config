@@ -1,11 +1,24 @@
-{ inputs, sources, pkgs, lib, ... }: {
+{
+  inputs,
+  sources,
+  pkgs,
+  lib,
+  ...
+}:
+{
   imports = [ inputs.nixos-hardware.nixosModules.common-pc-ssd ];
 
   boot = {
-    kernelPackages = pkgs.linuxPackagesFor
-      (pkgs.callPackage ./kernel { inherit (sources.linux-rockchip) src; });
+    kernelPackages = pkgs.linuxPackagesFor (
+      pkgs.callPackage ./kernel { inherit (sources.linux-rockchip) src; }
+    );
 
-    supportedFilesystems = lib.mkForce [ "vfat" "fat32" "exfat" "ext4" ];
+    supportedFilesystems = lib.mkForce [
+      "vfat"
+      "fat32"
+      "exfat"
+      "ext4"
+    ];
 
     loader = {
       grub.enable = false;

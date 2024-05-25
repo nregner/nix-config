@@ -1,6 +1,20 @@
-{ lib, writeShellScript, buildFHSEnvBubblewrap, stdenvNoCC, fetchurl
-, autoPatchelfHook, dpkg, nss, libvorbis, libdrm, libGL, wayland
-, xkeyboard_config, libthai, makeDesktopItem }:
+{
+  lib,
+  writeShellScript,
+  buildFHSEnvBubblewrap,
+  stdenvNoCC,
+  fetchurl,
+  autoPatchelfHook,
+  dpkg,
+  nss,
+  libvorbis,
+  libdrm,
+  libGL,
+  wayland,
+  xkeyboard_config,
+  libthai,
+  makeDesktopItem,
+}:
 
 let
   pname = "insync";
@@ -33,14 +47,23 @@ let
 
     src = fetchurl {
       # Find a binary from https://www.insynchq.com/downloads/linux#ubuntu.
-      url =
-        "https://cdn.insynchq.com/builds/linux/insync_${version}-lunar_amd64.deb";
+      url = "https://cdn.insynchq.com/builds/linux/insync_${version}-lunar_amd64.deb";
       sha256 = "sha256-BxTFtQ1rAsOuhKnH5vsl3zkM7WOd+vjA4LKZGxl4jk0=";
     };
 
-    buildInputs = [ nss libvorbis libdrm libGL wayland libthai ];
+    buildInputs = [
+      nss
+      libvorbis
+      libdrm
+      libGL
+      wayland
+      libthai
+    ];
 
-    nativeBuildInputs = [ autoPatchelfHook dpkg ];
+    nativeBuildInputs = [
+      autoPatchelfHook
+      dpkg
+    ];
 
     unpackPhase = ''
       dpkg-deb --fsys-tarfile $src | tar -x --no-same-permissions --no-same-owner
@@ -79,12 +102,16 @@ let
     # NB! This did the trick, otherwise it segfaults! However I don't understand why!
     dontStrip = true;
   };
-
-in buildFHSEnvBubblewrap {
+in
+buildFHSEnvBubblewrap {
   name = pname;
   inherit meta;
 
-  targetPkgs = pkgs: with pkgs; [ insync-pkg libudev0-shim ];
+  targetPkgs =
+    pkgs: with pkgs; [
+      insync-pkg
+      libudev0-shim
+    ];
 
   runScript = writeShellScript "insync-wrapper.sh" ''
     # QT_STYLE_OVERRIDE was used to suppress a QT warning, it should have no actual effect for this binary.

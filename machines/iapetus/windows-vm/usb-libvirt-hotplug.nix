@@ -8,7 +8,8 @@ let
     text = builtins.readFile ./usb-libvirt-hotplug.sh;
   };
   command = "${lib.getExe script} ${domain}";
-in {
+in
+{
   # find: `udevadm monitor --property --udev --subsystem-match=usb/usb_device`
   # test: `journalctl -f`
   services.udev.extraRules = ''

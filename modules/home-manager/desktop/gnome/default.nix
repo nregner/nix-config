@@ -1,4 +1,5 @@
-{ lib, pkgs, ... }: {
+{ lib, pkgs, ... }:
+{
   home.packages = with pkgs; [
     gnomeExtensions.tray-icons-reloaded
     gnomeExtensions.vitals
@@ -45,10 +46,15 @@
         "sound-output-device-chooser@kgshank.net"
         "space-bar@luchrioh"
       ];
-      favorite-apps =
-        [ "firefox.desktop" "org.gnome.Nautilus.desktop" "Alacritty.desktop" ];
+      favorite-apps = [
+        "firefox.desktop"
+        "org.gnome.Nautilus.desktop"
+        "Alacritty.desktop"
+      ];
     };
 
-    "org/gtk/settings/file-chooser" = { clock-format = "12h"; };
+    "org/gtk/settings/file-chooser" = {
+      clock-format = "12h";
+    };
   };
 }

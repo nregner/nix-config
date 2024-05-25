@@ -1,4 +1,5 @@
-{ lib, pkgs, ... }: {
+{ lib, pkgs, ... }:
+{
   imports = [
     ../../modules/home-manager/desktop
     ../../modules/home-manager/desktop/gnome
@@ -63,7 +64,7 @@
     # nix
     cachix
     nix-output-monitor
-    nixfmt
+    nixfmt-rfc-style
     nix-du # nix-du -s=500MB | xdot -
     nvfetcher
     hydra-cli
@@ -76,13 +77,15 @@
   xdg.desktopEntries.discord = {
     type = "Application";
     name = "Discord";
-    comment =
-      "All-in-one voice and text chat for gamers that's free, secure, and works on both your desktop and phone.";
+    comment = "All-in-one voice and text chat for gamers that's free, secure, and works on both your desktop and phone.";
     genericName = "Internet Messenger";
     # exec = "discord --enable-features=UseOzonePlatform --ozone-platform=wayland";
     exec = "discord --disable-gpu";
     icon = "discord";
-    categories = [ "Network" "InstantMessaging" ];
+    categories = [
+      "Network"
+      "InstantMessaging"
+    ];
   };
 
   # rustc -Z unstable-options --print target-spec-json | jq '.["llvm-target"]' -r
@@ -90,13 +93,14 @@
   # https://discourse.nixos.org/t/create-nix-develop-shell-for-rust-with-mold/35894/6
   home.file.".cargo/config.toml".source = pkgs.writeText "config.toml" ''
     [target.x86_64-unknown-linux-gnu]
-    linker = "${
-      (lib.getExe' ((pkgs.unstable.stdenvAdapters.useMoldLinker
-        pkgs.unstable.clangStdenv).cc) "clang")
-    }"
+    linker = "${(lib.getExe' ((pkgs.unstable.stdenvAdapters.useMoldLinker pkgs.unstable.clangStdenv).cc) "clang")}"
   '';
 
-  programs.alacritty.settings = { font = { size = lib.mkForce 11; }; };
+  programs.alacritty.settings = {
+    font = {
+      size = lib.mkForce 11;
+    };
+  };
 
   services.easyeffects.enable = true;
 

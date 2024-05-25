@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
   options.services.nregner.metrics = {
     enable = lib.mkEnableOption "Ship basic system-level metrics";
   };
@@ -30,7 +36,10 @@
           enabled = true;
           period = "10s";
           processes = [ ".*" ];
-          cpu.metrics = [ "percentages" "normalized_percentages" ];
+          cpu.metrics = [
+            "percentages"
+            "normalized_percentages"
+          ];
           core.metrics = [ "percentages" ];
         };
       };

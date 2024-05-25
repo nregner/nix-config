@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   programs.zsh = {
     enable = true;
     initExtra = ''
@@ -18,24 +19,29 @@
     # defaultKeymap = "viins";
     oh-my-zsh = {
       enable = true;
-      plugins = [ "aws" "git" "vi-mode" ];
+      plugins = [
+        "aws"
+        "git"
+        "vi-mode"
+      ];
       # theme = "robbyrussell";
     };
-    shellAliases = let
-      nixRebuild =
-        if pkgs.stdenv.isDarwin then "darwin-rebuild" else "nixos-rebuild";
-    in {
-      jqless = "jq -C | less -r";
+    shellAliases =
+      let
+        nixRebuild = if pkgs.stdenv.isDarwin then "darwin-rebuild" else "nixos-rebuild";
+      in
+      {
+        jqless = "jq -C | less -r";
 
-      nr = "${nixRebuild} --flake .";
-      nrs = "${nixRebuild} --flake . switch";
-      snr = "sudo ${nixRebuild} --flake .";
-      snrs = "sudo ${nixRebuild} --flake . switch";
+        nr = "${nixRebuild} --flake .";
+        nrs = "${nixRebuild} --flake . switch";
+        snr = "sudo ${nixRebuild} --flake .";
+        snrs = "sudo ${nixRebuild} --flake . switch";
 
-      hm = "home-manager --flake .";
-      hms = "home-manager --flake . switch";
+        hm = "home-manager --flake .";
+        hms = "home-manager --flake . switch";
 
-      npd = "nix profile diff-closures --profile /nix/var/nix/profiles/system";
-    };
+        npd = "nix profile diff-closures --profile /nix/var/nix/profiles/system";
+      };
   };
 }

@@ -1,10 +1,23 @@
-{ inputs', pkgs, treefmt, }: {
-  default =
-    pkgs.mkShell { packages = with pkgs.unstable; [ sops terraform treefmt ]; };
+{
+  inputs',
+  pkgs,
+  treefmt,
+}:
+{
+  default = pkgs.mkShell {
+    packages = with pkgs.unstable; [
+      sops
+      terraform
+      treefmt
+    ];
+  };
 
   bootstrap = pkgs.mkShell {
     NIX_CONFIG = "experimental-features = nix-command flakes";
-    nativeBuildInputs = with pkgs.unstable; [ nix git ];
+    nativeBuildInputs = with pkgs.unstable; [
+      nix
+      git
+    ];
     packages = [ inputs'.home-manager.packages.home-manager ];
   };
 }

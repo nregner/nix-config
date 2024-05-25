@@ -4,7 +4,10 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-aws-config = { version = "1.1.7", features = ["rustls", "behavior-version-latest"] }
+aws-config = { version = "1.1.7", features = [
+  "rustls",
+  "behavior-version-latest",
+] }
 aws-sdk-route53 = "1.27.0"
 clap = { version = "4.5.4", features = ["derive"] }
 hyper = "0.14.28"

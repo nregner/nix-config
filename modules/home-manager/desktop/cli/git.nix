@@ -1,11 +1,19 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
   programs.git = {
     enable = true;
     userName = "Nathan Regner";
     userEmail = "nathanregner@gmail.com";
     lfs.enable = true;
     extraConfig = {
-      push = { autoSetupRemote = true; };
+      push = {
+        autoSetupRemote = true;
+      };
       pull.rebase = true;
       rebase.updateRefs = true;
       rebase.autostash = true;
@@ -33,7 +41,9 @@
           -c color.diff.newMovedAlternativeDimmed='white dim'
           diff --ignore-blank-lines --color-moved=dimmed-zebra --color-moved-ws=ignore-all-space --minimal'';
       };
-      include = { path = "${config.xdg.configHome}/git/local"; };
+      include = {
+        path = "${config.xdg.configHome}/git/local";
+      };
     };
   };
 

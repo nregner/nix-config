@@ -1,7 +1,14 @@
 # sudo su hydra
 # hydra-create-user nregner --full-name "Nathan Regner" --email-address nathanregner@gmail.com --password-prompt --role admin
 
-{ inputs, config, lib, pkgs, ... }: {
+{
+  inputs,
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
   imports = [ inputs.hydra-sentinel.nixosModules.server ];
 
   services.hydra = {
@@ -15,8 +22,7 @@
       "/var/lib/hydra/machines"
       (pkgs.writeTextFile {
         name = "local-machine";
-        text =
-          "localhost ${pkgs.system} - 10 1 nixos-test,benchmark,big-parallel,kvm - -";
+        text = "localhost ${pkgs.system} - 10 1 nixos-test,benchmark,big-parallel,kvm - -";
       })
     ];
     extraConfig = ''
@@ -46,36 +52,49 @@
     listenHost = "0.0.0.0";
     listenPort = 3002;
     settings = {
-      allowed_ips = [ "192.168.0.0/16" "100.0.0.0/8" ];
-      github_webhook_secret_file =
-        config.sops.secrets.hydra-github-webhook-secret.path;
+      allowed_ips = [
+        "192.168.0.0/16"
+        "100.0.0.0/8"
+      ];
+      github_webhook_secret_file = config.sops.secrets.hydra-github-webhook-secret.path;
       build_machines = [
         {
           hostName = "enceladus";
           sshUser = "nregner";
           systems = [ "aarch64-darwin" ];
-          supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" ];
+          supportedFeatures = [
+            "nixos-test"
+            "benchmark"
+            "big-parallel"
+          ];
           maxJobs = 12;
           macAddress = "60:3e:5f:4e:4e:bc";
-          vms = [{
-            hostName = "enceladus-linux-vm";
-            sshUser = "nregner";
-            systems = [ "aarch64-linux" ];
-            supportedFeatures = [
-              "nixos-test"
-              "benchmark"
-              "big-parallel"
-              "kvm"
-              "gccarch-armv8-a"
-            ];
-            maxJobs = 8;
-          }];
+          vms = [
+            {
+              hostName = "enceladus-linux-vm";
+              sshUser = "nregner";
+              systems = [ "aarch64-linux" ];
+              supportedFeatures = [
+                "nixos-test"
+                "benchmark"
+                "big-parallel"
+                "kvm"
+                "gccarch-armv8-a"
+              ];
+              maxJobs = 8;
+            }
+          ];
         }
         {
           hostName = "iapetus";
           sshUser = "nregner";
           systems = [ "x86_64-linux" ];
-          supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+          supportedFeatures = [
+            "nixos-test"
+            "benchmark"
+            "big-parallel"
+            "kvm"
+          ];
           maxJobs = 12;
           speedFactor = 2;
           # macAddress = "00:d8:61:a3:ea:8c";
@@ -84,16 +103,20 @@
     };
   };
 
-  nix.extraOptions = let urls = [ "https:" "github:" ];
-  in ''
-    extra-allowed-uris = ${lib.concatStringsSep " " urls}
-  '';
+  nix.extraOptions =
+    let
+      urls = [
+        "https:"
+        "github:"
+      ];
+    in
+    ''
+      extra-allowed-uris = ${lib.concatStringsSep " " urls}
+    '';
 
   nginx.subdomain.hydra = {
     "/".proxyPass = "http://127.0.0.1:${toString config.services.hydra.port}/";
-    "/github/webhook".proxyPass = "http://127.0.0.1:${
-        toString config.services.hydra-sentinel-server.listenPort
-      }/webhook";
+    "/github/webhook".proxyPass = "http://127.0.0.1:${toString config.services.hydra-sentinel-server.listenPort}/webhook";
   };
 }
 
@@ -114,4 +137,3 @@
 #         StrictHostKeyChecking No
 #         UserKnownHostsFile /dev/null
 #         IdentityFile /var/lib/hydra/.ssh/id_ed25519
-

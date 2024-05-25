@@ -3,8 +3,7 @@ let
   sharedModifications = final: prev: {
     # FIXME: hack to bypass "FATAL: Module ahci not found" error
     # https://github.com/NixOS/nixpkgs/issues/154163#issuecomment-1350599022
-    makeModulesClosure = x:
-      prev.makeModulesClosure (x // { allowMissing = true; });
+    makeModulesClosure = x: prev.makeModulesClosure (x // { allowMissing = true; });
 
     hydra_unstable = prev.hydra_unstable.overrideAttrs (oldAttrs: {
       patches = (oldAttrs.patches or [ ]) ++ [
@@ -15,21 +14,25 @@ let
     });
 
     # disable xvfb-run tests to fix build on darwin
-    xdot = (prev.xdot.overridePythonAttrs
-      (oldAttrs: { nativeCheckInputs = [ ]; })).overrideAttrs
-      (oldAttrs: { doInstallCheck = false; });
+    xdot =
+      (prev.xdot.overridePythonAttrs (oldAttrs: {
+        nativeCheckInputs = [ ];
+      })).overrideAttrs
+        (oldAttrs: {
+          doInstallCheck = false;
+        });
   };
-in {
-  additions = final: _prev:
+in
+{
+  additions =
+    final: _prev:
     import ../pkgs {
       inherit inputs;
       pkgs = final;
     };
 
-  modifications = final: prev:
-    {
-      hyprland = final.unstable.hyprland;
-    } // sharedModifications final prev;
+  modifications =
+    final: prev: { hyprland = final.unstable.hyprland; } // sharedModifications final prev;
 
   unstable-packages = final: _prev: {
     unstable = import inputs.nixpkgs-unstable {

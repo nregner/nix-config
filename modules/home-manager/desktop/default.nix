@@ -1,6 +1,6 @@
-{ inputs, outputs, ... }: {
+{ outputs, ... }:
+{
   imports = [
-    #
     ../base
     ./alacritty.nix
     ./cli
@@ -11,7 +11,7 @@
   ];
 
   # standalone install - reimport nixpkgs
-  nixpkgs = import ../../../nixpkgs.nix { inherit inputs outputs; };
+  nixpkgs = import ../../../nixpkgs.nix { inherit outputs; };
 
   # Allow home-manager to manage itself
   programs.home-manager.enable = true;

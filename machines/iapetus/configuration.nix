@@ -1,4 +1,5 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+{
   imports = [
     # inputs.hyprland.nixosModules.default
     ../../modules/nixos/desktop
@@ -69,7 +70,8 @@
   services.nregner.hydra-builder.enable = true;
 
   # https://nixos.wiki/wiki/CCache#Derivation_CCache_2
-  environment.systemPackages = [ config.boot.kernelPackages.perf ]
+  environment.systemPackages =
+    [ config.boot.kernelPackages.perf ]
     ++ (with pkgs.unstable; [
       android-file-transfer # aft-mtp-mount ~/mnt
       gnome.nautilus-python
@@ -86,8 +88,10 @@
     # enableOnBoot = false; # lazy start with docker.socket
     # extraOptions = "--insecure-registry sagittarius:5000";
     daemon.settings = {
-      insecure-registries =
-        [ "http://sagittarius:5000" "http://100.92.148.118:5000" ];
+      insecure-registries = [
+        "http://sagittarius:5000"
+        "http://100.92.148.118:5000"
+      ];
     };
     storageDriver = "btrfs";
   };
@@ -108,10 +112,8 @@
 
   programs.steam = {
     enable = true;
-    remotePlay.openFirewall =
-      true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall =
-      true; # Open ports in the firewall for Source Dedicated Server
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
   };
 
   # This value determines the NixOS release from which the default

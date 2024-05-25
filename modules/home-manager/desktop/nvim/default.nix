@@ -1,4 +1,5 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+{
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -43,19 +44,20 @@
   xdg.configFile = {
     "nvim/lua".source = config.lib.file.mkFlakeSymlink ./lua;
     "nvim/after".source = config.lib.file.mkFlakeSymlink ./after;
-    "nvim/lazy-lock.json".source =
-      config.lib.file.mkFlakeSymlink ./lazy-lock.json;
+    "nvim/lazy-lock.json".source = config.lib.file.mkFlakeSymlink ./lazy-lock.json;
   };
 
   programs.zsh.shellAliases.vimdiff = "nvim -d";
 
   # https://github.com/jesseduffield/lazygit/wiki/Custom-Commands-Compendium
-  programs.lazygit.settings.customCommands = [{
-    key = "M";
-    command = "nvim -c DiffviewOpen";
-    description = "Open diffview.nvim";
-    context = "files";
-    loadingText = "opening diffview.nvim";
-    subprocess = true;
-  }];
+  programs.lazygit.settings.customCommands = [
+    {
+      key = "M";
+      command = "nvim -c DiffviewOpen";
+      description = "Open diffview.nvim";
+      context = "files";
+      loadingText = "opening diffview.nvim";
+      subprocess = true;
+    }
+  ];
 }

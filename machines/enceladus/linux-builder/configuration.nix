@@ -1,4 +1,5 @@
-{ self, lib, ... }: {
+{ self, lib, ... }:
+{
   imports = [ ../../../modules/nixos/server ];
 
   networking.hostName = "enceladus-linux-vm";
@@ -7,8 +8,7 @@
   sops.defaultSopsFile = null;
 
   users.users = {
-    nregner.openssh.authorizedKeys.keys =
-      lib.attrValues self.globals.ssh.allKeys;
+    nregner.openssh.authorizedKeys.keys = lib.attrValues self.globals.ssh.allKeys;
   };
 
   services.tailscaled-autoconnect.enable = true;
@@ -16,4 +16,3 @@
   # don't rebuild vm image on every commit
   system.nixos.tags = lib.mkForce [ ];
 }
-

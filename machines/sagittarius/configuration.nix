@@ -1,6 +1,6 @@
-{ config, lib, ... }: {
+{ config, lib, ... }:
+{
   imports = [
-    #
     ../../modules/nixos/server
     ./hardware-configuration.nix
     ./services
@@ -10,15 +10,22 @@
 
   programs.nregner.home-manager.enable = true;
 
-  nix.buildMachines = lib.mkForce [{
-    protocol = "ssh-ng";
-    hostName = "iapetus";
-    sshUser = "nregner";
-    systems = [ "x86_64-linux" ];
-    supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
-    maxJobs = 12;
-    speedFactor = 2;
-  }];
+  nix.buildMachines = lib.mkForce [
+    {
+      protocol = "ssh-ng";
+      hostName = "iapetus";
+      sshUser = "nregner";
+      systems = [ "x86_64-linux" ];
+      supportedFeatures = [
+        "nixos-test"
+        "benchmark"
+        "big-parallel"
+        "kvm"
+      ];
+      maxJobs = 12;
+      speedFactor = 2;
+    }
+  ];
 
   sops.defaultSopsFile = ./secrets.yaml;
 

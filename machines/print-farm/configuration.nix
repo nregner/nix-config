@@ -1,10 +1,29 @@
-{ self, config, lib, ... }: {
-  imports = [ ../../modules/nixos/server ./klipper ];
+{
+  self,
+  config,
+  lib,
+  ...
+}:
+{
+  imports = [
+    ../../modules/nixos/server
+    ./klipper
+  ];
 
   boot = {
-    supportedFilesystems = lib.mkForce [ "vfat" "ext4" "ntfs" "cifs" ];
+    supportedFilesystems = lib.mkForce [
+      "vfat"
+      "ext4"
+      "ntfs"
+      "cifs"
+    ];
     consoleLogLevel = lib.mkDefault 7;
-    initrd = { supportedFilesystems = lib.mkForce [ "vfat" "ext4" ]; };
+    initrd = {
+      supportedFilesystems = lib.mkForce [
+        "vfat"
+        "ext4"
+      ];
+    };
   };
 
   users.users.root.password = "root";

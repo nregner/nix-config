@@ -1,4 +1,10 @@
-{ inputs, config, pkgs, ... }: {
+{
+  inputs,
+  config,
+  pkgs,
+  ...
+}:
+{
   disabledModules = [
     "services/continuous-integration/github-runner.nix"
     "services/continuous-integration/github-runners.nix"

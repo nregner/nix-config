@@ -1,4 +1,5 @@
-{ self, lib, ... }: {
+{ self, lib, ... }:
+{
   networking.firewall.enable = true;
 
   services.openssh = {

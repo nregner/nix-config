@@ -1,4 +1,10 @@
-{ inputs, config, pkgs, ... }: {
+{
+  inputs,
+  config,
+  pkgs,
+  ...
+}:
+{
   imports = [ inputs.nix-index-database.hmModules.nix-index ];
 
   programs.direnv = {
@@ -14,10 +20,9 @@
     enableZshIntegration = true;
   };
 
-  home.packages = with pkgs;
-    [
-      nvd # nix closure diff
-    ];
+  home.packages = with pkgs; [
+    nvd # nix closure diff
+  ];
 
   # https://discourse.nixos.org/t/nvd-simple-nix-nixos-version-diff-tool/12397/6
   home.activation.report-changes = config.lib.dag.entryAnywhere ''

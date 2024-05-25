@@ -1,14 +1,20 @@
-{ config, lib, pkgs, ... }:
-let cfg = config.services.tailscaled-autoconnect;
-in {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+let
+  cfg = config.services.tailscaled-autoconnect;
+in
+{
   # source: https://tailscale.com/blog/nixos-minecraft/
   options.services.tailscaled-autoconnect = {
     enable = lib.mkEnableOption (lib.mdDoc "Auto-connect to Tailscale");
     secret-key = lib.mkOption {
       type = lib.types.str;
       default = "tailscale/server_key";
-      description =
-        lib.mkDefault "Path to the secret containing the Tailscale server key";
+      description = lib.mkDefault "Path to the secret containing the Tailscale server key";
     };
   };
 
@@ -34,25 +40,30 @@ in {
         RestartMaxDelaySec = "5m";
       };
 
-      script = let
-        pkg = pkgs.writeShellApplication {
-          name = "tailscaled-autoconnect";
-          runtimeInputs = [ config.services.tailscale.package pkgs.jq ];
-          text = ''
-            # let tailscaled settle
-            sleep 2
+      script =
+        let
+          pkg = pkgs.writeShellApplication {
+            name = "tailscaled-autoconnect";
+            runtimeInputs = [
+              config.services.tailscale.package
+              pkgs.jq
+            ];
+            text = ''
+              # let tailscaled settle
+              sleep 2
 
-            health="$(tailscale status -json | jq '.Health')"
-            if [ "$health" = "null" ]; then
-              echo "Already connected"
-              exit 0
-            fi
+              health="$(tailscale status -json | jq '.Health')"
+              if [ "$health" = "null" ]; then
+                echo "Already connected"
+                exit 0
+              fi
 
-            echo "Authenticating... ($health)"
-            tailscale up --reset --ssh --auth-key="file:${config.sops.secrets.tailscale-auth-key.path}"
-          '';
-        };
-      in "${pkg}/bin/${pkg.name}";
+              echo "Authenticating... ($health)"
+              tailscale up --reset --ssh --auth-key="file:${config.sops.secrets.tailscale-auth-key.path}"
+            '';
+          };
+        in
+        "${pkg}/bin/${pkg.name}";
     };
 
     services.networkd-dispatcher = {

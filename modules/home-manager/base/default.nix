@@ -1,6 +1,11 @@
-{ options, pkgs, lib, ... }: {
+{
+  options,
+  pkgs,
+  lib,
+  ...
+}:
+{
   imports = [
-    #
     ../lib
     ./fzf.nix
     ./tmux.nix
@@ -19,7 +24,10 @@
         controlPersist = "10m";
       };
 
-      home.packages = with pkgs.unstable; [ nix-tree nix-du ];
+      home.packages = with pkgs.unstable; [
+        nix-tree
+        nix-du
+      ];
     }
     # TODO: Remove check when home-manager is updated to 24.11
     (lib.optionalAttrs (builtins.hasAttr "gc" options.nix) {

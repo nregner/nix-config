@@ -1,13 +1,21 @@
-{ self, pkgs, lib, ... }: {
-  imports = [ ../../modules/darwin ./builders.nix ];
+{
+  self,
+  pkgs,
+  lib,
+  ...
+}:
+{
+  imports = [
+    ../../modules/darwin
+    ./builders.nix
+  ];
 
   nixpkgs.hostPlatform = "aarch64-darwin";
 
   networking.hostName = "enceladus";
 
   users.users = {
-    nregner.openssh.authorizedKeys.keys =
-      lib.attrValues self.globals.ssh.allKeys;
+    nregner.openssh.authorizedKeys.keys = lib.attrValues self.globals.ssh.allKeys;
   };
 
   security.pam.enableSudoTouchIdAuth = true;
