@@ -1,7 +1,7 @@
-{ inputs, pkgs }:
+{ inputs, pkgs, lib }:
 let sources = pkgs.callPackage ../_sources/generated.nix { };
 in {
-  inherit sources;
+  # inherit sources;
 
   gitea-github-mirror = pkgs.unstable.callPackage ./gitea-github-mirror { };
 
@@ -18,8 +18,10 @@ in {
         };
       self = python3;
     };
-  })).overrideAttrs
-    (oldAttrs: { patches = [ ./moonraker-preprocess-cancellation.patch ]; });
+  })).overrideAttrs (oldAttrs: {
+    patches = [ ./moonraker-preprocess-cancellation.patch ];
+    meta.platforms = [ "aarch64-linux" ];
+  });
 
   prepare-sd-card = pkgs.writeShellApplication {
     name = "prepare-sd-card";

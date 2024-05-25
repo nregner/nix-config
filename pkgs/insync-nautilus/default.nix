@@ -28,6 +28,6 @@ stdenv.mkDerivation rec {
     homepage = "https://www.insynchq.com/downloads/linux#nautilus";
     description = "Insync nautilus integration";
     license = lib.licenses.gpl3Plus;
-    platforms = lib.platforms.linux;
+    hydraPlatforms = [ ];
   };
 }

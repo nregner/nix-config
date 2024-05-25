@@ -9,6 +9,8 @@ let
     vendorHash = "sha256-/EebKxlfpaUfSpGQ7+GXByuv1lG7Na9rzuFKy7ONSFk=";
     passthru.devShell =
       mkShell { packages = pkg.nativeBuildInputs ++ pkg.buildInputs; };
+
+    meta.hydraPlatforms = [ ];
   };
 in pkg
 

@@ -65,12 +65,8 @@
     let
       inherit (self) outputs;
       inherit (nixpkgs) lib;
-      forAllSystems = lib.genAttrs [
-        "aarch64-linux"
-        "x86_64-linux"
-        "aarch64-darwin"
-        "x86_64-darwin"
-      ];
+      forAllSystems =
+        lib.genAttrs [ "aarch64-linux" "x86_64-linux" "aarch64-darwin" ];
       sources = import ./modules/sources.nix inputs;
     in rec {
       globals = import ./globals.nix { inherit lib; };
@@ -79,10 +75,24 @@
       # Acessible through 'nix build', 'nix shell', etc
       packages = forAllSystems (system:
         let
+          filterAvailable = set:
+            builtins.listToAttrs (builtins.concatMap (name:
+              let value = set.${name};
+              in if lib.isDerivation value then
+                lib.optional (lib.meta.availableOn system value) {
+                  inherit name value;
+                }
+              else [{
+                inherit name;
+                value = if builtins.isAttrs value then
+                  (filterAvailable value)
+                else
+                  value;
+              }]) (builtins.attrNames set));
           pkgs = nixpkgs.legacyPackages.${system} // {
             unstable = nixpkgs-unstable.legacyPackages.${system};
           };
-        in import ./pkgs { inherit inputs pkgs; });
+        in (import ./pkgs { inherit inputs pkgs lib; }));
 
       # Devshells for flake development
       devShells = forAllSystems (system:
@@ -98,7 +108,7 @@
         });
 
       # Your custom packages and modifications, exported as overlays
-      overlays = import ./overlays { inherit inputs; };
+      overlays = import ./overlays { inherit inputs lib; };
       # Reusable nixos modules you might want to export
       # These are usually stuff you would upstream into nixpkgs
       # nixosModules = import ./modules/nixos;
@@ -229,6 +239,23 @@
 
         devShells = lib.mapAttrs (system: { _aggregate, ... }: _aggregate)
           (lib.getAttrs [ "x86_64-linux" "aarch64-darwin" ] outputs.devShells);
+
+        packages = forAllSystems (system:
+          let
+            pkgs = inputs.nixpkgs-unstable.legacyPackages.${system};
+            filterAvailable = set:
+              builtins.concatMap (name:
+                let value = set.${name};
+                in if lib.isDerivation value then
+                  lib.optional (lib.meta.availableOn system value) value
+                else if builtins.isAttrs value then
+                  (filterAvailable value)
+                else
+                  [ ]) (builtins.attrNames set);
+          in pkgs.releaseTools.aggregate {
+            name = "packages-${system}";
+            constituents = filterAvailable outputs.packages.${system};
+          });
       };
     };
 }
