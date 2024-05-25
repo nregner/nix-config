@@ -3,9 +3,7 @@ inputs:
 ({ pkgs, lib, ... }:
   let
     sources = (pkgs.callPackage ../_sources/generated.nix { }) // {
-      catppuccin = builtins.mapAttrs (_: p: p.src)
-        (pkgs.callPackage "${inputs.catppuccin-nix}/_sources/generated.nix"
-          { });
+      catppuccin = import "${inputs.catppuccin-nix}/.sources";
     };
   in { config._module.args = { inherit sources; }; })
 

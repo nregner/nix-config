@@ -10,7 +10,7 @@
             yamlFormat.generate "lazygit.yaml" config.programs.lazygit.settings;
           catppuccin = config.programs.lazygit.catppuccin;
           theme =
-            "${sources.catppuccin.lazygit}/themes-mergable/${catppuccin.flavour}/${catppuccin.accent}.yml";
+            "${sources.catppuccin.lazygit}/themes-mergable/${catppuccin.flavor}/${catppuccin.accent}.yml";
         in runCommand "lazygit-wrapper" {
           nativeBuildInputs = [ makeWrapper ];
         } ''

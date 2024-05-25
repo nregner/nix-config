@@ -2,7 +2,7 @@
   imports = [ inputs.catppuccin-nix.homeManagerModules.catppuccin ];
 
   catppuccin = {
-    flavour = "mocha";
+    flavor = "mocha";
     accent = "blue";
   };
 

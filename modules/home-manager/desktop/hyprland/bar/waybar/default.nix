@@ -1,18 +1,15 @@
-{ config, pkgs, lib, ... }:
-let
-  # to debug CSS:
-  #
-  # systemctl edit --user waybar
-  #
-  # [Service]
-  # Environment="GTK_DEBUG=interactive"
-  configFiles = {
-    "waybar/style.css".source = config.lib.file.mkFlakeSymlink ./style.css;
-  };
-in {
+{ config, pkgs, lib, ... }: {
   programs.waybar = {
     enable = true;
     systemd.enable = true;
+
+    # to debug CSS:
+    #
+    # systemctl edit --user waybar
+    #
+    # [Service]
+    # Environment="GTK_DEBUG=interactive"
+    style = config.lib.file.mkFlakeSymlink ./style.css;
     # package = inputs.nixpkgs-wayland.packages.${pkgs.system}.waybar;
     # TODO: try https://github.com/polybar/polybar instead
     # https://www.reddit.com/r/unixporn/comments/s6s6sv/bspwm_catppuccin_is_a_pretty_cool_theme/#lightbox
@@ -127,17 +124,12 @@ in {
     };
   };
 
-  xdg.configFile = configFiles;
-
   systemd.user.paths.waybar-watcher = {
     Unit = {
       PartOf = [ "graphical-session.target" ];
       After = [ "graphical-session.target" ];
     };
-    Path = {
-      PathChanged = (builtins.map (path: "${config.xdg.configHome}/${path}")
-        (builtins.attrNames configFiles));
-    };
+    Path = { PathChanged = "${config.xdg.configHome}/waybar/style.css"; };
     Install = { WantedBy = [ "graphical-session.target" ]; };
   };
 

@@ -14,7 +14,10 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   # theme
-  catppuccin.flavour = "mocha";
+  catppuccin = {
+    flavor = "mocha";
+    accent = "blue";
+  };
 
   nix.gc = {
     automatic = true;
