@@ -3,61 +3,13 @@ let
   sources = pkgs.callPackage ../_sources/generated.nix { };
 in
 {
-  inherit sources;
-
   gitea-github-mirror = pkgs.unstable.callPackage ./gitea-github-mirror { };
-
-  route53-ddns = pkgs.unstable.callPackage ./route53-ddns { };
-
-  moonraker-develop =
-    (pkgs.unstable.moonraker.override (prev: rec {
-      python3 = prev.python3.override {
-        packageOverrides =
-          self: super:
-          let
-            preprocess-cancellation =
-              inputs.preprocess-cancellation.packages.${pkgs.stdenv.hostPlatform.system}.default;
-          in
-          assert prev.python3.pkgs.hasPythonModule preprocess-cancellation;
-          {
-            inherit preprocess-cancellation;
-          };
-        self = python3;
-      };
-    })).overrideAttrs
-      (oldAttrs: {
-        patches = [ ./moonraker-preprocess-cancellation.patch ];
-      });
-
-  prepare-sd-card = pkgs.writeShellApplication {
-    name = "prepare-sd-card";
-    runtimeInputs = with pkgs; [
-      gnutar
-      zstd
-    ];
-    text = ''
-      tmp=$(mktemp -d)
-      img="$tmp/sd-card.img"
-      mnt="$tmp/mnt"
-
-      sudo mkdir -p "$mnt"
-      unzstd "$1" -o "$img"
-      sudo mount -o loop,offset=39845888 "$img" "$mnt"
-      sudo mkdir -p "$mnt/etc/ssh/"
-      sudo tar -axf "$2" -C "$mnt/etc/ssh/"
-      sudo umount "$mnt"
-
-      echo "$tmp"
-    '';
-  };
-
-  klipper-tools = pkgs.unstable.callPackage ./klipper { };
 
   hammerspoon = pkgs.unstable.callPackage ./hammerspoon.nix { };
 
-  insync-nautilus = pkgs.unstable.callPackage ./insync-nautilus { };
-
   insync = pkgs.unstable.callPackage ./insync.nix { };
+
+  insync-nautilus = pkgs.unstable.callPackage ./insync-nautilus { };
 
   joker = pkgs.unstable.buildGoModule (
     sources.joker
@@ -69,6 +21,12 @@ in
     }
   );
 
+  klipper-calibrate-shaper = pkgs.callPackage ./klipper/calibrate-shaper.nix { };
+
+  klipper-flash-rp2040 = pkgs.callPackage ./klipper/rp2040.nix { };
+
+  moonraker-develop = (pkgs.unstable.callPackage ./moonraker { inherit inputs; });
+
   pin-github-action = pkgs.unstable.buildNpmPackage (
     sources.pin-github-action
     // {
@@ -77,6 +35,8 @@ in
       dontNpmBuild = true;
     }
   );
+
+  route53-ddns = pkgs.unstable.callPackage ./route53-ddns { };
 
   sf-mono-nerd-font =
     let
