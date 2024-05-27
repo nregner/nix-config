@@ -19,12 +19,7 @@
     # defaultKeymap = "viins";
     oh-my-zsh = {
       enable = true;
-      plugins = [
-        "aws"
-        "git"
-        "vi-mode"
-      ];
-      # theme = "robbyrussell";
+      plugins = [ "vi-mode" ];
     };
     shellAliases =
       let
