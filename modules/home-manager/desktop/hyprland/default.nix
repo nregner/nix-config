@@ -61,7 +61,7 @@
           # Monitors
           ${lib.concatMapStringsSep "\n" (
             monitor:
-            "monitor = ${monitor.name}, ${monitor.resolution}, ${monitor.position}, ${toString monitor.scale}"
+            "monitor=${monitor.name},${monitor.resolution},${monitor.position},${toString monitor.scale}"
           ) cfg.monitors}
 
           # Workspaces
@@ -86,7 +86,7 @@
           splash = false
           preload = ~/.config/hypr/assets/wallpaper.png
           ${lib.concatMapStringsSep "\n" (
-            monitor: "wallpaper = ${monitor.name}, ~/.config/hypr/assets/wallpaper.png"
+            monitor: "wallpaper=${monitor.name},~/.config/hypr/assets/wallpaper.png"
           ) cfg.monitors}
         '';
 
