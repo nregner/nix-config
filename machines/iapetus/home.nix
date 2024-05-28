@@ -43,6 +43,17 @@
     wallpaper = ../../assets/planet-rise.png;
   };
 
+  # Prefer primary GPU if not captured by VFIO
+  wayland.windowManager.hyprland.extraConfig = ''
+    env = WLR_DRM_DEVICES,$HOME/.config/hypr/cards/rtx-2070:$HOME/.config/hypr/cards/gtx-1060
+  '';
+  # Link GPU devices to get rid of ":" in file names
+  # https://wiki.hyprland.org/Configuring/Multi-GPU/
+  systemd.user.tmpfiles.rules = [
+    "L+ /home/nregner/.config/hypr/cards/gtx-1060 - - - - /dev/dri/by-path/pci-0000:24:00.0-card"
+    "L+ /home/nregner/.config/hypr/cards/rtx-2070 - - - - /dev/dri/by-path/pci-0000:2d:00.0-card"
+  ];
+
   programs.zsh.initExtra = ''
     export PATH="$PATH:$HOME/.cargo/bin"
     export PATH="$PATH:$HOME/.local/share/JetBrains/Toolbox/scripts"

@@ -48,17 +48,21 @@ in
             "10de:1ad8"
             "10de:1ad9"
           ];
+          secondaryIds = [
+            "10de:1b83"
+            "10de:10f0"
+          ];
         in
         [
           # enable IOMMU
           "amd_iommu=on"
-        ]
-        ++ optionals cfg.enable [
+          "rd.modules-load=vfio-pci"
           # isolate the GPU
-          "vfio-pci.ids=${concatStringsSep "," gpuIDs}"
+          "vfio-pci.ids=${concatStringsSep "," (if cfg.enable then gpuIDs else secondaryIds)}"
           # fix for using secondary GPU as primary?
           "video=vesafb:off,efifb:off"
         ];
+      # ++ optionals (!cfg.enable) [ "fbcon=map:1" ];
     };
 
     virtualisation.spiceUSBRedirection.enable = true;
