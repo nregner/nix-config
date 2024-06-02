@@ -19,11 +19,25 @@
         name = "DP-1";
         resolution = "1920x1080@144";
         position = "0x0";
+        workspaces = [
+          1
+          2
+          3
+          4
+          5
+        ];
       }
       {
         name = "DP-2";
         resolution = "1920x1080@144";
         position = "1920x0";
+        workspaces = [
+          6
+          7
+          8
+          9
+          0
+        ];
       }
     ];
     wallpaper = ../../assets/planet-rise.png;

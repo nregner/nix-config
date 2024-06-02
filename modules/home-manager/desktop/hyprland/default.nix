@@ -34,6 +34,10 @@
                   type = types.int;
                   default = 1;
                 };
+                workspaces = mkOption {
+                  type = types.listOf types.int;
+                  default = [ ];
+                };
               };
             }
           );
@@ -54,10 +58,20 @@
         catppuccin.enable = true;
 
         extraConfig = ''
+          # Monitors
           ${lib.concatMapStringsSep "\n" (
             monitor:
             "monitor = ${monitor.name}, ${monitor.resolution}, ${monitor.position}, ${toString monitor.scale}"
           ) cfg.monitors}
+
+          # Workspaces
+          ${lib.concatMapStringsSep "\n" (
+            monitor:
+            (lib.concatMapStringsSep "\n" (
+              workspace: "workspace=${toString workspace},monitor:${monitor.name},persitent:true"
+            ) monitor.workspaces)
+          ) cfg.monitors}
+
           exec-once = ${lib.getExe import-env} tmux
           exec-once = ${lib.getExe import-env} system
           source = ${config.xdg.configHome}/hypr/user.conf
