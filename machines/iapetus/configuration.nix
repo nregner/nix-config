@@ -17,8 +17,8 @@
     enable = true;
     videoDrivers = [ "nvidia" ];
 
-    layout = "us";
-    xkbVariant = "";
+    xkb.layout = "us";
+    xkb.variant = "";
   };
 
   programs.hyprland = {
@@ -26,12 +26,12 @@
     # package = inputs.hyprland.packages.${pkgs.system}.hyprland;
   };
   # https://wiki.hyprland.org/0.20.1beta/Getting-Started/Installation/
-  services.xserver.displayManager.sddm.enable = true;
+  services.displayManager.sddm.wayland.enable = true;
 
   security.pam.services.swaylock = { };
 
-  services.xserver.displayManager.autoLogin.enable = true;
-  services.xserver.displayManager.autoLogin.user = "nregner";
+  services.displayManager.autoLogin.enable = true;
+  services.displayManager.autoLogin.user = "nregner";
 
   # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
   systemd.services."getty@tty1".enable = false;
