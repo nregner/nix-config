@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, ... }:
 {
   imports = [
     ../../modules/nixos/server
@@ -9,23 +9,6 @@
   networking.hostName = "sagittarius";
 
   programs.nregner.home-manager.enable = true;
-
-  nix.buildMachines = lib.mkForce [
-    {
-      protocol = "ssh-ng";
-      hostName = "iapetus";
-      sshUser = "nregner";
-      systems = [ "x86_64-linux" ];
-      supportedFeatures = [
-        "nixos-test"
-        "benchmark"
-        "big-parallel"
-        "kvm"
-      ];
-      maxJobs = 12;
-      speedFactor = 2;
-    }
-  ];
 
   sops.defaultSopsFile = ./secrets.yaml;
 

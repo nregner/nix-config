@@ -6,7 +6,7 @@ export def main [
 ] {
     echo $"deploying ($path) to ($host)"
     ssh $host -- $"
-        nix copy --from http://sagittarius:8000 ($path) &&
+        nix copy --from https://cache.nregner.net ($path) &&
         sudo nix-env -p /nix/var/nix/profiles/system --set ($path) &&
         sudo /nix/var/nix/profiles/system/bin/switch-to-configuration switch
     "
