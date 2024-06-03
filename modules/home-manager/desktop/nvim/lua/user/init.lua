@@ -876,21 +876,14 @@ require("lazy").setup({
     opts = {},
   },
 
-  {
-    "echasnovski/mini.nvim",
+  { -- Comment.nvim
+    "numToStr/Comment.nvim",
+    dependencies = {
+      { "JoosepAlviste/nvim-ts-context-commentstring", opts = { enable_autocmd = false } },
+    },
     config = function()
-      require("mini.comment").setup({
-        mappings = {
-          -- Toggle comment (like `gcip` - comment inner paragraph) for both
-          -- Normal and Visual modes
-          comment = "gc",
-
-          -- Toggle comment on current line
-          comment_line = "gcc",
-
-          -- Define 'comment' textobject (like `dgc` - delete whole comment block)
-          textobject = "gc",
-        },
+      require("Comment").setup({
+        pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
       })
     end,
   },
@@ -925,6 +918,17 @@ require("lazy").setup({
     config = function(_, opts)
       require("litee.calltree").setup(opts)
     end,
+  },
+
+  { -- TODO comments
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {
+      signs = false,
+      keywords = {
+        TEST = nil,
+      },
+    },
   },
 
   { -- Colorizer
