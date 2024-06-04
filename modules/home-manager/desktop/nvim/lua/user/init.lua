@@ -596,8 +596,6 @@ require("lazy").setup({
         defaults = {
           mappings = {
             i = {
-              ["<C-u>"] = false,
-              ["<C-d>"] = "delete_buffer",
               ["<c-enter>"] = "to_fuzzy_refine",
               -- map actions.which_key to <C-h> (default: <C-/>)
               -- actions.which_key shows the mappings for your picker,
@@ -607,6 +605,11 @@ require("lazy").setup({
             n = {
               ["d"] = "delete_buffer",
             },
+          },
+        },
+        pickers = {
+          find_files = {
+            hidden = true,
           },
         },
         extensions = {
