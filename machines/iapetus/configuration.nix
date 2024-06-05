@@ -84,7 +84,6 @@
 
   virtualisation.docker = {
     enable = true;
-    package = pkgs.unstable.docker;
     # enableOnBoot = false; # lazy start with docker.socket
     # extraOptions = "--insecure-registry sagittarius:5000";
     daemon.settings = {

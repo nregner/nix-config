@@ -1,13 +1,7 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}:
+{ config, pkgs, ... }:
 {
   virtualisation.docker = {
     enable = true;
-    package = pkgs.unstable.docker;
     daemon.settings = {
       live-restore = false;
       insecure-registries = [ "http://sagittarius:${toString config.services.dockerRegistry.port}" ];

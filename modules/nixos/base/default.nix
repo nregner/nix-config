@@ -7,11 +7,12 @@
 }:
 {
   imports = [
-    inputs.nixos-generators.nixosModules.all-formats
     inputs.catppuccin-nix.nixosModules.catppuccin
-    ./services
+    inputs.nixos-generators.nixosModules.all-formats
+    ./docker.nix
     ./networking.nix
     ./nix.nix
+    ./services
     ./sops.nix
     ./tailscale.nix
     ./users.nix
