@@ -594,6 +594,13 @@ require("lazy").setup({
     config = function()
       require("telescope").setup({
         defaults = {
+          preview = {
+            enabled = false,
+            -- try to prevent freezes on large files
+            -- https://github.com/nvim-telescope/telescope.nvim/issues/1379
+            filesize_limit = 1, -- MB
+            highlight_limit = 0.1, -- MB
+          },
           mappings = {
             i = {
               ["<c-enter>"] = "to_fuzzy_refine",
@@ -939,6 +946,8 @@ require("lazy").setup({
     event = "VeryLazy",
     cmd = "ColorizerToggle",
     opts = {
+      "*", -- Highlight all files
+      "!TelescopePrompt", -- Except telescope previews. Seems to result in freezes: https://github.com/nvim-telescope/telescope.nvim/issues/1379
       RGB = true, -- #RGB hex codes
       RRGGBB = true, -- #RRGGBB hex codes
       names = false, -- "Name" codes like Blue
