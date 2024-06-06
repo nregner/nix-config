@@ -12,6 +12,18 @@
       sha256 = "sha256-GhUjvFMlgjTdgtV9ASW7IqE2dBktPyOlRwg6qM1r7vc=";
     };
   };
+  jellyfin-tizen = {
+    pname = "jellyfin-tizen";
+    version = "692c0bd74291cabd51d451079679b0ec14ae4ca3";
+    src = fetchFromGitHub {
+      owner = "jellyfin";
+      repo = "jellyfin-tizen";
+      rev = "692c0bd74291cabd51d451079679b0ec14ae4ca3";
+      fetchSubmodules = false;
+      sha256 = "sha256-h6s9bRhlV0oFQXJM8gMPoT0uiwnb1Y2SZN77j+lxADA=";
+    };
+    date = "2024-05-18";
+  };
   joker = {
     pname = "joker";
     version = "v1.3.5";

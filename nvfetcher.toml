@@ -3,6 +3,10 @@
 src.github = "FieldofClay/hyprland-workspaces"
 fetch.github = "FieldofClay/hyprland-workspaces"
 
+[jellyfin-tizen]
+src.git = "https://github.com/jellyfin/jellyfin-tizen"
+fetch.github = "jellyfin/jellyfin-tizen"
+
 [joker]
 src.github_tag = "candid82/joker"
 fetch.github = "candid82/joker"

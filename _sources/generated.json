@@ -19,6 +19,26 @@
         },
         "version": "v2.0.1"
     },
+    "jellyfin-tizen": {
+        "cargoLocks": null,
+        "date": "2024-05-18",
+        "extract": null,
+        "name": "jellyfin-tizen",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "jellyfin",
+            "repo": "jellyfin-tizen",
+            "rev": "692c0bd74291cabd51d451079679b0ec14ae4ca3",
+            "sha256": "sha256-h6s9bRhlV0oFQXJM8gMPoT0uiwnb1Y2SZN77j+lxADA=",
+            "type": "github"
+        },
+        "version": "692c0bd74291cabd51d451079679b0ec14ae4ca3"
+    },
     "joker": {
         "cargoLocks": null,
         "date": null,

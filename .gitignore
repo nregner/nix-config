@@ -1,6 +1,7 @@
 ### Nix
 result
 result-*
+source
 .direnv/
 
 ### Editors

@@ -2,7 +2,7 @@
 let
   sources = pkgs.callPackage ../_sources/generated.nix { };
 in
-{
+rec {
   gitea-github-mirror = pkgs.unstable.callPackage ./gitea-github-mirror { };
 
   hammerspoon = pkgs.unstable.callPackage ./hammerspoon.nix { };
@@ -10,6 +10,11 @@ in
   insync = pkgs.unstable.callPackage ./insync.nix { };
 
   insync-nautilus = pkgs.unstable.callPackage ./insync-nautilus { };
+
+  jellyfin-tizen = pkgs.unstable.callPackage ./jellyfin-tizen {
+    source = sources.jellyfin-tizen;
+    inherit tizen;
+  };
 
   joker = pkgs.unstable.buildGoModule (
     sources.joker
@@ -48,6 +53,8 @@ in
     '';
 
   tfautomv = pkgs.unstable.callPackage ./tfautomv.nix { source = sources.tfautomv; };
+
+  tizen = pkgs.unstable.callPackage ./tizen.nix { };
 
   writeBabashkaApplication = pkgs.unstable.callPackage ./write-babashka-application.nix { };
 }
