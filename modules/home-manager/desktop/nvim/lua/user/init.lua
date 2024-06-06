@@ -610,7 +610,16 @@ require("lazy").setup({
         disabled_filetypes = { "NvimTree" },
       },
       sections = {
-        lualine_a = { "mode" },
+        lualine_a = {
+          "mode",
+          function()
+            local reg = vim.fn.reg_recording()
+            if reg == "" then
+              return ""
+            end
+            return "recording to " .. reg
+          end,
+        },
         lualine_b = { "diagnostics" },
         lualine_c = { "filename" },
         lualine_x = { "encoding", "fileformat", "filetype" },
