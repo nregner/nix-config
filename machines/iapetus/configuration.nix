@@ -10,6 +10,7 @@
     ../../modules/nixos/desktop
     ./hardware-configuration.nix
     ./windows-vm
+    ./zsa.nix
   ];
 
   # Networking
