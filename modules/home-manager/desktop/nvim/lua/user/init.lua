@@ -175,6 +175,7 @@ require("lazy").setup({
 
       local servers = {
         clojure_lsp = {},
+        emmet_language_server = {},
         eslint = {},
         gopls = {},
         graphql = {},

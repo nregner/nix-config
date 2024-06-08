@@ -15,6 +15,7 @@
 
       # language servers
       clojure-lsp
+      emmet-language-server
       gopls
       lua-language-server
       nil
