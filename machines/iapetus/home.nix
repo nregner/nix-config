@@ -72,7 +72,7 @@
     babashka
     gh
     jq
-    nushellFull
+    nushell
     pv
     rclone
     restic
