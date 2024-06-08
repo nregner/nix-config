@@ -25,6 +25,7 @@
       rust-analyzer-unwrapped
       terraform-ls
       vscode-langservers-extracted
+      yaml-language-server
 
       # formatters/linters
       codespell

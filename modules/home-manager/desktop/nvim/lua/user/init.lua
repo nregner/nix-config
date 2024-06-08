@@ -190,6 +190,13 @@ require("lazy").setup({
         gopls = {},
         graphql = {},
         html = { filetypes = { "html", "twig", "hbs" } },
+        jsonls = {
+          -- https://github.com/b0o/SchemaStore.nvim?tab=readme-ov-file
+          json = {
+            schemas = require("schemastore").json.schemas(),
+            validate = { enable = true },
+          },
+        },
         nil_ls = {},
         nushell = {},
         rust_analyzer = {
@@ -207,6 +214,19 @@ require("lazy").setup({
         terraformls = {},
         tsserver = {},
         volar = {},
+        yamlls = {
+          yaml = {
+            -- https://github.com/b0o/SchemaStore.nvim?tab=readme-ov-file
+            schemaStore = {
+              -- You must disable built-in schemaStore support if you want to use
+              -- this plugin and its advanced options like `ignore`.
+              enable = false,
+              -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
+              url = "",
+            },
+            schemas = require("schemastore").yaml.schemas(),
+          },
+        },
 
         lua_ls = {
           Lua = {
@@ -238,6 +258,8 @@ require("lazy").setup({
       end
     end,
   },
+
+  "b0o/schemastore.nvim",
 
   { -- LSP output panel
     "mhanberg/output-panel.nvim",
