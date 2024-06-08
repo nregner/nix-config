@@ -70,11 +70,11 @@
             "arch": null,
             "finalImageName": null,
             "finalImageTag": null,
-            "imageDigest": "sha256:00b785bb827cabf10be518ee03958fe233ba3a1f906ba18a6534dcc02f6c0da6",
+            "imageDigest": "sha256:014bf4b7b88ae4aabbfbafc7542be1498b4672883bcf9bdc3581d433d030a75c",
             "imageName": "library/kibana",
             "imageTag": "7.17.21",
             "os": null,
-            "sha256": "sha256-DPWkjukZzOvgecm09lA9y8a5PF4BckKs0BZH+Cv9OeU=",
+            "sha256": "sha256-ZODgw8VfGm+XmWwLJNbhL/9J3rXa7RfiTdeWXM7IdJA=",
             "tlsVerify": null
         },
         "version": "7.17.21"
