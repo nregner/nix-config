@@ -121,12 +121,19 @@ require("lazy").setup({
     end,
   },
 
-  -- NOTE: This is where your plugins related to LSP can be installed.
-  --  The configuration is done below. Search for lspconfig to find it below.
+  { -- Notifications + LSP Progress Messages
+    "j-hui/fidget.nvim",
+    opts = {
+      notification = {
+        override_vim_notify = true,
+      },
+    },
+  },
+
   { -- LSP Configuration & Plugins
     "neovim/nvim-lspconfig",
     dependencies = {
-      { "j-hui/fidget.nvim", opts = {} },
+      "j-hui/fidget.nvim",
       { "folke/neodev.nvim", opts = {} },
     },
     config = function()
