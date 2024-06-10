@@ -108,10 +108,8 @@
       isoImage.squashfsCompression = "zstd"; # -Xcompression-level 1
     };
 
-  services.jellyfin = {
-    enable = true;
-    openFirewall = true;
-  };
+  services.logind.extraConfig = "HandleLidSwitch=ignore";
+
   services.plex = {
     enable = true;
     openFirewall = true;
