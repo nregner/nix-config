@@ -8,6 +8,9 @@ require("lazy").setup({
   "tpope/vim-fugitive",
   "tpope/vim-rhubarb",
 
+  -- replacement for ":w !sudo tee % > /dev/null" trick
+  "lambdalisue/vim-suda",
+
   -- {
   --   "akinsho/git-conflict.nvim",
   --   version = "*",
