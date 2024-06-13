@@ -657,6 +657,16 @@ require("lazy").setup({
             filesize_limit = 1, -- MB
             highlight_limit = 0.1, -- MB
           },
+          vimgrep_arguments = {
+            "rg",
+            "--color=never",
+            "--no-heading",
+            "--with-filename",
+            "--line-number",
+            "--column",
+            "--smart-case",
+            "--hidden", -- added to default
+          },
           mappings = {
             i = {
               ["<c-enter>"] = "to_fuzzy_refine",
