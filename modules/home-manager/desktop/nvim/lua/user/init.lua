@@ -390,7 +390,14 @@ require("lazy").setup({
             if cmp.visible() then
               cmp.select_next_item()
             else
-              cmp.complete()
+              cmp.complete({
+                config = {
+                  sources = {
+                    { name = "nvim_lsp" },
+                    { name = "buffer" },
+                  },
+                },
+              })
             end
           end),
           -- ["<C-n>"] = cmp.mapping.select_next_item(),
@@ -436,15 +443,15 @@ require("lazy").setup({
           {
             name = "buffer",
             keyword_length = 5,
-            option = {
-              get_bufnrs = function()
-                local bufs = {}
-                for _, win in ipairs(vim.api.nvim_list_wins()) do
-                  bufs[vim.api.nvim_win_get_buf(win)] = true
-                end
-                return vim.tbl_keys(bufs)
-              end,
-            },
+            -- option = {
+            --   get_bufnrs = function()
+            --     local bufs = {}
+            --     for _, win in ipairs(vim.api.nvim_list_wins()) do
+            --       bufs[vim.api.nvim_win_get_buf(win)] = true
+            --     end
+            --     return vim.tbl_keys(bufs)
+            --   end,
+            -- },
           },
           { name = "path" },
         },
