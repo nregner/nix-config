@@ -1,12 +1,9 @@
+{ inputs, pkgs, ... }:
 {
-  self,
-  inputs,
-  pkgs,
-  lib,
-  ...
-}:
-{
-  imports = [ inputs.catppuccin-nix.homeManagerModules.catppuccin ];
+  imports = [
+    inputs.catppuccin-nix.homeManagerModules.catppuccin
+    ./theme.linux.nix
+  ];
 
   catppuccin = {
     flavor = "mocha";
@@ -15,28 +12,8 @@
 
   fonts.fontconfig.enable = true;
   home.packages = [
-    # nerdfonts is large - just use a subset
+    # nerdfonts package is large; use a subset
     (pkgs.unstable.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     pkgs.sf-mono-nerd-font
   ];
-
-  gtk = {
-    enable = pkgs.hostPlatform.isLinux;
-    catppuccin = {
-      enable = true;
-      size = "compact";
-      tweaks = [ "rimless" ];
-    };
-    iconTheme = {
-      package = pkgs.unstable.catppuccin-papirus-folders;
-      name = "Papirus-Dark";
-    };
-  };
-
-  home.pointerCursor = lib.mkIf pkgs.hostPlatform.isLinux {
-    name = "Catppuccin-Mocha-Dark-Cursors";
-    package = pkgs.unstable.catppuccin-cursors.mochaDark;
-    size = 24;
-    gtk.enable = true;
-  };
 }
