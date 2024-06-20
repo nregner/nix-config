@@ -135,7 +135,7 @@ require("lazy").setup({
 
   { -- LSP Configuration & Plugins
     "neovim/nvim-lspconfig",
-    dependencies = { "j-hui/fidget.nvim" },
+    dependencies = { "j-hui/fidget.nvim", "yioneko/nvim-vtsls" },
     config = function()
       local on_attach = function(_, bufnr)
         local map = function(mode, keys, func, desc)
@@ -180,6 +180,8 @@ require("lazy").setup({
         end, { desc = "Format current buffer with LSP" })
       end
 
+      require("lspconfig.configs").vtsls = require("vtsls").lspconfig -- set default server config, optional but recommended
+
       local servers = {
         clojure_lsp = {},
         emmet_language_server = {},
@@ -209,8 +211,10 @@ require("lazy").setup({
           },
         },
         terraformls = {},
-        tsserver = {},
         volar = {},
+        vtsls = {
+          settings = require("vtsls").lspconfig.settings,
+        },
         yamlls = {
           yaml = {
             -- https://github.com/b0o/SchemaStore.nvim?tab=readme-ov-file
