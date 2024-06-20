@@ -135,10 +135,7 @@ require("lazy").setup({
 
   { -- LSP Configuration & Plugins
     "neovim/nvim-lspconfig",
-    dependencies = {
-      "j-hui/fidget.nvim",
-      { "folke/neodev.nvim", opts = {} },
-    },
+    dependencies = { "j-hui/fidget.nvim" },
     config = function()
       local on_attach = function(_, bufnr)
         local map = function(mode, keys, func, desc)
@@ -257,6 +254,17 @@ require("lazy").setup({
         })
       end
     end,
+  },
+
+  {
+    "folke/lazydev.nvim",
+    ft = "lua",
+    dependencies = { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
+    opts = {
+      library = {
+        { path = "luvit-meta/library", words = { "vim%.uv" } },
+      },
+    },
   },
 
   "b0o/schemastore.nvim",
