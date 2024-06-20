@@ -547,7 +547,7 @@ require("lazy").setup({
         map("n", "<leader>hb", function()
           gs.blame_line({ full = true })
         end, { desc = "[H]unk [B]lame" })
-        map("n", "<leader>gb", gs.toggle_current_line_blame, { desc = "[G]it [B]lame" })
+        map("n", "<leader>hB", gs.toggle_current_line_blame, { desc = "Git [B]lame" })
         map("n", "<leader>hd", gs.diffthis, { desc = "[H]unk [D]iff" })
         map("n", "<leader>hD", function()
           gs.diffthis("~")
@@ -640,6 +640,8 @@ require("lazy").setup({
       "catgoose/telescope-helpgrep.nvim",
     },
     config = function()
+      local actions = require("telescope.actions")
+      local action_state = require("telescope.actions.state")
       require("telescope").setup({
         defaults = {
           preview = {
@@ -676,6 +678,45 @@ require("lazy").setup({
           find_files = {
             hidden = true,
           },
+          git_commits = {
+            mappings = {
+              i = {
+                ["<C-d>"] = function() -- show diffview for the selected commit
+                  -- Open in diffview
+                  local entry = action_state.get_selected_entry()
+                  -- close Telescope window properly prior to switching windows
+                  actions.close(vim.api.nvim_get_current_buf())
+                  vim.cmd(("DiffviewOpen %s^!"):format(entry.value))
+                end,
+              },
+            },
+          },
+          git_bcommits = {
+            mappings = {
+              i = {
+                ["<C-d>"] = function() -- show diffview for the selected commit of current buffer
+                  -- Open in diffview
+                  local entry = action_state.get_selected_entry()
+                  -- close Telescope window properly prior to switching windows
+                  actions.close(vim.api.nvim_get_current_buf())
+                  vim.cmd(("DiffviewOpen %s^!"):format(entry.value))
+                end,
+              },
+            },
+          },
+          git_branches = {
+            mappings = {
+              i = {
+                ["<C-d>"] = function() -- show diffview comparing the selected branch with the current branch
+                  -- Open in diffview
+                  local entry = action_state.get_selected_entry()
+                  -- close Telescope window properly prior to switching windows
+                  actions.close(vim.api.nvim_get_current_buf())
+                  vim.cmd(("DiffviewOpen %s.."):format(entry.value))
+                end,
+              },
+            },
+          },
         },
         extensions = {
           helpgrep = {
@@ -710,6 +751,11 @@ require("lazy").setup({
         require("telescope.builtin").command_history,
         { desc = "[F]ind [C]ommand History" }
       )
+
+      -- Git
+      vim.keymap.set("n", "<leader>gb", builtin.git_branches, { desc = "[G]it [B]ranches" })
+      vim.keymap.set("n", "<leader>gc", builtin.git_commits, { desc = "[G]it [C]ommits" })
+      vim.keymap.set("n", "<leader>gf", builtin.git_bcommits, { desc = "[G]it [F]ile Commits" })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set("n", "<leader>/", function()
