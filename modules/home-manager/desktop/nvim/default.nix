@@ -24,6 +24,7 @@
       terraform-ls
       vscode-langservers-extracted
       yaml-language-server
+      pkgs.vtsls
 
       # formatters/linters
       codespell

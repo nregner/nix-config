@@ -50,4 +50,6 @@ in
   tfautomv = pkgs.unstable.callPackage ./tfautomv.nix { source = sources.tfautomv; };
 
   writeBabashkaApplication = pkgs.unstable.callPackage ./write-babashka-application.nix { };
+
+  vtsls = pkgs.unstable.callPackage ./vtsls { };
 }
