@@ -1,4 +1,5 @@
 {
+  inputs,
   config,
   pkgs,
   lib,
@@ -11,6 +12,7 @@
     ./hardware-configuration.nix
     ./windows-vm
     ./zsa.nix
+    "${inputs.nixpkgs-unstable}/nixos/modules/services/web-apps/nextjs-ollama-llm-ui.nix"
   ];
 
   # Networking
@@ -131,6 +133,17 @@
     enable = true;
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+  };
+
+  services.ollama = {
+    enable = true;
+    package = pkgs.unstable.ollama;
+    acceleration = "cuda";
+    environmentVariables.OLLAMA_ORIGINS = "http://localhost";
+  };
+  services.nextjs-ollama-llm-ui = {
+    enable = true;
+    package = pkgs.unstable.nextjs-ollama-llm-ui;
   };
 
   # This value determines the NixOS release from which the default

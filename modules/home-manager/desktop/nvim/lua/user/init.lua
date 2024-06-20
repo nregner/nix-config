@@ -481,27 +481,44 @@ require("lazy").setup({
   },
 
   {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    event = "InsertEnter",
+    "huggingface/llm.nvim",
     opts = {
-      copilot_node_command = vim.g.copilot_node_command,
-      panel = {
-        enabled = true,
-        auto_refresh = true,
-      },
-      suggestion = {
-        enabled = true,
-        auto_trigger = true,
-      },
-      filetypes = {
-        yaml = true,
-        markdown = true,
-        gitcommit = true,
-        gitrebase = true,
+      backend = "ollama",
+      model = "codegemma:2b",
+      url = "http://localhost:11434", -- llm-ls uses "/api/generate"
+      -- cf https://github.com/ollama/ollama/blob/main/docs/api.md#parameters
+      request_body = {
+        -- -- Modelfile options for the model you use
+        -- options = {
+        --   temperature = 0.2,
+        --   top_p = 0.95,
+        -- },
       },
     },
   },
+
+  -- {
+  --   "zbirenbaum/copilot.lua",
+  --   cmd = "Copilot",
+  --   event = "InsertEnter",
+  --   opts = {
+  --     copilot_node_command = vim.g.copilot_node_command,
+  --     panel = {
+  --       enabled = true,
+  --       auto_refresh = true,
+  --     },
+  --     suggestion = {
+  --       enabled = true,
+  --       auto_trigger = true,
+  --     },
+  --     filetypes = {
+  --       yaml = true,
+  --       markdown = true,
+  --       gitcommit = true,
+  --       gitrebase = true,
+  --     },
+  --   },
+  -- },
 
   {
     "folke/which-key.nvim",
