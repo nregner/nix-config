@@ -699,7 +699,10 @@ require("lazy").setup({
             "--line-number",
             "--column",
             "--smart-case",
-            "--hidden", -- added to default
+            -- additions to default
+            "--hidden",
+            "-g",
+            "!.git",
           },
           mappings = {
             i = {
@@ -1314,9 +1317,6 @@ vim.api.nvim_create_autocmd("VimLeavePre", {
 -- [[ Setting options ]]
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
-
--- Set highlight on search
-vim.o.hlsearch = false
 
 -- Make line numbers default
 vim.wo.number = true
