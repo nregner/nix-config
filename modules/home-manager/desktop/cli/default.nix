@@ -1,7 +1,8 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 {
   imports = [
     ./git.nix
+    ./zoxide.nix
     ./k9s.nix
     ./lazygit.nix
     ./nix.nix
