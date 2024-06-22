@@ -81,7 +81,7 @@
     },
     "linux-rockchip": {
         "cargoLocks": null,
-        "date": "2024-05-15",
+        "date": "2024-06-20",
         "extract": null,
         "name": "linux-rockchip",
         "passthru": null,
@@ -93,11 +93,11 @@
             "name": null,
             "owner": "armbian",
             "repo": "linux-rockchip",
-            "rev": "9fb8c4cc0ec516870dea431c83e2d546bb57df7d",
-            "sha256": "sha256-bbUJbw8DgTKql/z4f18KloCU2KUuSbsg4UbcWiMfNyU=",
+            "rev": "75ac2784c40818adbdabb06e98ac18317af5fdac",
+            "sha256": "sha256-B6Y2lxPFzyqfyPgfc/G3mymdyOYNyGqUrR0LaatFLlw=",
             "type": "github"
         },
-        "version": "9fb8c4cc0ec516870dea431c83e2d546bb57df7d"
+        "version": "75ac2784c40818adbdabb06e98ac18317af5fdac"
     },
     "pin-github-action": {
         "cargoLocks": null,

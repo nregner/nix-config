@@ -2,6 +2,8 @@
 {
   imports = [ ../../../modules/nixos/server ];
 
+  nixpkgs.hostPlatform = "aarch64-linux";
+
   networking.hostName = "enceladus-linux-vm";
 
   # FIXME: Have to manually run /run/current-system/activate to get secrets to show up...
