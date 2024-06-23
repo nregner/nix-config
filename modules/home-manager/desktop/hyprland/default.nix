@@ -96,10 +96,10 @@
 
       home.packages = with pkgs.unstable; [
         gnome.nautilus
-        # TODO: Get these from the flake?
         hyprpaper
         hyprpicker
         import-env
+        wl-clipboard
       ];
 
       # auto mount disks
