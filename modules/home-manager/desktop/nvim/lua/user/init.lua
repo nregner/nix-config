@@ -566,13 +566,16 @@ require("lazy").setup({
         end, { desc = "[H]unk [D]iff last commit" })
         map("n", "<leader>htd", gs.toggle_deleted, { desc = "[H]unk [T]oggle [D]eleted" })
 
+        local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
+        local prev_hunk_repeat, next_hunk_repeat = ts_repeat_move.make_repeatable_move_pair(gs.prev_hunk, gs.next_hunk)
+
         -- don't override the built-in and fugitive keymaps
         map({ "n", "v" }, "]c", function()
           if vim.wo.diff then
             return "]c"
           end
           vim.schedule(function()
-            gs.next_hunk()
+            next_hunk_repeat()
           end)
           return "<Ignore>"
         end, { expr = true, desc = "Jump to next hunk" })
@@ -581,7 +584,7 @@ require("lazy").setup({
             return "[c"
           end
           vim.schedule(function()
-            gs.prev_hunk()
+            prev_hunk_repeat()
           end)
           return "<Ignore>"
         end, { expr = true, desc = "Jump to previous hunk" })
@@ -834,27 +837,33 @@ require("lazy").setup({
             ["ia"] = "@parameter.inner",
             ["af"] = "@function.outer",
             ["if"] = "@function.inner",
-            ["ac"] = "@class.outer",
-            ["ic"] = "@class.inner",
+            -- ["ac"] = "@class.outer",
+            -- ["ic"] = "@class.inner",
+            ["ac"] = "@comment.outer",
+            ["ic"] = "@comment.inner",
+            ["al"] = "@loop.outer",
+            ["il"] = "@loop.inner",
           },
         },
         move = {
           enable = true,
           set_jumps = true, -- whether to set jumps in the jumplist
           goto_next_start = {
-            ["]m"] = "@function.outer",
+            ["]f"] = "@function.outer",
             ["]]"] = "@class.outer",
+            -- ["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
           },
           goto_next_end = {
-            ["]M"] = "@function.outer",
+            ["]F"] = "@function.outer",
             ["]["] = "@class.outer",
           },
           goto_previous_start = {
-            ["[m"] = "@function.outer",
+            ["[f"] = "@function.outer",
             ["[["] = "@class.outer",
+            -- ["[z"] = { query = "@fold", query_group = "folds", desc = "Previous fold" },
           },
           goto_previous_end = {
-            ["[M"] = "@function.outer",
+            ["[F"] = "@function.outer",
             ["[]"] = "@class.outer",
           },
         },
@@ -877,12 +886,17 @@ require("lazy").setup({
         -- mode = "topline",
       })
 
-      -- There are additional nvim-treesitter modules that you can use to interact
-      -- with nvim-treesitter. You should go explore a few and see what interests you:
-      --
-      --    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
-      --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
-      --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+      local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
+
+      -- vim way: ; goes to the direction you were moving.
+      vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move)
+      vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_opposite)
+
+      -- Optionally, make builtin f, F, t, T also repeatable with ; and ,
+      vim.keymap.set({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f_expr, { expr = true })
+      vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F_expr, { expr = true })
+      vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, { expr = true })
+      vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
     end,
   },
 
@@ -1214,7 +1228,7 @@ require("lazy").setup({
 
   { -- REPL
     "Olical/conjure",
-    ft = { "clojure", "lua" },
+    ft = { "clojure" },
     dependencies = {
       -- https://github.com/guns/vim-sexp
       "guns/vim-sexp",
@@ -1338,10 +1352,17 @@ local function goto_error_diagnostic(f)
   end
 end
 
-vim.keymap.set("n", "[e", goto_error_diagnostic(vim.diagnostic.goto_prev), { desc = "Go to previous error diagnostic" })
-vim.keymap.set("n", "]e", goto_error_diagnostic(vim.diagnostic.goto_next), { desc = "Go to next diagnostic" })
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
+local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
+local prev_diag_error, next_diag_error = ts_repeat_move.make_repeatable_move_pair(
+  goto_error_diagnostic(vim.diagnostic.goto_prev),
+  goto_error_diagnostic(vim.diagnostic.goto_next)
+)
+vim.keymap.set("n", "[e", prev_diag_error, { desc = "Go to previous error diagnostic" })
+vim.keymap.set("n", "]e", next_diag_error, { desc = "Go to next diagnostic" })
+local prev_diag, next_diag =
+  ts_repeat_move.make_repeatable_move_pair(vim.diagnostic.goto_prev, vim.diagnostic.goto_next)
+vim.keymap.set("n", "[d", prev_diag, { desc = "Go to previous diagnostic" })
+vim.keymap.set("n", "]d", next_diag, { desc = "Go to next diagnostic" })
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 vim.keymap.set("n", "<leader>d", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 
@@ -1357,10 +1378,12 @@ vim.keymap.set("n", "<leader>sv", function()
 end, { desc = "[S]ource [V]imrc" })
 
 -- Quickfix keymaps
-vim.keymap.set("n", "[q", "<CMD>cprev<CR>", { desc = "Go to previous quickfix item" })
-vim.keymap.set("n", "]q", "<CMD>cnext<CR>", { desc = "Go to next quickfix item" })
-vim.keymap.set("n", "[Q", "<CMD>cfirst<CR>", { desc = "Go to first quickfix item" })
-vim.keymap.set("n", "]Q", "<CMD>clast<CR>", { desc = "Go to last quickfix item" })
+local prev_quickfix, next_quickfix = ts_repeat_move.make_repeatable_move_pair(vim.cmd.cprev, vim.cmd.cnext)
+vim.keymap.set("n", "[q", prev_quickfix, { desc = "Go to previous quickfix item" })
+vim.keymap.set("n", "]q", next_quickfix, { desc = "Go to next quickfix item" })
+local first_quickfix, last_quickfix = ts_repeat_move.make_repeatable_move_pair(vim.cmd.cfirst, vim.cmd.clast)
+vim.keymap.set("n", "[Q", first_quickfix, { desc = "Go to first quickfix item" })
+vim.keymap.set("n", "]Q", last_quickfix, { desc = "Go to last quickfix item" })
 
 -- URL handling
 -- source: https://sbulav.github.io/vim/neovim-opening-urls/
