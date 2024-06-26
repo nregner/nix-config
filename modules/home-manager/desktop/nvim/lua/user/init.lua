@@ -1316,7 +1316,7 @@ require("lazy").setup({
   },
 }, {
   dev = {
-    path = "~/dev/nvim-plugins/",
+    path = "~/dev/github/",
   },
 })
 
