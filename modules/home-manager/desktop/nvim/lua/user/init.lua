@@ -370,6 +370,8 @@ require("lazy").setup({
       "saadparwaiz1/cmp_luasnip",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-path",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-cmdline",
     },
     config = function()
       local cmp = require("cmp")
@@ -467,15 +469,37 @@ require("lazy").setup({
           },
           { name = "path" },
         },
-        sorting = {
-          comparators = {
-            cmp.config.compare.offset,
-            cmp.config.compare.exact,
-            cmp.config.compare.score,
-            cmp.config.compare.recently_used,
-            cmp.config.compare.kind,
-          },
+        -- sorting = {
+        --   priority_weight = 2,
+        --   comparators = {
+        --     cmp.config.compare.offset,
+        --     cmp.config.compare.exact,
+        --     cmp.config.compare.score,
+        --     cmp.config.compare.recently_used,
+        --     cmp.config.compare.kind,
+        --   },
+        -- },
+      })
+
+      cmp.setup.cmdline("/", {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+          { name = "buffer" },
         },
+      })
+
+      cmp.setup.cmdline(":", {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+          { name = "path" },
+        }, {
+          {
+            name = "cmdline",
+            option = {
+              ignore_cmds = { "Man", "!", "Gbrowse" },
+            },
+          },
+        }),
       })
     end,
   },
@@ -567,7 +591,7 @@ require("lazy").setup({
         map("n", "<leader>htd", gs.toggle_deleted, { desc = "[H]unk [T]oggle [D]eleted" })
 
         local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
-        local prev_hunk_repeat, next_hunk_repeat = ts_repeat_move.make_repeatable_move_pair(gs.prev_hunk, gs.next_hunk)
+        local next_hunk_repeat, prev_hunk_repeat = ts_repeat_move.make_repeatable_move_pair(gs.next_hunk, gs.prev_hunk)
 
         -- don't override the built-in and fugitive keymaps
         map({ "n", "v" }, "]c", function()
@@ -1076,6 +1100,15 @@ require("lazy").setup({
   { -- TODO comments
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
+    keys = function()
+      local todo = require("todo-comments")
+      local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
+      local jump_next, jump_prev = ts_repeat_move.make_repeatable_move_pair(todo.jump_next, todo.jump_prev)
+      return {
+        { "]t", jump_next, desc = "Next [T]odo comment" },
+        { "[t", jump_prev, desc = "Previous [T]odo comment" },
+      }
+    end,
     opts = {
       signs = false,
       keywords = {
@@ -1353,16 +1386,16 @@ local function goto_error_diagnostic(f)
 end
 
 local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
-local prev_diag_error, next_diag_error = ts_repeat_move.make_repeatable_move_pair(
-  goto_error_diagnostic(vim.diagnostic.goto_prev),
-  goto_error_diagnostic(vim.diagnostic.goto_next)
+local next_diag_error, prev_diag_error = ts_repeat_move.make_repeatable_move_pair(
+  goto_error_diagnostic(vim.diagnostic.goto_next),
+  goto_error_diagnostic(vim.diagnostic.goto_prev)
 )
-vim.keymap.set("n", "[e", prev_diag_error, { desc = "Go to previous error diagnostic" })
 vim.keymap.set("n", "]e", next_diag_error, { desc = "Go to next diagnostic" })
-local prev_diag, next_diag =
-  ts_repeat_move.make_repeatable_move_pair(vim.diagnostic.goto_prev, vim.diagnostic.goto_next)
-vim.keymap.set("n", "[d", prev_diag, { desc = "Go to previous diagnostic" })
+vim.keymap.set("n", "[e", prev_diag_error, { desc = "Go to previous error diagnostic" })
+local next_diag, prev_diag =
+  ts_repeat_move.make_repeatable_move_pair(vim.diagnostic.goto_next, vim.diagnostic.goto_prev)
 vim.keymap.set("n", "]d", next_diag, { desc = "Go to next diagnostic" })
+vim.keymap.set("n", "[d", prev_diag, { desc = "Go to previous diagnostic" })
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 vim.keymap.set("n", "<leader>d", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 
@@ -1378,12 +1411,12 @@ vim.keymap.set("n", "<leader>sv", function()
 end, { desc = "[S]ource [V]imrc" })
 
 -- Quickfix keymaps
-local prev_quickfix, next_quickfix = ts_repeat_move.make_repeatable_move_pair(vim.cmd.cprev, vim.cmd.cnext)
-vim.keymap.set("n", "[q", prev_quickfix, { desc = "Go to previous quickfix item" })
+local next_quickfix, prev_quickfix = ts_repeat_move.make_repeatable_move_pair(vim.cmd.cnext, vim.cmd.cprev)
 vim.keymap.set("n", "]q", next_quickfix, { desc = "Go to next quickfix item" })
-local first_quickfix, last_quickfix = ts_repeat_move.make_repeatable_move_pair(vim.cmd.cfirst, vim.cmd.clast)
-vim.keymap.set("n", "[Q", first_quickfix, { desc = "Go to first quickfix item" })
+vim.keymap.set("n", "[q", prev_quickfix, { desc = "Go to previous quickfix item" })
+local last_quickfix, first_quickfix = ts_repeat_move.make_repeatable_move_pair(vim.cmd.clast, vim.cmd.cfirst)
 vim.keymap.set("n", "]Q", last_quickfix, { desc = "Go to last quickfix item" })
+vim.keymap.set("n", "[Q", first_quickfix, { desc = "Go to first quickfix item" })
 
 -- URL handling
 -- source: https://sbulav.github.io/vim/neovim-opening-urls/
