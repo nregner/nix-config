@@ -24,9 +24,13 @@
       emmet-language-server
       gopls
       lua-language-server
-      nil
+      # FIXME: nix 2.23 fails to build on darwin
+      (nil.override {
+        nixVersions = {
+          latest = pkgs.unstable.nixVersions.nix_2_22;
+        };
+      })
       nodePackages_latest.graphql-language-service-cli
-      nodePackages_latest.volar
       terraform-ls
       vscode-langservers-extracted
       yaml-language-server

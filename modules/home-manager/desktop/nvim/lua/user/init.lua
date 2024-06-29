@@ -211,7 +211,6 @@ require("lazy").setup({
           },
         },
         terraformls = {},
-        volar = {},
         vtsls = {
           settings = require("vtsls").lspconfig.settings,
         },
