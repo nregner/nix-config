@@ -303,6 +303,7 @@ require("lazy").setup({
         jsonc = { "prettierd" },
         lua = { "stylua" },
         markdown = { "prettierd", "injected" },
+        nginx = { "nginxfmt" },
         nix = { "nixfmt" },
         rust = { "rustfmt" },
         sh = { "shfmt" },
@@ -320,6 +321,10 @@ require("lazy").setup({
       },
       formatters = {
         prettier = { options = { ft_parsers = { gitcommit = "markdown" } } },
+        nginxfmt = {
+          command = "nginxfmt",
+          args = { "--pipe" },
+        },
       },
       format_on_save = function(bufnr)
         -- Disable with a global or buffer-local variable
