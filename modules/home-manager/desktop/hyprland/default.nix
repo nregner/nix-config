@@ -21,6 +21,7 @@
     {
       hyprland = {
         enable = lib.mkEnableOption "Enable Hyprland configuration";
+        package = pkgs.unstable.hyprland;
 
         monitors = mkOption {
           description = "https://wiki.hyprland.org/Configuring/Monitors/";

@@ -13,6 +13,11 @@ let
       ];
     });
 
+    hyprland = prev.hyprland.overrideAttrs {
+      # https://github.com/hyprwm/Hyprland/issues/6698#issuecomment-2198330991
+      patches = [ ./hyprland/revert-2566d818848b58b114071f199ffe944609376270.patch ];
+    };
+
     # disable xvfb-run tests to fix build on darwin
     xdot =
       (prev.xdot.overridePythonAttrs (oldAttrs: {

@@ -29,7 +29,7 @@
 
   programs.hyprland = {
     enable = true;
-    # package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    package = pkgs.unstable.hyprland;
   };
   services.displayManager.defaultSession = "hyprland";
   # https://wiki.hyprland.org/Configuring/Multi-GPU/
