@@ -18,6 +18,36 @@ let
       patches = [ ./hyprland/revert-2566d818848b58b114071f199ffe944609376270.patch ];
     };
 
+    orca-slicer =
+      let
+        pname = "orca-slicer";
+        version = "2.1.1";
+        src = final.fetchurl {
+          url = "https://github.com/SoftFever/OrcaSlicer/releases/download/v${version}/OrcaSlicer_Linux_V${version}.AppImage";
+          hash = "sha256-kvM1rBGEJhjRqQt3a8+I0o4ahB1Uc9qB+4PzhYoNQdM=";
+        };
+        appimageContents = final.appimageTools.extract { inherit pname version src; };
+        inherit (final) lib;
+      in
+      lib.warnIf (lib.versionOlder version prev.orca-slicer.version)
+        "orca-slicer is outdated. latest: ${prev.orca-slicer.version}"
+        (
+          final.appimageTools.wrapType2 {
+            inherit pname version src;
+            extraPkgs = pkgs: [ pkgs.webkitgtk ];
+            extraInstallCommands = ''
+              install -m 444 -D ${appimageContents}/OrcaSlicer.desktop $out/share/applications/OrcaSlicer.desktop
+              install -m 444 -D ${appimageContents}/usr/share/icons/hicolor/192x192/apps/OrcaSlicer.png \
+                $out/share/icons/hicolor/192x192/apps/OrcaSlicer.png
+              substituteInPlace $out/share/applications/OrcaSlicer.desktop \
+                --replace-fail 'Exec=AppRun' 'Exec=env WEBKIT_DISABLE_DMABUF_RENDERER=1 ${pname}'
+            '';
+            passthru = {
+              inherit appimageContents;
+            };
+          }
+        );
+
     # disable xvfb-run tests to fix build on darwin
     xdot =
       (prev.xdot.overridePythonAttrs (oldAttrs: {
