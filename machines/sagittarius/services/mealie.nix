@@ -1,32 +1,39 @@
+{ config, pkgs, ... }:
+let
+  dataDir = "/var/lib/mealie";
+in
 {
-  inputs,
-  config,
-  pkgs,
-  ...
-}:
-{
-  imports = [ inputs.mealie.nixosModules.default ];
-
-  services.mealie-nightly = {
+  services.mealie = {
     enable = true;
-    package = inputs.mealie.packages.${pkgs.stdenv.hostPlatform.system}.mealie-nightly;
+    # https://github.com/NixOS/nixpkgs/issues/321623
+    package = pkgs.unstable.mealie.overrideAttrs (old: {
+      patches = (old.patches or [ ]) ++ [
+        (pkgs.fetchpatch {
+          url = "https://github.com/mealie-recipes/mealie/commit/445754c5d844ccf098f3678bc4f3cc9642bdaad6.patch";
+          hash = "sha256-ZdATmSYxhGSjoyrni+b5b8a30xQPlUeyp3VAc8OBmDY=";
+          revert = true;
+        })
+      ];
+    });
   };
 
   nginx.subdomain.mealie = {
-    "/".proxyPass = "http://127.0.0.1:${toString config.services.mealie-nightly.port}/";
+    "/".proxyPass = "http://127.0.0.1:${toString config.services.mealie.port}/";
   };
 
   services.nregner.backups.mealie = {
-    paths = [ config.services.mealie-nightly.stateDir ];
+    paths = [ dataDir ];
     restic = {
       s3 = { };
     };
   };
 
-  # nix.settings = {
-  #   substituters = [ "https://nathanregner-mealie-nix.cachix.org" ];
-  #   trusted-public-keys = [
-  #     "nathanregner-mealie-nix.cachix.org-1:Ir3Z9UXjCcKwULpHZ8BveGbg7Az7edKLs4RPlrM1USM="
-  #   ];
-  # };
+  assertions = [
+    {
+      assertion = config.systemd.services.mealie.environment.DATA_DIR == dataDir;
+      message = ''
+        Mismatched config.systemd.services.mealie.environment.DATA_DIR: ${config.systemd.services.mealie.environment.DATA_DIR}
+      '';
+    }
+  ];
 }

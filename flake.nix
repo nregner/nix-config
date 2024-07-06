@@ -31,10 +31,6 @@
       url = "github:hraban/mac-app-util";
       # inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-    mealie = {
-      url = "github:nathanregner/mealie-nix";
-      # inputs.nixpkgs.follows = "nixpkgs";
-    };
     nix-index-database = {
       url = "github:Mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
