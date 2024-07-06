@@ -95,7 +95,7 @@
       };
 
       home.packages = with pkgs.unstable; [
-        gnome.nautilus
+        nautilus
         hyprpaper
         hyprpicker
         import-env

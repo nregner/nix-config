@@ -30,7 +30,7 @@ require("lazy").setup({
   },
 
   {
-    "/chentoast/marks.nvim",
+    "chentoast/marks.nvim",
     config = true,
   },
 

@@ -1,10 +1,11 @@
 {
-  lib,
-  stdenv,
-  fetchurl,
-  gnome,
   dpkg,
+  fetchurl,
+  lib,
+  nautilus,
+  nautilus-python,
   python3,
+  stdenv,
 }:
 
 stdenv.mkDerivation rec {
@@ -19,8 +20,8 @@ stdenv.mkDerivation rec {
   strictDeps = true;
   nativeBuildInputs = [ dpkg ];
   buildInputs = [
-    gnome.nautilus
-    gnome.nautilus-python
+    nautilus
+    nautilus-python
     python3
   ];
 

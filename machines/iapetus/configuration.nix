@@ -92,7 +92,7 @@
     [ config.boot.kernelPackages.perf ]
     ++ (with pkgs.unstable; [
       android-file-transfer # aft-mtp-mount ~/mnt
-      gnome.nautilus-python
+      nautilus-python
       insync-nautilus
       libmtp
       virt-manager

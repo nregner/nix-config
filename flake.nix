@@ -135,7 +135,7 @@
               };
             };
 
-          treefmt = import ./treefmt.nix { inherit pkgs; };
+          treefmt = import ./treefmt.nix;
         };
 
       flake =
