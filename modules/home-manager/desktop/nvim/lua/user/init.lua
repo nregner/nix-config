@@ -135,9 +135,13 @@ require("lazy").setup({
 
   { -- LSP Configuration & Plugins
     "neovim/nvim-lspconfig",
-    dependencies = { "j-hui/fidget.nvim", "yioneko/nvim-vtsls" },
+    dependencies = {
+      "artemave/workspace-diagnostics.nvim",
+      "j-hui/fidget.nvim",
+      "yioneko/nvim-vtsls",
+    },
     config = function()
-      local on_attach = function(_, bufnr)
+      local on_attach = function(client, bufnr)
         local map = function(mode, keys, func, desc)
           if desc then
             desc = "LSP: " .. desc
@@ -178,6 +182,8 @@ require("lazy").setup({
         vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
           vim.lsp.buf.format()
         end, { desc = "Format current buffer with LSP" })
+
+        require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
       end
 
       require("lspconfig.configs").vtsls = require("vtsls").lspconfig -- set default server config, optional but recommended
