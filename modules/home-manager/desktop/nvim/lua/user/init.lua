@@ -167,7 +167,7 @@ require("lazy").setup({
         nmap("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
 
         -- See `:help K` for why this keymap
-        -- nmap("K", vim.lsp.buf.hover, "Hover Documentation")
+        nmap("K", vim.lsp.buf.hover, "Hover Documentation")
         nmap("<M-k>", vim.lsp.buf.signature_help, "Signature Documentation")
 
         -- Lesser used LSP functionality
@@ -1214,7 +1214,23 @@ require("lazy").setup({
 
   { -- trouble.nvim
     "folke/trouble.nvim",
-    opts = {}, -- for default options, refer to the configuration section for custom setup.
+    opts = {
+      keys = {
+        -- -- TODO: doesn't work quite right
+        -- h = "fold_more",
+        -- l = "fold_open",
+        -- -- TODO:
+        -- p = "parent_item",
+      },
+      modes = {
+        symbols = {
+          desc = "document symbols",
+          mode = "lsp_document_symbols",
+          focus = false,
+          win = { position = "right", foldlevel = 1 },
+        },
+      },
+    }, -- for default options, refer to the configuration section for custom setup.
     cmd = "Trouble",
     keys = {
       {
