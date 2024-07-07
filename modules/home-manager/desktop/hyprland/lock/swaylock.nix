@@ -48,22 +48,22 @@
       enable = true;
 
       timeouts = [
-        # auto-lock
-        {
-          timeout = lockAfter;
-          command = "${lock} --grace 15";
-          resumeCommand = displayOn;
-        }
-        # turn off display after locking manually
-        {
-          timeout = lockDisplayOffAfter;
-          command = lockDisplayOff;
-          resumeCommand = displayOn;
-        }
+        # # auto-lock
+        # {
+        #   timeout = lockAfter;
+        #   command = "${lock} --grace 15";
+        #   resumeCommand = displayOn;
+        # }
+        # # turn off display after locking manually
+        # {
+        #   timeout = lockDisplayOffAfter;
+        #   command = lockDisplayOff;
+        #   resumeCommand = displayOn;
+        # }
         # turn off display after locking automatically
         {
-          timeout = lockAfter + lockDisplayOffAfter;
-          command = lockDisplayOff;
+          timeout = lockAfter;
+          command = displayOff;
           resumeCommand = displayOn;
         }
         # auto-sleep
