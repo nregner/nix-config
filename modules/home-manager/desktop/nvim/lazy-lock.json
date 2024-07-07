@@ -62,5 +62,6 @@
   "vim-sexp-mappings-for-regular-people": { "branch": "master", "commit": "cc5923e357373ea6ef0c13eae82f44e6b9b1d374" },
   "vim-sleuth": { "branch": "master", "commit": "1cc4557420f215d02c4d2645a748a816c220e99b" },
   "vim-suda": { "branch": "master", "commit": "b97fab52f9cdeabe2bbb5eb98d82356899f30829" },
-  "which-key.nvim": { "branch": "main", "commit": "af4ded85542d40e190014c732fa051bdbf88be3d" }
+  "which-key.nvim": { "branch": "main", "commit": "af4ded85542d40e190014c732fa051bdbf88be3d" },
+  "workspace-diagnostics.nvim": { "branch": "main", "commit": "2c911e785f953241704918dcd0dbada8c852d716" }
 }
