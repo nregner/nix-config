@@ -1326,6 +1326,8 @@ require("lazy").setup({
       },
     },
     config = function(_)
+      vim.g["conjure#client#clojure#nrepl#refresh#backend"] = "clj-reload"
+
       require("conjure.main").main()
       require("conjure.mapping")["on-filetype"]()
     end,
