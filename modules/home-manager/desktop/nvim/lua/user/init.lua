@@ -1,4 +1,4 @@
--- disable netrw
+-- disable nrw
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
@@ -15,6 +15,17 @@ require("lazy").setup({
 
   -- replacement for ":w !sudo tee % > /dev/null" trick
   "lambdalisue/vim-suda",
+
+  { -- Local (project-specific) config
+    "klen/nvim-config-local",
+    config = function()
+      require("config-local").setup({
+        config_files = { ".nvim.lua", ".nvimrc", ".exrc" },
+        hashfile = vim.fn.stdpath("data") .. "/nvim-config-local",
+        lookup_parents = true,
+      })
+    end,
+  },
 
   -- {
   --   "akinsho/git-conflict.nvim",
