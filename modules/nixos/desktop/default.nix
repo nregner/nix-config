@@ -8,7 +8,9 @@
 
   users.mutableUsers = true;
 
-  # login shell
-  programs.zsh.enable = true;
-  users.users.nregner.shell = pkgs.zsh;
+  programs.zsh = {
+    enable = true;
+    enableBashCompletion = true;
+  };
+  users.users.nregner.shell = pkgs.zsh; # login shell
 }
