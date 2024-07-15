@@ -25,6 +25,7 @@
       clojure-lsp
       emmet-language-server
       gopls
+      helm-ls
       lua-language-server
       # FIXME: nix 2.23 fails to build on darwin
       (nil.override {
