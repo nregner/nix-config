@@ -20,6 +20,7 @@
       emmet-language-server
       gopls
       libclang
+      helm-ls
       lua-language-server
       nil
       terraform-ls
