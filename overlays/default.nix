@@ -48,6 +48,9 @@ let
           }
         );
 
+    # FIXME: https://github.com/NixOS/nixpkgs/issues/326942
+    mealie = prev.mealie.override { python3Packages = final.python311Packages; };
+
     # disable xvfb-run tests to fix build on darwin
     xdot =
       (prev.xdot.overridePythonAttrs (oldAttrs: {

@@ -14,13 +14,13 @@
   };
   joker = {
     pname = "joker";
-    version = "v1.3.5";
+    version = "v1.4.0";
     src = fetchFromGitHub {
       owner = "candid82";
       repo = "joker";
-      rev = "v1.3.5";
+      rev = "v1.4.0";
       fetchSubmodules = false;
-      sha256 = "sha256-aBZ0KlXWKAF70xFxc+WWXucLPnxyaCxu97IYkPuKcCA=";
+      sha256 = "sha256-Y7FaW3V80mXp3l87srTLyhF45MlNH7QUZ5hrTudPtDU=";
     };
   };
   kamp = {
@@ -46,15 +46,15 @@
   };
   linux-rockchip = {
     pname = "linux-rockchip";
-    version = "75ac2784c40818adbdabb06e98ac18317af5fdac";
+    version = "709c51c64e1652d4f8c87b1815db86f56d188268";
     src = fetchFromGitHub {
       owner = "armbian";
       repo = "linux-rockchip";
-      rev = "75ac2784c40818adbdabb06e98ac18317af5fdac";
+      rev = "709c51c64e1652d4f8c87b1815db86f56d188268";
       fetchSubmodules = false;
-      sha256 = "sha256-B6Y2lxPFzyqfyPgfc/G3mymdyOYNyGqUrR0LaatFLlw=";
+      sha256 = "sha256-YZdWNhLopRyaEBojqMLMYEMKV6V0HcFgFmDbRSbBhRo=";
     };
-    date = "2024-06-20";
+    date = "2024-07-10";
   };
   pin-github-action = {
     pname = "pin-github-action";

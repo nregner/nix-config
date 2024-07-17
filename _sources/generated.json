@@ -33,11 +33,11 @@
             "name": null,
             "owner": "candid82",
             "repo": "joker",
-            "rev": "v1.3.5",
-            "sha256": "sha256-aBZ0KlXWKAF70xFxc+WWXucLPnxyaCxu97IYkPuKcCA=",
+            "rev": "v1.4.0",
+            "sha256": "sha256-Y7FaW3V80mXp3l87srTLyhF45MlNH7QUZ5hrTudPtDU=",
             "type": "github"
         },
-        "version": "v1.3.5"
+        "version": "v1.4.0"
     },
     "kamp": {
         "cargoLocks": null,
@@ -81,7 +81,7 @@
     },
     "linux-rockchip": {
         "cargoLocks": null,
-        "date": "2024-06-20",
+        "date": "2024-07-10",
         "extract": null,
         "name": "linux-rockchip",
         "passthru": null,
@@ -93,11 +93,11 @@
             "name": null,
             "owner": "armbian",
             "repo": "linux-rockchip",
-            "rev": "75ac2784c40818adbdabb06e98ac18317af5fdac",
-            "sha256": "sha256-B6Y2lxPFzyqfyPgfc/G3mymdyOYNyGqUrR0LaatFLlw=",
+            "rev": "709c51c64e1652d4f8c87b1815db86f56d188268",
+            "sha256": "sha256-YZdWNhLopRyaEBojqMLMYEMKV6V0HcFgFmDbRSbBhRo=",
             "type": "github"
         },
-        "version": "75ac2784c40818adbdabb06e98ac18317af5fdac"
+        "version": "709c51c64e1652d4f8c87b1815db86f56d188268"
     },
     "pin-github-action": {
         "cargoLocks": null,

@@ -14,7 +14,7 @@ in
   joker = pkgs.unstable.buildGoModule (
     sources.joker
     // {
-      vendorHash = "sha256-k17BthjOjZs0WB88AVVIM00HcSZl2S5u8n9eB2NFdrk=";
+      vendorHash = "sha256-t/28kTJVgVoe7DgGzNgA1sYKoA6oNC46AeJSrW/JetU=";
       preBuild = ''
         go generate ./...
       '';
