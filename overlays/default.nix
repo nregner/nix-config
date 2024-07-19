@@ -1,5 +1,13 @@
 { inputs, ... }:
 let
+  inherit (inputs.nixpkgs) lib;
+
+  warnIfOutdated =
+    prev: final:
+    lib.warnIf (lib.versionOlder final.version prev.version)
+      "${final.name} is outdated. latest: ${prev.version}"
+      final;
+
   sharedModifications = final: prev: rec {
     # FIXME: hack to bypass "FATAL: Module ahci not found" error
     # https://github.com/NixOS/nixpkgs/issues/154163#issuecomment-1350599022
@@ -17,6 +25,27 @@ let
       # https://github.com/hyprwm/Hyprland/issues/6698#issuecomment-2198330991
       patches = [ ./hyprland/revert-2566d818848b58b114071f199ffe944609376270.patch ];
     };
+
+    nodePackages_latest =
+      let
+        nodePkgs = prev.nodePackages_latest;
+        node2nixPkgs = import ../pkgs/node2nix {
+          pkgs = final;
+          nodejs = nodePkgs.nodejs;
+        };
+      in
+      nodePkgs
+      // {
+        graphql-language-service-cli = warnIfOutdated nodePkgs.graphql-language-service-cli (
+          node2nixPkgs.graphql-language-service-cli.override {
+            nativeBuildInputs = [ final.buildPackages.makeWrapper ];
+            postInstall = ''
+              wrapProgram "$out/bin/graphql-lsp" \
+                --prefix NODE_PATH : ${nodePkgs.graphql}/lib/node_modules
+            '';
+          }
+        );
+      };
 
     orca-slicer =
       let
