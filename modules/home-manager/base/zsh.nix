@@ -5,15 +5,8 @@
     initExtra = ''
       bindkey -M viins 'jk' vi-cmd-mode
 
-      # https://github.com/nix-community/nix-direnv/wiki/Shell-integration
       flakify() {
-        if [ ! -e flake.nix ]; then
-          nix flake new -t github:nix-community/nix-direnv .
-        elif [ ! -e .envrc ]; then
-          echo "use flake" > .envrc
-          direnv allow
-        fi
-        ${"EDITOR"} flake.nix
+        nix flake new -t github:NixOS/templates#''${1:-"utils-generic"} .
       }
     '';
     # defaultKeymap = "viins";
