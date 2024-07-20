@@ -1,6 +1,6 @@
 { inputs, ... }:
 let
-  sharedModifications = final: prev: {
+  sharedModifications = final: prev: rec {
     # FIXME: hack to bypass "FATAL: Module ahci not found" error
     # https://github.com/NixOS/nixpkgs/issues/154163#issuecomment-1350599022
     makeModulesClosure = x: prev.makeModulesClosure (x // { allowMissing = true; });
@@ -47,9 +47,6 @@ let
             };
           }
         );
-
-    # FIXME: https://github.com/NixOS/nixpkgs/issues/326942
-    mealie = prev.mealie.override { python3Packages = final.python311Packages; };
 
     # disable xvfb-run tests to fix build on darwin
     xdot =
