@@ -118,10 +118,8 @@
   # Fix issues with suspend/resume on wayland
   boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
 
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
     # Override broken nvidia config which depends on 32 bit `pkgsi686Linux.nvidia-vaapi-driver`
     # for `opengl.driSupport32Bit` which is enabled by the steam config.
     # https://github.com/NixOS/nixpkgs/blob/6d6682772b62652b5019ffd7572cea1f39b72b20/nixos/modules/hardware/video/nvidia.nix#L395C45-L395C45
