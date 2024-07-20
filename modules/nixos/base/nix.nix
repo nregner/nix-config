@@ -10,7 +10,7 @@
 
   nix = {
     distributedBuilds = true;
-    package = pkgs.unstable.nixVersions.nix_2_22;
+    package = pkgs.unstable.nixVersions.nix_2_23;
 
     settings = {
       auto-optimise-store = true;
