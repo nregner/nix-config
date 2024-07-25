@@ -315,7 +315,7 @@ require("lazy").setup({
         lua = { "stylua" },
         markdown = { "prettierd", "injected" },
         nginx = { "nginxfmt" },
-        nix = { "nixfmt" },
+        nix = { "nixfmt", "injected" },
         rust = { "rustfmt" },
         sh = { "shfmt" },
         terraform = { "terraform_fmt" },
