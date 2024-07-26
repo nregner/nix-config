@@ -8,6 +8,8 @@ let
   };
 in
 {
+  cura5 = pkgs.unstable.callPackage ./cura { };
+
   gitea-github-mirror = pkgs.unstable.callPackage ./gitea-github-mirror { };
 
   graphql-language-service-cli = node2nixPkgs.graphql-language-service-cli.override {
@@ -51,7 +53,8 @@ in
     pkgs.unstable.runCommand "${pname}-${version}" { } ''
       mkdir -p $out/share/fonts/${pname}
       cp ${src}/*.otf $out/share/fonts/${pname}
-    '';
+
+'';
 
   tfautomv = pkgs.unstable.callPackage ./tfautomv.nix { source = sources.tfautomv; };
 
