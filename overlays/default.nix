@@ -77,6 +77,36 @@ let
           }
         );
 
+    cura =
+      let
+        pname = "cura";
+        version = "5.7.2";
+        src = final.fetchurl {
+          url = "https://github.com/Ultimaker/Cura/releases/download/${version}-RC2/UltiMaker-Cura-${version}-linux-X64.AppImage";
+          hash = "sha256-XlTcCmIqcfTg8fxM2KDik66qjIKktWet+94lFIJWopY=";
+        };
+        appimageContents = final.appimageTools.extract { inherit pname version src; };
+        inherit (final) lib;
+      in
+      lib.warnIf (lib.versionOlder version prev.cura.version)
+        "cura is outdated. latest: ${prev.cura.version}"
+        (
+          final.appimageTools.wrapType2 {
+            inherit pname version src;
+            extraPkgs = pkgs: [ pkgs.webkitgtk ];
+            extraInstallCommands = ''
+              install -m 444 -D ${appimageContents}/com.ultimaker.cura.desktop $out/share/applications/com.ultimaker.cura.desktop
+              # install -m 444 -D ${appimageContents}/usr/share/icons/hicolor/192x192/apps/cura-icon.png \
+              #   $out/share/icons/hicolor/256x256/apps/cura-icon.png
+              substituteInPlace $out/share/applications/com.ultimaker.cura.desktop \
+                --replace-fail 'Exec=UltiMaker-Cura' 'Exec=env ${pname}\nTryExec=${pname}'
+            '';
+            passthru = {
+              inherit appimageContents;
+            };
+          }
+        );
+
     # disable xvfb-run tests to fix build on darwin
     xdot =
       (prev.xdot.overridePythonAttrs (oldAttrs: {

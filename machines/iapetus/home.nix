@@ -84,7 +84,6 @@
     kubernetes-helm
 
     # 3d printer
-    orca-slicer
     super-slicer-latest
 
     # nix
