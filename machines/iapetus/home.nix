@@ -84,9 +84,9 @@
     kubernetes-helm
 
     # 3d printer
-    pkgs.cura
     orca-slicer
     super-slicer-beta
+    pkgs.cura5
 
     # nix
     cachix
