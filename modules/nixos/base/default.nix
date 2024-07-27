@@ -33,17 +33,7 @@
     dates = "weekly";
   };
 
-  system.nixos.tags =
-    let
-      src = self.sourceInfo;
-    in
-    [
-      "${src.shortRev or src.dirtyShortRev}-${
-        (lib.concatStringsSep "-" (
-          builtins.match "([[:digit:]]{4})([[:digit:]]{2})([[:digit:]]{2}).*" (src.lastModifiedDate or "")
-        ))
-      }"
-    ];
+  system.configurationRevision = self.rev or self.dirtyRev or null;
 
   boot.tmp.cleanOnBoot = true;
 
