@@ -5,25 +5,21 @@ in
 {
   services.mealie = {
     enable = true;
-    # FIXME: https://github.com/NixOS/nixpkgs/issues/325120
-    package = pkgs.unstable.mealie.override {
-      python3Packages =
-        let
-          packageOverrides = self: super: {
-            extruct = super.extruct.overrideAttrs rec {
-              version = "0.17.0";
-              src = pkgs.fetchFromGitHub {
-                owner = "scrapinghub";
-                repo = "extruct";
-                rev = "refs/tags/v${version}";
-                hash = "sha256-CfhIqbhrZkJ232grhHxrmj4H1/Bq33ZXe8kovSOWSK0=";
-              };
-            };
-          };
-          self = pkgs.unstable.python311.override { inherit packageOverrides self; };
-        in
-        self.pkgs;
-    };
+    package =
+      (pkgs.unstable.mealie.override {
+        # FIXME: https://github.com/NixOS/nixpkgs/issues/325120
+        python3Packages = pkgs.unstable.python311.pkgs;
+      }).overrideAttrs
+        (old: {
+          # FIXME: https://github.com/NixOS/nixpkgs/issues/321623
+          patches = (old.patches or [ ]) ++ [
+            (pkgs.fetchpatch {
+              url = "https://github.com/mealie-recipes/mealie/commit/445754c5d844ccf098f3678bc4f3cc9642bdaad6.patch";
+              hash = "sha256-ZdATmSYxhGSjoyrni+b5b8a30xQPlUeyp3VAc8OBmDY=";
+              revert = true;
+            })
+          ];
+        });
   };
 
   nginx.subdomain.mealie = {
