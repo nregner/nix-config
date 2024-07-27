@@ -1,10 +1,10 @@
 #!/usr/bin/env bb
 
-(require '[babashka.process :refer [shell]])
-(require '[cheshire.core :as json])
-(require '[clojure.string :as str])
-(require '[clojure.java.io :as io])
-(require '[clj-yaml.core :as yaml])
+(require '[babashka.process :refer [shell]]
+         '[cheshire.core :as json]
+         '[clojure.string :as str]
+         '[clojure.java.io :as io]
+         '[clj-yaml.core :as yaml])
 
 (def script-root (.getParentFile (io/file *file*)))
 

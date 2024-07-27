@@ -1300,6 +1300,68 @@ require("lazy").setup({
     },
   },
 
+  {
+    "chrishrb/gx.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    keys = { { "gx", "<cmd>Browse<cr>", mode = { "n", "x" } } },
+    cmd = { "Browse" },
+    init = function()
+      vim.g.netrw_nogx = 1
+    end,
+    opts = {
+      open_browser_app = vim.g.open_cmd,
+      handlers = {
+        plugin = true,
+        github = true,
+        package_json = true,
+        search = {
+          name = "search",
+          handle = function(mode, line, opts)
+            -- don't search unless selected
+            if mode == "v" then
+              return require("gx.handlers.search").handle(mode, line, opts)
+            end
+          end,
+        },
+        url = {
+          name = "url",
+          handle = function(mode, line, _)
+            -- don't open URLs without a protocol
+            local pattern = "(https?://[a-zA-Z%d_/%%%-%.~@\\+#=?&:]+)"
+            return require("gx.helper").find(line, mode, pattern)
+          end,
+        },
+        -- TODO
+        -- jira = {
+        --   name = "jira",
+        --   handle = function(mode, line, _)
+        --     local ticket = require("gx.helper").find(line, mode, "(%u+-%d+)")
+        --     if ticket and #ticket < 20 then
+        --       return "http://jira.company.com/browse/" .. ticket
+        --     end
+        --   end,
+        -- },
+        rust = {
+          name = "rust",
+          filename = "Cargo.toml",
+          handle = function(mode, line, _)
+            local crate = require("gx.helper").find(line, mode, "(%w+)%s-=%s")
+            if crate then
+              return "https://crates.io/crates/" .. crate
+            end
+          end,
+        },
+      },
+      handler_options = {
+        search_engine = "google", -- you can select between google, bing, duckduckgo, ecosia and yandex
+        select_for_search = false, -- if your cursor is e.g. on a link, the pattern for the link AND for the word will always match. This disables this behaviour for default so that the link is opened without the select option for the word AND link
+
+        git_remotes = { "upstream", "origin" }, -- list of git remotes to search for git issue linking, in priority
+        git_remote_push = true, -- use the push url for git issue linking,
+      },
+    },
+  },
+
   { -- REPL
     "Olical/conjure",
     ft = { "clojure" },
@@ -1463,29 +1525,15 @@ local last_quickfix, first_quickfix = ts_repeat_move.make_repeatable_move_pair(v
 vim.keymap.set("n", "]Q", last_quickfix, { desc = "Go to last quickfix item" })
 vim.keymap.set("n", "[Q", first_quickfix, { desc = "Go to first quickfix item" })
 
-local open
 if vim.fn.has("mac") == 1 then
-  open = function(arg)
-    vim.fn.jobstart("open " .. vim.fn.shellescape(arg), { detach = true })
-  end
+  vim.g.open_cmd = "open"
 elseif vim.fn.has("unix") == 1 then
-  open = function(arg)
-    vim.fn.jobstart("xdg-open " .. vim.fn.shellescape(arg), { detach = true })
-  end
-else
-  open = function()
-    vim.notify("open not supported", vim.log.levels.WARN)
-  end
+  vim.g.open_cmd = "xdg-open"
 end
-
--- URL handling
-vim.keymap.set("", "gx", function()
-  open(vim.fn.expand("<cfile>"))
-end)
 
 -- for GBrowse, now that netrw is disabled
 vim.api.nvim_create_user_command("Browse", function(opts)
-  open(opts.fargs[1])
+  vim.fn.jobstart(vim.g.open_cmd .. " " .. vim.fn.shellescape(opts.fargs[1]), { detach = true })
 end, { nargs = 1 })
 
 -- [[ Highlight on yank ]]
