@@ -69,6 +69,16 @@
     };
     date = "2024-07-10";
   };
+  mealie = {
+    pname = "mealie";
+    version = "latest";
+    src = dockerTools.pullImage {
+      imageName = "hkotel/mealie";
+      imageDigest = "sha256:54a976880161c3c96de30b63cd0092d1f069aa8b23686669b726558ddf112724";
+      sha256 = "sha256-LsnvoHhztvn/OrMLdyiLUwhkFn9OmVt2fWOUcK2QisY=";
+      finalImageTag = "latest";
+    };
+  };
   sf-mono-nerd-font = {
     pname = "sf-mono-nerd-font";
     version = "v18.0d1e1.0";

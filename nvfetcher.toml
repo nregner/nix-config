@@ -24,6 +24,11 @@ src.git = "https://github.com/armbian/linux-rockchip.git"
 src.branch = "rk-5.10-rkr6"
 fetch.github = "armbian/linux-rockchip"
 
+[mealie]
+src.container = "hkotel/mealie"
+src.include_regex = "latest"
+fetch.docker = "hkotel/mealie"
+
 [sf-mono-nerd-font]
 src.github = "epk/SF-Mono-Nerd-Font"
 fetch.github = "epk/SF-Mono-Nerd-Font"
