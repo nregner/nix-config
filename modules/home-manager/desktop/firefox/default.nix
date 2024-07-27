@@ -1,17 +1,9 @@
+{ pkgs, ... }:
 {
   programs.firefox = {
+    enable = true;
     profiles.default = {
-
-      # extensions = [
-      #   (pkgs.stdenv.mkDerivation {
-      #     name = "firefox-extension-ublock-origin";
-      #     src = ./extensions;
-      #     dontBuild = true;
-      #     installPhase = ''
-      #     '';
-      #   })
-      # ];
-
+      extensions = [ pkgs.aws-cli-sso ];
       settings = {
         extensions.autoDisableScopes = 0;
       };

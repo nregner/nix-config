@@ -3,6 +3,8 @@ let
   sources = pkgs.callPackage ../_sources/generated.nix { };
 in
 {
+  aws-cli-sso = pkgs.unstable.callPackage ./aws-cli-sso { };
+
   gitea-github-mirror = pkgs.unstable.callPackage ./gitea-github-mirror { };
 
   hammerspoon = pkgs.unstable.callPackage ./hammerspoon.nix { };
@@ -45,7 +47,8 @@ in
     pkgs.unstable.runCommand "${pname}-${version}" { } ''
       mkdir -p $out/share/fonts/${pname}
       cp ${src}/*.otf $out/share/fonts/${pname}
-    '';
+
+'';
 
   tfautomv = pkgs.unstable.callPackage ./tfautomv.nix { source = sources.tfautomv; };
 
