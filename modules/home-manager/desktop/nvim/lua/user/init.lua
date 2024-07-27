@@ -1326,8 +1326,6 @@ require("lazy").setup({
       },
     },
     config = function(_)
-      vim.g["conjure#client#clojure#nrepl#refresh#backend"] = "clj-reload"
-
       require("conjure.main").main()
       require("conjure.mapping")["on-filetype"]()
     end,
@@ -1335,13 +1333,20 @@ require("lazy").setup({
       vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
         pattern = { "conjure-log-*.cljc" },
         callback = function(ev)
-          vim.diagnostic.disable(ev.buf)
+          vim.diagnostic.enable(false, ev)
         end,
       })
       vim.g["conjure#extract#tree_sitter#enabled"] = true
+      vim.g["conjure#client#clojure#nrepl#refresh#backend"] = "clj-reload"
+      -- https://github.com/Olical/conjure/issues/406
+      vim.g["conjure#client#clojure#nrepl#eval#print_function"] = "cider.nrepl.pprint/pprint"
     end,
   },
-}, {})
+}, {
+  dev = {
+    path = "~/dev/github",
+  },
+})
 
 -- https://trstringer.com/neovim-auto-reopen-files/
 vim.api.nvim_create_autocmd("VimLeavePre", {
