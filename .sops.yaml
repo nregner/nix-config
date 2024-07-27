@@ -50,3 +50,8 @@ creation_rules:
       - age:
           - *user_nregner
           - *host_sagittarius
+  - path_regex: machines/iapetus/secrets.yaml
+    key_groups:
+      - age:
+          - *user_nregner
+          - *host_iapetus

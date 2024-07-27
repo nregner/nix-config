@@ -42,7 +42,7 @@
     '';
   };
 
-  services.nregner.backups.gitea = {
+  services.nregner.backup.paths.gitea = {
     paths = [ config.services.gitea.stateDir ];
     restic = {
       s3 = { };

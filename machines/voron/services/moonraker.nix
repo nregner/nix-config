@@ -24,7 +24,7 @@
     };
   };
 
-  services.nregner.backups.moonraker = {
+  services.nregner.backup.paths.moonraker = {
     paths = [ config.services.moonraker.stateDir ];
     restic = {
       s3 = { };

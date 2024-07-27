@@ -1,15 +1,12 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ config, lib, ... }:
 {
   imports = [
     ../../modules/nixos/desktop
     ./disko.nix
     ./hardware-configuration.nix
   ];
+
+  services.nregner.backup.enable = false;
 
   # bootloader
   boot.loader.systemd-boot.enable = true;

@@ -26,7 +26,7 @@ in
     "/".proxyPass = "http://127.0.0.1:${toString config.services.mealie.port}/";
   };
 
-  services.nregner.backups.mealie = {
+  services.nregner.backup.paths.mealie = {
     paths = [ dataDir ];
     restic = {
       s3 = { };

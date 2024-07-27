@@ -13,6 +13,8 @@
     ./zsa.nix
   ];
 
+  sops.defaultSopsFile = ./secrets.yaml;
+
   # Networking
   networking.hostName = "iapetus";
   networking.networkmanager.enable = true;

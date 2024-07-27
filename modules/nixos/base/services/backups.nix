@@ -7,10 +7,14 @@
 with lib;
 let
   inherit (utils.systemdUtils.unitOptions) unitOption;
-  cfg = config.services.nregner.backups;
+  cfg = config.services.nregner.backup;
 in
 {
-  options.services.nregner.backups = mkOption {
+  options.services.nregner.backup.enable = mkOption {
+    default = !(args.options.virtualisation ? qemu);
+  };
+
+  options.services.nregner.backup.paths = mkOption {
     default = { };
     type = types.attrsOf (
       types.submodule (
@@ -63,16 +67,21 @@ in
     );
   };
 
-  config = lib.mkIf (!lib.matchAttrs cfg { }) (
+  config = lib.mkMerge [
     {
-      sops.secrets.restic-password.key = "restic_password";
-      sops.secrets.restic-s3-env.key = "restic/s3_env";
+      # https://discourse.nixos.org/t/psa-pinning-users-uid-is-important-when-reinstalling-nixos-restoring-backups/21819
+      services.nregner.backup.paths.nixos = {
+        paths = [ "/var/lib/nixos" ];
+        restic = {
+          s3 = { };
+        };
+      };
     }
-    // (
+    (lib.mkIf cfg.enable (
       let
         defaults = {
           s3 = name: {
-            repository = "s3:s3.dualstack.us-west-2.amazonaws.com/nregner-restic-${args.config.networking.hostName}/${name}";
+            repository = "s3:s3.dualstack.us-west-2.amazonaws.com/nregner-restic/${args.config.networking.hostName}/${name}";
             initialize = true;
             passwordFile = args.config.sops.secrets.restic-password.path;
             environmentFile = args.config.sops.secrets.restic-s3-env.path;
@@ -83,7 +92,7 @@ in
             ];
           };
         };
-        resticJobs = trivial.pipe cfg [
+        resticJobs = trivial.pipe cfg.paths [
           (attrsets.mapAttrsToList (
             name:
             {
@@ -99,9 +108,12 @@ in
           (lists.foldl (acc: attrs: acc // attrs) { })
         ];
       in
+
       {
+        sops.secrets.restic-password.key = "restic_password";
+        sops.secrets.restic-s3-env.key = "restic/s3_env";
         services.restic.backups = resticJobs;
       }
-    )
-  );
+    ))
+  ];
 }
