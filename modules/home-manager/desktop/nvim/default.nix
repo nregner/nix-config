@@ -21,10 +21,10 @@
       helm-ls
       lua-language-server
       nil
+      nodePackages_latest.typescript
       pkgs."@olrtg/emmet-language-server"
       pkgs.graphql-language-service-cli
       pkgs.harper-ls
-      pkgs.vtsls
       terraform-ls
       vscode-langservers-extracted
       yaml-language-server
