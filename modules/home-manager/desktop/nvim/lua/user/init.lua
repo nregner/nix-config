@@ -289,14 +289,6 @@ require("lazy").setup({
 
   "b0o/schemastore.nvim",
 
-  { -- LSP output panel
-    "mhanberg/output-panel.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("output_panel").setup()
-    end,
-  },
-
   { -- Autoformat
     "stevearc/conform.nvim",
     opts = {
