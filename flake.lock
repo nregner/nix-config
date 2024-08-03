@@ -32,9 +32,7 @@
     },
     "disko": {
       "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
+        "nixpkgs": ["nixpkgs"]
       },
       "locked": {
         "lastModified": 1723080788,
@@ -173,9 +171,7 @@
     },
     "home-manager": {
       "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
+        "nixpkgs": ["nixpkgs"]
       },
       "locked": {
         "lastModified": 1720042825,
@@ -194,9 +190,7 @@
     },
     "home-manager-unstable": {
       "inputs": {
-        "nixpkgs": [
-          "nixpkgs-unstable"
-        ]
+        "nixpkgs": ["nixpkgs-unstable"]
       },
       "locked": {
         "lastModified": 1723015306,
@@ -216,9 +210,7 @@
     "hydra-sentinel": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "nixpkgs": [
-          "nixpkgs-unstable"
-        ]
+        "nixpkgs": ["nixpkgs-unstable"]
       },
       "locked": {
         "lastModified": 1720290729,
@@ -257,9 +249,7 @@
     },
     "nix-darwin": {
       "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
+        "nixpkgs": ["nixpkgs"]
       },
       "locked": {
         "lastModified": 1722924007,
@@ -277,9 +267,7 @@
     },
     "nix-index-database": {
       "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
+        "nixpkgs": ["nixpkgs"]
       },
       "locked": {
         "lastModified": 1722740924,
@@ -313,9 +301,7 @@
     "nixos-generators": {
       "inputs": {
         "nixlib": "nixlib",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
+        "nixpkgs": ["nixpkgs"]
       },
       "locked": {
         "lastModified": 1723078345,
@@ -443,9 +429,7 @@
     "preprocess-cancellation": {
       "inputs": {
         "flake-utils": "flake-utils_3",
-        "nixpkgs": [
-          "nixpkgs-unstable"
-        ],
+        "nixpkgs": ["nixpkgs-unstable"],
         "rust-overlay": "rust-overlay"
       },
       "locked": {
@@ -487,10 +471,7 @@
     "rust-overlay": {
       "inputs": {
         "flake-utils": "flake-utils_4",
-        "nixpkgs": [
-          "preprocess-cancellation",
-          "nixpkgs"
-        ]
+        "nixpkgs": ["preprocess-cancellation", "nixpkgs"]
       },
       "locked": {
         "lastModified": 1716776264,
@@ -508,12 +489,8 @@
     },
     "sops-nix": {
       "inputs": {
-        "nixpkgs": [
-          "nixpkgs-unstable"
-        ],
-        "nixpkgs-stable": [
-          "nixpkgs"
-        ]
+        "nixpkgs": ["nixpkgs-unstable"],
+        "nixpkgs-stable": ["nixpkgs"]
       },
       "locked": {
         "lastModified": 1723568948,
@@ -591,9 +568,7 @@
     },
     "treefmt-nix": {
       "inputs": {
-        "nixpkgs": [
-          "nixpkgs-unstable"
-        ]
+        "nixpkgs": ["nixpkgs-unstable"]
       },
       "locked": {
         "lastModified": 1722330636,
