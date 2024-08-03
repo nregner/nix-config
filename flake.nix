@@ -27,13 +27,17 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-parts.url = "github:hercules-ci/flake-parts";
-    hydra-sentinel = {
-      url = "github:nathanregner/hydra-sentinel";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
     mac-app-util = {
       url = "github:hraban/mac-app-util";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+    nix-fast-build = {
+      url = "github:Mic92/nix-fast-build";
+      inputs = {
+        flake-parts.follows = "flake-parts";
+        nixpkgs.follows = "nixpkgs";
+        treefmt-nix.follows = "treefmt-nix";
+      };
     };
     nix-index-database = {
       url = "github:Mic92/nix-index-database";
@@ -44,7 +48,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     sops-nix = {
-      url = "github:Mic92/sops-nix";
+      # url = "/Volumes/dev/github/sops-nix";
+      url = "github:nathanregner/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     treefmt-nix = {
@@ -261,10 +266,10 @@
                       # copy system closure so we don't have to download/rebuild on the host
                       config.system.build.toplevel
                       (pkgs.runCommand "install-scripts" { } ''
-                        mkdir -p $out/bin
-                        cp ${config.system.build.formatScript} $out/bin/disko-format
-                        cp ${config.system.build.mountScript} $out/bin/disko-mount
-                        cp ${pkgs.writeShellScript "install" ''
+                                                                      mkdir -p $out/bin
+                                                                      cp${config.system.build.formatScript} $out/bin/disko-format
+                                                                      cp ${config.system.build.mountScript} $out/bin/disko-mount
+                        cp${pkgs.writeShellScript "install" ''
                           sudo nixos-install --root /mnt --flake ${self.outPath}#${name}
                         ''} $out/bin/nixos-install-flake
                       '')

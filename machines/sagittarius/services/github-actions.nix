@@ -70,8 +70,11 @@
   };
   services.github-runners.nix-config = {
     extraPackages = with pkgs.unstable; [
+      nix-fast-build
       node2nix
+      nushell
       nvfetcher
+      wol
     ];
     extraEnvironment = {
       NVFETCHER_KEYFILE = config.sops.templates.nvfetcher-github-pat.path;

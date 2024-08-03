@@ -31,6 +31,8 @@ let
       # FIXME: https://github.com/NixOS/nixpkgs/issues/357979
       moonraker = warnIfOutdated prev.moonraker (final.callPackage ./moonraker { });
 
+      nix-fast-build = inputs.nix-fast-build.packages.${final.system}.default;
+
       # disable xvfb-run tests to fix build on darwin
       xdot =
         (prev.xdot.overridePythonAttrs (oldAttrs: {

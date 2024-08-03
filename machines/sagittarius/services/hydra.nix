@@ -2,15 +2,12 @@
 # hydra-create-user nregner --full-name "Nathan Regner" --email-address nathanregner@gmail.com --password-prompt --role admin
 
 {
-  inputs,
   config,
   lib,
   pkgs,
   ...
 }:
 {
-  imports = [ inputs.hydra-sentinel.nixosModules.server ];
-
   services.hydra = {
     enable = true;
     package = pkgs.unstable.hydra_unstable.overrideAttrs { doCheck = false; };
@@ -42,67 +39,6 @@
     hydra-users nregner hydra
   '';
 
-  sops.secrets.hydra-github-webhook-secret = {
-    key = "hydra/github_webhook_secret";
-    owner = "hydra-sentinel-server";
-  };
-
-  services.hydra-sentinel-server = {
-    enable = true;
-    listenHost = "0.0.0.0";
-    listenPort = 3002;
-    settings = {
-      allowedIps = [
-        "192.168.0.0/16"
-        "100.0.0.0/8"
-      ];
-      githubWebhookSecretFile = config.sops.secrets.hydra-github-webhook-secret.path;
-      buildMachines = [
-        {
-          hostName = "enceladus";
-          sshUser = "nregner";
-          systems = [ "aarch64-darwin" ];
-          supportedFeatures = [
-            "nixos-test"
-            "benchmark"
-            "big-parallel"
-          ];
-          maxJobs = 12;
-          macAddress = "60:3e:5f:4e:4e:bc";
-          vms = [
-            {
-              hostName = "enceladus-linux-vm";
-              sshUser = "builder";
-              systems = [ "aarch64-linux" ];
-              supportedFeatures = [
-                "nixos-test"
-                "benchmark"
-                "big-parallel"
-                "kvm"
-                "gccarch-armv8-a"
-              ];
-              maxJobs = 8;
-            }
-          ];
-        }
-        {
-          hostName = "iapetus";
-          sshUser = "nregner";
-          systems = [ "x86_64-linux" ];
-          supportedFeatures = [
-            "nixos-test"
-            "benchmark"
-            "big-parallel"
-            "kvm"
-          ];
-          maxJobs = 12;
-          speedFactor = 2;
-          # macAddress = "00:d8:61:a3:ea:8c";
-        }
-      ];
-    };
-  };
-
   nix.extraOptions =
     let
       urls = [
@@ -116,7 +52,6 @@
 
   nginx.subdomain.hydra = {
     "/".proxyPass = "http://127.0.0.1:${toString config.services.hydra.port}/";
-    "/github/webhook".proxyPass = "http://127.0.0.1:${toString config.services.hydra-sentinel-server.listenPort}/webhook";
   };
 }
 
