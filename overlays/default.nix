@@ -21,11 +21,6 @@ let
       checkPhase = "";
     });
 
-    hyprland = prev.hyprland.overrideAttrs {
-      # https://github.com/hyprwm/Hyprland/issues/6698#issuecomment-2198330991
-      patches = [ ./hyprland/revert-2566d818848b58b114071f199ffe944609376270.patch ];
-    };
-
     nodePackages_latest =
       let
         nodePkgs = prev.nodePackages_latest;
@@ -96,13 +91,39 @@ in
     };
 
   modifications =
-    final: prev: { hyprland = final.unstable.hyprland; } // sharedModifications final prev;
+    final: prev:
+    {
+      #
+    }
+    // sharedModifications final prev;
 
-  unstable-packages = final: _prev: {
+  unstable-packages = stablePrev: stableFinal: {
     unstable = import inputs.nixpkgs-unstable {
-      system = final.system;
+      system = stableFinal.system;
       config.allowUnfree = true;
-      overlays = [ sharedModifications ];
+      overlays = [
+        sharedModifications
+        (final: prev: {
+          # FIXME: https://github.com/NixOS/nixpkgs/pull/331856
+          nix-du = warnIfOutdated prev.nix-du (
+            stableFinal.nix-du.overrideAttrs (drv: rec {
+              version = "1.2.1";
+
+              src = final.fetchFromGitHub {
+                owner = "symphorien";
+                repo = "nix-du";
+                rev = "v${version}";
+                sha256 = "sha256-WImnfkBU17SFQG1DzVUdsNq3hkiISNjAVZr2xGbgwHg=";
+              };
+
+              cargoDeps = drv.cargoDeps.overrideAttrs (_: {
+                inherit src;
+                outputHash = "sha256-DjAi34ORO8z4K3qA9BOvLzMQIq2a2QiURiaFBVrK7WU=";
+              });
+            })
+          );
+        })
+      ];
     };
   };
 }

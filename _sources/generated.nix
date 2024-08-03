@@ -36,12 +36,12 @@
   };
   kibana = {
     pname = "kibana";
-    version = "7.17.22";
+    version = "7.17.23";
     src = dockerTools.pullImage {
       imageName = "library/kibana";
-      imageDigest = "sha256:834864700792e3a228b6ddf9313f53cd1a156b435714c30677a67f47eca4eb2e";
-      sha256 = "sha256-O5Q93OETWq9GtTkrWy+HgD+ZUsIeSUPPhXq4pS+z80M=";
-      finalImageTag = "7.17.22";
+      imageDigest = "sha256:35caffeb480e6cd55afaad72f78820f802e21c2d73996c1b46c2998c0513f977";
+      sha256 = "sha256-mXYN+rQI8kgtjirtJQbvGxjdauQKITJaD1ivoQk05kI=";
+      finalImageTag = "7.17.23";
     };
   };
   linux-rockchip = {

@@ -6,7 +6,7 @@
 }:
 {
   virtualisation.docker = {
-    package = pkgs.unstable.docker_26;
+    package = pkgs.unstable.docker_27;
     rootless = {
       package = config.virtualisation.docker.package;
     };
