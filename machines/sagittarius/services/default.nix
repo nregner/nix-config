@@ -11,5 +11,6 @@
     ./nginx.nix
     ./nix-serve.nix
     ./qbittorrent.nix
+    ./silverbullet.nix
   ];
 }

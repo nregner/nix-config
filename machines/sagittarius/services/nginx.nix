@@ -1,4 +1,7 @@
 { config, lib, ... }:
+let
+  oauth2-proxy-user = config.systemd.services.oauth2-proxy.serviceConfig.User;
+in
 {
   options.nginx.subdomain = lib.mkOption {
     type = lib.types.attrs;
@@ -23,6 +26,7 @@
 
     services.nginx = {
       enable = true;
+      enableReload = true;
 
       # Use recommended settings
       recommendedOptimisation = true;
@@ -79,5 +83,48 @@
     ];
 
     users.users.nginx.extraGroups = [ "acme" ];
+
+    sops.secrets.oauth2-proxy-client-secret = {
+      key = "oauth2-proxy/client-secret";
+      owner = oauth2-proxy-user;
+    };
+    sops.secrets.oauth2-proxy-cookie-secret = {
+      key = "oauth2-proxy/cookie-secret";
+      owner = oauth2-proxy-user;
+    };
+    sops.secrets.oauth2-proxy-google-service-account = {
+      key = "oauth2-proxy/google-service-account";
+      owner = oauth2-proxy-user;
+    };
+    sops.templates.oauth2-proxy-env = {
+      content = ''
+        OAUTH2_PROXY_COOKIE_SECRET=${config.sops.placeholder.oauth2-proxy-cookie-secret}
+      '';
+      owner = oauth2-proxy-user;
+    };
+
+    services.oauth2-proxy = {
+      enable = true;
+      nginx = {
+        domain = "nregner.net";
+      };
+      email.addresses = ''
+        nathanregner@gmail.com
+      '';
+      clientID = "397693947419-n7dljfbjdrs7da82o1mpa9fhoafo7467.apps.googleusercontent.com";
+      clientSecret = null;
+      google = {
+        serviceAccountJSON = config.sops.secrets.oauth2-proxy-google-service-account.path;
+      };
+      cookie = {
+        domain = "nregner.net";
+        secret = null;
+      };
+      extraConfig = {
+        client-secret-file = config.sops.secrets.oauth2-proxy-client-secret.path;
+        # whitelist-domain = [ "nregner.net" ];
+      };
+      keyFile = config.sops.templates.oauth2-proxy-env.path;
+    };
   };
 }
