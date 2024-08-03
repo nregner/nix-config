@@ -17,6 +17,8 @@ jobs:
         run: nix flake update
       - name: Run nvfetcher
         run: nvfetcher -k $NVFETCHER_KEYFILE
+      - name: Run node2nix
+        run: ./pkgs/node2nix/update.sh
       - name: Commit and push
         run: |
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'

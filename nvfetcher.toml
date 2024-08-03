@@ -21,10 +21,6 @@ src.git = "https://github.com/armbian/linux-rockchip.git"
 src.branch = "rk-5.10-rkr6"
 fetch.github = "armbian/linux-rockchip"
 
-[pin-github-action]
-src.github_tag = "mheap/pin-github-action"
-fetch.github = "mheap/pin-github-action"
-
 [sf-mono-nerd-font]
 src.github = "epk/SF-Mono-Nerd-Font"
 fetch.github = "epk/SF-Mono-Nerd-Font"

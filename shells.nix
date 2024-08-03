@@ -6,6 +6,7 @@
 {
   default = pkgs.mkShell {
     packages = with pkgs.unstable; [
+      node2nix
       sops
       tenv
       treefmt

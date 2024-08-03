@@ -21,27 +21,6 @@ let
       checkPhase = "";
     });
 
-    nodePackages_latest =
-      let
-        nodePkgs = prev.nodePackages_latest;
-        node2nixPkgs = import ../pkgs/node2nix {
-          pkgs = final;
-          nodejs = nodePkgs.nodejs;
-        };
-      in
-      nodePkgs
-      // {
-        graphql-language-service-cli = warnIfOutdated nodePkgs.graphql-language-service-cli (
-          node2nixPkgs.graphql-language-service-cli.override {
-            nativeBuildInputs = [ final.buildPackages.makeWrapper ];
-            postInstall = ''
-              wrapProgram "$out/bin/graphql-lsp" \
-                --prefix NODE_PATH : ${nodePkgs.graphql}/lib/node_modules
-            '';
-          }
-        );
-      };
-
     orca-slicer =
       let
         pname = "orca-slicer";

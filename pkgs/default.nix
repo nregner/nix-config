@@ -1,9 +1,22 @@
 { inputs, pkgs }:
 let
   sources = pkgs.callPackage ../_sources/generated.nix { };
+  nodePkgs = pkgs.unstable.nodePackages_latest;
+  node2nixPkgs = import ./node2nix {
+    pkgs = pkgs.unstable;
+    nodejs = nodePkgs.nodejs;
+  };
 in
 {
   gitea-github-mirror = pkgs.unstable.callPackage ./gitea-github-mirror { };
+
+  graphql-language-service-cli = node2nixPkgs.graphql-language-service-cli.override {
+    nativeBuildInputs = [ pkgs.unstable.makeWrapper ];
+    postInstall = ''
+      wrapProgram "$out/bin/graphql-lsp" \
+      --prefix NODE_PATH : ${nodePkgs.graphql}/lib/node_modules
+    '';
+  };
 
   hammerspoon = pkgs.unstable.callPackage ./hammerspoon.nix { };
 
@@ -27,14 +40,7 @@ in
 
   moonraker-develop = (pkgs.unstable.callPackage ./moonraker { inherit inputs; });
 
-  pin-github-action = pkgs.unstable.buildNpmPackage (
-    sources.pin-github-action
-    // {
-      npmDepsHash = "sha256-UTOPQSQwZZ9U940zz8z4S/eAO9yPX4c1nsTXTlwlUfc=";
-      NODE_OPTIONS = "--openssl-legacy-provider";
-      dontNpmBuild = true;
-    }
-  );
+  inherit (node2nixPkgs) pin-github-action;
 
   route53-ddns = pkgs.unstable.callPackage ./route53-ddns { };
 
@@ -49,7 +55,7 @@ in
 
   tfautomv = pkgs.unstable.callPackage ./tfautomv.nix { source = sources.tfautomv; };
 
-  writeBabashkaApplication = pkgs.unstable.callPackage ./write-babashka-application.nix { };
+  vtsls = node2nixPkgs."@vtsls/language-server";
 
-  vtsls = pkgs.unstable.callPackage ./vtsls { };
+  writeBabashkaApplication = pkgs.unstable.callPackage ./write-babashka-application.nix { };
 }

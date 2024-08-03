@@ -20,8 +20,8 @@
       emmet-language-server
       gopls
       lua-language-server
+      pkgs.graphql-language-service-cli
       nil
-      nodePackages_latest.graphql-language-service-cli
       terraform-ls
       vscode-langservers-extracted
       yaml-language-server

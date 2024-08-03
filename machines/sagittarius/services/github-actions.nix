@@ -59,7 +59,10 @@
     owner = "github";
   };
   services.github-runners.nix-config = {
-    extraPackages = with pkgs.unstable; [ nvfetcher ];
+    extraPackages = with pkgs.unstable; [
+      node2nix
+      nvfetcher
+    ];
     extraEnvironment = {
       NVFETCHER_KEYFILE = config.sops.templates.nvfetcher-github-pat.path;
     };
