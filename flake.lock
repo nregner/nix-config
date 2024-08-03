@@ -156,6 +156,21 @@
         "type": "github"
       }
     },
+    "github-nix-ci": {
+      "locked": {
+        "lastModified": 1722647776,
+        "narHash": "sha256-5ZN/+hEtHnZIQGZqO6ScPLUn+4eQfPYFErLnRoJ8/U4=",
+        "owner": "nathanregner",
+        "repo": "github-nix-ci",
+        "rev": "ced1fc61c7109bf0fcc5247785541a9558ab81e6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nathanregner",
+        "repo": "github-nix-ci",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -452,6 +467,7 @@
         "catppuccin-nix": "catppuccin-nix",
         "disko": "disko",
         "flake-parts": "flake-parts",
+        "github-nix-ci": "github-nix-ci",
         "home-manager": "home-manager",
         "home-manager-unstable": "home-manager-unstable",
         "hydra-sentinel": "hydra-sentinel",
@@ -500,15 +516,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1722897572,
-        "narHash": "sha256-3m/iyyjCdRBF8xyehf59QlckIcmShyTesymSb+N4Ap4=",
-        "owner": "Mic92",
+        "lastModified": 1723568948,
+        "narHash": "sha256-4SQxAQ5bVyg1R3nSNDIDM5CmMubdWV82zPZVBORORYY=",
+        "owner": "nathanregner",
         "repo": "sops-nix",
-        "rev": "8ae477955dfd9cbf5fa4eb82a8db8ddbb94e79d9",
+        "rev": "28e1a24c06177d96aba281c12a3c562a2c42e15f",
         "type": "github"
       },
       "original": {
-        "owner": "Mic92",
+        "owner": "nathanregner",
         "repo": "sops-nix",
         "type": "github"
       }
