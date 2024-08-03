@@ -1,0 +1,28 @@
+name: Build flake outputs
+
+on:
+  push:
+    branches:
+      - main
+      - next
+      - build/gha-nix-fast-build
+  # pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.branch }}
+  cancel-in-progress: true
+
+jobs:
+  nix:
+    runs-on: ${{ matrix.system }}
+    strategy:
+      matrix:
+        system:
+          - aaarch64-darwin
+          - aaarch64-linux
+          - x86_64-linux
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v4
+      - name: nix-fast-build
+        run: nix-fast-build --no-nom -j12 --systems "${{ matrix.system }}" --flake .#hydraJobs

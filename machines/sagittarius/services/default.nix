@@ -1,9 +1,9 @@
 {
   imports = [
+    ../../../modules/nixos/github-actions
     ./docker.nix
     ./elk.nix
     ./gitea.nix
-    ./github-actions.nix
     ./hydra.nix
     ./k8s.nix
     ./mealie.nix
