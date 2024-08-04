@@ -101,6 +101,10 @@
         hyprpicker
         import-env
         wl-clipboard
+
+        # screenshot
+        grim
+        slurp
       ];
 
       # auto mount disks
