@@ -3,6 +3,10 @@
 src.github = "FieldofClay/hyprland-workspaces"
 fetch.github = "FieldofClay/hyprland-workspaces"
 
+[harper-ls]
+src.github = "elijah-potter/harper"
+fetch.github = "elijah-potter/harper"
+
 [joker]
 src.github_tag = "candid82/joker"
 fetch.github = "candid82/joker"
