@@ -2,6 +2,7 @@
   self,
   inputs,
   outputs,
+  sources,
   pkgs,
   lib,
   ...
@@ -66,7 +67,12 @@
               }
             ];
           specialArgs = {
-            inherit self inputs outputs;
+            inherit
+              self
+              inputs
+              outputs
+              sources
+              ;
           };
           system = "aarch64-linux";
         };

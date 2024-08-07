@@ -84,17 +84,6 @@
     };
     date = "2024-07-10";
   };
-  pin-github-action = {
-    pname = "pin-github-action";
-    version = "v1.9.1";
-    src = fetchFromGitHub {
-      owner = "mheap";
-      repo = "pin-github-action";
-      rev = "v1.9.1";
-      fetchSubmodules = false;
-      sha256 = "sha256-FBNdK+d1gXvC7uxARZrM7RHdwiPX/Vi1bp84R78t6wI=";
-    };
-  };
   sf-mono-nerd-font = {
     pname = "sf-mono-nerd-font";
     version = "v18.0d1e1.0";
