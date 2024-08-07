@@ -89,12 +89,10 @@
     pkgs.cura5
 
     # nix
-    cachix
     nix-output-monitor
     nixfmt-rfc-style
     nix-du # nix-du -s=500MB | xdot -
     nvfetcher
-    hydra-cli
     xdot
 
     # rc
