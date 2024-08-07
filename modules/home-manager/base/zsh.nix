@@ -21,16 +21,19 @@
       let
         nixRebuild = if pkgs.stdenv.isDarwin then "darwin-rebuild" else "nixos-rebuild";
       in
-      {
+      rec {
         jqless = "jq -C | less -r";
 
         nr = "${nixRebuild} --flake .";
-        nrs = "${nixRebuild} --flake . switch";
-        snr = "sudo ${nixRebuild} --flake .";
-        snrs = "sudo ${nixRebuild} --flake . switch";
+        nrb = "${nr} build";
+        snr = "${nr} --use-remote-sudo";
+        snrb = "${snr} boot";
+        snrs = "${snr} switch";
+        snrt = "${snr} test";
 
         hm = "home-manager --flake .";
-        hms = "home-manager --flake . switch";
+        hmb = "${hm} build";
+        hms = "${hm} switch";
 
         npd = "nix profile diff-closures --profile /nix/var/nix/profiles/system";
       };
