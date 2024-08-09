@@ -6,7 +6,7 @@
 {
   imports = [
     ../../modules/darwin
-    ./builders.nix
+    ./linux-builder.nix
   ];
 
   nixpkgs.hostPlatform = "aarch64-darwin";
@@ -28,6 +28,24 @@
 
   environment.systemPackages = [
     pkgs.hydra-auto-upgrade
+  ];
+
+  nix.distributedBuilds = true;
+  nix.buildMachines = [
+    {
+      hostName = "sagittarius";
+      protocol = "ssh-ng";
+      sshUser = "nregner";
+      system = "x86_64-linux";
+      supportedFeatures = [
+        "nixos-test"
+        "benchmark"
+        "big-parallel"
+        "kvm"
+      ];
+      maxJobs = 10;
+      speedFactor = 1;
+    }
   ];
 
   # Used for backwards compatibility, please read the changelog before changing.

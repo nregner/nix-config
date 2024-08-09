@@ -24,11 +24,11 @@ resource "tailscale_tailnet_key" "server" {
 }
 
 resource "tailscale_tailnet_key" "builder" {
-  ephemeral     = true
+  ephemeral     = false
   expiry        = null
   preauthorized = true
   reusable      = true
-  tags          = ["tag:server"]
+  tags          = ["tag:server", "tag:builder"]
 }
 
 output "server_key" {

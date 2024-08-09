@@ -14,6 +14,7 @@
     ./hydra-builder.nix
     ./nix.nix
     ./preferences.nix
+    ./sops.nix
   ];
 
   nix = {

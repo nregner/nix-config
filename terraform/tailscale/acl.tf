@@ -18,6 +18,9 @@ resource "tailscale_acl" "acl" {
     }
     hosts = {
       sagittarius = data.tailscale_device.sagittarius.addresses[0]
+      iapetus     = data.tailscale_device.iapetus.addresses[0]
+      enceladus   = data.tailscale_device.enceladus.addresses[0]
+      # enceladus-linux-vm = data.tailscale_device.enceladus_linux_vm.addresses[0]
     }
 
     # https://tailscale.com/kb/1337/acl-syntax#acls
@@ -52,6 +55,25 @@ resource "tailscale_acl" "acl" {
         src    = ["group:admin", "tag:admin", "tag:hydra"]
         dst    = ["tag:builder"]
         users  = ["autogroup:nonroot", "root"]
+      },
+    ]
+
+    # https://tailscale.com/kb/1337/acl-syntax#sshtests
+    sshTests = [
+      {
+        src    = "sagittarius"
+        dst    = ["enceladus"]
+        accept = ["nregner"]
+      },
+      # {
+      #   src    = "sagittarius"
+      #   dst    = ["enceladus-linux-vm"]
+      #   accept = ["builder"]
+      # },
+      {
+        src    = "sagittarius"
+        dst    = ["iapetus"]
+        accept = ["nregner"]
       },
     ]
   })
