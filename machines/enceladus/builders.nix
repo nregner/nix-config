@@ -25,7 +25,7 @@
       speedFactor = 1;
     }
     {
-      hostName = "iapetus";
+      hostName = "sagittarius";
       protocol = "ssh-ng";
       sshUser = "nregner";
       system = "x86_64-linux";
@@ -35,8 +35,8 @@
         "big-parallel"
         "kvm"
       ];
-      maxJobs = 12;
-      speedFactor = 2;
+      maxJobs = 10;
+      speedFactor = 1;
     }
   ];
 
