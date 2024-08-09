@@ -25,7 +25,7 @@
       speedFactor = 1;
     }
     {
-      hostName = "iapetus";
+      hostName = "sagittarius";
       protocol = "ssh-ng";
       sshUser = "nregner";
       system = "x86_64-linux";
@@ -35,8 +35,8 @@
         "big-parallel"
         "kvm"
       ];
-      maxJobs = 12;
-      speedFactor = 2;
+      maxJobs = 10;
+      speedFactor = 1;
     }
   ];
 
@@ -81,8 +81,22 @@
     ) { modules = [ ]; };
   };
 
+  environment.systemPackages = with pkgs.unstable; [
+    util-linux
+    coreutils-full
+    # keep base image around even if not in use
+    pkgs.darwin.linux-builder
+  ];
+
   launchd.daemons.linux-builder.serviceConfig = {
     StandardOutPath = "/var/log/darwin-builder.log";
     StandardErrorPath = "/var/log/darwin-builder.log";
   };
+
+  environment.etc."ssh/ssh_config.d/100-linux-builder.conf".text = lib.mkForce ''
+    Host enceladus-linux-vm
+      User builder
+      Hostname localhost
+      Port 31022
+  '';
 }

@@ -12,4 +12,12 @@
   };
 
   programs.ssh.knownHosts = self.globals.ssh.knownHosts;
+
+  programs.ssh.extraConfig = ''
+    Host enceladus-linux-vm
+      User builder
+      HostName enceladus-linux-vm
+      ProxyJump nregner@enceladus
+      Port 31022
+  '';
 }
