@@ -1,6 +1,9 @@
 # sudo su hydra
 # hydra-create-user nregner --full-name "Nathan Regner" --email-address nathanregner@gmail.com --password-prompt --role admin
 
+# sudo su hydra-queue-runner
+# ssh builder@enceladus-linux-vm
+
 {
   inputs,
   config,
@@ -38,6 +41,8 @@
     '';
   };
 
+  nix.settings.trusted-users = [ "hydra" ];
+
   services.postgresql.identMap = ''
     hydra-users nregner hydra
   '';
@@ -72,7 +77,7 @@
           vms = [
             {
               hostName = "enceladus-linux-vm";
-              sshUser = "nregner";
+              sshUser = "builder";
               systems = [ "aarch64-linux" ];
               supportedFeatures = [
                 "nixos-test"
@@ -116,7 +121,8 @@
 
   nginx.subdomain.hydra = {
     "/".proxyPass = "http://127.0.0.1:${toString config.services.hydra.port}/";
-    "/github/webhook".proxyPass = "http://127.0.0.1:${toString config.services.hydra-sentinel-server.listenPort}/webhook";
+    "/github/webhook".proxyPass =
+      "http://127.0.0.1:${toString config.services.hydra-sentinel-server.listenPort}/webhook";
   };
 }
 

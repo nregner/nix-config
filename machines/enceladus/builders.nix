@@ -25,7 +25,7 @@
       speedFactor = 1;
     }
     {
-      hostName = "iapetus";
+      hostName = "sagittarius";
       protocol = "ssh-ng";
       sshUser = "nregner";
       system = "x86_64-linux";
@@ -35,8 +35,8 @@
         "big-parallel"
         "kvm"
       ];
-      maxJobs = 12;
-      speedFactor = 2;
+      maxJobs = 10;
+      speedFactor = 1;
     }
   ];
 
@@ -79,6 +79,14 @@
       in
       nixos.config.system.build.macos-builder-installer
     ) { modules = [ ]; };
+  };
+
+  users = {
+    users.builder = {
+      uid = 502;
+      openssh.authorizedKeys.keys = lib.attrValues self.globals.ssh.allKeys;
+    };
+    knownUsers = [ "builder" ];
   };
 
   launchd.daemons.linux-builder.serviceConfig = {
