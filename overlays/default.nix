@@ -80,29 +80,7 @@ in
     unstable = import inputs.nixpkgs-unstable {
       system = stableFinal.system;
       config.allowUnfree = true;
-      overlays = [
-        sharedModifications
-        (final: prev: {
-          # FIXME: https://github.com/NixOS/nixpkgs/pull/331856
-          nix-du = warnIfOutdated prev.nix-du (
-            stableFinal.nix-du.overrideAttrs (drv: rec {
-              version = "1.2.1";
-
-              src = final.fetchFromGitHub {
-                owner = "symphorien";
-                repo = "nix-du";
-                rev = "v${version}";
-                sha256 = "sha256-WImnfkBU17SFQG1DzVUdsNq3hkiISNjAVZr2xGbgwHg=";
-              };
-
-              cargoDeps = drv.cargoDeps.overrideAttrs (_: {
-                inherit src;
-                outputHash = "sha256-DjAi34ORO8z4K3qA9BOvLzMQIq2a2QiURiaFBVrK7WU=";
-              });
-            })
-          );
-        })
-      ];
+      overlays = [ sharedModifications ];
     };
   };
 }
