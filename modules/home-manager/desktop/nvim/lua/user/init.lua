@@ -209,6 +209,7 @@ require("lazy").setup({
           ["harper-ls"] = {
             linters = {
               sentence_capitalization = false,
+              spaces = false,
             },
           },
         },

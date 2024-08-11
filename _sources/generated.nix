@@ -13,6 +13,17 @@
     };
     date = "2024-06-03";
   };
+  harper-ls = {
+    pname = "harper-ls";
+    version = "v0.9.3";
+    src = fetchFromGitHub {
+      owner = "elijah-potter";
+      repo = "harper";
+      rev = "v0.9.3";
+      fetchSubmodules = false;
+      sha256 = "sha256-HwyBmjc8kpBpwPQC2zkykn8wv+7v1Q5NMg+Ohz3XeD8=";
+    };
+  };
   hyprland-workspaces = {
     pname = "hyprland-workspaces";
     version = "v2.0.1";

@@ -26,7 +26,7 @@ in
 
   insync-nautilus = pkgs.unstable.callPackage ./insync-nautilus { };
 
-  harper-ls = pkgs.unstable.callPackage ./harper-ls { };
+  harper-ls = pkgs.unstable.callPackage ./harper-ls { inherit sources; };
 
   joker = pkgs.unstable.buildGoModule (
     sources.joker

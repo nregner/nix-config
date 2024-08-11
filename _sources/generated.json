@@ -19,6 +19,26 @@
         },
         "version": "895a65f8d5acf848136ee8fe8e8f736f0d27df96"
     },
+    "harper-ls": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "harper-ls",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "elijah-potter",
+            "repo": "harper",
+            "rev": "v0.9.3",
+            "sha256": "sha256-HwyBmjc8kpBpwPQC2zkykn8wv+7v1Q5NMg+Ohz3XeD8=",
+            "type": "github"
+        },
+        "version": "v0.9.3"
+    },
     "hyprland-workspaces": {
         "cargoLocks": null,
         "date": null,
