@@ -14,6 +14,7 @@
 
   boot = {
     loader.systemd-boot.enable = true;
+    loader.systemd-boot.bootCounting.enable = true;
     loader.efi.canTouchEfiVariables = true;
     kernelParams = [ "console=tty0" ];
     supportedFilesystems = lib.mkForce [
