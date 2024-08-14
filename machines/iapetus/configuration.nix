@@ -103,7 +103,7 @@
 
   virtualisation.docker = {
     enable = true;
-    # enableOnBoot = false; # lazy start with docker.socket
+    enableOnBoot = false; # lazy start with docker.socket
     # extraOptions = "--insecure-registry sagittarius:5000";
     daemon.settings = {
       insecure-registries = [
