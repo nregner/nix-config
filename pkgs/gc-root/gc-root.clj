@@ -11,6 +11,7 @@
 
 (defn resolve-gc-root
   [& segments]
+  (println (System/getProperty "user.name"))
   (->> (apply fs/path "/nix/var/nix/gcroots/per-user/" (System/getProperty "user.name") segments)
        (fs/create-dirs)))
 
