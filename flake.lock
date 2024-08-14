@@ -5,8 +5,12 @@
         "crane": "crane",
         "flake-compat": "flake-compat",
         "flake-utils": "flake-utils",
-        "nixpkgs": ["nixpkgs-unstable"],
-        "nixpkgs-stable": ["nixpkgs"]
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ],
+        "nixpkgs-stable": [
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1723558887,
@@ -54,7 +58,10 @@
     },
     "crane": {
       "inputs": {
-        "nixpkgs": ["attic", "nixpkgs"]
+        "nixpkgs": [
+          "attic",
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1717025063,
@@ -72,7 +79,9 @@
     },
     "disko": {
       "inputs": {
-        "nixpkgs": ["nixpkgs"]
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1723080788,
@@ -242,7 +251,9 @@
     },
     "home-manager": {
       "inputs": {
-        "nixpkgs": ["nixpkgs"]
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1720042825,
@@ -261,7 +272,9 @@
     },
     "home-manager-unstable": {
       "inputs": {
-        "nixpkgs": ["nixpkgs-unstable"]
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
       },
       "locked": {
         "lastModified": 1723015306,
@@ -281,7 +294,9 @@
     "hydra-sentinel": {
       "inputs": {
         "flake-utils": "flake-utils_2",
-        "nixpkgs": ["nixpkgs-unstable"]
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
       },
       "locked": {
         "lastModified": 1720290729,
@@ -320,7 +335,9 @@
     },
     "nix-darwin": {
       "inputs": {
-        "nixpkgs": ["nixpkgs"]
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1722924007,
@@ -338,7 +355,9 @@
     },
     "nix-index-database": {
       "inputs": {
-        "nixpkgs": ["nixpkgs"]
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1722740924,
@@ -372,7 +391,9 @@
     "nixos-generators": {
       "inputs": {
         "nixlib": "nixlib",
-        "nixpkgs": ["nixpkgs"]
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1723078345,
@@ -500,7 +521,9 @@
     "preprocess-cancellation": {
       "inputs": {
         "flake-utils": "flake-utils_4",
-        "nixpkgs": ["nixpkgs-unstable"],
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ],
         "rust-overlay": "rust-overlay"
       },
       "locked": {
@@ -543,7 +566,10 @@
     "rust-overlay": {
       "inputs": {
         "flake-utils": "flake-utils_5",
-        "nixpkgs": ["preprocess-cancellation", "nixpkgs"]
+        "nixpkgs": [
+          "preprocess-cancellation",
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1716776264,
@@ -561,15 +587,19 @@
     },
     "sops-nix": {
       "inputs": {
-        "nixpkgs": ["nixpkgs-unstable"],
-        "nixpkgs-stable": ["nixpkgs"]
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ],
+        "nixpkgs-stable": [
+          "nixpkgs"
+        ]
       },
       "locked": {
-        "lastModified": 1723568948,
-        "narHash": "sha256-4SQxAQ5bVyg1R3nSNDIDM5CmMubdWV82zPZVBORORYY=",
+        "lastModified": 1723569174,
+        "narHash": "sha256-TQ+lX3onApWxoQEdyFNhNIPcNS3IeU1QW8pMZLit7bQ=",
         "owner": "nathanregner",
         "repo": "sops-nix",
-        "rev": "28e1a24c06177d96aba281c12a3c562a2c42e15f",
+        "rev": "7956bfccd5705fafe83428b49a11c19608b570fa",
         "type": "github"
       },
       "original": {
@@ -640,7 +670,9 @@
     },
     "treefmt-nix": {
       "inputs": {
-        "nixpkgs": ["nixpkgs-unstable"]
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
       },
       "locked": {
         "lastModified": 1722330636,

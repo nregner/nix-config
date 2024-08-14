@@ -5,7 +5,7 @@ on:
     branches:
       - main
       - next
-      - build/gha-nix-fast-build
+      - build/gha
   # pull_request:
 
 concurrency:
@@ -25,4 +25,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: nix-fast-build
-        run: nix-fast-build --no-nom -j12 --systems "${{ matrix.system }}" --flake .#hydraJobs
+        run: |
+          nix-fast-build \
+            --eval-workers 4 \
+            --eval-max-memory-size 1024 \
+            --no-nom \
+            --systems "${{ matrix.system }}" \
+            --flake .#hydraJobs
+          gc-root add --profile "${{ github.repo }}/${{ github.branch }}" --generation "${{ github.ref }}" ./result*

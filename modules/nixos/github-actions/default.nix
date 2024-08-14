@@ -29,6 +29,7 @@ in
       extraPackages = with pkgs.unstable; [
         nvfetcher
         nix-fast-build
+        pkgs.gc-root
       ];
       extraEnvironment = {
         NVFETCHER_KEYFILE = config.sops.templates.nvfetcher-github-pat.path;

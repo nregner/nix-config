@@ -7,8 +7,10 @@ let
     nodejs = nodePkgs.nodejs;
   };
 in
-{
+rec {
   cura5 = pkgs.unstable.callPackage ./cura { };
+
+  gc-root = pkgs.unstable.callPackage ./gc-root { inherit writeBabashkaApplication; };
 
   gitea-github-mirror = pkgs.unstable.callPackage ./gitea-github-mirror { };
 
