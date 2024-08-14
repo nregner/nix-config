@@ -1,6 +1,5 @@
 {
   imports = [
-    ../../../modules/nixos/github-actions
     ./attic.nix
     ./docker.nix
     ./elk.nix

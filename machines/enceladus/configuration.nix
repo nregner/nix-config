@@ -7,7 +7,6 @@
 {
   imports = [
     ../../modules/darwin
-    ../../modules/nixos/github-actions
     ./builders.nix
   ];
 
@@ -22,6 +21,8 @@
   security.pam.enableSudoTouchIdAuth = true;
 
   services.nregner.hydra-builder.enable = true;
+
+  services.nregner.gha.enable = true;
 
   services.tailscale = {
     enable = true;

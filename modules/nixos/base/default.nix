@@ -2,13 +2,13 @@
   self,
   inputs,
   pkgs,
-  lib,
   ...
 }:
 {
   imports = [
     inputs.catppuccin-nix.nixosModules.catppuccin
     inputs.nixos-generators.nixosModules.all-formats
+    ../../common
     ./docker.nix
     ./networking.nix
     ./nix.nix
