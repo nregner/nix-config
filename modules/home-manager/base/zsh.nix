@@ -26,9 +26,9 @@
 
         nr = "${nixRebuild} --flake .";
         nrb = "${nr} build";
-        snr = "sudo ${nr}";
-        snrs = "sudo ${nr} switch";
-        snrt = "sudo ${nr} test";
+        snr = "${nr} --use-remote-sudo";
+        snrs = "${snr} switch";
+        snrt = "${snr} test";
 
         hm = "home-manager --flake .";
         hmb = "${hm} build";
