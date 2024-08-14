@@ -8,7 +8,7 @@
 let
   cfg = config.services.nregner.gha;
   owner = if pkgs.stdenv.isLinux then "github-runner" else "_github-runner";
-  group = "github";
+  group = owner;
 in
 {
   imports = [ inputs.github-nix-ci.nixosModules.default ];

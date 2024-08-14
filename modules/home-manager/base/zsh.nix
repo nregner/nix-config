@@ -20,13 +20,15 @@
     shellAliases =
       let
         nixRebuild = if pkgs.stdenv.isDarwin then "darwin-rebuild" else "nixos-rebuild";
+        sudoNixRebuild =
+          if pkgs.stdenv.isDarwin then "sudo ${nixRebuild}" else "${nixRebuild} --use-remote-sudo";
       in
       rec {
         jqless = "jq -C | less -r";
 
         nr = "${nixRebuild} --flake .";
         nrb = "${nr} build";
-        snr = "${nr} --use-remote-sudo";
+        snr = "${sudoNixRebuild} --flake .";
         snrb = "${snr} boot";
         snrs = "${snr} switch";
         snrt = "${snr} test";
