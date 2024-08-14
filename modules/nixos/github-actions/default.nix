@@ -6,6 +6,7 @@
 }:
 let
   owner = if pkgs.stdenv.isLinux then "github-runner" else "_github-runner";
+  group = "github";
 in
 {
   imports = [ inputs.github-nix-ci.nixosModules.default ];
@@ -40,7 +41,7 @@ in
   sops.secrets.github-pat = {
     sopsFile = ./secrets.yaml;
     key = "pat";
-    inherit owner;
+    inherit owner group;
   };
 
   # https://discourse.nixos.org/t/flakes-provide-github-api-token-for-rate-limiting/18609/3
@@ -48,7 +49,7 @@ in
     content = ''
       access-tokens = github.com = ${config.sops.placeholder.github-pat}
     '';
-    inherit owner;
+    inherit owner group;
   };
   nix.extraOptions = ''
     !include ${config.sops.templates.github-pat.path}
@@ -60,6 +61,6 @@ in
       [keys]
       github = "${config.sops.placeholder.github-pat}"
     '';
-    inherit owner;
+    inherit owner group;
   };
 }

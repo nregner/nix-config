@@ -24,7 +24,7 @@ jobs:
       fail-fast: false
     steps:
       - uses: actions/checkout@v4
-      - name: nix-fast-build
+      - name: build
         run: |
           nix-fast-build \
             --eval-workers 4 \
@@ -32,4 +32,6 @@ jobs:
             --no-nom \
             --systems "${{ matrix.system }}" \
             --flake .#hydraJobs
+      - name: add gc-root
+        run: |
           gc-root add --profile "${{ github.repo }}/${{ github.branch }}" --generation "${{ github.ref }}" ./result*

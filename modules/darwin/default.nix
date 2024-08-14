@@ -15,6 +15,7 @@
     ./hydra-builder.nix
     ./nix.nix
   ];
+  sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
 
   environment.systemPackages = with pkgs.unstable; [
     util-linux

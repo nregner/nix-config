@@ -66,5 +66,22 @@
     extraEnvironment = {
       NVFETCHER_KEYFILE = config.sops.templates.nvfetcher-github-pat.path;
     };
+
+    nix.buildMachines = [
+      {
+        hostName = "iapetus";
+        protocol = "ssh-ng";
+        sshUser = "nregner";
+        system = "x86_64-linux";
+        supportedFeatures = [
+          "nixos-test"
+          "benchmark"
+          "big-parallel"
+          "kvm"
+        ];
+        maxJobs = 12;
+        speedFactor = 1;
+      }
+    ];
   };
 }
