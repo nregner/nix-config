@@ -27,8 +27,8 @@ jobs:
       - name: Build
         run: |
           nix-fast-build \
-            --eval-workers 4 \
-            --eval-max-memory-size 1024 \
+            --eval-workers 10 \
+            --eval-max-memory-size 2048 \
             --no-nom \
             --systems "${{ matrix.system }}" \
             --flake .#hydraJobs
