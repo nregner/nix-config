@@ -9,6 +9,7 @@ keys:
   - &host_print_farm age16zk73cejuepyskjeq0625ecf727y3nmmw32qq0ta97q9e4uj2sqstq6240
   - &host_voron age1vzn4vh7xe7tqx0czgayafr208pjwegmus0l3gxn4v5yeemwch58sahxpee
   - &host_sagittarius age1yfflu4pxlt32sy4xaa04m5gs7kyrccyj9y5hh0qvndmxtrxrtpns7mf682
+  - &host_enceladus age19hzwnm5dfl6m9vv2sq9z9r0ykn8djvjqaauuruyhf4q4vuxpev2sx4rcsd
   - &host_callisto age1h7223qs8fq2v8nta352jqd7kjffl0sxmrpvmcls0q3gm4j5m8d6q7ynsrr
 creation_rules:
   - path_regex: terraform/.*/secrets.yaml
@@ -62,4 +63,5 @@ creation_rules:
           - *host_iapetus
           - *host_server
           - *host_sagittarius
+          - *host_enceladus
           - *aarch64_linux_builder
