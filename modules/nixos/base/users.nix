@@ -38,4 +38,15 @@ in
       }
     ];
   };
+
+  services.postgresql = {
+    ensureUsers = [
+      {
+        name = "nregner";
+        ensureClauses = {
+          superuser = true;
+        };
+      }
+    ];
+  };
 }

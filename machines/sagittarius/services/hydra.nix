@@ -38,10 +38,6 @@
     '';
   };
 
-  services.postgresql.identMap = ''
-    hydra-users nregner hydra
-  '';
-
   sops.secrets.hydra-github-webhook-secret = {
     key = "hydra/github_webhook_secret";
     owner = "hydra-sentinel-server";

@@ -1,6 +1,7 @@
 {
   inputs,
   config,
+  pkgs,
   lib,
   ...
 }:
@@ -18,5 +19,7 @@
         server_addr = "sagittarius:3002";
       };
     };
+
+    environment.systemPackages = with pkgs.unstable; [ attic-client ];
   };
 }

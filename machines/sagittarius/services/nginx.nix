@@ -36,6 +36,8 @@ in
       recommendedGzipSettings = true;
       recommendedZstdSettings = true;
 
+      clientMaxBodySize = "10G";
+
       virtualHosts =
         let
           virtualHost = locations: {
