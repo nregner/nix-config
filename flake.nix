@@ -118,7 +118,12 @@
           devShells =
             let
               shells = import ./shells.nix {
-                inherit inputs' pkgs;
+                inherit
+                  inputs
+                  inputs'
+                  pkgs
+                  outputs
+                  ;
                 treefmt = config.treefmt.build.wrapper;
               };
             in
