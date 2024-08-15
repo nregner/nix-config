@@ -1239,6 +1239,7 @@ require("lazy").setup({
       "antoinemadec/FixCursorHold.nvim",
       "nvim-treesitter/nvim-treesitter",
       -- Adapters
+      "marilari88/neotest-vitest",
       "nvim-neotest/neotest-jest",
       "rouge8/neotest-rust",
     },
@@ -1250,6 +1251,7 @@ require("lazy").setup({
             args = { "--no-capture", "--cargo-quiet", "--cargo-quiet" },
           }),
           require("neotest-jest")({}),
+          require("neotest-vitest"),
         },
         diagnostic = {
           enabled = true,
