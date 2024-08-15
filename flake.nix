@@ -28,6 +28,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-parts.url = "github:hercules-ci/flake-parts";
+    harmonia = {
+      url = "github:nathanregner/harmonia";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
     hydra-sentinel = {
       url = "github:nathanregner/hydra-sentinel";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -262,9 +266,9 @@
                       # copy system closure so we don't have to download/rebuild on the host
                       config.system.build.toplevel
                       (pkgs.runCommand "install-scripts" { } ''
-                                               mkdir -p $out/bin
-                                               cp${config.system.build.formatScript} $out/bin/disko-format
-                                               cp ${config.system.build.mountScript} $out/bin/disko-mount
+                                                                      mkdir -p $out/bin
+                                                                      cp${config.system.build.formatScript} $out/bin/disko-format
+                                                                      cp ${config.system.build.mountScript} $out/bin/disko-mount
  cp${pkgs.writeShellScript "install" ''
                           sudo nixos-install --root /mnt --flake ${self.outPath}#${name}
                         ''} $out/bin/nixos-install-flake
