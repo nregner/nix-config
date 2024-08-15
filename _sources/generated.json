@@ -19,6 +19,26 @@
         },
         "version": "895a65f8d5acf848136ee8fe8e8f736f0d27df96"
     },
+    "hammerspoon": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "hammerspoon",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "Hammerspoon",
+            "repo": "hammerspoon",
+            "rev": "1.0.0",
+            "sha256": "sha256-Uy6InmbUGcwEVo13yDhfRLX5RO2WM9UF+3EMhP7y4kM=",
+            "type": "github"
+        },
+        "version": "1.0.0"
+    },
     "harper-ls": {
         "cargoLocks": null,
         "date": null,

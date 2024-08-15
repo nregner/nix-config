@@ -13,6 +13,17 @@
     };
     date = "2024-06-03";
   };
+  hammerspoon = {
+    pname = "hammerspoon";
+    version = "1.0.0";
+    src = fetchFromGitHub {
+      owner = "Hammerspoon";
+      repo = "hammerspoon";
+      rev = "1.0.0";
+      fetchSubmodules = false;
+      sha256 = "sha256-Uy6InmbUGcwEVo13yDhfRLX5RO2WM9UF+3EMhP7y4kM=";
+    };
+  };
   harper-ls = {
     pname = "harper-ls";
     version = "v0.11.0";

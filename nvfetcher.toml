@@ -7,6 +7,10 @@ fetch.github = "nixos/flake-registry"
 src.github = "FieldofClay/hyprland-workspaces"
 fetch.github = "FieldofClay/hyprland-workspaces"
 
+[hammerspoon]
+src.github = "Hammerspoon/hammerspoon"
+fetch.github = "Hammerspoon/hammerspoon"
+
 [harper-ls]
 src.github = "elijah-potter/harper"
 fetch.github = "elijah-potter/harper"
