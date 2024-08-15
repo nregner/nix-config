@@ -1,1 +1,6 @@
-["@vtsls/language-server", "graphql-language-service-cli", "pin-github-action"]
+[
+  "@olrtg/emmet-language-server",
+  "@vtsls/language-server",
+  "graphql-language-service-cli",
+  "pin-github-action"
+]

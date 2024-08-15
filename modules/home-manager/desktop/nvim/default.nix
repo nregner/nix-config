@@ -17,18 +17,18 @@
 
       # language servers
       clojure-lsp
-      emmet-language-server
       gopls
       libclang
       helm-ls
       lua-language-server
       nil
-      terraform-ls
-      vscode-langservers-extracted
-      yaml-language-server
+      pkgs."@olrtg/emmet-language-server"
       pkgs.graphql-language-service-cli
       pkgs.harper-ls
       pkgs.vtsls
+      terraform-ls
+      vscode-langservers-extracted
+      yaml-language-server
 
       # formatters/linters
       nixfmt-rfc-style

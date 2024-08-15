@@ -211,7 +211,20 @@ require("lazy").setup({
           },
         },
         clojure_lsp = {},
-        emmet_language_server = {},
+        -- https://github.com/olrtg/emmet-language-server
+        emmet_language_server = {
+          filetypes = {
+            "css",
+            "html",
+            "javascript",
+            "javascriptreact",
+            "less",
+            "sass",
+            "scss",
+            "pug",
+            "typescriptreact",
+          },
+        },
         eslint = {},
         gopls = {},
         graphql = {},

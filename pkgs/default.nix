@@ -8,6 +8,8 @@ let
   };
 in
 {
+  inherit (node2nixPkgs) "@olrtg/emmet-language-server";
+
   cura5 = pkgs.unstable.callPackage ./cura { };
 
   gitea-github-mirror = pkgs.unstable.callPackage ./gitea-github-mirror { };
