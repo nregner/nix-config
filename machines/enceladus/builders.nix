@@ -81,17 +81,22 @@
     ) { modules = [ ]; };
   };
 
+  environment.systemPackages = with pkgs.unstable; [
+    util-linux
+    coreutils-full
+    # keep base image around even if not in use
+    pkgs.darwin.linux-builder
+  ];
+
   launchd.daemons.linux-builder.serviceConfig = {
     StandardOutPath = "/var/log/darwin-builder.log";
     StandardErrorPath = "/var/log/darwin-builder.log";
   };
 
-  # environment.etc."ssh/ssh_config.d/100-linux-builder.conf".text = lib.mkForce ''
-  #   Host linux-builder
-  #     Hostname localhost
-  #     Port 31022
-  #   Host enceladus-linux-vm
-  #     Hostname localhost
-  #     Port 31022
-  # '';
+  environment.etc."ssh/ssh_config.d/100-linux-builder.conf".text = lib.mkForce ''
+    Host enceladus-linux-vm
+      User builder
+      Hostname localhost
+      Port 31022
+  '';
 }
