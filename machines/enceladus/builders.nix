@@ -85,4 +85,10 @@
     StandardOutPath = "/var/log/darwin-builder.log";
     StandardErrorPath = "/var/log/darwin-builder.log";
   };
+
+  environment.etc."ssh/ssh_config.d/100-linux-builder.conf".text = lib.mkForce ''
+    Host enceladus-linux-vm
+      Hostname localhost
+      Port 31022
+  '';
 }
