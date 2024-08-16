@@ -147,7 +147,7 @@ require("lazy").setup({
   { -- LSP Configuration & Plugins
     "neovim/nvim-lspconfig",
     dependencies = {
-      "artemave/workspace-diagnostics.nvim",
+      -- "artemave/workspace-diagnostics.nvim",
       "j-hui/fidget.nvim",
       "yioneko/nvim-vtsls",
     },
@@ -200,6 +200,12 @@ require("lazy").setup({
       require("lspconfig.configs").vtsls = require("vtsls").lspconfig -- set default server config, optional but recommended
 
       local servers = {
+        clangd = {
+          cmd = { -- https://www.reddit.com/r/neovim/comments/12qbcua/multiple_different_client_offset_encodings/
+            "clangd",
+            "--offset-encoding=utf-16",
+          },
+        },
         clojure_lsp = {},
         emmet_language_server = {},
         eslint = {},
@@ -275,10 +281,11 @@ require("lazy").setup({
 
       for server_name, server_config in pairs(servers) do
         require("lspconfig")[server_name].setup({
+          cmd = server_config.cmd,
           capabilities = capabilities,
           on_attach = on_attach,
           settings = server_config,
-          filetypes = (server_config or {}).filetypes,
+          filetypes = server_config.filetypes,
         })
       end
     end,
