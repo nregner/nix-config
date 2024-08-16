@@ -279,8 +279,8 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1723771461,
-        "narHash": "sha256-kWKlsSbR0SscDyhWUaxv66zpQnwt1mLJfDSaye1Go5w=",
+        "lastModified": 1723771736,
+        "narHash": "sha256-EQ3IsPza8G6LjQCG6fh7C04OM3I+JvfRshqCFi8B/4Y=",
         "path": "/home/nregner/dev/github/harmonia/",
         "type": "path"
       },
