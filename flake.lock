@@ -279,17 +279,14 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1723698885,
-        "narHash": "sha256-/jkPKSKInWHJExm9fud2HQMmpovQMyahc1zk1hLGU5M=",
-        "owner": "nathanregner",
-        "repo": "harmonia",
-        "rev": "d9bc3c07e122d0dd25ff6f2e8b0295d7497863d6",
-        "type": "github"
+        "lastModified": 1723771461,
+        "narHash": "sha256-kWKlsSbR0SscDyhWUaxv66zpQnwt1mLJfDSaye1Go5w=",
+        "path": "/home/nregner/dev/github/harmonia/",
+        "type": "path"
       },
       "original": {
-        "owner": "nathanregner",
-        "repo": "harmonia",
-        "type": "github"
+        "path": "/home/nregner/dev/github/harmonia/",
+        "type": "path"
       }
     },
     "home-manager": {

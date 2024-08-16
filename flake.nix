@@ -29,7 +29,8 @@
     };
     flake-parts.url = "github:hercules-ci/flake-parts";
     harmonia = {
-      url = "github:nathanregner/harmonia";
+      # url = "github:nathanregner/harmonia";
+      url = "path:/home/nregner/dev/github/harmonia/";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     hydra-sentinel = {
