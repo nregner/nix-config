@@ -1,3 +1,4 @@
+# { config, lib, ... }:
 {
   imports = [
     ../nixos/base/nix.nix
@@ -10,11 +11,12 @@
     user = "root";
   };
 
+  nix.settings.sandbox = false;
   # https://github.com/NixOS/nix/issues/4119#issuecomment-1734738812
-  nix.settings.sandbox = true;
-  system.systemBuilderArgs = {
-    sandboxProfile = ''
-      (allow file-read* file-write* process-exec mach-lookup (subpath "${builtins.storeDir}"))
-    '';
-  };
+  # nix.settings.sandbox = "relaxed";
+  # system.systemBuilderArgs = lib.mkIf (config.nix.settings.sandbox == "relaxed") {
+  #   sandboxProfile = ''
+  #     (allow file-read* file-write* process-exec mach-lookup (subpath "${builtins.storeDir}"))
+  #   '';
+  # };
 }
