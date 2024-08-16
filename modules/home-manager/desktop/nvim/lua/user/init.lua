@@ -194,12 +194,20 @@ require("lazy").setup({
           vim.lsp.buf.format()
         end, { desc = "Format current buffer with LSP" })
 
-        require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
+        if not client.name == "clangd" and not client.name == "jdtls" then
+          require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
+        end
       end
 
       require("lspconfig.configs").vtsls = require("vtsls").lspconfig -- set default server config, optional but recommended
 
       local servers = {
+        clangd = {
+          cmd = { -- https://www.reddit.com/r/neovim/comments/12qbcua/multiple_different_client_offset_encodings/
+            "clangd",
+            "--offset-encoding=utf-16",
+          },
+        },
         clojure_lsp = {},
         emmet_language_server = {},
         eslint = {},
@@ -275,10 +283,11 @@ require("lazy").setup({
 
       for server_name, server_config in pairs(servers) do
         require("lspconfig")[server_name].setup({
+          cmd = server_config.cmd,
           capabilities = capabilities,
           on_attach = on_attach,
           settings = server_config,
-          filetypes = (server_config or {}).filetypes,
+          filetypes = server_config.filetypes,
         })
       end
     end,
