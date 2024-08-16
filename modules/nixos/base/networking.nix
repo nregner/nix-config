@@ -15,8 +15,9 @@
 
   programs.ssh.extraConfig = ''
     Host enceladus-linux-vm
+      User nregner
       HostName localhost
-      ProxyJump nregner@enceladus
+      ProxyJump enceladus
       Port 31022
   '';
 }
