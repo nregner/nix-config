@@ -15,13 +15,13 @@
   };
   harper-ls = {
     pname = "harper-ls";
-    version = "v0.9.3";
+    version = "v0.9.4";
     src = fetchFromGitHub {
       owner = "elijah-potter";
       repo = "harper";
-      rev = "v0.9.3";
+      rev = "v0.9.4";
       fetchSubmodules = false;
-      sha256 = "sha256-HwyBmjc8kpBpwPQC2zkykn8wv+7v1Q5NMg+Ohz3XeD8=";
+      sha256 = "sha256-ER1cK2+yb+0nqKIJAiDzJO1YUaMMyqwWWpv0I3hPjVY=";
     };
   };
   hyprland-workspaces = {
@@ -62,8 +62,8 @@
     version = "7.17.23";
     src = dockerTools.pullImage {
       imageName = "library/kibana";
-      imageDigest = "sha256:35caffeb480e6cd55afaad72f78820f802e21c2d73996c1b46c2998c0513f977";
-      sha256 = "sha256-mXYN+rQI8kgtjirtJQbvGxjdauQKITJaD1ivoQk05kI=";
+      imageDigest = "sha256:2ade8523d73f0bfe9cecd14fe8bdd32bf4f2f5bb38654953c9dfb38d402eb7e8";
+      sha256 = "sha256-0a5mf3AcelU96Db7LQz+5BCSNfe/tVCrU4FaHDePbug=";
       finalImageTag = "7.17.23";
     };
   };
