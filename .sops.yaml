@@ -3,7 +3,6 @@
 keys:
   - &user_nregner age1edzgfqhfrg5a6p9dgte7s8dqt87vu8a50up5mys0h34x3dsrj90qr743qw
   - &user_nregner_mac age1me7gswd8w750e30m8au67mv9npvkqtvjugz50ydn9tajezu0lccs9qw38c
-  - &aarch64_linux_builder age13rrpdnr7f9knpgdvafvjkp74ejacuhcvzhdw2j8h5xjwyrmrhv4s4tvr8j
   - &host_iapetus age1pfp278lmacxxj9xj9zez9pgh3yuh64vp0syh6cx6xapvx0c9yfhssl8ed5
   - &host_server age1g2mgt0s80nc5yzkjnwmn6qwf8udnapx92vhwussjpa9d4et5v5zskgap5y
   - &host_print_farm age16zk73cejuepyskjeq0625ecf727y3nmmw32qq0ta97q9e4uj2sqstq6240
@@ -26,9 +25,6 @@ creation_rules:
           - *host_voron
           - *host_print_farm
           - *host_sagittarius
-          - *aarch64_linux_builder
-        kms:
-          - arn: arn:aws:kms:us-west-2:544292031362:key/mrk-2b49806343894488949fb1943c932e64
   - path_regex: machines/voron/secrets.yaml
     key_groups:
       - age:
@@ -39,12 +35,6 @@ creation_rules:
       - age:
           - *user_nregner
           - *host_print_farm
-  - path_regex: machines/ec2-aarch64/secrets.yaml
-    key_groups:
-      - age:
-          - *user_nregner
-        kms:
-          - arn: arn:aws:kms:us-west-2:544292031362:key/mrk-2b49806343894488949fb1943c932e64
   - path_regex: machines/sagittarius/secrets.yaml
     key_groups:
       - age:
