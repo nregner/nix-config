@@ -1446,9 +1446,9 @@ require("lazy").setup({
     end,
     init = function()
       vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-        pattern = { "conjure-log-*.cljc" },
+        pattern = { "conjure-log-*" },
         callback = function(ev)
-          vim.diagnostic.enable(false, ev)
+          vim.diagnostic.enable(false, { bufnr = ev.buf })
         end,
       })
       vim.g["conjure#extract#tree_sitter#enabled"] = true
