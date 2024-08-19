@@ -988,6 +988,9 @@ require("lazy").setup({
             end,
           },
         },
+        renderer = {
+          group_empty = true,
+        },
         on_attach = function(bufnr)
           local api = require("nvim-tree.api")
           local git = require("nvim-tree.git")
