@@ -6,8 +6,10 @@
 {
   default = pkgs.mkShell {
     packages = with pkgs.unstable; [
+      age
       node2nix
       sops
+      ssh-to-age
       tenv
       treefmt
     ];
