@@ -30,7 +30,7 @@
       pkgs.vtsls
 
       # formatters/linters
-      codespell
+      nixfmt-rfc-style
       pkgs.joker
       prettierd
       shfmt
