@@ -1021,6 +1021,14 @@ require("lazy").setup({
         update_cwd = true,
         sync_root_with_cwd = true,
         hijack_cursor = true,
+        hijack_unnamed_buffer_when_opening = true,
+        actions = {
+          change_dir = {
+            enable = true,
+            global = true,
+            restrict_above_cwd = false,
+          },
+        },
         view = {
           width = {
             max = function()
