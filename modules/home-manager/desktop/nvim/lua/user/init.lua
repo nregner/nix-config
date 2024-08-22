@@ -64,9 +64,22 @@ require("lazy").setup({
   {
     "altermo/ultimate-autopair.nvim",
     event = { "InsertEnter", "CmdlineEnter" },
-    branch = "v0.6", --recommended as each new version will have breaking changes
+    branch = "v0.6",
     opts = {
       cmap = false,
+      close = {
+        enable = true,
+        map = "<C-S-Enter>",
+        cmap = "<C-S-Enter>",
+        conf = {},
+      },
+      extensions = {
+        cond = {
+          cond = function(fn)
+            return not fn.in_node("comment")
+          end,
+        },
+      },
     },
   },
 
