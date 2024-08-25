@@ -32,7 +32,3 @@ fetch.github = "armbian/linux-rockchip"
 [sf-mono-nerd-font]
 src.github = "epk/SF-Mono-Nerd-Font"
 fetch.github = "epk/SF-Mono-Nerd-Font"
-
-[tfautomv]
-src.github_tag = "busser/tfautomv"
-fetch.github = "busser/tfautomv"

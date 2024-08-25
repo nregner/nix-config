@@ -60,8 +60,6 @@ in
 
 '';
 
-  tfautomv = pkgs.unstable.callPackage ./tfautomv.nix { source = sources.tfautomv; };
-
   vtsls = node2nixPkgs."@vtsls/language-server";
 
   writeBabashkaApplication = pkgs.unstable.callPackage ./write-babashka-application.nix { };

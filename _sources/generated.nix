@@ -62,8 +62,8 @@
     version = "7.17.23";
     src = dockerTools.pullImage {
       imageName = "library/kibana";
-      imageDigest = "sha256:2ade8523d73f0bfe9cecd14fe8bdd32bf4f2f5bb38654953c9dfb38d402eb7e8";
-      sha256 = "sha256-0a5mf3AcelU96Db7LQz+5BCSNfe/tVCrU4FaHDePbug=";
+      imageDigest = "sha256:35caffeb480e6cd55afaad72f78820f802e21c2d73996c1b46c2998c0513f977";
+      sha256 = "sha256-mXYN+rQI8kgtjirtJQbvGxjdauQKITJaD1ivoQk05kI=";
       finalImageTag = "7.17.23";
     };
   };
