@@ -10,7 +10,7 @@
     # TODO: opt-in to individual components options
     ./bar/waybar
     ./launcher/tofi.nix
-    ./lock/swaylock.nix
+    ./lock/hyprlock.nix
     ./notification/mako.nix
   ];
 
@@ -76,12 +76,12 @@
           exec-once = ${lib.getExe import-env} tmux
           exec-once = ${lib.getExe import-env} system
           exec-once = "systemctl --user start waybar.service"
-          source = ${config.xdg.configHome}/hypr/user.conf
+          source = ${config.xdg.configHome}/hypr/hyprland.user.conf
         '';
       };
 
       xdg.configFile = {
-        "hypr/user.conf".source = config.lib.file.mkFlakeSymlink ./hyprland.conf;
+        "hypr/hyprland.user.conf".source = config.lib.file.mkFlakeSymlink ./hyprland.conf;
 
         "hypr/hyprpaper.conf".text = ''
           splash = false
@@ -92,7 +92,14 @@
         '';
 
         "hypr/assets/wallpaper.png".source = cfg.wallpaper;
-        "hypr/assets/avatar.png".source = ../../../../assets/cat.png;
+        "hypr/assets/avatar.png".source =
+          pkgs.runCommand "avatar.png"
+            {
+              nativeBuildInputs = with pkgs.unstable; [ imagemagick ];
+            }
+            ''
+              magick ${../../../../assets/cat.png} -resize 100x100 $out
+            '';
       };
 
       home.packages = with pkgs.unstable; [
