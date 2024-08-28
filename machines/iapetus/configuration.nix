@@ -45,7 +45,7 @@
   # https://wiki.hyprland.org/0.20.1beta/Getting-Started/Installation/
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
-  security.pam.services.swaylock = { };
+  security.pam.services.hyprlock = { };
 
   # services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
