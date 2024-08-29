@@ -209,7 +209,7 @@ require("lazy").setup({
           vim.lsp.buf.format()
         end, { desc = "Format current buffer with LSP" })
 
-        if not client.name == "clangd" and not client.name == "jdtls" then
+        if client.name ~= "clangd" and client.name ~= "harper_ls" and client.name ~= "emmet_language_server" then
           require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
         end
       end
