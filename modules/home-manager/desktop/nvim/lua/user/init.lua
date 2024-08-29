@@ -1604,6 +1604,9 @@ vim.keymap.set("n", "<leader>hp", "<cmd>diffput<cr>", { noremap = true })
 vim.keymap.set("n", "<leader>hg", "<cmd>diffget<cr>", { noremap = true })
 vim.keymap.set("n", "q", "<nop>", { noremap = true })
 
+-- Search highlight
+vim.keymap.set("n", "<Esc>", "<cmd>nohls<cr>", { silent = true, noremap = true })
+
 -- Diagnostic keymaps
 
 -- https://github.com/neovim/neovim/discussions/25588#discussioncomment-8700283
