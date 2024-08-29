@@ -1473,6 +1473,14 @@ require("lazy").setup({
     config = true,
   },
 
+  {
+    "t-troebst/perfanno.nvim",
+    opts = { annotate_after_load = true },
+    -- PerfLuaProfileStart
+    -- PerfLuaProfileStop
+    -- PerfHottestCallersFunction
+  },
+
   { -- coerce.nvim
     "gregorias/coerce.nvim",
     -- version = "3.0",
