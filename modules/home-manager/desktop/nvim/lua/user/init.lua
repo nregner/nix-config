@@ -240,7 +240,9 @@ require("lazy").setup({
         },
         eslint = {},
         gopls = {},
-        graphql = {},
+        graphql = {
+          filetypes = { "graphql", "javascript", "javascriptreact", "typescript", "typescriptreact" },
+        },
         harper_ls = {
           ["harper-ls"] = {
             linters = {
