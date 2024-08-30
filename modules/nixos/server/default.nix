@@ -6,7 +6,6 @@
     ./programs
   ];
   services.tailscaled-autoconnect.enable = lib.mkDefault true;
-  services.nregner.metrics.enable = lib.mkDefault true;
 
   system.autoUpgrade = {
     enable = true;

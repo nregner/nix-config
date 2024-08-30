@@ -57,16 +57,6 @@
       sha256 = "sha256-anBGjLtYlyrxeNVy1TEMcAGTVUFrGClLuoJZuo3xlDM=";
     };
   };
-  kibana = {
-    pname = "kibana";
-    version = "7.17.23";
-    src = dockerTools.pullImage {
-      imageName = "library/kibana";
-      imageDigest = "sha256:35caffeb480e6cd55afaad72f78820f802e21c2d73996c1b46c2998c0513f977";
-      sha256 = "sha256-mXYN+rQI8kgtjirtJQbvGxjdauQKITJaD1ivoQk05kI=";
-      finalImageTag = "7.17.23";
-    };
-  };
   linux-rockchip = {
     pname = "linux-rockchip";
     version = "709c51c64e1652d4f8c87b1815db86f56d188268";
@@ -88,17 +78,6 @@
       rev = "v18.0d1e1.0";
       fetchSubmodules = false;
       sha256 = "sha256-f5A/vTKCUxdMhCqv0/ikF46tRrx5yZfIkvfExb3/XEQ=";
-    };
-  };
-  tfautomv = {
-    pname = "tfautomv";
-    version = "v0.6.2";
-    src = fetchFromGitHub {
-      owner = "busser";
-      repo = "tfautomv";
-      rev = "v0.6.2";
-      fetchSubmodules = false;
-      sha256 = "sha256-qUeIbHJqxGkt2esMm4w6fM52ZE16jWnxugVXxqBh1Qc=";
     };
   };
 }
