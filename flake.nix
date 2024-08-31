@@ -22,6 +22,10 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-doom-emacs-unstraightened = {
+      url = "github:marienz/nix-doom-emacs-unstraightened";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
     flake-parts.url = "github:hercules-ci/flake-parts";
     hydra-sentinel = {
       url = "github:nathanregner/hydra-sentinel";
@@ -254,10 +258,10 @@
                       # copy system closure so we don't have to download/rebuild on the host
                       config.system.build.toplevel
                       (pkgs.runCommand "install-scripts" { } ''
-                        mkdir -p $out/bin
-                        cp ${config.system.build.formatScript} $out/bin/disko-format
-                        cp ${config.system.build.mountScript} $out/bin/disko-mount
-                        cp ${pkgs.writeShellScript "install" ''
+                                                                                             mkdir -p $out/bin
+                                                                                             cp${config.system.build.formatScript} $out/bin/disko-format
+                                                                                             cp ${config.system.build.mountScript} $out/bin/disko-mount
+ cp${pkgs.writeShellScript "install" ''
                           sudo nixos-install --root /mnt --flake ${self.outPath}#${name}
                         ''} $out/bin/nixos-install-flake
                       '')

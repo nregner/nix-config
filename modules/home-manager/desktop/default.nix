@@ -4,6 +4,7 @@
     ../base
     ./alacritty.nix
     ./cli
+    ./emacs
     ./jetbrains
     ./nvim
     ./sops.nix
