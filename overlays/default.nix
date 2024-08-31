@@ -64,14 +64,6 @@ let
           (oldAttrs: {
             doInstallCheck = false;
           });
-
-      # FIXME: https://github.com/NixOS/nixpkgs/issues/332957
-      # inherit (stable) deepfilternet;
-      inherit (stable) easyeffects;
-
-      # rustPlatform = stable.rustPlatform;
-      # FIXME: https://github.com/NixOS/nixpkgs/issues/334730
-      inherit (stable) awscli2;
     };
 in
 {
