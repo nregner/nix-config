@@ -6,10 +6,10 @@
 }:
 let
   pname = "cura";
-  version = "5.8.0";
+  version = "5.8.1";
   src = fetchurl {
     url = "https://github.com/Ultimaker/Cura/releases/download/${version}/UltiMaker-Cura-${version}-linux-X64.AppImage";
-    hash = "sha256-EojVAe+o43W80ES5BY3QgGRTxztwS+B6kIOfJOtULOg=";
+    hash = "sha256-VLd+V00LhRZYplZbKkEp4DXsqAhA9WLQhF933QAZRX0=";
   };
   appimageContents = appimageTools.extract { inherit pname version src; };
 in
@@ -22,7 +22,7 @@ lib.warnIf (lib.versionOlder version cura.version) "cura is outdated. latest: ${
       mkdir -p $out/share
       cp -r ${appimageContents}/usr/share/icons $out/share
       substituteInPlace $out/share/applications/com.ultimaker.cura.desktop \
-        --replace-fail 'Exec=UltiMaker-Cura' 'Exec=env ${pname}\nTryExec=${pname}'
+        --replace-fail 'Exec=UltiMaker-Cura' 'Exec=env QT_QPA_PLATFORM=xcb ${pname}'
     '';
     passthru = {
       inherit appimageContents;
