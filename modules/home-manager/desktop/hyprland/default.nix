@@ -92,7 +92,14 @@
         '';
 
         "hypr/assets/wallpaper.png".source = cfg.wallpaper;
-        "hypr/assets/avatar.png".source = ../../../../assets/cat.png;
+        "hypr/assets/avatar.png".source =
+          pkgs.runCommand "avatar.png"
+            {
+              nativeBuildInputs = with pkgs.unstable; [ imagemagick ];
+            }
+            ''
+              magick ${../../../../assets/cat.png} -resize 100x100 $out
+            '';
       };
 
       home.packages = with pkgs.unstable; [
