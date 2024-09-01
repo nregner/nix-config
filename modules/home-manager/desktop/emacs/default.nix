@@ -20,4 +20,7 @@
   };
 
   xdg.configFile."emacs2".source = config.lib.file.mkFlakeSymlink ./user;
+  xdg.configFile."doom/config.el".source = ./user/config.el;
+  xdg.configFile."doom/init.el".source = ./doom/init.el;
+  xdg.configFile."doom/packages.el".source = ./doom/packages.el;
 }
