@@ -12,6 +12,7 @@
     lfs.enable = true;
     maintenance.enable = true;
     extraConfig = {
+      commit.verbose = true;
       push = {
         autoSetupRemote = true;
       };
