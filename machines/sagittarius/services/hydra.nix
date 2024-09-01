@@ -52,12 +52,12 @@
     listenHost = "0.0.0.0";
     listenPort = 3002;
     settings = {
-      allowed_ips = [
+      allowedIps = [
         "192.168.0.0/16"
         "100.0.0.0/8"
       ];
-      github_webhook_secret_file = config.sops.secrets.hydra-github-webhook-secret.path;
-      build_machines = [
+      githubWebhookSecretFile = config.sops.secrets.hydra-github-webhook-secret.path;
+      buildMachines = [
         {
           hostName = "enceladus";
           sshUser = "nregner";

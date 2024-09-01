@@ -15,7 +15,7 @@
     services.hydra-sentinel-client = {
       enable = true;
       settings = {
-        server_addr = "sagittarius:3002";
+        serverAddr = "sagittarius:3002";
       };
     };
   };
