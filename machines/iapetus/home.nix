@@ -70,6 +70,7 @@
 
     awscli2
     babashka
+    dust
     gh
     jq
     nushell
@@ -94,6 +95,10 @@
     nix-du # nix-du -s=500MB | xdot -
     nvfetcher
     xdot
+
+    # rust
+    cargo-autoinherit
+    cargo-outdated
 
     # rc
     betaflight-configurator
