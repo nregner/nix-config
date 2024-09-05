@@ -1,4 +1,23 @@
 {
+    "antifennel": {
+        "cargoLocks": null,
+        "date": "2024-03-07",
+        "extract": null,
+        "name": "antifennel",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "rev": "7cf2a2ec4e2d92e82a396e5b1208454eac0b98ed",
+            "sha256": "sha256-kqKjBk5zzvnA5QcSqegrZULmrDol4eT7Roqxi2TC/8c=",
+            "type": "git",
+            "url": "https://git.sr.ht/~technomancy/antifennel"
+        },
+        "version": "7cf2a2ec4e2d92e82a396e5b1208454eac0b98ed"
+    },
     "flake-registry": {
         "cargoLocks": null,
         "date": "2024-06-03",
@@ -130,11 +149,11 @@
             "arch": null,
             "finalImageName": null,
             "finalImageTag": null,
-            "imageDigest": "sha256:54a976880161c3c96de30b63cd0092d1f069aa8b23686669b726558ddf112724",
+            "imageDigest": "sha256:88e8e12542e9a2733c07f175682dc69e7360becb6137d604bb087a71ab33c5fe",
             "imageName": "hkotel/mealie",
             "imageTag": "latest",
             "os": null,
-            "sha256": "sha256-LsnvoHhztvn/OrMLdyiLUwhkFn9OmVt2fWOUcK2QisY=",
+            "sha256": "sha256-zRNYvxWwVxWTXZbgffeCtAtDed1lyD+dIjf5RtU23/I=",
             "tlsVerify": null
         },
         "version": "latest"

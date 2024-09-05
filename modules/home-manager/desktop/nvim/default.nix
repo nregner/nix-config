@@ -52,6 +52,8 @@
     "nvim/lazy-lock.json".source = config.lib.file.mkFlakeSymlink ./lazy-lock.json;
   };
 
+  home.packages = with pkgs.unstable; [ luajitPackages.fennel ];
+
   programs.zsh.shellAliases.vimdiff = "nvim -d";
 
   programs.zsh.initExtra =

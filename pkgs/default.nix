@@ -10,6 +10,8 @@ in
 {
   inherit (node2nixPkgs) "@olrtg/emmet-language-server";
 
+  antifennel = pkgs.unstable.callPackage ./antifennel { inherit sources; };
+
   cura5 = pkgs.unstable.callPackage ./cura { };
 
   gitea-github-mirror = pkgs.unstable.callPackage ./gitea-github-mirror { };

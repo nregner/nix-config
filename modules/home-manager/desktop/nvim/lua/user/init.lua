@@ -4,6 +4,8 @@ vim.g.loaded_netrwPlugin = 1
 
 -- https://github.com/folke/lazy.nvim#-plugin-spec
 require("lazy").setup({
+  { "Olical/nfnl", ft = "fennel" },
+
   -- Git
   "tpope/vim-fugitive",
   "tpope/vim-rhubarb",
