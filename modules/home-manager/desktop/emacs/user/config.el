@@ -79,4 +79,3 @@
 (evil-embrace-disable-evil-surround-integration)
 (setq doom-font "JetBrainsMono Nerd Font")
 (setq lsp-rust-server 'rust-analyzer)
-(setq doom-theme 'catppuccin)
