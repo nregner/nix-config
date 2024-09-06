@@ -11,7 +11,11 @@
     # doomDir = config.lib.file.mkFlakeSymlink "./doom";
     doomDir = ./doom;
     # doomLocalDir = "~/.local/share/nix-doom";
-    extraPackages = epkgs: [ epkgs.treesit-grammars.with-all-grammars ];
+    extraPackages =
+      epkgs: with epkgs; [
+        tmux-pane
+        treesit-grammars.with-all-grammars
+      ];
   };
 
   # services.emacs = {

@@ -79,3 +79,8 @@
 (evil-embrace-disable-evil-surround-integration)
 (setq doom-font "JetBrainsMono Nerd Font")
 (setq lsp-rust-server 'rust-analyzer)
+;; (setq font-lock-support-mode 'tree-sitter-lock-mode)
+
+;; (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+;; https://emacs-tree-sitter.github.io/syntax-highlighting/
+(add-hook 'nix-mode-hook #'tree-sitter-hl-mode)
