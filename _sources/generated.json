@@ -33,11 +33,11 @@
             "name": null,
             "owner": "elijah-potter",
             "repo": "harper",
-            "rev": "v0.9.5",
-            "sha256": "sha256-Tk2YOY9myAGHrNTpgwyqo+P6gGQ+2cpKAJbsA3ZfhUA=",
+            "rev": "v0.10.0",
+            "sha256": "sha256-DpBCTljIigpyZdiFm8x/bqDn+kzK8ILHpzGqX0d1mI8=",
             "type": "github"
         },
-        "version": "v0.9.5"
+        "version": "v0.10.0"
     },
     "hyprland-workspaces": {
         "cargoLocks": null,
