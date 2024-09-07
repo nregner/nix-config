@@ -14,7 +14,7 @@
     configFile = pkgs.writeText "printer.cfg" ''
       [include /etc/klipper/printer.cfg]
     '';
-    mutableConfig = true;
+    # mutableConfig = true;
   };
 
   environment.etc = {
@@ -22,6 +22,7 @@
     "klipper/printer.cfg".source = pkgs.writeText "printer.immutable.cfg" ''
       [include ${./printer.cfg}]
       [include ${./kamp.cfg}]
+      [include ${./menu.cfg}]
     '';
   };
 
