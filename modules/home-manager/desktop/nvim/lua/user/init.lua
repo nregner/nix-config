@@ -371,7 +371,9 @@ require("lazy").setup({
         lua = { "stylua" },
         markdown = { "prettierd", "injected" },
         nginx = { "nginxfmt" },
-        nix = { "nixfmt", "injected" },
+        nix = {
+          "nixfmt", --[[ "injected" ]]
+        }, -- FIXME: injected bash formatter broken
         rust = { "rustfmt" },
         sh = { "shfmt" },
         terraform = { "terraform_fmt" },
