@@ -48,6 +48,9 @@ in
 
   klipper-flash-rp2040 = pkgs.callPackage ./klipper/rp2040.nix { };
 
+  # TODO: Upgrade after https://github.com/bluenviron/mediamtx/issues/2758
+  mediamtx-v0_2 = pkgs.unstable.callPackage ./mediamtx { };
+
   moonraker-develop = (pkgs.unstable.callPackage ./moonraker { inherit inputs; });
 
   orca-slicer = (pkgs.unstable.callPackage ./orca-slicer { inherit sources; });
