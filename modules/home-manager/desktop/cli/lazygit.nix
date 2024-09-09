@@ -52,6 +52,8 @@
           moveUpCommit = "<c-P>";
         };
       };
+
+      promptToReturnFromSubprocess = false;
     };
   };
 }
