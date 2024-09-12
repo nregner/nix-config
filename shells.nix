@@ -2,11 +2,13 @@
   inputs',
   pkgs,
   treefmt,
+  agenix-rekey,
 }:
 {
   default = pkgs.mkShell {
     packages = with pkgs.unstable; [
       age
+      agenix-rekey
       node2nix
       sops
       ssh-to-age

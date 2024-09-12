@@ -18,6 +18,14 @@
     };
 
     # Tools
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    agenix-rekey = {
+      url = "github:oddlama/agenix-rekey";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -92,7 +100,10 @@
         "x86_64-linux"
         "aarch64-darwin"
       ];
-      imports = [ inputs.treefmt-nix.flakeModule ];
+      imports = [
+        inputs.agenix-rekey.flakeModule
+        inputs.treefmt-nix.flakeModule
+      ];
 
       perSystem =
         {
@@ -117,6 +128,7 @@
               shells = import ./shells.nix {
                 inherit inputs' pkgs;
                 treefmt = config.treefmt.build.wrapper;
+                agenix-rekey = config.agenix-rekey.package;
               };
             in
             shells
@@ -126,6 +138,10 @@
                 constituents = lib.attrValues shells;
               };
             };
+
+          agenix-rekey.nodes = self.nixosConfigurations
+          # // self.darwinConfigurations // self.homeConfigurations
+          ;
 
           treefmt = import ./treefmt.nix;
         };
