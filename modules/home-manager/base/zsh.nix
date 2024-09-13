@@ -26,7 +26,7 @@
 
         nr = "${nixRebuild} --flake .";
         nrb = "${nr} build";
-        snr = "${nr} --use-remote-sudo";
+        snr = if pkgs.stdenv.isDarwin then "sudo ${nr}" else "${nr} --use-remote-sudo";
         snrb = "${snr} boot";
         snrs = "${snr} switch";
         snrt = "${snr} test";
