@@ -37,7 +37,7 @@
 
       # https://discourse.nixos.org/t/do-flakes-also-set-the-system-channel/19798
       # pin system channels to flake inputs
-      nix-path = "${inputs.nixpkgs-unstable}";
+      nix-path = "nixpkgs=${inputs.nixpkgs-unstable}";
     };
   };
 }
