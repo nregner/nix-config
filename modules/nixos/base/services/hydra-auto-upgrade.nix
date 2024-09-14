@@ -5,12 +5,12 @@
   ...
 }:
 let
-  cfg = config.system.hydraAutoUpgrade;
+  cfg = config.system.hydra-auto-upgrade;
 in
 {
   # derived from: https://github.com/Misterio77/nix-config/blob/main/modules/nixos/hydra-auto-upgrade.nix
   options = {
-    system.hydraAutoUpgrade = {
+    system.hydra-auto-upgrade = {
       enable = lib.mkEnableOption "periodic hydra-based auto upgrade";
       operation = lib.mkOption {
         type = lib.types.enum [
@@ -20,7 +20,7 @@ in
         default = "boot";
       };
       dates = lib.mkOption {
-        type = lib.types.str;
+        type = lib.types.nullOr lib.types.str;
         default = "04:40";
         example = "daily";
       };
@@ -115,14 +115,14 @@ in
         {
           assertion = cfg.enable -> !config.system.autoUpgrade.enable;
           message = ''
-            hydraAutoUpgrade and autoUpgrade are mutually exclusive.
+            hydra-auto-upgrade and autoUpgrade are mutually exclusive.
           '';
         }
       ];
 
       environment.systemPackages = [ script ];
 
-      systemd.services.nixos-upgrade = {
+      systemd.services.nixos-upgrade = lib.mkIf (cfg.dates != null) {
         description = "NixOS Upgrade";
         restartIfChanged = false;
         unitConfig.X-StopOnRemoval = false;

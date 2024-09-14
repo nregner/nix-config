@@ -14,7 +14,8 @@
   };
 
   services.tailscaled-autoconnect.enable = true;
-  system.hydraAutoUpgrade.enable = false;
+
+  system.hydra-auto-upgrade.enable = false;
 
   # don't rebuild vm image on every commit
   system.nixos.tags = lib.mkForce [ ];

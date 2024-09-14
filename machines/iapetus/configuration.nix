@@ -88,6 +88,11 @@
 
   services.nregner.hydra-builder.enable = true;
 
+  system.hydra-auto-upgrade = {
+    enable = true;
+    dates = null;
+  };
+
   # https://nixos.wiki/wiki/CCache#Derivation_CCache_2
   environment.systemPackages =
     [ config.boot.kernelPackages.perf ]
