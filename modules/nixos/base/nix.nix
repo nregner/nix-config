@@ -10,11 +10,12 @@
   nixpkgs = import ../../../nixpkgs.nix { inherit outputs; };
 
   nix = {
-    distributedBuilds = true;
     package = pkgs.unstable.nixVersions.latest;
+    distributedBuilds = true;
+    optimise.automatic = true;
 
     settings = {
-      auto-optimise-store = true;
+      auto-optimise-store = lib.mkDefault false;
       builders-use-substitutes = true;
       experimental-features = [
         "nix-command"
