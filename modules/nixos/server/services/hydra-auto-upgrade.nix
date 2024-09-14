@@ -61,12 +61,8 @@ in
         name = "hydra-auto-upgrade";
         runtimeInputs = with pkgs.unstable; [
           config.nix.package.out
-          # config.programs.ssh.package
           coreutils
           curl
-          # gitMinimal
-          # gnutar
-          # gzip
           jq
           nvd
         ];
