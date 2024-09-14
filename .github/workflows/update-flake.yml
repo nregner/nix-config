@@ -1,0 +1,56 @@
+name: Update Dependencies
+
+on:
+  workflow_dispatch: # allow manual trigger
+  schedule:
+    - cron: "0 16 * * 6" # min hour day-of-month month day-of-week
+
+jobs:
+  flake:
+    runs-on: [self-hosted]
+    steps:
+      - uses: actions/checkout@cd7d8d697e10461458bc61a30d094dc601a8b017 # pin@main
+        with:
+          token: ${{ secrets.GH_TOKEN_FOR_UPDATES }}
+          ref: next
+      - name: Run flake update
+        run: nix flake update
+      - name: Commit and push
+        run: |
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.name "github-actions[bot]"
+          git add -A
+          git commit -am "build: update flake.lock"
+          git push
+  nvfetcher:
+    runs-on: [self-hosted]
+    steps:
+      - uses: actions/checkout@cd7d8d697e10461458bc61a30d094dc601a8b017 # pin@main
+        with:
+          token: ${{ secrets.GH_TOKEN_FOR_UPDATES }}
+          ref: next
+      - name: Run nvfetcher
+        run: nvfetcher -k $NVFETCHER_KEYFILE
+      - name: Commit and push
+        run: |
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.name "github-actions[bot]"
+          git add -A
+          git commit -am "build: update sources"
+          git push
+  node2nix:
+    runs-on: [self-hosted]
+    steps:
+      - uses: actions/checkout@cd7d8d697e10461458bc61a30d094dc601a8b017 # pin@main
+        with:
+          token: ${{ secrets.GH_TOKEN_FOR_UPDATES }}
+          ref: next
+      - name: Run node2nix
+        run: ./pkgs/node2nix/update.sh
+      - name: Commit and push
+        run: |
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.name "github-actions[bot]"
+          git add -A
+          git commit -am "build: update node2nix packages"
+          git push
