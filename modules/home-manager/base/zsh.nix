@@ -23,6 +23,7 @@
       in
       rec {
         jqless = "jq -C | less -r";
+        cdiff = "diff --new-line-format='+%L' --old-line-format='-%L' --unchanged-line-format=' %L'"; # diff with full context
 
         nr = "${nixRebuild} --flake .";
         nrb = "${nr} build";
