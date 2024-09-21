@@ -7,7 +7,6 @@
     defaultEditor = true;
     extraConfig = builtins.readFile ./init.vim;
     extraLuaConfig = ''
-      vim.g.copilot_node_command = '${pkgs.unstable.nodejs_20}/bin/node'
       require('user')
     '';
 

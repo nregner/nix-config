@@ -587,29 +587,6 @@ require("lazy").setup({
   },
 
   {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    event = "InsertEnter",
-    opts = {
-      copilot_node_command = vim.g.copilot_node_command,
-      panel = {
-        enabled = true,
-        auto_refresh = true,
-      },
-      suggestion = {
-        enabled = true,
-        auto_trigger = true,
-      },
-      filetypes = {
-        yaml = true,
-        markdown = true,
-        gitcommit = true,
-        gitrebase = true,
-      },
-    },
-  },
-
-  {
     "folke/which-key.nvim",
     config = function()
       require("which-key").setup({})
