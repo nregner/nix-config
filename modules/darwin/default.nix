@@ -20,9 +20,13 @@
     coreutils-full
   ];
 
-  nix.settings = {
-    # https://github.com/NixOS/nix/issues/7273
-    auto-optimise-store = lib.mkForce false;
+  nix = {
+    optimise.user = "root";
+
+    settings = {
+      # https://github.com/NixOS/nix/issues/7273
+      auto-optimise-store = lib.mkForce false;
+    };
   };
 
   # Auto upgrade nix package and the daemon service.
