@@ -1,5 +1,6 @@
 {
   imports = [
+    ./cache.nix
     ./docker.nix
     ./gitea.nix
     ./github-actions.nix
@@ -8,7 +9,6 @@
     ./mealie.nix
     ./nexus.nix
     ./nginx.nix
-    ./nix-serve.nix
     ./qbittorrent.nix
     ./silverbullet.nix
   ];
