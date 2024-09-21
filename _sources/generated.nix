@@ -26,13 +26,13 @@
   };
   hyprland-workspaces = {
     pname = "hyprland-workspaces";
-    version = "v2.0.1";
+    version = "v2.0.2";
     src = fetchFromGitHub {
       owner = "FieldofClay";
       repo = "hyprland-workspaces";
-      rev = "v2.0.1";
+      rev = "v2.0.2";
       fetchSubmodules = false;
-      sha256 = "sha256-GhUjvFMlgjTdgtV9ASW7IqE2dBktPyOlRwg6qM1r7vc=";
+      sha256 = "sha256-cTIh/UwtVVAWdJEcwOxKmYHBA6XXAaAQz/yW0Xs0y1k=";
     };
   };
   joker = {

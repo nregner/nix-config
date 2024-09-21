@@ -53,11 +53,11 @@
             "name": null,
             "owner": "FieldofClay",
             "repo": "hyprland-workspaces",
-            "rev": "v2.0.1",
-            "sha256": "sha256-GhUjvFMlgjTdgtV9ASW7IqE2dBktPyOlRwg6qM1r7vc=",
+            "rev": "v2.0.2",
+            "sha256": "sha256-cTIh/UwtVVAWdJEcwOxKmYHBA6XXAaAQz/yW0Xs0y1k=",
             "type": "github"
         },
-        "version": "v2.0.1"
+        "version": "v2.0.2"
     },
     "joker": {
         "cargoLocks": null,
