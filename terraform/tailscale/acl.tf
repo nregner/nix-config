@@ -1,4 +1,5 @@
 # https://registry.terraform.io/providers/tailscale/tailscale/latest/docs
+# https://tailscale.com/kb/1337/acl-syntax
 
 resource "tailscale_acl" "acl" {
   acl = jsonencode({
@@ -19,6 +20,7 @@ resource "tailscale_acl" "acl" {
       sagittarius = data.tailscale_device.sagittarius.addresses[0]
     }
 
+    # https://tailscale.com/kb/1337/acl-syntax#acls
     acls = [
       {
         action = "accept"
@@ -27,17 +29,8 @@ resource "tailscale_acl" "acl" {
       },
       {
         action = "accept"
-        src    = ["*"]
-        dst = [
-          "sagittarius:8000", # binary cache
-        ]
-      },
-      {
-        action = "accept"
-        src    = ["group:admin", "tag:admin", "tag:server"]
-        dst = [
-          "sagittarius:9201" # elasticsearch
-        ]
+        src    = ["sagittarius"]
+        dst    = ["*:${jsondecode(file("../../globals.json")).services.prometheus.port}"] # prometheus
       },
       {
         action = "accept"
