@@ -1,0 +1,5 @@
+{
+  "services": {
+    "prometheus": { "port": 9001 }
+  }
+}

@@ -22,3 +22,4 @@
     knownHosts = lib.mapAttrs (name: value: { publicKey = value; }) hostKeys;
   };
 }
+// builtins.fromJSON (builtins.readFile ./globals.json)

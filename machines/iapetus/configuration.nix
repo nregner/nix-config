@@ -88,6 +88,8 @@
 
   services.nregner.hydra-builder.enable = true;
 
+  services.prometheus-host-metrics.enable = lib.mkDefault true;
+
   system.hydra-auto-upgrade = {
     enable = true;
     dates = null;
