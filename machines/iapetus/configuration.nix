@@ -6,7 +6,6 @@
 }:
 {
   imports = [
-    # inputs.hyprland.nixosModules.default
     ../../modules/nixos/desktop
     ./hardware-configuration.nix
     ./windows-vm
@@ -19,6 +18,7 @@
   networking.hostName = "iapetus";
   networking.networkmanager.enable = true;
   systemd.services.NetworkManager-wait-online.enable = false;
+  networking.wireless.enable = false;
 
   # Desktop environment
   services.xserver = {

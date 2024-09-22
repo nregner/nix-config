@@ -41,7 +41,7 @@
     };
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     sops-nix = {
       url = "github:Mic92/sops-nix";
@@ -251,28 +251,40 @@
               inherit (config.nixpkgs.hostPlatform) system;
             in
             {
-              iso-installer = inputs.nixos-generators.nixosGenerate {
+              # sudo dd if=./result/iso/*.iso of=/dev/diskN status=progress
+              recovery-iso = inputs.nixos-generators.nixosGenerate {
                 inherit system;
                 modules = [
-                  "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-gnome.nix"
-                  {
-                    environment.etc."nixos/flake".source = self.outPath;
-                    environment.systemPackages = [
-                      # copy system closure so we don't have to download/rebuild on the host
-                      config.system.build.toplevel
-                      (pkgs.runCommand "install-scripts" { } ''
-                        mkdir -p $out/bin
-                        cp ${config.system.build.formatScript} $out/bin/disko-format
-                        cp ${config.system.build.mountScript} $out/bin/disko-mount
-                        cp ${pkgs.writeShellScript "install" ''
-                          sudo nixos-install --root /mnt --flake ${self.outPath}#${name}
-                        ''} $out/bin/nixos-install-flake
-                      '')
-                    ];
-                    isoImage.squashfsCompression = "zstd -Xcompression-level 1";
-                  }
+                  sources
+                  (
+                    { modulesPath, ... }:
+                    {
+                      imports = [
+                        "${toString modulesPath}/installer/cd-dvd/installation-cd-base.nix"
+                        ./modules/nixos/base/nix.nix
+                      ];
+
+                      environment.systemPackages = [
+                        # copy system closure so we don't have to download/rebuild on the host
+                        # config.system.build.toplevel
+                        (pkgs.runCommand "install-scripts" { } ''
+                          mkdir -p $out/bin
+                          cp ${config.system.build.formatScript} $out/bin/disko-format
+                          cp ${config.system.build.mountScript} $out/bin/disko-mount
+                          cp ${pkgs.writeShellScript "install" ''
+                            sudo nixos-install --root /mnt --flake ${self.outPath}#${config.networking.hostName}
+                          ''} $out/bin/nixos-install-flake
+                        '')
+                      ];
+                      isoImage.squashfsCompression = "zstd -Xcompression-level 1";
+                      formatAttr = "isoImage";
+                    }
+                  )
                 ];
-                format = "install-iso";
+                specialArgs = {
+                  inherit self inputs outputs;
+                };
+                format = "iso";
               };
             }
           ) nixosConfigurations;
