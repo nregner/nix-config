@@ -69,6 +69,13 @@
       url = "github:nathanregner/preprocess_cancellation";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+
+    # misc
+    clojure-lsp = {
+      # https://github.com/clojure-lsp/clojure-lsp/actions/workflows/nix.yml?query=is%3Asuccess
+      url = "github:clojure-lsp/clojure-lsp/d24549429ab3178338e30075d1b4098149fa9130";
+      # inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs =
