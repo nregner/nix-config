@@ -46,7 +46,10 @@
         path = "${config.xdg.configHome}/git/local";
       };
     };
-    ignores = [ "Session.vim" ];
+    ignores = [
+      "Session.vim"
+      ".direnv"
+    ];
   };
 
   home.packages = with pkgs.unstable; [ difftastic ];
