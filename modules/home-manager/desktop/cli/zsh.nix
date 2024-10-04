@@ -37,6 +37,11 @@
           [[ ! "$TERMINAL_EMULATOR" =~ "JetBrains" ]]; then
           $_tmux attach >&/dev/null
         fi
+
+        # clear scrollback buffer if tmux is running
+        if [[ $TMUX ]]; then
+          alias clear='clear && tmux clear-history'
+        fi
       '';
 
     shellAliases = lib.optionalAttrs (!pkgs.stdenv.isDarwin) {
