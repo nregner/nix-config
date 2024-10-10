@@ -1298,7 +1298,7 @@ require("lazy").setup({
       end
 
       local show_summary = function()
-        neotest.summary.open()
+        neotest.output_panel.open()
       end
 
       nmap("<localleader>tt", function(args)
@@ -1321,6 +1321,9 @@ require("lazy").setup({
       nmap("<localleader>twq", function()
         neotest.watch.stop()
       end, "[T]est [W]atch [Q]uit")
+      nmap("<localleader>tr", function()
+        neotest.output_panel.clear()
+      end, "[T]est [R]eset logs")
     end,
   },
 
