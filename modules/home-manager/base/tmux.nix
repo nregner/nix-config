@@ -8,6 +8,7 @@
       unbind r
       bind-key r source-file ${config.xdg.configHome}/tmux/tmux.conf \; display-message "tmux.conf reloaded"
 
+      set-option -g default-command "$SHELL"
       source-file ${config.xdg.configHome}/tmux/user.conf
     '';
     plugins = with pkgs.unstable.tmuxPlugins; [ yank ];
