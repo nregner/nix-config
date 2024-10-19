@@ -41,7 +41,7 @@
     # nix
     nix-output-monitor
     nixfmt-rfc-style
-    nvfetcher
+    # nvfetcher
     # nix-du # nix-du -s=500MB | xdot -
     xdot
     nixos-rebuild
