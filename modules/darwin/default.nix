@@ -15,11 +15,6 @@
     ./nix.nix
   ];
 
-  environment.systemPackages = with pkgs.unstable; [
-    util-linux
-    coreutils-full
-  ];
-
   nix = {
     optimise.user = "root";
 
