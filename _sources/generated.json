@@ -1,4 +1,24 @@
 {
+    "expresslrs-configurator": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "expresslrs-configurator",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "ExpressLRS",
+            "repo": "ExpressLRS-Configurator",
+            "rev": "v1.7.6",
+            "sha256": "sha256-Ml5l33U67S+hMXEMNUItT+6sRGoUbiDhFBCtUPBgz0Y=",
+            "type": "github"
+        },
+        "version": "v1.7.6"
+    },
     "flake-registry": {
         "cargoLocks": null,
         "date": "2024-06-03",

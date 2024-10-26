@@ -102,6 +102,9 @@
 
     # rc
     betaflight-configurator
+    edgetx
+    ggroundcontrol2
+    expresslrs-configurator
   ];
 
   xdg.desktopEntries.discord = {

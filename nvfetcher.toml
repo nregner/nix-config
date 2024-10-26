@@ -1,4 +1,9 @@
 # https://github.com/berberman/nvfetcher?tab=readme-ov-file#keyfile
+
+[expresslrs-configurator]
+src.github = "ExpressLRS/ExpressLRS-Configurator"
+fetch.github = "ExpressLRS/ExpressLRS-Configurator"
+
 [flake-registry]
 src.git = "https://github.com/nixos/flake-registry"
 fetch.github = "nixos/flake-registry"
