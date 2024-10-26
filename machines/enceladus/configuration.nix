@@ -1,7 +1,6 @@
 {
   self,
   pkgs,
-  lib,
   ...
 }:
 {
@@ -14,8 +13,8 @@
 
   networking.hostName = "enceladus";
 
-  users.users = {
-    nregner.openssh.authorizedKeys.keys = lib.attrValues self.globals.ssh.allKeys;
+  users.users.nregner = {
+    openssh.authorizedKeys.keys = builtins.attrValues self.globals.ssh.userKeys.nregner;
   };
 
   security.pam.enableSudoTouchIdAuth = true;
