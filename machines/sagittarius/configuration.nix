@@ -4,6 +4,7 @@
     ../../modules/nixos/server
     ./hardware-configuration.nix
     ./services
+    ./users.nix
   ];
 
   networking.hostName = "sagittarius";

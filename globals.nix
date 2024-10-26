@@ -11,13 +11,17 @@
     };
 
     userKeys = {
-      "nregner@enceladus" = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJN0UxPvRjkqYdq8OFtzO/borc4lU4QNYSJiGhgx3MkI";
-      "nregner@iapetus" = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDk7uVEehfyhAZUvZbvH5Kw85MzLyYqVdTOMBXsmBeLx";
-      "nregner@sagittarius" = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIArpJ0oIqZ8amBOGjwPSoxAXMzgNeyu8fV9pfQmsGl+i";
-      "hydra@sagittarius" = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA8n6H94elpMmRgK3oTt5bAL3XMiDgJejFVUXsWgQ8XK";
+      nregner = {
+        "nregner@enceladus" = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJN0UxPvRjkqYdq8OFtzO/borc4lU4QNYSJiGhgx3MkI";
+        "nregner@iapetus" = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDk7uVEehfyhAZUvZbvH5Kw85MzLyYqVdTOMBXsmBeLx";
+        "nregner@sagittarius" = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIArpJ0oIqZ8amBOGjwPSoxAXMzgNeyu8fV9pfQmsGl+i";
+      };
+      hydra = {
+        "hydra@sagittarius" = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA8n6H94elpMmRgK3oTt5bAL3XMiDgJejFVUXsWgQ8XK";
+      };
     };
 
-    allKeys = hostKeys // userKeys;
+    allKeys = hostKeys // lib.mergeAttrsList (builtins.attrValues userKeys);
 
     knownHosts = lib.mapAttrs (name: value: { publicKey = value; }) hostKeys;
   };

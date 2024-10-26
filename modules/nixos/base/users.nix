@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  self,
+  config,
+  lib,
+  ...
+}:
 let
   ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
 in
@@ -18,9 +23,7 @@ in
         "libvirtd"
         "networkmanager"
       ];
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDk7uVEehfyhAZUvZbvH5Kw85MzLyYqVdTOMBXsmBeLx"
-    ];
+    openssh.authorizedKeys.keys = builtins.attrValues self.globals.ssh.userKeys.nregner;
   };
 
   security.sudo = {
@@ -38,4 +41,5 @@ in
       }
     ];
   };
+
 }
