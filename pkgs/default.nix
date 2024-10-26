@@ -12,6 +12,8 @@ in
 
   cura5 = pkgs.unstable.callPackage ./cura { };
 
+  expresslrs-configurator = pkgs.unstable.callPackage ./expresslrs-configurator.nix { };
+
   gitea-github-mirror = pkgs.unstable.callPackage ./gitea-github-mirror { };
 
   graphql-language-service-cli = node2nixPkgs.graphql-language-service-cli.override {
@@ -58,7 +60,7 @@ in
       mkdir -p $out/share/fonts/${pname}
       cp ${src}/*.otf $out/share/fonts/${pname}
 
-'';
+    '';
 
   vtsls = node2nixPkgs."@vtsls/language-server";
 
