@@ -1,6 +1,7 @@
 # https://github.com/ExpressLRS/ExpressLRS-Configurator/blob/master/.github/workflows/publish.yml
 {
-  electron_27,
+  electron,
+  # electron_27,
   fetchYarnDeps,
   nodejs,
   python3,
@@ -8,16 +9,26 @@
   stdenv,
   yarnBuildHook,
   yarnConfigHook,
+  runCommand,
 }:
 
 let
-  electron = electron_27;
+  # electron = electron_27;
 
   inherit (sources.expresslrs-configurator) pname version src;
+
+  # src = runCommand "expresslrs-configurator-src" { } ''
+  #   mkdir $out
+  #   cp -r ${sources.expresslrs-configurator.src}/* $out
+  #   rm $out/{yarn.lock,package.json}
+  #   cp ${./yarn.lock} $out/yarn.lock
+  #   cp ${./package.json} $out/package.json
+  # '';
+
   inherit (stdenv.hostPlatform) system;
   offlineCacheHash =
     {
-      x86_64-linux = "sha256-XgKao1CJ/6trBmyKNgRCmh0/wXLhBU4mFGU3+apyf3A=";
+      x86_64-linux = "sha256-UmJqI2UWf9s1HZVP4v50MgN+M06IW5/P7evAndDCfVU=";
       # aarch64-linux = "";
       # x86_64-darwin = "";
       aarch64-darwin = "";
@@ -27,7 +38,8 @@ let
     inherit pname version src;
 
     offlineCache = fetchYarnDeps {
-      yarnLock = "${finalAttrs.src}/yarn.lock";
+      yarnLock = ./yarn.lock;
+      # yarnLock = "${finalAttrs.src}/yarn.lock";
       hash = offlineCacheHash;
     };
 
@@ -43,6 +55,15 @@ let
       ELECTRON_SKIP_BINARY_DOWNLOAD = "1";
       # npm_config_build_from_source = "true";
     };
+
+    patchPhase = ''
+      cp ${./package.json} .
+      cp ${./yarn.lock} .
+    '';
+
+    buildPhase = ''
+      yarn --offline package
+    '';
 
     postBuild = ''
       # cp -r {electron.dist} electron-dist
