@@ -387,6 +387,7 @@ require("lazy").setup({
         typescriptreact = { "prettierd" },
         vue = { "prettierd" },
         yaml = { "prettierd" },
+        zsh = { "shfmt" },
 
         -- all filetypes
         ["*"] = { "trim_whitespace" },
