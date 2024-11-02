@@ -10,12 +10,9 @@
 {
   nixpkgs = import ../../../nixpkgs.nix { inherit outputs; };
 
-  imports = [
-    inputs.nix.nixosModules.default
-  ];
+  imports = [ inputs.nix.nixosModules.default ];
 
   nix = {
-    package = pkgs.unstable.nixVersions.latest;
     distributedBuilds = true;
     optimise.automatic = true;
 

@@ -1,4 +1,4 @@
-{ inputs, outputs, ... }:
+{ outputs, ... }:
 {
   imports = [
     ../base
@@ -8,7 +8,6 @@
     ./nvim
     ./sops.nix
     ./theme.nix
-    inputs.nix.homeModules.default
   ];
 
   # standalone install - reimport nixpkgs

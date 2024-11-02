@@ -8,7 +8,7 @@
   imports = [
     ../nixos/base/nix.nix
     ../nixos/desktop/nix.nix
-    inputs.nix.nixosModules.default
+    inputs.nix.darwinModules.default
   ];
 
   nix.gc = {
