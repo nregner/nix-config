@@ -1,4 +1,5 @@
 {
+  inputs,
   outputs,
   sources,
   config,
@@ -8,6 +9,10 @@
 }:
 {
   nixpkgs = import ../../../nixpkgs.nix { inherit outputs; };
+
+  imports = [
+    inputs.nix.nixosModules.default
+  ];
 
   nix = {
     package = pkgs.unstable.nixVersions.latest;

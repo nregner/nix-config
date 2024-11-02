@@ -1,8 +1,14 @@
-{ config, lib, ... }:
+{
+  inputs,
+  config,
+  lib,
+  ...
+}:
 {
   imports = [
     ../nixos/base/nix.nix
     ../nixos/desktop/nix.nix
+    inputs.nix.nixosModules.default
   ];
 
   nix.gc = {

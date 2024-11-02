@@ -1,6 +1,7 @@
 {
   inputs = {
     # Nix
+    nix.url = "https://flakehub.com/f/DeterminateSystems/nix/2.0";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixos-hardware.url = "github:nixos/nixos-hardware";
