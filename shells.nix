@@ -22,6 +22,7 @@
       git
     ];
     packages = [
+      pkgs.generate-sops-keys
       inputs'.home-manager.packages.home-manager
     ] ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [ inputs'.nix-darwin.packages.darwin-rebuild ];
   };

@@ -30,6 +30,8 @@ in
 
   harper-ls = pkgs.unstable.callPackage ./harper-ls { inherit sources; };
 
+  generate-sops-keys = pkgs.unstable.callPackage ./generate-sops-keys.nix { };
+
   joker = pkgs.unstable.buildGoModule (
     sources.joker
     // {
@@ -58,7 +60,7 @@ in
       mkdir -p $out/share/fonts/${pname}
       cp ${src}/*.otf $out/share/fonts/${pname}
 
-'';
+    '';
 
   vtsls = node2nixPkgs."@vtsls/language-server";
 
