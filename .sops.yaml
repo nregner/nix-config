@@ -45,3 +45,8 @@ creation_rules:
       - age:
           - *user_nregner
           - *host_iapetus
+  - path_regex: modules/home-manager/desktop/(.*/)?secrets.yaml
+    key_groups:
+      - age:
+          - *user_nregner
+          - *user_nregner_mac

@@ -93,7 +93,6 @@
     nix-output-monitor
     nixfmt-rfc-style
     nix-du # nix-du -s=500MB | xdot -
-    nvfetcher
     xdot
 
     # rust
@@ -103,6 +102,8 @@
     # rc
     betaflight-configurator
   ];
+
+  programs.nvfetcher.enable = true;
 
   xdg.desktopEntries.discord = {
     type = "Application";

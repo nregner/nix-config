@@ -5,6 +5,7 @@
     ./alacritty.nix
     ./cli
     ./jetbrains
+    ./nvfetcher.nix
     ./nvim
     ./sops.nix
     ./theme.nix

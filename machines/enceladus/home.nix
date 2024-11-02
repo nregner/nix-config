@@ -41,11 +41,12 @@
     # nix
     nix-output-monitor
     nixfmt-rfc-style
-    # nvfetcher
     # nix-du # nix-du -s=500MB | xdot -
     xdot
     nixos-rebuild
   ];
+
+  programs.nvfetcher.enable = true;
 
   programs.tmux-sessionizer = {
     # fix permission denied errors trying to read /Volumes/dev
