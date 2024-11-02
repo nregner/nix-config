@@ -13,7 +13,7 @@ let
     let
       stable = inputs.nixpkgs.legacyPackages.${final.system};
     in
-    {
+    rec {
       inherit (inputs.clojure-lsp.packages.${final.system}) clojure-lsp;
 
       # FIXME: hack to bypass "FATAL: Module ahci not found" error
@@ -27,6 +27,17 @@ let
         ];
         checkPhase = "";
       });
+
+      python3 = prev.python3.override {
+        packageOverrides = pyfinal: pyprev: {
+            # broken on darwin
+          pycurl = pyprev.pycurl.overrideAttrs (_: {
+            dontUsePytestCheck = true;
+          });
+        };
+      };
+
+      python3Packages = python3.pkgs;
 
       orca-slicer =
         let
