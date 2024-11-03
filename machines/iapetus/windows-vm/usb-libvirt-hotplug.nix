@@ -14,5 +14,6 @@ in
   # test: `journalctl -f`
   services.udev.extraRules = ''
     SUBSYSTEM=="usb", ENV{ID_MODEL}=="InterLinkDX", RUN+="${command}"
+    SUBSYSTEM=="usb", ENV{ID_MODEL}=="RM_TX16S_Joystick", RUN+="${command}"
   '';
 }
