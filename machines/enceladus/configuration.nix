@@ -25,7 +25,10 @@
     enable = true;
     package = pkgs.unstable.tailscale;
   };
-  # environment.systemPackages = [ config.services.tailscale.package ];
+
+  environment.systemPackages = [
+    pkgs.hydra-auto-upgrade
+  ];
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog

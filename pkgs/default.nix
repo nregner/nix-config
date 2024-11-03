@@ -30,6 +30,8 @@ in
 
   harper-ls = pkgs.unstable.callPackage ./harper-ls { inherit sources; };
 
+  hydra-auto-upgrade = pkgs.unstable.callPackage ./hydra-auto-upgrade { };
+
   generate-sops-keys = pkgs.unstable.callPackage ./generate-sops-keys.nix { };
 
   joker = pkgs.unstable.buildGoModule (
