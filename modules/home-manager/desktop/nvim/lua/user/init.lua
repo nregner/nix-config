@@ -222,6 +222,8 @@ require("lazy").setup({
 
       require("lspconfig.configs").vtsls = require("vtsls").lspconfig -- set default server config, optional but recommended
 
+      local util = require('lspconfig.util')
+
       local servers = {
         clangd = {
           cmd = { -- https://www.reddit.com/r/neovim/comments/12qbcua/multiple_different_client_offset_encodings/
@@ -229,7 +231,9 @@ require("lazy").setup({
             "--offset-encoding=utf-16",
           },
         },
-        clojure_lsp = {},
+        clojure_lsp = {
+          root_dir = util.root_pattern("project.clj", "deps.edn", "bb.edn", ".git")
+        },
         -- https://github.com/olrtg/emmet-language-server
         emmet_language_server = {
           filetypes = {
@@ -341,6 +345,7 @@ require("lazy").setup({
           on_attach = on_attach,
           settings = server_config,
           filetypes = server_config.filetypes,
+          root_dir = server_config.root_dir,
         })
       end
     end,
