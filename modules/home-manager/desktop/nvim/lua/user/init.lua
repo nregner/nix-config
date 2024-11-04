@@ -308,7 +308,12 @@ require("lazy").setup({
             },
           },
         },
-        terraformls = {},
+        terraformls = {
+          root_dir = util.root_pattern(".terraform", ".terraform.lock.hcl", ".git"),
+        },
+        tflint = {
+          root_dir = util.root_pattern(".terraform", ".terraform.lock.hcl", ".git", ".tflint.hcl"),
+        },
         vtsls = {
           settings = require("vtsls").lspconfig.settings,
         },

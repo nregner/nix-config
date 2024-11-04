@@ -26,6 +26,7 @@
       pkgs.harper-ls
       pkgs.vtsls
       terraform-ls
+      tflint
       vscode-langservers-extracted
       yaml-language-server
 
