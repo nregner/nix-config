@@ -154,6 +154,21 @@
         },
         "version": "latest"
     },
+    "orca-slicer-x86_64-linux": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "orca-slicer-x86_64-linux",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "name": null,
+            "sha256": "sha256-3uqA3PXTrrOE0l8ziRAtmQ07gBFB+1Zx3S6JhmOPrZ8=",
+            "type": "url",
+            "url": "https://github.com/SoftFever/OrcaSlicer/releases/download/v2.2.0/OrcaSlicer_Linux_v2.2.0.AppImage"
+        },
+        "version": "v2.2.0"
+    },
     "sf-mono-nerd-font": {
         "cargoLocks": null,
         "date": null,

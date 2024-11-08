@@ -85,7 +85,7 @@
     kubernetes-helm
 
     # 3d printer
-    orca-slicer
+    pkgs.orca-slicer
     super-slicer-beta
     pkgs.cura5
 

@@ -87,6 +87,14 @@
       finalImageTag = "latest";
     };
   };
+  orca-slicer-x86_64-linux = {
+    pname = "orca-slicer-x86_64-linux";
+    version = "v2.2.0";
+    src = fetchurl {
+      url = "https://github.com/SoftFever/OrcaSlicer/releases/download/v2.2.0/OrcaSlicer_Linux_v2.2.0.AppImage";
+      sha256 = "sha256-3uqA3PXTrrOE0l8ziRAtmQ07gBFB+1Zx3S6JhmOPrZ8=";
+    };
+  };
   sf-mono-nerd-font = {
     pname = "sf-mono-nerd-font";
     version = "v18.0d1e1.0";

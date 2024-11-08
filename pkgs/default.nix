@@ -48,6 +48,8 @@ in
 
   moonraker-develop = (pkgs.unstable.callPackage ./moonraker { inherit inputs; });
 
+  orca-slicer = (pkgs.unstable.callPackage ./orca-slicer { inherit sources; });
+
   inherit (node2nixPkgs) pin-github-action;
 
   route53-ddns = pkgs.unstable.callPackage ./route53-ddns { };
