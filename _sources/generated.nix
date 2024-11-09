@@ -31,24 +31,24 @@
   };
   harper-ls = {
     pname = "harper-ls";
-    version = "v0.11.0";
+    version = "v0.12.0";
     src = fetchFromGitHub {
       owner = "elijah-potter";
       repo = "harper";
-      rev = "v0.11.0";
+      rev = "v0.12.0";
       fetchSubmodules = false;
-      sha256 = "sha256-83Fg1oywYuvyc5aFeujH/g8Czi8r0wBUr1Bj6vwxNec=";
+      sha256 = "sha256-2Frt0vpCGnF3pZREY+ynPkdCLf2zsde49cEsNrqFUtY=";
     };
   };
   hyprland-workspaces = {
     pname = "hyprland-workspaces";
-    version = "v2.0.2";
+    version = "v2.0.3";
     src = fetchFromGitHub {
       owner = "FieldofClay";
       repo = "hyprland-workspaces";
-      rev = "v2.0.2";
+      rev = "v2.0.3";
       fetchSubmodules = false;
-      sha256 = "sha256-cTIh/UwtVVAWdJEcwOxKmYHBA6XXAaAQz/yW0Xs0y1k=";
+      sha256 = "sha256-P+EJoZJqSlpMX1bWOkQYlKR577nTTe1luWKK5GS9Pn4=";
     };
   };
   joker = {

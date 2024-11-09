@@ -28,17 +28,6 @@ let
         checkPhase = "";
       });
 
-      python3 = prev.python3.override {
-        packageOverrides = pyfinal: pyprev: {
-            # broken on darwin
-          pycurl = pyprev.pycurl.overrideAttrs (_: {
-            dontUsePytestCheck = true;
-          });
-        };
-      };
-
-      python3Packages = python3.pkgs;
-
       # disable xvfb-run tests to fix build on darwin
       xdot =
         (prev.xdot.overridePythonAttrs (oldAttrs: {
