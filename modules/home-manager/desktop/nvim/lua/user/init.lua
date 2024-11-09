@@ -209,20 +209,22 @@ require("lazy").setup({
           vim.lsp.buf.format()
         end, { desc = "Format current buffer with LSP" })
 
-        if
-          client.name ~= "clangd"
-          and client.name ~= "harper_ls"
-          and client.name ~= "emmet_language_server"
-          and client.name ~= "yamlls"
-          and client.name ~= "jsonls"
-        then
-          require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
-        end
+        -- FIXME: auto-starting bb repl before files are opened
+        -- FIXME: not reloading externally changed TS files
+        -- if
+        --   client.name ~= "clangd"
+        --   and client.name ~= "harper_ls"
+        --   and client.name ~= "emmet_language_server"
+        --   and client.name ~= "yamlls"
+        --   and client.name ~= "jsonls"
+        -- then
+        --   require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
+        -- end
       end
 
       require("lspconfig.configs").vtsls = require("vtsls").lspconfig -- set default server config, optional but recommended
 
-      local util = require('lspconfig.util')
+      local util = require("lspconfig.util")
 
       local servers = {
         clangd = {
@@ -232,7 +234,7 @@ require("lazy").setup({
           },
         },
         clojure_lsp = {
-          root_dir = util.root_pattern("project.clj", "deps.edn", "bb.edn", ".git")
+          root_dir = util.root_pattern("project.clj", "deps.edn", "bb.edn", ".git"),
         },
         -- https://github.com/olrtg/emmet-language-server
         emmet_language_server = {
