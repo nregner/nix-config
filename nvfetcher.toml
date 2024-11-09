@@ -8,13 +8,17 @@ fetch.url = "https://github.com/Ultimaker/Cura/releases/download/$ver/UltiMaker-
 src.git = "https://github.com/nixos/flake-registry"
 fetch.github = "nixos/flake-registry"
 
-[hyprland-workspaces]
-src.github = "FieldofClay/hyprland-workspaces"
-fetch.github = "FieldofClay/hyprland-workspaces"
+[hammerspoon]
+src.github = "Hammerspoon/hammerspoon"
+fetch.url = "https://github.com/Hammerspoon/hammerspoon/releases/download/$ver/Hammerspoon-$ver.zip"
 
 [harper-ls]
 src.github = "elijah-potter/harper"
 fetch.github = "elijah-potter/harper"
+
+[hyprland-workspaces]
+src.github = "FieldofClay/hyprland-workspaces"
+fetch.github = "FieldofClay/hyprland-workspaces"
 
 [joker]
 src.github_tag = "candid82/joker"

@@ -3,19 +3,12 @@
 {
   lib,
   stdenvNoCC,
-  fetchurl,
+  sources,
   unzip,
 }:
 
 stdenvNoCC.mkDerivation (finalAttrs: {
-  pname = "hammerspoon";
-  version = "1.0.0";
-
-  src = fetchurl {
-    name = "Hammerspoon-${finalAttrs.version}.zip";
-    url = "https://github.com/Hammerspoon/hammerspoon/releases/download/${finalAttrs.version}/Hammerspoon-${finalAttrs.version}.zip";
-    hash = "sha256-XbcCtV2kfcMG6PWUjZHvhb69MV3fopQoMioK9+1+an4=";
-  };
+  inherit (sources.hammerspoon) pname version src;
 
   dontPatch = true;
   dontConfigure = true;

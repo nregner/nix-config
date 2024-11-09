@@ -34,6 +34,21 @@
         },
         "version": "895a65f8d5acf848136ee8fe8e8f736f0d27df96"
     },
+    "hammerspoon": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "hammerspoon",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "name": null,
+            "sha256": "sha256-XbcCtV2kfcMG6PWUjZHvhb69MV3fopQoMioK9+1+an4=",
+            "type": "url",
+            "url": "https://github.com/Hammerspoon/hammerspoon/releases/download/1.0.0/Hammerspoon-1.0.0.zip"
+        },
+        "version": "1.0.0"
+    },
     "harper-ls": {
         "cargoLocks": null,
         "date": null,
@@ -145,11 +160,11 @@
             "arch": null,
             "finalImageName": null,
             "finalImageTag": null,
-            "imageDigest": "sha256:88e8e12542e9a2733c07f175682dc69e7360becb6137d604bb087a71ab33c5fe",
+            "imageDigest": "sha256:54a976880161c3c96de30b63cd0092d1f069aa8b23686669b726558ddf112724",
             "imageName": "hkotel/mealie",
             "imageTag": "latest",
             "os": null,
-            "sha256": "sha256-zRNYvxWwVxWTXZbgffeCtAtDed1lyD+dIjf5RtU23/I=",
+            "sha256": "sha256-LsnvoHhztvn/OrMLdyiLUwhkFn9OmVt2fWOUcK2QisY=",
             "tlsVerify": null
         },
         "version": "latest"

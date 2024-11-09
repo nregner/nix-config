@@ -22,7 +22,7 @@ in
     '';
   };
 
-  hammerspoon = pkgs.unstable.callPackage ./hammerspoon.nix { };
+  hammerspoon = pkgs.unstable.callPackage ./hammerspoon.nix { inherit sources; };
 
   insync = pkgs.unstable.callPackage ./insync.nix { };
 
