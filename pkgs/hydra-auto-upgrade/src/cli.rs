@@ -1,25 +1,9 @@
-use clap::{Args, Parser, Subcommand};
-use clap_complete::Shell;
+use clap::{Parser, Subcommand};
 use std::path::PathBuf;
 
 #[derive(Parser, Debug)]
-#[command(name = "hydra-auto-upgrade")]
-pub struct Opt {
-    // If provided, outputs the completion file for given shell
-    #[arg(long = "generate", value_enum)]
-    pub generator: Option<Shell>,
-    #[command(subcommand)]
-    pub command: Option<Commands>,
-}
-
-#[derive(Subcommand, Debug)]
-enum Commands {
-    #[command(visible_alias = "upgrade")]
-    AutoUpgrade(AutoUpgrade),
-}
-
-#[derive(Args, Debug)]
-pub struct AutoUpgrade {
+#[command()]
+pub struct Args {
     #[arg(long, default_value = "https://hydra.nregner.net")]
     pub instance: String,
     #[arg(long, default_value = "nix-config")]
