@@ -54,6 +54,7 @@ impl Profile {
     pub fn path(&self) -> PathBuf {
         match self {
             Profile::Home { .. } => {
+                #[allow(deprecated)] // never going to run on Windows
                 let home = std::env::home_dir().expect("Failed to locate user $HOME");
                 home.join(".local/state/nix/profiles/home-manager")
             }

@@ -1,5 +1,6 @@
 # https://github.com/NixOS/nixpkgs/blob/master/doc/languages-frameworks/rust.section.md
 {
+  installShellFiles,
   lib,
   mkShell,
   nvd,
@@ -15,6 +16,10 @@ let
     # src = lib.sources.sourceFilesBySuffices (lib.cleanSource ./.) [ ".nix" ];
     src = lib.cleanSource ./.;
 
+    nativeBuildInputs = [ installShellFiles ];
+
+    runtimeInputs = [ nvd ];
+
     postPatch = ''
       ln -sf ${./Cargo.toml} Cargo.toml
       ln -sf ${./Cargo.lock} Cargo.lock
@@ -22,11 +27,20 @@ let
 
     cargoLock.lockFile = ./Cargo.lock;
 
-    runtimeInputs = [ nvd ];
+    cargoBuildFlags = [
+      "-Z"
+      "unstable-options"
+      "--artifact-dir"
+      "completions"
+    ];
 
     postConfigure = ''
       substituteInPlace src/main.rs \
         --replace-fail '"nvd"' '"${lib.getExe nvd}"'
+    '';
+
+    postInstall = ''
+      installShellCompletion target/completions/*
     '';
 
     passthru.devShell = mkShell {

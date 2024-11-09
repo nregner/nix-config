@@ -1,0 +1,29 @@
+{
+  "NSServicesStatus": {
+    "com.apple.Terminal - Search man Page Index in Terminal - searchManPages": {
+      "enabled_services_menu": "0",
+      "presentation_modes": {
+        "ContextMenu": "0",
+        "ServicesMenu": "0"
+      },
+      "enabled_context_menu": "0"
+    }
+  },
+  "FinderActive": {
+    "APPEXTENSION-com.apple.finder.CreatePDFQuickAction": "1",
+    "is.workflow.actions.image.removebackground": "1",
+    "APPEXTENSION-com.apple.finder.MarkupQuickAction": "1",
+    "APPEXTENSION-com.apple.finder.RotateQuickAction": "1",
+    "APPEXTENSION-com.apple.finder.TrimQuickAction": "1",
+    "is.workflow.actions.image.convert.finder": "1"
+  },
+  "FinderOrdering": {
+    "APPEXTENSION-com.apple.finder.CreatePDFQuickAction": "3",
+    "is.workflow.actions.image.removebackground": "5",
+    "APPEXTENSION-com.apple.finder.MarkupQuickAction": "1",
+    "APPEXTENSION-com.apple.finder.RotateQuickAction": "0",
+    "APPEXTENSION-com.apple.finder.TrimQuickAction": "2",
+    "is.workflow.actions.image.convert.finder": "4"
+  },
+  "ServicesShortcutsPresent": "0"
+}
