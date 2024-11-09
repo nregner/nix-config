@@ -1,16 +1,16 @@
 use serde::Deserialize;
 use std::path::{Path, PathBuf};
 
-use crate::{cli::Args, Profile, Result};
+use crate::{cli::AutoUpgrade, Profile, Result};
 
 pub fn get_latest_build(
-    Args {
+    AutoUpgrade {
         instance,
         project,
         jobset,
         profile,
         ..
-    }: &Args,
+    }: &AutoUpgrade,
 ) -> Result<Build> {
     let attr = match profile.attr() {
         Some(attr) => attr.to_string(),

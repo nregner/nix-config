@@ -2,24 +2,34 @@ mod cli;
 mod hydra;
 
 use clap::Parser;
-use cli::Profile;
+use clap::{Args, Command, CommandFactory, Parser, Subcommand, ValueHint};
+use clap_complete::{generate, Generator};
+use cli::{Opt, Profile};
 use core::error::Error;
 use hydra::Build;
 use std::{
     fs,
     io::{self, BufRead},
     path::Path,
-    process::Command,
 };
 
 type Result<T> = std::result::Result<T, Box<dyn Error>>;
 
 fn main() -> Result<()> {
-    let args = cli::Args::parse();
-    let profile = &args.profile;
+    let opt = cli::Opt::parse();
+
+    if let Some(generator) = opt.generator {
+        let mut cmd = Opt::command();
+        eprintln!("Generating completion file for {generator:?}...");
+        print_completions(generator, &mut cmd);
+    }
+
+    let command = opt.command.expect("no command provided");
+
+    let profile = &opt.profile;
     let profile_path = profile.path();
 
-    let build = hydra::get_latest_build(&args)?;
+    let build = hydra::get_latest_build(&opt)?;
 
     let changed = if fs::canonicalize(profile.path())? == build.out_path() {
         if !profile.force() {
@@ -45,6 +55,10 @@ fn main() -> Result<()> {
     set_profile(&profile_path, &build)?;
 
     Ok(())
+}
+
+pub fn print_completions<G: Generator>(gen: G, cmd: &mut Command) {
+    generate(gen, cmd, cmd.get_name().to_string(), &mut io::stdout());
 }
 
 fn copy(build: &Build) -> io::Result<()> {

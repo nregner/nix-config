@@ -6,6 +6,7 @@ edition = "2021"
 [dependencies]
 atty = "0.2.14"
 clap = { version = "4.5.4", features = ["derive"] }
+clap_complete = "4.5.37"
 serde = { version = "1.0.214", features = ["derive"] }
 ureq = { version = "2.10.1", features = ["json"] }
 whoami = { version = "1.5.2", default-features = false }
