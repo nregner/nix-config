@@ -5,8 +5,8 @@
   pkgs,
   ...
 }:
-with lib;
 let
+  inherit (lib) mkOption types mkIf;
   cfg = config.services.qbittorrent;
   configDir = "${cfg.dataDir}/.config";
   openFilesLimit = 4096;
@@ -23,6 +23,11 @@ in
       description = ''
         Run qBittorrent headlessly as systemwide daemon
       '';
+    };
+
+    package = mkOption {
+      type = types.package;
+      default = pkgs.qbittorrent;
     };
 
     dataDir = mkOption {
@@ -79,12 +84,7 @@ in
   };
 
   config = mkIf cfg.enable {
-
-    environment.systemPackages = [ pkgs.qbittorrent ];
-
-    nixpkgs.overlays = [
-      (final: prev: { qbittorrent = prev.qbittorrent.override { guiSupport = false; }; })
-    ];
+    environment.systemPackages = [ cfg.package ];
 
     networking.firewall = mkIf cfg.openFirewall {
       allowedTCPPorts = [ cfg.port ];
@@ -100,10 +100,10 @@ in
       after = [ "network.target" ];
       description = "qBittorrent Daemon";
       wantedBy = [ "multi-user.target" ];
-      path = [ pkgs.qbittorrent ];
+      path = [ cfg.package ];
       serviceConfig = {
         ExecStart = ''
-          ${pkgs.qbittorrent}/bin/qbittorrent-nox \
+          qbittorrent-nox \
             --profile=${configDir} \
             --webui-port=${toString cfg.port}
         '';
