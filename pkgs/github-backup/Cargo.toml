@@ -1,0 +1,20 @@
+[package]
+name = "hydra-auto-upgrade"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+chrono = { version = "0.4", features = ["serde"] }
+reqwest = { version = "0.12.4", features = ["json", "stream"] }
+base64 = "0.22"
+rand = "0.8"
+serde = { version = "1.0", features = ["derive"] }
+uuid = { version = "1.11", features = ["serde", "v4"] }
+progenitor-client = "0.8.0"
+
+[build-dependencies]
+prettyplease = "0.2.24"
+progenitor = "0.8.0"
+# progenitor =
+serde_json = "1.0"
+syn = "2.0"

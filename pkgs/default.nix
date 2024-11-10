@@ -14,6 +14,8 @@ in
 
   gitea-github-mirror = pkgs.unstable.callPackage ./gitea-github-mirror { };
 
+  github-backup = pkgs.unstable.callPackage ./github-backup { };
+
   graphql-language-service-cli = node2nixPkgs.graphql-language-service-cli.override {
     nativeBuildInputs = [ pkgs.unstable.makeWrapper ];
     postInstall = ''
