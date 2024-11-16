@@ -24,6 +24,7 @@
       pkgs."@olrtg/emmet-language-server"
       pkgs.graphql-language-service-cli
       pkgs.harper-ls
+      pkgs.typescript
       pkgs.vtsls
       terraform-ls
       tflint

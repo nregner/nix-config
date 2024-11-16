@@ -28,6 +28,9 @@ let
         checkPhase = "";
       });
 
+      # FIXME: https://github.com/NixOS/nixpkgs/issues/357979
+      moonraker = warnIfOutdated prev.moonraker (final.callPackage ./moonraker { });
+
       # disable xvfb-run tests to fix build on darwin
       xdot =
         (prev.xdot.overridePythonAttrs (oldAttrs: {
@@ -49,7 +52,6 @@ in
   modifications =
     final: prev:
     {
-      #
     }
     // sharedModifications final prev;
 

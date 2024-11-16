@@ -2,7 +2,7 @@
 {
   services.moonraker = {
     enable = true;
-    package = pkgs.moonraker-develop;
+    package = pkgs.unstable.moonraker;
     allowSystemControl = true;
     settings = {
       authorization = {

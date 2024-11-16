@@ -29,7 +29,7 @@
     };
     mac-app-util = {
       url = "github:hraban/mac-app-util";
-      # inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     nix-index-database = {
       url = "github:Mic92/nix-index-database";
@@ -42,7 +42,6 @@
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
-      inputs.nixpkgs-stable.follows = "nixpkgs";
     };
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
@@ -64,10 +63,6 @@
     orangepi-nix = {
       url = "github:nathanregner/orangepi-nix";
       # inputs.nixpkgs.follows = "nixpkgs";
-    };
-    preprocess-cancellation = {
-      url = "github:nathanregner/preprocess_cancellation";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
     # misc

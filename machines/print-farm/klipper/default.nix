@@ -64,7 +64,7 @@ in
     # moonraker
     services.moonraker = {
       enable = true;
-      package = pkgs.moonraker-develop;
+      package = pkgs.unstable.moonraker;
       # package = pkgs.writeShellScriptBin "moonraker" ''
       #   ${pkgs.unstable.moonraker}/bin/moonraker -v $@
       # '';
