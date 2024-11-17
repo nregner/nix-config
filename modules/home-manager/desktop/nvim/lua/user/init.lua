@@ -296,6 +296,7 @@ require("lazy").setup({
         },
         nil_ls = {},
         nushell = {},
+        pyright = {},
         rust_analyzer = {
           -- https://rust-analyzer.github.io/manual.html#configuration
           ["rust-analyzer"] = {
