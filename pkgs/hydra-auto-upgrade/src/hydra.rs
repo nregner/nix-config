@@ -9,20 +9,21 @@ pub fn get_latest_build(
         project,
         jobset,
         profile,
+        job,
         ..
     }: &Args,
 ) -> Result<Build> {
-    let attr = match profile.attr() {
-        Some(attr) => attr.to_string(),
+    let job = match job {
+        Some(job) => job.to_string(),
         None => {
             let hostname = whoami::fallible::hostname()?;
-            match profile {
-                Profile::Home { .. } => format!("{}@{}", whoami::username(), hostname),
-                Profile::System { .. } => hostname,
-            }
+            let profile = match profile {
+                Profile::Home => "home",
+                Profile::System => "system",
+            };
+            format!("deploy.{hostname}.{profile}")
         }
     };
-    let job = format!("{}.{attr}", profile.top_attr());
 
     let url = format!("{instance}/job/{project}/{jobset}/{job}/latest");
     let response: Build = ureq::get(&url)

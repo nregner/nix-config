@@ -7,42 +7,34 @@ use core::error::Error;
 use hydra::Build;
 use std::{
     fs,
-    io::{self, BufRead},
+    io::{self},
     path::Path,
     process::Command,
 };
+use tempdir::TempDir;
 
 type Result<T> = std::result::Result<T, Box<dyn Error>>;
 
 fn main() -> Result<()> {
     let args = cli::Args::parse();
-    let profile = &args.profile;
+    let profile = args.profile;
     let profile_path = profile.path();
 
     let build = hydra::get_latest_build(&args)?;
 
-    let changed = if fs::canonicalize(profile.path())? == build.out_path() {
-        if !profile.force() {
+    if fs::canonicalize(profile.path())? == build.out_path() {
+        if args.force {
             eprintln!("Profile unchanged, skipping activation");
             return Ok(());
         }
         eprintln!("Re-running activation script");
-        false
     } else {
         copy(&build)?;
         diff(&profile_path, &build)?;
         eprintln!();
-        true
     };
 
-    if changed && atty::is(atty::Stream::Stdout) {
-        eprintln!("Press enter to continue");
-        let mut stdin = std::io::stdin().lock();
-        stdin.read_line(&mut String::new())?;
-    }
-
-    switch(&profile, &build)?;
-    set_profile(&profile_path, &build)?;
+    activate(profile, &build, &args.activate_args)?;
 
     Ok(())
 }
@@ -63,38 +55,40 @@ fn diff(profile_path: &Path, build: &Build) -> io::Result<()> {
     exec(&mut command)
 }
 
-fn switch(profile: &Profile, build: &Build) -> io::Result<()> {
-    let command = match profile {
-        Profile::Home { .. } => "activate",
-        #[cfg(target_os = "linux")]
-        Profile::System { .. } => "bin/switch-to-configuration",
-        #[cfg(target_os = "macos")]
-        Profile::System { .. } => "activate",
+fn activate(profile: Profile, build: &Build, args: &[String]) -> io::Result<()> {
+    let tempdir = TempDir::new("activate")?;
+
+    let activate_rs = build.out_path().join("activate-rs");
+    let mut command = if atty::is(atty::Stream::Stdout) && profile == Profile::System {
+        let mut command = Command::new("sudo");
+        command.arg(activate_rs);
+        command
+    } else {
+        Command::new(activate_rs)
+    };
+    command.arg("activate");
+    command.arg(build.out_path());
+    command.arg("--temp-path");
+    command.arg(tempdir.path());
+
+    command.args(["--confirm-timeout", "60"]);
+
+    match profile {
+        Profile::Home { .. } => {
+            command.args(["--profile-user", &whoami::username()]);
+            command.args(["--profile-name", "home-manager"]);
+        }
+        Profile::System { .. } => {
+            command.args(["--profile-path", "/run/current-system/"]);
+        }
     };
 
-    let mut command = Command::new(build.out_path().join(command));
+    command.args(args);
 
-    #[cfg(target_os = "linux")]
-    if let Profile::System {
-        operation, args, ..
-    } = profile
-    {
-        command.arg(operation);
-        command.args(args);
-    }
+    exec(&mut command)?;
 
-    exec(&mut command)
-}
-
-fn set_profile(profile_path: &Path, build: &Build) -> io::Result<()> {
-    let mut command = Command::new("nix");
-    command
-        .arg("build")
-        .arg("--no-link")
-        .arg("--profile")
-        .arg(profile_path)
-        .arg(build.out_path());
-    exec(&mut command)
+    drop(tempdir);
+    Ok(())
 }
 
 fn exec(command: &mut Command) -> io::Result<()> {

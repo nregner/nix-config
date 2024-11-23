@@ -18,14 +18,6 @@ in
         default = "04:40";
         example = "daily";
       };
-
-      operation = lib.mkOption {
-        type = lib.types.enum [
-          "switch"
-          "boot"
-        ];
-        default = "boot";
-      };
     };
   };
 
@@ -51,7 +43,7 @@ in
         config.nix.package
       ];
       script = ''
-        hydra-auto-upgrade system ${cfg.operation}
+        hydra-auto-upgrade system boot
       '';
 
       startAt = cfg.dates;

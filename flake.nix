@@ -18,6 +18,10 @@
     };
 
     # Tools
+    deploy-rs = {
+      url = "github:serokell/deploy-rs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -82,6 +86,7 @@
       nix-darwin,
       home-manager,
       home-manager-unstable,
+      deploy-rs,
       ...
     }@inputs:
     let
@@ -272,6 +277,46 @@
             }
           ) nixosConfigurations;
 
+          deploy.nodes =
+            let
+              homeProfiles = (
+                activate: hostName:
+                let
+                  homeConfiguration = homeConfigurations."nregner@${hostName}" or null;
+                in
+                if homeConfiguration != null then
+                  {
+                    home = {
+                      user = "nregner";
+                      path = activate homeConfiguration;
+                    };
+                  }
+                else
+                  { }
+              );
+              systemProfiles =
+                type:
+                lib.mapAttrs (
+                  name:
+                  { config, ... }@systemConfiguration:
+                  {
+                    hostname = config.networking.hostName;
+                    profiles =
+                      let
+                        activate = deploy-rs.lib.${config.nixpkgs.hostPlatform.system}.activate;
+                      in
+                      {
+                        system = {
+                          user = "root";
+                          path = activate.${type} systemConfiguration;
+                        };
+                      }
+                      // (homeProfiles activate.home-manager config.networking.hostName);
+                  }
+                );
+            in
+            systemProfiles "nixos" nixosConfigurations // systemProfiles "darwin" darwinConfigurations;
+
           hydraJobs = {
             # TODO: is this even needed or are inputs already cached?
             flakeInputs =
@@ -292,17 +337,9 @@
               in
               pkgs.linkFarm "flake-inputs" (lib.unique (recurse "" inputs));
 
-            nixosConfigurations = (
-              lib.mapAttrs (name: { config, ... }: config.system.build.toplevel) nixosConfigurations
-            );
-
-            darwinConfigurations = (
-              lib.mapAttrs (name: { config, ... }: config.system.build.toplevel) darwinConfigurations
-            );
-
-            homeConfigurations = (
-              lib.mapAttrs (name: { activation-script, ... }: activation-script) homeConfigurations
-            );
+            deploy = lib.mapAttrs (
+              name: { profiles, ... }: builtins.mapAttrs (_: { path, ... }: path) profiles
+            ) deploy.nodes;
 
             devShells = lib.mapAttrs (system: { _aggregate, ... }: _aggregate) (
               lib.getAttrs [
