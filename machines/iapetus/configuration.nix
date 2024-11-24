@@ -6,9 +6,7 @@
 }:
 {
   imports = [
-    # inputs.hyprland.nixosModules.default
     ../../modules/nixos/desktop
-    ./disko.nix
     ./hardware-configuration.nix
     ./windows-vm
     ./zsa.nix
