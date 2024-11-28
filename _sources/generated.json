@@ -160,11 +160,11 @@
             "arch": null,
             "finalImageName": null,
             "finalImageTag": null,
-            "imageDigest": "sha256:54a976880161c3c96de30b63cd0092d1f069aa8b23686669b726558ddf112724",
+            "imageDigest": "sha256:88e8e12542e9a2733c07f175682dc69e7360becb6137d604bb087a71ab33c5fe",
             "imageName": "hkotel/mealie",
             "imageTag": "latest",
             "os": null,
-            "sha256": "sha256-LsnvoHhztvn/OrMLdyiLUwhkFn9OmVt2fWOUcK2QisY=",
+            "sha256": "sha256-zRNYvxWwVxWTXZbgffeCtAtDed1lyD+dIjf5RtU23/I=",
             "tlsVerify": null
         },
         "version": "latest"
@@ -183,6 +183,21 @@
             "url": "https://github.com/SoftFever/OrcaSlicer/releases/download/v2.2.0/OrcaSlicer_Linux_v2.2.0.AppImage"
         },
         "version": "v2.2.0"
+    },
+    "scroll-reverser": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "scroll-reverser",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "name": null,
+            "sha256": "sha256-CWHbtvjvTl7dQyvw3W583UIZ2LrIs7qj9XavmkK79YU=",
+            "type": "url",
+            "url": "https://github.com/pilotmoon/Scroll-Reverser/releases/download/v1.9/ScrollReverser-1.9.zip"
+        },
+        "version": "1.9"
     },
     "sf-mono-nerd-font": {
         "cargoLocks": null,

@@ -52,6 +52,8 @@ in
 
   route53-ddns = pkgs.unstable.callPackage ./route53-ddns { };
 
+  scroll-reverser = pkgs.unstable.callPackage ./scroll-reverser { inherit sources; };
+
   sf-mono-nerd-font =
     let
       inherit (sources.sf-mono-nerd-font) pname version src;

@@ -42,6 +42,13 @@ fetch.docker = "hkotel/mealie"
 src.github = "SoftFever/OrcaSlicer"
 fetch.url = "https://github.com/SoftFever/OrcaSlicer/releases/download/$ver/OrcaSlicer_Linux_$ver.AppImage"
 
+[scroll-reverser]
+src.github = "pilotmoon/Scroll-Reverser"
+src.prefix = "v"
+fetch.url = "https://github.com/pilotmoon/Scroll-Reverser/releases/download/v$ver/ScrollReverser-$ver.zip"
+# fetch.github = "pilotmoon/Scroll-Reverser"
+# git.fetchSubmodules = true
+
 [sf-mono-nerd-font]
 src.github = "epk/SF-Mono-Nerd-Font"
 fetch.github = "epk/SF-Mono-Nerd-Font"
