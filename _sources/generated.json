@@ -184,6 +184,26 @@
         },
         "version": "v2.2.0"
     },
+    "packwiz": {
+        "cargoLocks": null,
+        "date": "2024-10-14",
+        "extract": null,
+        "name": "packwiz",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "packwiz",
+            "repo": "packwiz",
+            "rev": "0626c00149a8d9a5e9f76e5640e7b8b95c064350",
+            "sha256": "sha256-eAGfLUcyjDR2oJjLK3+DiuICTqoOcIwO5wL350w6vGw=",
+            "type": "github"
+        },
+        "version": "0626c00149a8d9a5e9f76e5640e7b8b95c064350"
+    },
     "scroll-reverser": {
         "cargoLocks": null,
         "date": null,

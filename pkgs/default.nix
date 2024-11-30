@@ -64,6 +64,8 @@ in
 
     '';
 
+  packwiz = pkgs.unstable.callPackage ./packwiz { inherit sources; };
+
   vtsls = node2nixPkgs."@vtsls/language-server";
 
   writeBabashkaApplication = pkgs.unstable.callPackage ./write-babashka-application.nix { };

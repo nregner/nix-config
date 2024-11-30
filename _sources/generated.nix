@@ -103,6 +103,18 @@
       sha256 = "sha256-3uqA3PXTrrOE0l8ziRAtmQ07gBFB+1Zx3S6JhmOPrZ8=";
     };
   };
+  packwiz = {
+    pname = "packwiz";
+    version = "0626c00149a8d9a5e9f76e5640e7b8b95c064350";
+    src = fetchFromGitHub {
+      owner = "packwiz";
+      repo = "packwiz";
+      rev = "0626c00149a8d9a5e9f76e5640e7b8b95c064350";
+      fetchSubmodules = false;
+      sha256 = "sha256-eAGfLUcyjDR2oJjLK3+DiuICTqoOcIwO5wL350w6vGw=";
+    };
+    date = "2024-10-14";
+  };
   scroll-reverser = {
     pname = "scroll-reverser";
     version = "1.9";
