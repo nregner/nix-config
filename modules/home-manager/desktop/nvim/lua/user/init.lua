@@ -1035,6 +1035,22 @@ require("lazy").setup({
   },
 
   {
+    "mtrajano/tssorter.nvim",
+    opts = {
+      sortables = {
+        nix = {
+          list = {
+            node = "list_expression",
+          },
+          attrset = {
+            node = "attrset_expression",
+          },
+        },
+      },
+    },
+  },
+
+  {
     "nvim-tree/nvim-tree.lua",
     lazy = false,
     dependencies = {
