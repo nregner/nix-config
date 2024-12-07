@@ -72,7 +72,6 @@
           vms = [
             {
               hostName = "enceladus-linux-vm";
-              sshUser = "nregner";
               systems = [ "aarch64-linux" ];
               supportedFeatures = [
                 "nixos-test"

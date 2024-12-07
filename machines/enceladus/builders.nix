@@ -81,6 +81,14 @@
     ) { modules = [ ]; };
   };
 
+  users = {
+    users.builder = {
+      uid = 502;
+      openssh.authorizedKeys.keys = lib.attrValues self.globals.ssh.allKeys;
+    };
+    knownUsers = [ "builder" ];
+  };
+
   environment.systemPackages = with pkgs.unstable; [
     util-linux
     coreutils-full

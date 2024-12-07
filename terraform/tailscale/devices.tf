@@ -16,15 +16,6 @@ resource "tailscale_device_tags" "sagittarius" {
   tags      = ["tag:hydra", "tag:server"]
 }
 
-data "tailscale_device" "enceladus_linux_vm" {
-  hostname = "enceladus-linux-vm"
-}
-
-resource "tailscale_device_tags" "enceladus_linux_vm" {
-  device_id = data.tailscale_device.enceladus_linux_vm.id
-  tags      = ["tag:builder"]
-}
-
 data "tailscale_device" "enceladus" {
   hostname = "enceladus"
 }
