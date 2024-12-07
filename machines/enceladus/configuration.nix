@@ -1,6 +1,7 @@
 {
   self,
   pkgs,
+  lib,
   ...
 }:
 {
@@ -15,7 +16,7 @@
 
   users.users.nregner = {
     # TODO: separate build user
-    openssh.authorizedKeys.keys = self.globals.ssh.allKeys;
+    openssh.authorizedKeys.keys = lib.attrValues self.globals.ssh.allKeys;
   };
 
   security.pam.enableSudoTouchIdAuth = true;
