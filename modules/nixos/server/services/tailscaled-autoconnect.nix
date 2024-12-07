@@ -6,14 +6,15 @@
 }:
 let
   cfg = config.services.tailscaled-autoconnect;
+  authKeyFile = cfg.authKeyFile or config.sops.secrets.tailscale-auth-key.path;
 in
 {
   # source: https://tailscale.com/blog/nixos-minecraft/
   options.services.tailscaled-autoconnect = {
     enable = lib.mkEnableOption (lib.mdDoc "Auto-connect to Tailscale");
-    secret-key = lib.mkOption {
-      type = lib.types.str;
-      default = "tailscale/server_key";
+    authKeyFile = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      default = null;
       description = lib.mkDefault "Path to the secret containing the Tailscale server key";
     };
   };
@@ -21,15 +22,11 @@ in
   config = lib.mkIf cfg.enable {
     sops.secrets.tailscale-auth-key = {
       sopsFile = ./secrets.yaml;
-      key = cfg.secret-key;
+      key = "tailscale/server_key";
     };
 
     systemd.services.tailscaled-autoconnect = {
       description = "Auto-connect to Tailscale";
-
-      wantedBy = [ "multi-user.target" ];
-      requires = [ "network-online.target" ];
-      after = [ "tailscale.service" ];
 
       serviceConfig = {
         Type = "oneshot";
@@ -59,7 +56,7 @@ in
               fi
 
               echo "Authenticating... ($health)"
-              tailscale up --reset --ssh --auth-key="file:${config.sops.secrets.tailscale-auth-key.path}"
+              tailscale up --reset --ssh --auth-key="file:${authKeyFile}"
             '';
           };
         in

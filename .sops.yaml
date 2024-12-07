@@ -9,6 +9,7 @@ keys:
   - &host_voron age1vzn4vh7xe7tqx0czgayafr208pjwegmus0l3gxn4v5yeemwch58sahxpee
   - &host_sagittarius age1yfflu4pxlt32sy4xaa04m5gs7kyrccyj9y5hh0qvndmxtrxrtpns7mf682
   - &host_callisto age1h7223qs8fq2v8nta352jqd7kjffl0sxmrpvmcls0q3gm4j5m8d6q7ynsrr
+  - &host_enceladus age19hzwnm5dfl6m9vv2sq9z9r0ykn8djvjqaauuruyhf4q4vuxpev2sx4rcsd
 creation_rules:
   - path_regex: terraform/.*/secrets.yaml
     key_groups:
@@ -25,6 +26,7 @@ creation_rules:
           - *host_voron
           - *host_print_farm
           - *host_sagittarius
+          - *host_enceladus
   - path_regex: machines/voron/secrets.yaml
     key_groups:
       - age:

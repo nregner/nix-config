@@ -3,6 +3,7 @@
   inputs,
   outputs,
   sources,
+  config,
   pkgs,
   lib,
   ...
@@ -40,9 +41,16 @@
     }
   ];
 
+  sops.secrets.tailscale-auth-key = {
+    sopsFile = ../../modules/nixos/server/services/secrets.yaml;
+    key = "tailscale/server_key";
+    neededForUsers = true;
+  };
+
   nix.linux-builder = {
     enable = true;
     maxJobs = 8;
+    ephemeral = true;
     # comment out for inital setup (pulls vm image via cache.nixos.org)
     # remove /var/lib/darwin-builder/*.img to force a reset
     package = lib.makeOverridable (
@@ -63,6 +71,11 @@
                   };
                   cores = 8; # TODO: Figure out why this can't be > 8
                   diskSize = lib.mkForce (64 * 1024);
+
+                  sharedDirectories.secrets = {
+                    source = "/run/secrets-for-users";
+                    target = "/run/secrets";
+                  };
                 };
               }
             ];
