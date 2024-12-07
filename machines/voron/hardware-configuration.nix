@@ -9,9 +9,11 @@
   imports = [ inputs.nixos-hardware.nixosModules.common-pc-ssd ];
 
   boot = {
-    kernelPackages = pkgs.linuxPackagesFor (
-      pkgs.callPackage ./kernel { source = sources.linux-rockchip; }
-    );
+    # kernelPackages = pkgs.linuxPackagesFor (
+    #   pkgs.callPackage ./kernel { source = sources.linux-rockchip; }
+    # );
+
+    kernelPackages = pkgs.unstable.linuxPackages_6_1;
 
     supportedFilesystems = lib.mkForce [
       "vfat"
@@ -33,6 +35,7 @@
   hardware = {
     enableRedistributableFirmware = true;
     deviceTree = {
+      dtbSource = pkgs.callPackage ./device-tree.nix { source = sources.linux-rockchip; };
       name = "rockchip/rk3588s-orangepi-5.dtb";
       overlays = [
         {
