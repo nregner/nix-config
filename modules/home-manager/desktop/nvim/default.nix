@@ -37,6 +37,7 @@
       prettierd
       shfmt
       stylua
+      taplo
 
       # test runners
       cargo-nextest # for rouge8/neotest-rust
