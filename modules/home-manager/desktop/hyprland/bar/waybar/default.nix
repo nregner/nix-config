@@ -35,6 +35,7 @@
         modules-left = [ "hyprland/workspaces" ];
         modules-center = [ "hyprland/window" ];
         modules-right = [
+          "tray"
           "custom/weather"
           "custom/storage"
           "backlight"
@@ -158,6 +159,10 @@
           separate-outputs = true;
         };
         "hyprland/workspaces" = { };
+
+        tray = {
+          show-passive-items = true;
+        };
       };
   };
 
