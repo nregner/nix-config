@@ -311,7 +311,12 @@ require("lazy").setup({
         rust_analyzer = {
           -- https://rust-analyzer.github.io/manual.html#configuration
           ["rust-analyzer"] = {
-            cargo = { allFeatures = true },
+            cargo = {
+              allFeatures = true,
+            },
+            check = {
+              command = "clippy",
+            },
             completion = {
               autoimport = { enable = true },
             },
