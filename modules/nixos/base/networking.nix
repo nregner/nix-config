@@ -20,7 +20,5 @@
       User builder
       HostName localhost
       Port 31022
-      IdentityFile /etc/ssh/ssh_host_ed25519_key
-      IdentityFile ~/.ssh/id_ed25519
   '';
 }
