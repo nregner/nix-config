@@ -44,12 +44,8 @@
   # show config changes on switch
   # https://discourse.nixos.org/t/nvd-simple-nix-nixos-version-diff-tool/12397/33
   system.activationScripts.report-changes = ''
-    PATH=$PATH:${
-      lib.makeBinPath [
-        pkgs.nvd
-        config.nix.package
-      ]
-    }
-    nvd diff $(ls -dv /nix/var/nix/profiles/system-*-link | tail -2)
+    if [[ -e /run/current-system ]]; then
+      ${pkgs.nix}/bin/nix store diff-closures /run/current-system "$systemConfig"
+    fi
   '';
 }
