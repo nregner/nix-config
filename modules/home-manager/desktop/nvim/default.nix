@@ -39,14 +39,16 @@
       stylua
       taplo
 
-      # test runners
-      cargo-nextest # for rouge8/neotest-rust
-
       # misc
       gnumake
       clang # for compiling tree-sitter parsers
     ];
   };
+
+  home.packages = with pkgs.unstable; [
+    # test runners
+    cargo-nextest # for rouge8/neotest-rust
+  ];
 
   xdg.configFile = {
     "nvim/lua".source = config.lib.file.mkFlakeSymlink ./lua;
