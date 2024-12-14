@@ -407,6 +407,7 @@ require("lazy").setup({
         rust = { "rustfmt" },
         sh = { "shfmt" },
         terraform = { "terraform_fmt" },
+        toml = { "taplo" },
         typescript = { "prettierd" },
         typescriptreact = { "prettierd" },
         vue = { "prettierd" },
