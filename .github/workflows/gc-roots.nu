@@ -10,9 +10,9 @@ export def main [] {
 
 export def "main add" [
   branch: string
-  job: int
+  run: int
 ] {
-  let base = $"($gc_root_base)/($branch)/($job)"
+  let base = $"($gc_root_base)/($branch)/($run)"
   ls result-* | each {
     nix-store --add-root $"($base)/($in.name)" -r $"./($in.name)"
   }

@@ -31,6 +31,7 @@
     {
 
       hostName = "enceladus";
+      protocol = "ssh-ng";
       sshUser = "nregner";
       systems = [ "aarch64-darwin" ];
       supportedFeatures = [
@@ -42,6 +43,7 @@
     }
     {
       hostName = "enceladus-linux-vm";
+      protocol = "ssh-ng";
       sshUser = "nregner";
       systems = [ "aarch64-linux" ];
       supportedFeatures = [
