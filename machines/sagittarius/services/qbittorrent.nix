@@ -1,7 +1,7 @@
 { config, ... }:
 {
   services.qbittorrent = {
-    enable = true;
+    enable = false;
     port = 8081;
     openFirewall = false;
     settings = {
