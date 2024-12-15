@@ -81,7 +81,16 @@
     extraEnvironment = {
       NVFETCHER_KEYFILE = config.sops.templates.nvfetcher-github-pat.path;
     };
+    serviceOverrides = {
+      ReadWritePaths = [
+        "/nix/var/nix/gcroots/per-user/github"
+      ];
+    };
   });
+
+  systemd.tmpfiles.rules = [
+    "d /nix/var/nix/gcroots/per-user/github 0755 github github - -"
+  ];
 
   users = {
     users.github = {
