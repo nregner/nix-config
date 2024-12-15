@@ -7,7 +7,6 @@
 {
   imports = [
     ../../modules/darwin
-    ../../modules/nixos/github-actions
     ./builders.nix
   ];
 

@@ -1,6 +1,5 @@
 {
   imports = [
-    ../../../modules/nixos/github-actions
     ./cache.nix
     ./docker.nix
     ./gitea.nix

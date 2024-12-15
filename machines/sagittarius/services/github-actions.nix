@@ -29,16 +29,6 @@
     group = "github";
   };
 
-  services.github-runners.hydra-sentinel = {
-    enable = true;
-    name = config.networking.hostName;
-    replace = true;
-    url = "https://github.com/nathanregner/hydra-sentinel";
-    tokenFile = config.sops.secrets.nix-config-github-runner-pat.path;
-    user = "github";
-    group = "github";
-  };
-
   users = {
     users.github = {
       group = "github";

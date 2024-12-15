@@ -1,8 +1,7 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 {
   services.qbittorrent = {
     enable = true;
-    package = pkgs.unstable.qbittorrent;
     port = 8081;
     openFirewall = false;
     settings = {

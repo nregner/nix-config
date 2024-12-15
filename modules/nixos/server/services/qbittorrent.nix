@@ -27,7 +27,7 @@ in
 
     package = mkOption {
       type = types.package;
-      default = pkgs.qbittorrent;
+      default = pkgs.unstable.qbittorrent-nox;
     };
 
     dataDir = mkOption {
