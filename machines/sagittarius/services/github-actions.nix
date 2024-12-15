@@ -13,6 +13,47 @@
     "${inputs.nixpkgs-unstable}/nixos/modules/services/continuous-integration/github-runners.nix"
   ];
 
+  nix.buildMachines = [
+    {
+      hostName = "iapetus";
+      protocol = "ssh-ng";
+      sshUser = "nregner";
+      system = "x86_64-linux";
+      supportedFeatures = [
+        "nixos-test"
+        "benchmark"
+        "big-parallel"
+        "kvm"
+      ];
+      maxJobs = 12;
+    }
+    {
+
+      hostName = "enceladus";
+      sshUser = "nregner";
+      systems = [ "aarch64-darwin" ];
+      supportedFeatures = [
+        "nixos-test"
+        "benchmark"
+        "big-parallel"
+      ];
+      maxJobs = 12;
+    }
+    {
+      hostName = "enceladus-linux-vm";
+      sshUser = "nregner";
+      systems = [ "aarch64-linux" ];
+      supportedFeatures = [
+        "nixos-test"
+        "benchmark"
+        "big-parallel"
+        "kvm"
+        "gccarch-armv8-a"
+      ];
+      maxJobs = 8;
+    }
+  ];
+
   # https://docs.github.com/en/rest/actions/self-hosted-runners#create-a-registration-token-for-a-repository
   sops.secrets.nix-config-github-runner-pat = {
     key = "nix-config-github-runner/pat";
