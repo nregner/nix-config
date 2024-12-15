@@ -169,6 +169,26 @@
         },
         "version": "latest"
     },
+    "octotail": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "octotail",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "getbettr",
+            "repo": "octotail",
+            "rev": "v1.0.16",
+            "sha256": "sha256-QfELVnGIwINRVcMz/P0vKPti6sPxOUXMMdOcYlrAjh4=",
+            "type": "github"
+        },
+        "version": "v1.0.16"
+    },
     "orca-slicer-x86_64-linux": {
         "cargoLocks": null,
         "date": null,

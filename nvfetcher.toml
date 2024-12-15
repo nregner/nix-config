@@ -38,6 +38,10 @@ src.container = "hkotel/mealie"
 src.include_regex = "latest"
 fetch.docker = "hkotel/mealie"
 
+[octotail]
+src.github = "getbettr/octotail"
+fetch.github = "getbettr/octotail"
+
 [orca-slicer-x86_64-linux]
 src.github = "SoftFever/OrcaSlicer"
 fetch.url = "https://github.com/SoftFever/OrcaSlicer/releases/download/$ver/OrcaSlicer_Linux_$ver.AppImage"
@@ -52,4 +56,3 @@ fetch.url = "https://github.com/pilotmoon/Scroll-Reverser/releases/download/v$ve
 [sf-mono-nerd-font]
 src.github = "epk/SF-Mono-Nerd-Font"
 fetch.github = "epk/SF-Mono-Nerd-Font"
-

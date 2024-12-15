@@ -95,6 +95,17 @@
       finalImageTag = "latest";
     };
   };
+  octotail = {
+    pname = "octotail";
+    version = "v1.0.16";
+    src = fetchFromGitHub {
+      owner = "getbettr";
+      repo = "octotail";
+      rev = "v1.0.16";
+      fetchSubmodules = false;
+      sha256 = "sha256-QfELVnGIwINRVcMz/P0vKPti6sPxOUXMMdOcYlrAjh4=";
+    };
+  };
   orca-slicer-x86_64-linux = {
     pname = "orca-slicer-x86_64-linux";
     version = "v2.2.0";
