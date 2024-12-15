@@ -13,8 +13,8 @@ export def "main add" [
   run: int
 ] {
   let base = $"($gc_root_base)/($branch)/($run)"
-  ls result-* | each {
-    nix-store --add-root $"($base)/($in.name)" -r $"./($in.name)"
+  ls result | each {
+    nix-store --add-root $"($base)/($in.name)" -r ./result
   }
 }
 

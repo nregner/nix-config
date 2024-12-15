@@ -306,6 +306,7 @@
                   { config, ... }@systemConfiguration:
                   {
                     hostname = config.networking.hostName;
+                    system = config.nixpkgs.hostPlatform.system;
                     profiles =
                       let
                         activate = deploy-rs.lib.${config.nixpkgs.hostPlatform.system}.activate;
@@ -353,6 +354,34 @@
               ] outputs.devShells
             );
           };
+
+          githubActions.matrix =
+            lib.concatLists (
+              lib.mapAttrsToList (
+                name:
+                { system, profiles, ... }:
+                lib.mapAttrsToList (
+                  profile:
+                  { path, ... }:
+                  {
+                    inherit system;
+                    attr = "deploy.nodes.${name}.profiles.${profile}.path";
+                    # attrs = builtins.map (profile: "deploy.nodes.${name}.profiles.${profile}.path") (
+                    #   builtins.attrNames profiles
+                    # );
+                  }
+                ) profiles
+              ) deploy.nodes
+            )
+            ++ builtins.map
+              (system: {
+                inherit system;
+                attr = "devShells.${system}._aggregate";
+              })
+              [
+                "x86_64-linux"
+                "aarch64-darwin"
+              ];
         };
     };
 }
