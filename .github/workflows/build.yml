@@ -48,4 +48,4 @@ jobs:
           reporter: jest-junit
       - name: Add GC roots
         if: success()
-        run: ./github/gc-roots.nu add "$BRANCH_NAME" "$JOB_ID"
+        run: ./github/workflows/gc-roots.nu add "$BRANCH_NAME" "$JOB_ID"
