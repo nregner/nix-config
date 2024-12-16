@@ -17,40 +17,27 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  nix-matrix:
-    runs-on: [self-hosted]
-    outputs:
-      matrix: ${{ steps.generate-matrix.outputs.matrix }}
-    steps:
-      - uses: actions/checkout@v4
-      - uses: cachix/install-nix-action@v30
-      - id: generate-matrix
-        name: Generate Nix Matrix
-        run: |
-          set -Eeu
-          matrix="$(nix eval --json '.#githubActions.matrix')"
-          echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
-
   build:
-    # runs-on: ${{ matrix.system }}
     runs-on: [self-hosted]
-    needs: nix-matrix
     strategy:
+      matrix:
+        job:
+          - systems: x86_64-linux
+          - systems: aaarch64-darwin aaarch64-linux
+            mac_address: 16:3e:75:99:c8:5a
       fail-fast: false
-      matrix: ${{ fromJSON(needs.nix-matrix.outputs.matrix) }}
-      # matrix:
-      #   job:
-      #     - systems: x86_64-linux
-      #     - systems: aaarch64-darwin aaarch64-linux
-      #       mac_address: 16:3e:75:99:c8:5a
-      # fail-fast: false
     steps:
       - uses: actions/checkout@main
       - name: Wake builder
         if: ${{ matrix.job.mac_address != '' }}
         run: wol "${{ matrix.job.mac_address }}"
       - name: Run nix-fast-build
-        run: nix build .#${{ matrix.job.attr }}
+        run: nix-fast-build --flake .#hydraJobs
+          --systems "${{ matrix.job.systems }}"
+          --eval-workers 4
+          --result-format junit
+          --result-file report.xml
+          --no-nom
       - name: Generate build report
         uses: dorny/test-reporter@main
         if: success() || failure()
