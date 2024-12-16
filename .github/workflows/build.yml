@@ -36,6 +36,7 @@ jobs:
     runs-on: [self-hosted]
     needs: nix-matrix
     strategy:
+      fail-fast: false
       matrix: ${{ fromJSON(needs.nix-matrix.outputs.matrix) }}
       # matrix:
       #   job:
@@ -49,7 +50,7 @@ jobs:
         if: ${{ matrix.job.mac_address != '' }}
         run: wol "${{ matrix.job.mac_address }}"
       - name: Run nix-fast-build
-        run: nix build .#${{ matrix.attr }}
+        run: nix build .#${{ matrix.job.attr }}
       - name: Generate build report
         uses: dorny/test-reporter@main
         if: success() || failure()
