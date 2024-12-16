@@ -2,7 +2,7 @@
 {
   services.qbittorrent = {
     enable = true;
-    package = pkgs.unstable.qbittorrent;
+    package = pkgs.unstable.qbittorrent-nox;
     port = 8081;
     openFirewall = false;
     settings = {

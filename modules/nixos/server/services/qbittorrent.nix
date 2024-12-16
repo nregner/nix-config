@@ -27,7 +27,7 @@ in
 
     package = mkOption {
       type = types.package;
-      default = pkgs.qbittorrent;
+      default = pkgs.qbittorrent-nox;
     };
 
     dataDir = mkOption {
@@ -100,10 +100,9 @@ in
       after = [ "network.target" ];
       description = "qBittorrent Daemon";
       wantedBy = [ "multi-user.target" ];
-      path = [ cfg.package ];
       serviceConfig = {
         ExecStart = ''
-          qbittorrent-nox \
+          ${cfg.package}/bin/qbittorrent-nox \
             --profile=${configDir} \
             --webui-port=${toString cfg.port}
         '';
