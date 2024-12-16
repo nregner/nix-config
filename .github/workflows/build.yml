@@ -49,7 +49,7 @@ jobs:
         if: ${{ matrix.job.mac_address != '' }}
         run: wol "${{ matrix.job.mac_address }}"
       - name: Run nix-fast-build
-        run: nix build --flake .#${{ matrix.attr }}
+        run: nix build .#${{ matrix.attr }}
       - name: Generate build report
         uses: dorny/test-reporter@main
         if: success() || failure()
