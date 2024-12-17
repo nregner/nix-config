@@ -1006,6 +1006,8 @@ require("lazy").setup({
   {
     -- Highlight, edit, and navigate code
     "nvim-treesitter/nvim-treesitter",
+    dir = vim.g.nvim_treesitter_dir,
+    pin = true,
     dependencies = {
       "nvim-treesitter/nvim-treesitter-context",
       "nvim-treesitter/nvim-treesitter-textobjects",
@@ -1023,7 +1025,7 @@ require("lazy").setup({
     },
     lazy = false,
     opts = {
-      auto_install = true,
+      auto_install = false,
       highlight = { enable = true },
       indent = { enable = true },
       disable = function(_lang, buf)

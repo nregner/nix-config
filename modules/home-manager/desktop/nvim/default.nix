@@ -6,11 +6,15 @@
     enable = true;
     defaultEditor = true;
     extraConfig = builtins.readFile ./init.vim;
+    # TODO: https://github.com/nvim-treesitter/nvim-treesitter/blob/master/README.md#changing-the-parser-install-directory
     extraLuaConfig = ''
+      vim.g.nvim_treesitter_dir = "${pkgs.unstable.vimPlugins.nvim-treesitter.withAllGrammars}"
       require('user')
     '';
 
-    plugins = with pkgs.unstable.vimPlugins; [ lazy-nvim ];
+    plugins = with pkgs.unstable.vimPlugins; [
+      lazy-nvim
+    ];
 
     extraPackages = with pkgs.unstable; [
 
@@ -38,10 +42,6 @@
       shfmt
       stylua
       taplo
-
-      # misc
-      gnumake
-      clang # for compiling tree-sitter parsers
     ];
   };
 
