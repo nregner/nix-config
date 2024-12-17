@@ -16,10 +16,6 @@ let
     rec {
       inherit (inputs.clojure-lsp.packages.${final.system}) clojure-lsp;
 
-      # FIXME: hack to bypass "FATAL: Module ahci not found" error
-      # https://github.com/NixOS/nixpkgs/issues/154163#issuecomment-1350599022
-      makeModulesClosure = x: prev.makeModulesClosure (x // { allowMissing = true; });
-
       hydra_unstable = prev.hydra_unstable.overrideAttrs (oldAttrs: {
         patches = (oldAttrs.patches or [ ]) ++ [
           ./hydra/fix-restrict-eval-does-not-allow-access-to-git-flake.patch
@@ -27,6 +23,10 @@ let
         ];
         checkPhase = "";
       });
+
+      # FIXME: hack to bypass "FATAL: Module ahci not found" error
+      # https://github.com/NixOS/nixpkgs/issues/154163#issuecomment-1350599022
+      makeModulesClosure = x: prev.makeModulesClosure (x // { allowMissing = true; });
 
       # FIXME: https://github.com/NixOS/nixpkgs/issues/357979
       moonraker = warnIfOutdated prev.moonraker (final.callPackage ./moonraker { });
@@ -39,6 +39,12 @@ let
           (oldAttrs: {
             doInstallCheck = false;
           });
+
+      wrapNeovimUnstable =
+        args: neovim-unwrapped:
+        (prev.wrapNeovimUnstable args neovim-unwrapped).overrideAttrs {
+          dontStrip = true;
+        };
     };
 in
 rec {
