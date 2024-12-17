@@ -70,7 +70,6 @@
 
     awscli2
     babashka
-    dust
     gh
     jq
     nushell
