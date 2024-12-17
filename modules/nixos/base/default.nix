@@ -2,7 +2,6 @@
   self,
   inputs,
   pkgs,
-  lib,
   ...
 }:
 {
@@ -48,6 +47,7 @@
     vim
 
     # filesystem
+    dua
     fd
     file
     rsync
