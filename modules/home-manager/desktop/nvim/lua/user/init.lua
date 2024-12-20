@@ -1374,7 +1374,7 @@ require("lazy").setup({
       end
 
       local show_summary = function()
-        neotest.output_panel.open()
+        neotest.summary.open()
       end
 
       nmap("<localleader>tt", function(args)
