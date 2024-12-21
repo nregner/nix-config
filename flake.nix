@@ -30,7 +30,13 @@
     hydra = {
       # url = "github:NixOS/hydra";
       url = "github:nathanregner/hydra";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      # inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nix.follows = "nix";
+    };
+    nix = {
+      # url = "github:NixOS/hydra";
+      url = "github:nathanregner/nix";
+      # inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     hydra-sentinel = {
       url = "github:nathanregner/hydra-sentinel";
