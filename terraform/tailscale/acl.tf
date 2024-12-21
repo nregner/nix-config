@@ -18,7 +18,7 @@ resource "tailscale_acl" "acl" {
     }
     hosts = {
       sagittarius = data.tailscale_device.sagittarius.addresses[0]
-      enceladus = data.tailscale_device.enceladus.addresses[0]
+      enceladus   = data.tailscale_device.enceladus.addresses[0]
     }
 
     # https://tailscale.com/kb/1337/acl-syntax#acls
@@ -56,15 +56,15 @@ resource "tailscale_acl" "acl" {
       },
     ]
 
-      sshTests = [
-        {
-          "src"    = "root@sagittarius",
-          "dst"    = ["enceladus"],
-          "accept" = ["builder"],
-          "check"  = [],
-          "deny"   = [],
-        }
-      ]
+    sshTests = [
+      {
+        "src"    = "root@sagittarius",
+        "dst"    = ["enceladus"],
+        "accept" = ["root"],
+        "check"  = [],
+        "deny"   = [],
+      }
+    ]
   })
 }
 
