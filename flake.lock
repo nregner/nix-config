@@ -331,15 +331,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1733444895,
-        "narHash": "sha256-r+t/0U8Pp6/Lvi3s3v8nDB9xCggvxFsnCEJ9TuZvVJc=",
-        "owner": "NixOS",
+        "lastModified": 1734817360,
+        "narHash": "sha256-UTDemj/Cbw0ckLXXbZUfyhaicC+2fIkZjUMN6F7YLXc=",
+        "owner": "nathanregner",
         "repo": "hydra",
-        "rev": "250668a19fa4d8ff9a6176ee6c44ca3003adedf1",
+        "rev": "19b08e9908258a5c8c5acc57dcc2b62e113722d4",
         "type": "github"
       },
       "original": {
-        "owner": "NixOS",
+        "owner": "nathanregner",
         "repo": "hydra",
         "type": "github"
       }
@@ -434,16 +434,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1734351750,
-        "narHash": "sha256-zuh7E3pUtoaO+5HbseInqIUwU9DtSgSQ2vsmFP4LTKw=",
-        "owner": "NixOS",
+        "lastModified": 1734817342,
+        "narHash": "sha256-DXUasUHwE0gDcDQ1AI+0zMxLd0ww8DHRq5enOKUDcso=",
+        "owner": "nathanregner",
         "repo": "nix",
-        "rev": "6a791e946f3aab132e98980001301601e0e3d56c",
+        "rev": "a551273f22fed679ce4994e71519b12f9bcbd536",
         "type": "github"
       },
       "original": {
-        "owner": "NixOS",
-        "ref": "2.24-maintenance",
+        "owner": "nathanregner",
         "repo": "nix",
         "type": "github"
       }
