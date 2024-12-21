@@ -16,7 +16,7 @@
     },
     "flake-registry": {
         "cargoLocks": null,
-        "date": "2024-06-03",
+        "date": "2024-12-17",
         "extract": null,
         "name": "flake-registry",
         "passthru": null,
@@ -28,11 +28,11 @@
             "name": null,
             "owner": "nixos",
             "repo": "flake-registry",
-            "rev": "895a65f8d5acf848136ee8fe8e8f736f0d27df96",
-            "sha256": "sha256-HKvoLGZUsBpjkxWkdtctGYj6RH0bl6vcw0OjTOqyzJk=",
+            "rev": "02fe640c9e117dd9d6a34efc7bcb8bd09c08111d",
+            "sha256": "sha256-/3gigrEBFORQs6a8LL5twoHs7biu08y/8Xc5aQmk3b0=",
             "type": "github"
         },
-        "version": "895a65f8d5acf848136ee8fe8e8f736f0d27df96"
+        "version": "02fe640c9e117dd9d6a34efc7bcb8bd09c08111d"
     },
     "hammerspoon": {
         "cargoLocks": null,
@@ -83,11 +83,11 @@
             "name": null,
             "owner": "FieldofClay",
             "repo": "hyprland-workspaces",
-            "rev": "v2.0.3",
-            "sha256": "sha256-P+EJoZJqSlpMX1bWOkQYlKR577nTTe1luWKK5GS9Pn4=",
+            "rev": "v2.0.4",
+            "sha256": "sha256-a5P99aSqhlZqClXAoaUNv/jmuM5duLDf+OzMeKGwDVI=",
             "type": "github"
         },
-        "version": "v2.0.3"
+        "version": "v2.0.4"
     },
     "joker": {
         "cargoLocks": null,
