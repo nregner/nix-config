@@ -949,22 +949,22 @@ let
         sha512 = "P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==";
       };
     };
-    "caniuse-lite-1.0.30001688" = {
+    "caniuse-lite-1.0.30001690" = {
       name = "caniuse-lite";
       packageName = "caniuse-lite";
-      version = "1.0.30001688";
+      version = "1.0.30001690";
       src = fetchurl {
-        url = "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001688.tgz";
-        sha512 = "Nmqpru91cuABu/DTCXbM2NSRHzM2uVHfPnhJ/1zEAJx/ILBRVmz3pzH4N7DZqbdG0gWClsCC05Oj0mJ/1AWMbA==";
+        url = "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001690.tgz";
+        sha512 = "5ExiE3qQN6oF8Clf8ifIDcMRCRE/dMGcETG/XGMD8/XiXm6HXQgQTh1yZYLXXpSOsEUlJm1Xr7kGULZTuGtP/w==";
       };
     };
-    "chokidar-4.0.1" = {
+    "chokidar-4.0.3" = {
       name = "chokidar";
       packageName = "chokidar";
-      version = "4.0.1";
+      version = "4.0.3";
       src = fetchurl {
-        url = "https://registry.npmjs.org/chokidar/-/chokidar-4.0.1.tgz";
-        sha512 = "n8enUVCED/KVRQlab1hr3MVpcVMvxtZjmEa956u+4YijlmQED223XMSYj2tLuKvr4jcCTzNNMpQDUer72MMmzA==";
+        url = "https://registry.npmjs.org/chokidar/-/chokidar-4.0.3.tgz";
+        sha512 = "Qgzu8kfBvo+cA4962jnP1KkS6Dop5NS6g7R5LFYJr4b8Ub94PPQXUksCw9PvXoeXPRRddRNC5C1JQUR2SMGtnA==";
       };
     };
     "chownr-2.0.0" = {
@@ -1048,13 +1048,13 @@ let
         sha512 = "RMtmw0iFkeR4YV+fUOSucriAQNb9g8zFR52MWCtl+cCZOFRNL6zeB395vPzFhEjjn4fMxXudmELnl/KF/WrK6w==";
       };
     };
-    "consola-3.2.3" = {
+    "consola-3.3.0" = {
       name = "consola";
       packageName = "consola";
-      version = "3.2.3";
+      version = "3.3.0";
       src = fetchurl {
-        url = "https://registry.npmjs.org/consola/-/consola-3.2.3.tgz";
-        sha512 = "I5qxpzLv+sJhTVEoLYNcTW+bThDCPsit0vLNKShZx6rLtpilNpmmeTPaeqJb9ZE9dV3DGaeby6Vuhrw38WjeyQ==";
+        url = "https://registry.npmjs.org/consola/-/consola-3.3.0.tgz";
+        sha512 = "kxltocVQCwQNFvw40dlVRYeAkAvtYjMFZYNlOcsF5wExPpGwPxMwgx4IfDJvBRPtBpnQwItd5WkTaR0ZwT/TmQ==";
       };
     };
     "convert-source-map-2.0.0" = {
@@ -1228,13 +1228,13 @@ let
         sha512 = "2QF/g9/zTaPDc3BjNcVTGoBbXBgYfMTTceLaYcFJ/W9kggFUkhxD/hMEeuLKbugyef9SqAx8cpgwlIP/jinUTA==";
       };
     };
-    "electron-to-chromium-1.5.73" = {
+    "electron-to-chromium-1.5.75" = {
       name = "electron-to-chromium";
       packageName = "electron-to-chromium";
-      version = "1.5.73";
+      version = "1.5.75";
       src = fetchurl {
-        url = "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.5.73.tgz";
-        sha512 = "8wGNxG9tAG5KhGd3eeA0o6ixhiNdgr0DcHWm85XPCphwZgD1lIEoi6t3VERayWao7SF7AAZTw6oARGJeVjH8Kg==";
+        url = "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.5.75.tgz";
+        sha512 = "Lf3++DumRE/QmweGjU+ZcKqQ+3bKkU/qjaKYhIJKEOhgIO9Xs6IiAQFkfFoj+RhgDk4LUeNsLo6plExHqSyu6Q==";
       };
     };
     "emmet-2.4.11" = {
@@ -1480,13 +1480,13 @@ let
         sha512 = "jhIXaOzy1sb8IyocaruWSn1TjmnBVs8Ayhcy83rmxNJ8q2uWKCAj3CnJY+KpGSXCueAPc0i05kVvVKtP1t9S3g==";
       };
     };
-    "graphql-16.9.0" = {
+    "graphql-16.10.0" = {
       name = "graphql";
       packageName = "graphql";
-      version = "16.9.0";
+      version = "16.10.0";
       src = fetchurl {
-        url = "https://registry.npmjs.org/graphql/-/graphql-16.9.0.tgz";
-        sha512 = "GGTKBX4SD7Wdb8mqeDLni2oaRGYQWjWHGKPQ24ZMnUtKfcsVoiv4uX8+LJr1K6U5VW2Lu1BwJnj7uiori0YtRw==";
+        url = "https://registry.npmjs.org/graphql/-/graphql-16.10.0.tgz";
+        sha512 = "AjqGKbDGUFRKIRCP9tCKiIGHyriz2oHEbPIbEtcSLSs4YjReZOIPQQWek4+6hjw62H9QShXHyaGivGiYVLeYFQ==";
       };
     };
     "graphql-17.0.0-alpha.7.canary.pr.4297.42bcd01f7c733e255ff9eab84ec8d7500dfd208a" = {
@@ -1678,22 +1678,22 @@ let
         sha512 = "muId7Zzn9ywDsyXgTIafTry2sV3nySZeUDe6YedVd1Hvuuep5AsIlqK+XefWpYTyJG5e503F2xIuT2lcU6rCSw==";
       };
     };
-    "jiti-1.21.6" = {
+    "jiti-1.21.7" = {
       name = "jiti";
       packageName = "jiti";
-      version = "1.21.6";
+      version = "1.21.7";
       src = fetchurl {
-        url = "https://registry.npmjs.org/jiti/-/jiti-1.21.6.tgz";
-        sha512 = "2yTgeWTWzMWkHu6Jp9NKgePDaYHbntiwvYuuJLbbN9vl7DC9DvXKOB2BC3ZZ92D3cvV/aflH0osDfwpHepQ53w==";
+        url = "https://registry.npmjs.org/jiti/-/jiti-1.21.7.tgz";
+        sha512 = "/imKNG4EbWNrVjoNC/1H5/9GFy+tqjGBHCaSsN+P2RnPqjsLmv6UD3Ej+Kj8nBWaRAwyk7kK5ZUc+OEatnTR3A==";
       };
     };
-    "jiti-2.4.1" = {
+    "jiti-2.4.2" = {
       name = "jiti";
       packageName = "jiti";
-      version = "2.4.1";
+      version = "2.4.2";
       src = fetchurl {
-        url = "https://registry.npmjs.org/jiti/-/jiti-2.4.1.tgz";
-        sha512 = "yPBThwecp1wS9DmoA4x4KR2h3QoslacnDR8ypuFM962kI4/456Iy1oHx2RAgh4jfZNdn0bctsdadceiBUgpU1g==";
+        url = "https://registry.npmjs.org/jiti/-/jiti-2.4.2.tgz";
+        sha512 = "rg9zJN+G4n2nfJl5MW3BMygZX56zKPNVEYYqq7adpmMh4Jn2QNEwhvQlFy6jPVdcod7txZtKHWnyZiA3a0zP7A==";
       };
     };
     "js-tokens-4.0.0" = {
@@ -1822,13 +1822,13 @@ let
         sha512 = "Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==";
       };
     };
-    "magic-string-0.30.15" = {
+    "magic-string-0.30.17" = {
       name = "magic-string";
       packageName = "magic-string";
-      version = "0.30.15";
+      version = "0.30.17";
       src = fetchurl {
-        url = "https://registry.npmjs.org/magic-string/-/magic-string-0.30.15.tgz";
-        sha512 = "zXeaYRgZ6ldS1RJJUrMrYgNJ4fdwnyI6tVqoiIhyCyv5IVTK9BU8Ic2l253GGETQHxI4HNUwhJ3fjDhKqEoaAw==";
+        url = "https://registry.npmjs.org/magic-string/-/magic-string-0.30.17.tgz";
+        sha512 = "sNPKHvyjVf7gyjwS4xGTaW/mCnF8wnjtifKBEhxfZ7E/S8tQ0rssrwGNn6q8JH/ohItJfSQp9mBtQYuTlH5QnA==";
       };
     };
     "magicast-0.3.5" = {
@@ -2497,13 +2497,13 @@ let
         sha512 = "IY1rnGr6izd10B0A8LqsBfmlT5OILVuZ7XsI0vdGPEvuonFV7NYEUK4dAkm9Zg2q0Um92kYjTpS1CAP3Nh/KWw==";
       };
     };
-    "svelte2tsx-0.7.30" = {
+    "svelte2tsx-0.7.31" = {
       name = "svelte2tsx";
       packageName = "svelte2tsx";
-      version = "0.7.30";
+      version = "0.7.31";
       src = fetchurl {
-        url = "https://registry.npmjs.org/svelte2tsx/-/svelte2tsx-0.7.30.tgz";
-        sha512 = "sHXK/vw/sVJmFuPSq6zeKrtuZKvo0jJyEi8ybN0dfrqSYVvHu8zFbO0zQKAL8y/fYackYojH41EJGe6v8rd5fw==";
+        url = "https://registry.npmjs.org/svelte2tsx/-/svelte2tsx-0.7.31.tgz";
+        sha512 = "exrN1o9mdCLAA7hTCudz731FIxomH/0SN9ZIX+WrY/XnlLuno/NNC1PF6JXPZVqp/4sMMDKteqyKoG44hliljQ==";
       };
     };
     "tar-6.2.1" = {
@@ -2904,11 +2904,11 @@ in
       })
       sources."c12-2.0.1"
       sources."cac-6.7.14"
-      sources."chokidar-4.0.1"
+      sources."chokidar-4.0.3"
       sources."chownr-2.0.0"
       sources."citty-0.1.6"
       sources."confbox-0.1.8"
-      sources."consola-3.2.3"
+      sources."consola-3.3.0"
       sources."cross-spawn-7.0.6"
       sources."defu-6.1.4"
       sources."destr-2.0.3"
@@ -2927,7 +2927,7 @@ in
       sources."human-signals-5.0.0"
       sources."is-stream-3.0.0"
       sources."isexe-2.0.0"
-      sources."jiti-2.4.1"
+      sources."jiti-2.4.2"
       sources."js-yaml-4.1.0"
       sources."jsonc-parser-2.3.1"
       sources."kleur-3.0.3"
@@ -3060,93 +3060,93 @@ in
       sources."@graphql-hive/gateway-abort-signal-any-0.0.1"
       (sources."@graphql-tools/batch-execute-9.0.10" // {
         dependencies = [
-          sources."graphql-16.9.0"
+          sources."graphql-16.10.0"
         ];
       })
       (sources."@graphql-tools/code-file-loader-8.0.3" // {
         dependencies = [
-          sources."graphql-16.9.0"
+          sources."graphql-16.10.0"
         ];
       })
       (sources."@graphql-tools/delegate-10.2.8" // {
         dependencies = [
-          sources."graphql-16.9.0"
+          sources."graphql-16.10.0"
         ];
       })
       (sources."@graphql-tools/executor-1.3.9" // {
         dependencies = [
-          sources."graphql-16.9.0"
+          sources."graphql-16.10.0"
         ];
       })
       (sources."@graphql-tools/executor-graphql-ws-1.3.5" // {
         dependencies = [
-          sources."graphql-16.9.0"
+          sources."graphql-16.10.0"
         ];
       })
       (sources."@graphql-tools/executor-http-1.2.1" // {
         dependencies = [
-          sources."graphql-16.9.0"
+          sources."graphql-16.10.0"
         ];
       })
       (sources."@graphql-tools/executor-legacy-ws-1.1.7" // {
         dependencies = [
-          sources."graphql-16.9.0"
+          sources."graphql-16.10.0"
         ];
       })
       (sources."@graphql-tools/graphql-file-loader-8.0.8" // {
         dependencies = [
-          sources."graphql-16.9.0"
+          sources."graphql-16.10.0"
         ];
       })
       (sources."@graphql-tools/graphql-tag-pluck-8.1.0" // {
         dependencies = [
-          sources."graphql-16.9.0"
+          sources."graphql-16.10.0"
         ];
       })
       (sources."@graphql-tools/import-7.0.8" // {
         dependencies = [
-          sources."graphql-16.9.0"
+          sources."graphql-16.10.0"
           sources."resolve-from-5.0.0"
         ];
       })
       (sources."@graphql-tools/json-file-loader-8.0.8" // {
         dependencies = [
-          sources."graphql-16.9.0"
+          sources."graphql-16.10.0"
         ];
       })
       (sources."@graphql-tools/load-8.0.9" // {
         dependencies = [
-          sources."graphql-16.9.0"
+          sources."graphql-16.10.0"
         ];
       })
       (sources."@graphql-tools/merge-9.0.14" // {
         dependencies = [
-          sources."graphql-16.9.0"
+          sources."graphql-16.10.0"
         ];
       })
       (sources."@graphql-tools/schema-10.0.13" // {
         dependencies = [
-          sources."graphql-16.9.0"
+          sources."graphql-16.10.0"
         ];
       })
       (sources."@graphql-tools/url-loader-8.0.20" // {
         dependencies = [
-          sources."graphql-16.9.0"
+          sources."graphql-16.10.0"
         ];
       })
       (sources."@graphql-tools/utils-10.6.4" // {
         dependencies = [
-          sources."graphql-16.9.0"
+          sources."graphql-16.10.0"
         ];
       })
       (sources."@graphql-tools/wrap-10.0.26" // {
         dependencies = [
-          sources."graphql-16.9.0"
+          sources."graphql-16.10.0"
         ];
       })
       (sources."@graphql-typed-document-node/core-3.2.0" // {
         dependencies = [
-          sources."graphql-16.9.0"
+          sources."graphql-16.10.0"
         ];
       })
       sources."@iarna/toml-2.2.5"
@@ -3199,7 +3199,7 @@ in
       sources."bufferutil-4.0.8"
       sources."busboy-1.6.0"
       sources."callsites-3.1.0"
-      sources."caniuse-lite-1.0.30001688"
+      sources."caniuse-lite-1.0.30001690"
       sources."cliui-7.0.4"
       (sources."code-red-1.0.4" // {
         dependencies = [
@@ -3223,7 +3223,7 @@ in
       sources."dir-glob-3.0.1"
       sources."dotenv-10.0.0"
       sources."dset-3.1.4"
-      sources."electron-to-chromium-1.5.73"
+      sources."electron-to-chromium-1.5.75"
       sources."emoji-regex-8.0.0"
       sources."encoding-0.1.13"
       sources."entities-4.5.0"
@@ -3246,7 +3246,7 @@ in
       sources."graphql-17.0.0-alpha.7.canary.pr.4297.42bcd01f7c733e255ff9eab84ec8d7500dfd208a"
       (sources."graphql-config-5.0.3" // {
         dependencies = [
-          sources."graphql-16.9.0"
+          sources."graphql-16.10.0"
           sources."minimatch-4.2.3"
         ];
       })
@@ -3254,7 +3254,7 @@ in
       sources."graphql-language-service-server-2.14.0"
       (sources."graphql-ws-5.16.0" // {
         dependencies = [
-          sources."graphql-16.9.0"
+          sources."graphql-16.10.0"
         ];
       })
       sources."iconv-lite-0.6.3"
@@ -3269,7 +3269,7 @@ in
       sources."is-number-7.0.0"
       sources."is-reference-3.0.3"
       sources."isomorphic-ws-5.0.0"
-      sources."jiti-1.21.6"
+      sources."jiti-1.21.7"
       sources."js-tokens-4.0.0"
       sources."js-yaml-4.1.0"
       sources."jsesc-3.1.0"
@@ -3279,7 +3279,7 @@ in
       sources."locate-character-3.0.0"
       sources."lower-case-2.0.2"
       sources."lru-cache-10.4.3"
-      sources."magic-string-0.30.15"
+      sources."magic-string-0.30.17"
       sources."mdn-data-2.0.30"
       sources."merge2-1.4.1"
       sources."meros-1.3.0"
@@ -3334,7 +3334,7 @@ in
           sources."estree-walker-3.0.3"
         ];
       })
-      sources."svelte2tsx-0.7.30"
+      sources."svelte2tsx-0.7.31"
       sources."to-regex-range-5.0.1"
       sources."tr46-0.0.3"
       sources."tslib-2.8.1"

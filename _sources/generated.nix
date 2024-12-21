@@ -11,15 +11,15 @@
   };
   flake-registry = {
     pname = "flake-registry";
-    version = "895a65f8d5acf848136ee8fe8e8f736f0d27df96";
+    version = "02fe640c9e117dd9d6a34efc7bcb8bd09c08111d";
     src = fetchFromGitHub {
       owner = "nixos";
       repo = "flake-registry";
-      rev = "895a65f8d5acf848136ee8fe8e8f736f0d27df96";
+      rev = "02fe640c9e117dd9d6a34efc7bcb8bd09c08111d";
       fetchSubmodules = false;
-      sha256 = "sha256-HKvoLGZUsBpjkxWkdtctGYj6RH0bl6vcw0OjTOqyzJk=";
+      sha256 = "sha256-/3gigrEBFORQs6a8LL5twoHs7biu08y/8Xc5aQmk3b0=";
     };
-    date = "2024-06-03";
+    date = "2024-12-17";
   };
   hammerspoon = {
     pname = "hammerspoon";
@@ -42,13 +42,13 @@
   };
   hyprland-workspaces = {
     pname = "hyprland-workspaces";
-    version = "v2.0.3";
+    version = "v2.0.4";
     src = fetchFromGitHub {
       owner = "FieldofClay";
       repo = "hyprland-workspaces";
-      rev = "v2.0.3";
+      rev = "v2.0.4";
       fetchSubmodules = false;
-      sha256 = "sha256-P+EJoZJqSlpMX1bWOkQYlKR577nTTe1luWKK5GS9Pn4=";
+      sha256 = "sha256-a5P99aSqhlZqClXAoaUNv/jmuM5duLDf+OzMeKGwDVI=";
     };
   };
   joker = {
