@@ -28,8 +28,8 @@
     };
     flake-parts.url = "github:hercules-ci/flake-parts";
     hydra = {
-      url = "github:NixOS/hydra?rev=d7986226f0666d5aa0032fdcdb9f38eef6a91dd3";
-      # inputs.nixpkgs.follows = "nixpkgs-unstable";
+      url = "github:NixOS/hydra";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     hydra-sentinel = {
       url = "github:nathanregner/hydra-sentinel";

@@ -1,0 +1,30 @@
+From ffd9c2a8193c6a15c1b960495f333a631019e72f Mon Sep 17 00:00:00 2001
+From: Nathan Regner <nathanregner@gmail.com>
+Date: Sat, 21 Dec 2024 13:43:47 -0700
+Subject: [PATCH] debug ssh
+
+---
+ src/libstore/ssh.cc | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/src/libstore/ssh.cc b/src/libstore/ssh.cc
+index dec733fd5..67fa4b181 100644
+--- a/src/libstore/ssh.cc
++++ b/src/libstore/ssh.cc
+@@ -141,6 +141,13 @@ std::unique_ptr<SSHMaster::Connection> SSHMaster::startCommand(
+ 
+         args.splice(args.end(), std::move(command));
+         auto env = createSSHEnv();
++
++        std::string command;
++        for (auto const& arg : args) {
++            command += arg;
++        }
++        printTalkative("SSH command ", command);
++
+         nix::execvpe(args.begin()->c_str(), stringsToCharPtrs(args).data(), stringsToCharPtrs(env).data());
+ 
+         // could not exec ssh/bash
+-- 
+2.44.1
+
