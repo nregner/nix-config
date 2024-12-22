@@ -8,3 +8,8 @@ hyper = { version = "1", features = ["full"] }
 tokio = { version = "1", features = ["macros"] }
 http-body-util = "0.1"
 hyper-util = { version = "0.1", features = ["full"] }
+hyper-rustls = "0.27.5"
+rustls-pemfile = "2.2.0"
+anyhow = "1.0.95"
+tokio-rustls = "0.26.1"
+rustls = "0.23.20"

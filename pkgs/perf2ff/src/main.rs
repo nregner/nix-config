@@ -1,37 +1,115 @@
-use std::convert::Infallible;
-use std::net::SocketAddr;
+//! Simple HTTPS echo service based on hyper_util and rustls
+//!
+//! First parameter is the mandatory port to use.
+//! Certificate and private key are hardcoded to sample files.
+//! hyper will automatically use HTTP/2 if a client starts talking HTTP/2,
+//! otherwise HTTP/1.1 will be used.
 
-use http_body_util::Full;
-use hyper::body::Bytes;
-use hyper::server::conn::http1;
+use std::net::{Ipv4Addr, SocketAddr};
+use std::sync::Arc;
+use std::{env, fs, io};
+
+// use http::{Method, Request, Response, StatusCode};
+use http_body_util::{BodyExt, Full};
+use hyper::body::{Bytes, Incoming};
 use hyper::service::service_fn;
-use hyper::{Request, Response};
-use hyper_util::rt::TokioIo;
+use hyper::{Method, Request, Response, StatusCode};
+use hyper_util::rt::{TokioExecutor, TokioIo};
+use hyper_util::server::conn::auto::Builder;
+use rustls::pki_types::{CertificateDer, PrivateKeyDer};
+use rustls::ServerConfig;
 use tokio::net::TcpListener;
+use tokio_rustls::TlsAcceptor;
 
-async fn hello(_: Request<hyper::body::Incoming>) -> Result<Response<Full<Bytes>>, Infallible> {
-    Ok(Response::new(Full::new(Bytes::from("Hello, World!"))))
+fn main() {
+    // Serve an echo service over HTTPS, with proper error handling.
+    if let Err(e) = run_server() {
+        eprintln!("FAILED: {}", e);
+        std::process::exit(1);
+    }
+}
+
+fn error(err: String) -> io::Error {
+    io::Error::new(io::ErrorKind::Other, err)
 }
 
 #[tokio::main(flavor = "current_thread")]
-async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
-    let addr = SocketAddr::from(([127, 0, 0, 1], 3000));
+async fn run_server() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
+    let _ = rustls::crypto::aws_lc_rs::default_provider().install_default();
 
-    // We create a TcpListener and bind it to 127.0.0.1:3000
-    let listener = TcpListener::bind(addr).await?;
+    let addr = SocketAddr::new(Ipv4Addr::LOCALHOST.into(), 3000);
 
-    let (stream, _) = listener.accept().await?;
+    let certs = load_certs("./localhost.cert")?;
+    let key = load_private_key("./localhost.key")?;
 
-    let io = TokioIo::new(stream);
+    println!("Starting to serve on https://{}", addr);
 
-    http1::Builder::new()
-        // `service_fn` converts our function in a `Service`
-        .serve_connection(
-            io,
-            service_fn(|_| async {
-                Result::<_, Infallible>::Ok(Response::new(Full::new(Bytes::from("Hello, World!"))))
-            }),
-        )
-        .await?;
-    Ok(())
+    // Create a TCP listener via tokio.
+    let incoming = TcpListener::bind(&addr).await?;
+
+    // Build TLS configuration.
+    let mut server_config = ServerConfig::builder()
+        .with_no_client_auth()
+        .with_single_cert(certs, key)
+        .map_err(|e| error(e.to_string()))?;
+    server_config.alpn_protocols = vec![b"h2".to_vec(), b"http/1.1".to_vec(), b"http/1.0".to_vec()];
+    let tls_acceptor = TlsAcceptor::from(Arc::new(server_config));
+
+    let service = service_fn(echo);
+
+    loop {
+        let (tcp_stream, _remote_addr) = incoming.accept().await?;
+
+        let tls_acceptor = tls_acceptor.clone();
+        tokio::spawn(async move {
+            let tls_stream = match tls_acceptor.accept(tcp_stream).await {
+                Ok(tls_stream) => tls_stream,
+                Err(err) => {
+                    eprintln!("failed to perform tls handshake: {err:#}");
+                    return;
+                }
+            };
+            if let Err(err) = Builder::new(TokioExecutor::new())
+                .serve_connection(TokioIo::new(tls_stream), service)
+                .await
+            {
+                eprintln!("failed to serve connection: {err:#}");
+            }
+        });
+    }
+}
+
+// Custom echo service, handling two different routes and a
+// catch-all 404 responder.
+async fn echo(req: Request<Incoming>) -> Result<Response<Full<Bytes>>, hyper::Error> {
+    let mut response = Response::new(Full::default());
+    match (req.method(), req.uri().path()) {
+        // Help route.
+        (&Method::GET, "/") => {
+            *response.body_mut() = Full::from("Try POST /echo\n");
+        }
+        // Echo service route.
+        (&Method::POST, "/echo") => {
+            *response.body_mut() = Full::from(req.into_body().collect().await?.to_bytes());
+        }
+        // Catch-all 404.
+        _ => {
+            *response.status_mut() = StatusCode::NOT_FOUND;
+        }
+    };
+    Ok(response)
+}
+
+fn load_certs(filename: &str) -> io::Result<Vec<CertificateDer<'static>>> {
+    let certfile = fs::File::open(filename)
+        .map_err(|e| error(format!("failed to open {}: {}", filename, e)))?;
+    let mut reader = io::BufReader::new(certfile);
+    rustls_pemfile::certs(&mut reader).collect()
+}
+
+fn load_private_key(filename: &str) -> io::Result<PrivateKeyDer<'static>> {
+    let keyfile = fs::File::open(filename)
+        .map_err(|e| error(format!("failed to open {}: {}", filename, e)))?;
+    let mut reader = io::BufReader::new(keyfile);
+    rustls_pemfile::private_key(&mut reader).map(|key| key.unwrap())
 }
