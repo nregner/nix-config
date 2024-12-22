@@ -54,6 +54,8 @@ in
 
   orca-slicer = (pkgs.unstable.callPackage ./orca-slicer { inherit sources; });
 
+  perf2ff = (pkgs.unstable.callPackage ./perf2ff { });
+
   route53-ddns = pkgs.unstable.callPackage ./route53-ddns { };
 
   scroll-reverser = pkgs.unstable.callPackage ./scroll-reverser { inherit sources; };

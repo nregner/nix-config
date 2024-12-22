@@ -1,4 +1,5 @@
-# https://github.com/NixOS/nixpkgs/blob/master/doc/languages-frameworks/rust.section.md
+# https://github.com/firefox-devtools/profiler/blob/main/docs-developer/loading-in-profiles.md#url
+# usage: perf script -F +pid | perf2ff
 {
   lib,
   mkShell,
@@ -9,16 +10,9 @@
 let
   pkg = rustPlatform.buildRustPackage {
     pname = "perf2ff";
-    version = "1.0.0";
+    version = "0.1.0";
 
-    # src = lib.sources.sourceFilesBySuffices (lib.cleanSource ./.) [ ".nix" ];
     src = lib.cleanSource ./.;
-
-    postPatch = ''
-      ln -sf ${./Cargo.toml} Cargo.toml
-      ln -sf ${./Cargo.lock} Cargo.lock
-    '';
-
     cargoLock.lockFile = ./Cargo.lock;
 
     passthru.devShell = mkShell {
