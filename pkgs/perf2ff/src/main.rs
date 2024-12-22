@@ -1,17 +1,15 @@
-//! Simple HTTPS echo service based on hyper_util and rustls
-//!
-//! First parameter is the mandatory port to use.
-//! Certificate and private key are hardcoded to sample files.
-//! hyper will automatically use HTTP/2 if a client starts talking HTTP/2,
-//! otherwise HTTP/1.1 will be used.
+//! https://github.com/firefox-devtools/profiler/blob/main/docs-developer/loading-in-profiles.md#url
 
+use std::io::Cursor;
 use std::net::{Ipv4Addr, SocketAddr};
+use std::process::Command;
 use std::sync::Arc;
 use std::{env, fs, io};
 
 // use http::{Method, Request, Response, StatusCode};
 use http_body_util::{BodyExt, Full};
 use hyper::body::{Bytes, Incoming};
+use hyper::header::{HeaderValue, ACCESS_CONTROL_ALLOW_ORIGIN, CONTENT_TYPE};
 use hyper::service::service_fn;
 use hyper::{Method, Request, Response, StatusCode};
 use hyper_util::rt::{TokioExecutor, TokioIo};
@@ -20,42 +18,39 @@ use rustls::pki_types::{CertificateDer, PrivateKeyDer};
 use rustls::ServerConfig;
 use tokio::net::TcpListener;
 use tokio_rustls::TlsAcceptor;
+use url::Url;
 
-fn main() {
-    // Serve an echo service over HTTPS, with proper error handling.
-    if let Err(e) = run_server() {
-        eprintln!("FAILED: {}", e);
-        std::process::exit(1);
-    }
-}
-
-fn error(err: String) -> io::Error {
-    io::Error::new(io::ErrorKind::Other, err)
+fn main() -> anyhow::Result<()> {
+    run_server()?;
+    Ok(())
 }
 
 #[tokio::main(flavor = "current_thread")]
-async fn run_server() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
-    let _ = rustls::crypto::aws_lc_rs::default_provider().install_default();
-
+async fn run_server() -> anyhow::Result<()> {
     let addr = SocketAddr::new(Ipv4Addr::LOCALHOST.into(), 3000);
+    let port = addr.port();
 
-    let certs = load_certs("./localhost.cert")?;
-    let key = load_private_key("./localhost.key")?;
+    let certs = load_certs()?;
+    let key = load_private_key()?;
 
-    println!("Starting to serve on https://{}", addr);
-
-    // Create a TCP listener via tokio.
     let incoming = TcpListener::bind(&addr).await?;
 
-    // Build TLS configuration.
-    let mut server_config = ServerConfig::builder()
+    let server_config = ServerConfig::builder()
         .with_no_client_auth()
-        .with_single_cert(certs, key)
-        .map_err(|e| error(e.to_string()))?;
-    server_config.alpn_protocols = vec![b"h2".to_vec(), b"http/1.1".to_vec(), b"http/1.0".to_vec()];
+        .with_single_cert(certs, key)?;
+    // server_config.alpn_protocols = vec![b"h2".to_vec(), b"http/1.1".to_vec(), b"http/1.0".to_vec()];
     let tls_acceptor = TlsAcceptor::from(Arc::new(server_config));
 
     let service = service_fn(echo);
+
+    let mut url = Url::parse("https://profiler.firefox.com/from-url/")?;
+    url.path_segments_mut()
+        .expect("base url")
+        .push(&format!("https://localhost:{port}"));
+    Command::new("firefox")
+        .arg(url.to_string())
+        .spawn()?
+        .wait()?;
 
     loop {
         let (tcp_stream, _remote_addr) = incoming.accept().await?;
@@ -79,20 +74,21 @@ async fn run_server() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
     }
 }
 
-// Custom echo service, handling two different routes and a
-// catch-all 404 responder.
 async fn echo(req: Request<Incoming>) -> Result<Response<Full<Bytes>>, hyper::Error> {
     let mut response = Response::new(Full::default());
-    match (req.method(), req.uri().path()) {
-        // Help route.
+    let headers = response.headers_mut();
+    headers.insert(
+        ACCESS_CONTROL_ALLOW_ORIGIN,
+        HeaderValue::from_static("https://profiler.firefox.com"),
+    );
+    headers.insert(CONTENT_TYPE, HeaderValue::from_static("application/json"));
+    match dbg!((req.method(), req.uri().path())) {
         (&Method::GET, "/") => {
             *response.body_mut() = Full::from("Try POST /echo\n");
         }
-        // Echo service route.
         (&Method::POST, "/echo") => {
             *response.body_mut() = Full::from(req.into_body().collect().await?.to_bytes());
         }
-        // Catch-all 404.
         _ => {
             *response.status_mut() = StatusCode::NOT_FOUND;
         }
@@ -100,16 +96,12 @@ async fn echo(req: Request<Incoming>) -> Result<Response<Full<Bytes>>, hyper::Er
     Ok(response)
 }
 
-fn load_certs(filename: &str) -> io::Result<Vec<CertificateDer<'static>>> {
-    let certfile = fs::File::open(filename)
-        .map_err(|e| error(format!("failed to open {}: {}", filename, e)))?;
-    let mut reader = io::BufReader::new(certfile);
+fn load_certs() -> io::Result<Vec<CertificateDer<'static>>> {
+    let mut reader = Cursor::new(include_bytes!("../localhost.cert"));
     rustls_pemfile::certs(&mut reader).collect()
 }
 
-fn load_private_key(filename: &str) -> io::Result<PrivateKeyDer<'static>> {
-    let keyfile = fs::File::open(filename)
-        .map_err(|e| error(format!("failed to open {}: {}", filename, e)))?;
-    let mut reader = io::BufReader::new(keyfile);
+fn load_private_key() -> io::Result<PrivateKeyDer<'static>> {
+    let mut reader = Cursor::new(include_bytes!("../localhost.key"));
     rustls_pemfile::private_key(&mut reader).map(|key| key.unwrap())
 }
