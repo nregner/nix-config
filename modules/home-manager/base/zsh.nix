@@ -1,17 +1,21 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   programs.zsh = {
     enable = true;
-    initExtra = ''
-      bindkey -M viins 'jk' vi-cmd-mode
+    initExtra =
+      ''
+        bindkey -M viins 'jk' vi-cmd-mode
 
-      flakify() {
-        nix flake new -t github:NixOS/templates#''${1:-"utils-generic"} .
-      }
+        flakify() {
+          nix flake new -t github:NixOS/templates#''${1:-"utils-generic"} .
+        }
 
-      # https://github.com/NixOS/nixpkgs/issues/275770
-      complete -C aws_completer aws
-    '';
+        # https://github.com/NixOS/nixpkgs/issues/275770
+        complete -C aws_completer aws
+      ''
+      + lib.optionalString pkgs.stdenv.isDarwin ''
+        source ${./zsh/completions/_launchctl}
+      '';
     # defaultKeymap = "viins";
     oh-my-zsh = {
       enable = true;
