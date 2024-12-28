@@ -1,17 +1,13 @@
 { pkgs, ... }:
 {
+  catppuccin.alacritty.enable = true;
   programs.alacritty = {
     enable = true;
     package = pkgs.unstable.alacritty;
-    catppuccin.enable = true;
+    # https://alacritty.org/config-alacritty.html
     settings = {
-      selection = {
-        save_to_clipboard = true;
-      };
-      window = {
-        dynamic_padding = true;
-        # https://github.com/alacritty/alacritty/issues/93
-        option_as_alt = "Both";
+      env = {
+        TERM = "alacritty";
       };
       font = {
         normal = {
@@ -19,9 +15,6 @@
           style = "Regular";
         };
         size = 11;
-      };
-      env = {
-        TERM = "alacritty";
       };
       # http://www.leonerd.org.uk/hacks/fixterms/
       keyboard.bindings = [
@@ -41,6 +34,14 @@
           chars = "\\u001B[13;7u";
         }
       ];
+      selection = {
+        save_to_clipboard = true;
+      };
+      window = {
+        dynamic_padding = true;
+        # https://github.com/alacritty/alacritty/issues/93
+        option_as_alt = "Both";
+      };
     };
   };
 }

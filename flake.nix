@@ -57,7 +57,16 @@
     };
 
     # Desktop
-    catppuccin-nix.url = "github:catppuccin/nix/1e4c3803b8da874ff75224ec8512cb173036bbd8"; # FIXME
+    catppuccin-nix = {
+      url = "github:catppuccin/nix";
+      inputs = {
+        home-manager-stable.follows = "home-manager";
+        home-manager.follows = "home-manager-unstable";
+        nixpkgs-stable.follows = "nixpkgs";
+        nixpkgs.follows = "nixpkgs-unstable";
+        nuscht-search.follows = "";
+      };
+    };
     # hyprland = {
     #   url = "github:hyprwm/Hyprland";
     #   inputs.nixpkgs.follows = "nixpkgs";
@@ -315,25 +324,6 @@
             systemProfiles "nixos" nixosConfigurations // systemProfiles "darwin" darwinConfigurations;
 
           hydraJobs = {
-            # TODO: is this even needed or are inputs already cached?
-            flakeInputs =
-              let
-                pkgs = inputs.nixpkgs-unstable.legacyPackages.x86_64-linux;
-                recurse = (
-                  parent: inputs:
-                  (lib.mapAttrsToList (name: input: {
-                    name = "${parent}${name}";
-                    path = input.outPath;
-                  }) inputs)
-                  ++ (builtins.concatLists (
-                    builtins.attrValues (
-                      builtins.mapAttrs (name: input: recurse "${parent}${name}." input.inputs or { }) inputs
-                    )
-                  ))
-                );
-              in
-              pkgs.linkFarm "flake-inputs" (lib.unique (recurse "" inputs));
-
             deploy = lib.mapAttrs (
               name: { profiles, ... }: builtins.mapAttrs (_: { path, ... }: path) profiles
             ) deploy.nodes;

@@ -54,10 +54,10 @@
       import-env = pkgs.writeShellScriptBin "import-env" (builtins.readFile ./import-env.sh);
     in
     lib.mkIf cfg.enable {
+      catppuccin.hyprland.enable = true;
+
       wayland.windowManager.hyprland = {
         enable = true;
-        catppuccin.enable = true;
-
         extraConfig = ''
           # Monitors
           ${lib.concatMapStringsSep "\n" (
