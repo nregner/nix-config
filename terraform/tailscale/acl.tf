@@ -55,12 +55,11 @@ resource "tailscale_acl" "acl" {
         users  = ["autogroup:nonroot", "root"]
       },
     ]
-
     sshTests = [
       {
         "src"    = "root@sagittarius",
-        "dst"    = ["enceladus"],
-        "accept" = ["root"],
+        "dst"    = ["enceladus-linux-vm"],
+        "accept" = ["builder"],
         "check"  = [],
         "deny"   = [],
       }
