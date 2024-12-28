@@ -85,8 +85,8 @@
 
     # 3d printer
     cura5
-    orca-slicer
-    super-slicer-beta
+    # orca-slicer
+    # super-slicer-beta
 
     # nix
     nix-output-monitor

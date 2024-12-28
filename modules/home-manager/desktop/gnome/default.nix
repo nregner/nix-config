@@ -1,6 +1,6 @@
 { lib, pkgs, ... }:
 {
-  home.packages = with pkgs; [
+  home.packages = with pkgs.unstable; [
     gnomeExtensions.tray-icons-reloaded
     gnomeExtensions.vitals
     gnomeExtensions.dash-to-panel
@@ -8,7 +8,6 @@
     gnomeExtensions.space-bar
 
     dconf2nix
-    gpick
   ];
 
   # Generated via dconf2nix: https://github.com/gvolpe/dconf2nix
