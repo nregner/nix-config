@@ -57,7 +57,16 @@
     };
 
     # Desktop
-    catppuccin-nix.url = "github:catppuccin/nix/1e4c3803b8da874ff75224ec8512cb173036bbd8"; # FIXME
+    catppuccin-nix = {
+      url = "github:catppuccin/nix";
+      inputs = {
+        home-manager-stable.follows = "home-manager";
+        home-manager.follows = "home-manager-unstable";
+        nixpkgs-stable.follows = "nixpkgs";
+        nixpkgs.follows = "nixpkgs-unstable";
+        nuscht-search.follows = "";
+      };
+    };
     # hyprland = {
     #   url = "github:hyprwm/Hyprland";
     #   inputs.nixpkgs.follows = "nixpkgs";
