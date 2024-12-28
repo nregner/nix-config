@@ -29,7 +29,11 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     hydra-sentinel = {
       url = "github:nathanregner/hydra-sentinel";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs = {
+        flake-parts.follows = "flake-parts";
+        nixpkgs.follows = "nixpkgs-unstable";
+        treefmt-nix.follows = "treefmt-nix";
+      };
     };
     mac-app-util = {
       url = "github:hraban/mac-app-util";
@@ -66,14 +70,7 @@
     # 3d printing
     orangepi-nix = {
       url = "github:nathanregner/orangepi-nix";
-      # inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # misc
-    clojure-lsp = {
-      # https://github.com/clojure-lsp/clojure-lsp/actions/workflows/nix.yml?query=is%3Asuccess
-      url = "github:clojure-lsp/clojure-lsp/3718eb4622b01f24687cbed560ffae7880e65566";
-      # inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 

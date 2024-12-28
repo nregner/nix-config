@@ -14,8 +14,6 @@ let
       stable = inputs.nixpkgs.legacyPackages.${final.system};
     in
     rec {
-      inherit (inputs.clojure-lsp.packages.${final.system}) clojure-lsp;
-
       hydra_unstable = prev.hydra_unstable.overrideAttrs (oldAttrs: {
         patches = (oldAttrs.patches or [ ]) ++ [
           ./hydra/fix-restrict-eval-does-not-allow-access-to-git-flake.patch
