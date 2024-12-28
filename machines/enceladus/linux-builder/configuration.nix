@@ -1,6 +1,9 @@
 { self, lib, ... }:
 {
-  imports = [ ../../../modules/nixos/base/nix.nix ];
+  imports = [
+    ../../../modules/nixos/base/nix.nix
+    ./store-image.nix
+  ];
 
   nixpkgs.hostPlatform = "aarch64-linux";
 
