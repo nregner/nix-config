@@ -2,10 +2,9 @@
 {
   imports = [
     ../../../modules/nixos/base/nix.nix
+    ./hardware-configuration.nix
     ./store-image.nix
   ];
-
-  nixpkgs.hostPlatform = "aarch64-linux";
 
   networking.hostName = "enceladus-linux-vm";
 

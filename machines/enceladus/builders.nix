@@ -43,42 +43,20 @@
   nix.linux-builder = {
     enable = true;
     maxJobs = 8;
+
     # comment out for inital setup (pulls vm image via cache.nixos.org)
     # remove /var/lib/darwin-builder/*.img to force a reset
-    package = lib.makeOverridable (
-      { modules }:
-      let
-        inherit (inputs) nixpkgs;
-        nixos = nixpkgs.lib.nixosSystem {
-          modules =
-            [
-              "${nixpkgs}/nixos/modules/profiles/nix-builder-vm.nix"
-              ./linux-builder/configuration.nix
-            ]
-            ++ [
-              {
-                virtualisation = {
-                  host = {
-                    inherit pkgs;
-                  };
-                  cores = 8; # TODO: Figure out why this can't be > 8
-                  diskSize = lib.mkForce (64 * 1024);
-                };
-              }
-            ];
-          specialArgs = {
-            inherit
-              self
-              inputs
-              outputs
-              sources
-              ;
-          };
-          system = "aarch64-linux";
-        };
-      in
-      nixos.config.system.build.macos-builder-installer
-    ) { modules = [ ]; };
+    config = {
+      imports = [ ./linux-builder/configuration.nix ];
+      config._module.args = {
+        inherit
+          self
+          inputs
+          outputs
+          sources
+          ;
+      };
+    };
   };
 
   users = {
@@ -88,6 +66,10 @@
     };
     knownUsers = [ "builder" ];
   };
+
+  environment.etc."ssh/sshd_config.d/100-allow-tcp-forwarding".text = ''
+    AllowTcpForwarding yes
+  '';
 
   launchd.daemons.linux-builder.serviceConfig = {
     StandardOutPath = "/var/log/darwin-builder.log";
