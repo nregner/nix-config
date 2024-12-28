@@ -1,30 +1,30 @@
 # generate age key:
 # sudo cat /etc/ssh/ssh_host_ed25519_key | nix-shell -p ssh-to-age age --run "ssh-to-age -private-key | age-keygen -y"
 keys:
-  - &user_nregner age1edzgfqhfrg5a6p9dgte7s8dqt87vu8a50up5mys0h34x3dsrj90qr743qw
-  - &user_nregner_mac age1me7gswd8w750e30m8au67mv9npvkqtvjugz50ydn9tajezu0lccs9qw38c
+  - &host_enceladus age19hzwnm5dfl6m9vv2sq9z9r0ykn8djvjqaauuruyhf4q4vuxpev2sx4rcsd
   - &host_iapetus age1pfp278lmacxxj9xj9zez9pgh3yuh64vp0syh6cx6xapvx0c9yfhssl8ed5
-  - &host_server age1g2mgt0s80nc5yzkjnwmn6qwf8udnapx92vhwussjpa9d4et5v5zskgap5y
   - &host_print_farm age16zk73cejuepyskjeq0625ecf727y3nmmw32qq0ta97q9e4uj2sqstq6240
-  - &host_voron age1vzn4vh7xe7tqx0czgayafr208pjwegmus0l3gxn4v5yeemwch58sahxpee
   - &host_sagittarius age1yfflu4pxlt32sy4xaa04m5gs7kyrccyj9y5hh0qvndmxtrxrtpns7mf682
-  - &host_callisto age1h7223qs8fq2v8nta352jqd7kjffl0sxmrpvmcls0q3gm4j5m8d6q7ynsrr
+  - &host_server age1g2mgt0s80nc5yzkjnwmn6qwf8udnapx92vhwussjpa9d4et5v5zskgap5y
+  - &host_voron age1vzn4vh7xe7tqx0czgayafr208pjwegmus0l3gxn4v5yeemwch58sahxpee
+  - &user_nregner age1edzgfqhfrg5a6p9dgte7s8dqt87vu8a50up5mys0h34x3dsrj90qr743qw
+  - &user_nregner_enceladus age1me7gswd8w750e30m8au67mv9npvkqtvjugz50ydn9tajezu0lccs9qw38c
 creation_rules:
   - path_regex: terraform/.*/secrets.yaml
     key_groups:
       - age:
           - *user_nregner
-          - *user_nregner_mac
+          - *user_nregner_enceladus
   - path_regex: modules/nixos/server/.*/secrets.yaml
     key_groups:
       - age:
-          - *user_nregner
+          - *host_enceladus
           - *host_iapetus
-          - *host_callisto
-          - *host_server
-          - *host_voron
           - *host_print_farm
           - *host_sagittarius
+          - *host_server
+          - *host_voron
+          - *user_nregner
   - path_regex: machines/voron/secrets.yaml
     key_groups:
       - age:
@@ -49,4 +49,4 @@ creation_rules:
     key_groups:
       - age:
           - *user_nregner
-          - *user_nregner_mac
+          - *user_nregner_enceladus

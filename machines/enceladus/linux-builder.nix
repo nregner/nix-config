@@ -3,43 +3,10 @@
   inputs,
   outputs,
   sources,
-  pkgs,
   lib,
   ...
 }:
 {
-  nix.distributedBuilds = true;
-  nix.buildMachines = [
-    {
-      hostName = "sagittarius";
-      protocol = "ssh-ng";
-      sshUser = "nregner";
-      system = "x86_64-linux";
-      supportedFeatures = [
-        "nixos-test"
-        "benchmark"
-        "big-parallel"
-        "kvm"
-      ];
-      maxJobs = 10;
-      speedFactor = 1;
-    }
-    {
-      hostName = "sagittarius";
-      protocol = "ssh-ng";
-      sshUser = "nregner";
-      system = "x86_64-linux";
-      supportedFeatures = [
-        "nixos-test"
-        "benchmark"
-        "big-parallel"
-        "kvm"
-      ];
-      maxJobs = 10;
-      speedFactor = 1;
-    }
-  ];
-
   nix.linux-builder = {
     enable = true;
     maxJobs = 8;
