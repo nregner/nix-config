@@ -1,20 +1,14 @@
 {
-  sources,
   config,
   pkgs,
   lib,
   ...
 }:
 {
+  catppuccin.hyprlock.enable = true;
   programs.hyprlock = {
     enable = true;
     package = pkgs.unstable.hyprlock;
-    extraConfig =
-      # hyprlang
-      ''
-        source=${sources.catppuccin.hyprland}/themes/mocha.conf
-        source=${config.xdg.configHome}/hypr/hyprlock.user.conf
-      '';
   };
 
   xdg.configFile = {
