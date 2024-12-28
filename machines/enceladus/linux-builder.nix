@@ -2,6 +2,7 @@
   self,
   inputs,
   outputs,
+  config,
   sources,
   lib,
   ...
@@ -22,6 +23,9 @@
           outputs
           sources
           ;
+        secrets = {
+          tailscale-auth-key = config.sops.secrets.tailscale-auth-key.path;
+        };
       };
     };
   };
@@ -41,5 +45,11 @@
   launchd.daemons.linux-builder.serviceConfig = {
     StandardOutPath = "/var/log/darwin-builder.log";
     StandardErrorPath = "/var/log/darwin-builder.log";
+  };
+
+  sops.secrets.tailscale-auth-key = {
+    sopsFile = ../../modules/nixos/server/services/secrets.yaml;
+    key = "tailscale/builder_key";
+    name = "linux-builder/tailscale-auth-key";
   };
 }
