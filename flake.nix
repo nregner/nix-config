@@ -315,6 +315,7 @@
                         system = {
                           user = "root";
                           path = activate.${type} systemConfiguration;
+                          remoteBuild = true;
                         };
                       }
                       // (homeProfiles activate.home-manager config.networking.hostName);
