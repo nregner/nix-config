@@ -1,20 +1,17 @@
 {
   linuxManualConfig,
-  src,
+  source,
   ubootTools,
   unzip,
   ...
 }:
 # TODO: mainline kernel? https://github.com/ryan4yin/nixos-rk3588/issues/71
 (linuxManualConfig {
-  version = "6.1.84-rockchip-rk3588";
+  inherit (source) src version;
   modDirVersion = "6.1.84";
-
-  inherit src;
+  extraMeta.branch = "6.1";
 
   configfile = ./orangepi5_config;
-
-  extraMeta.branch = "6.1";
 
   # nix eval .\#nixosConfigurations.voron.config.system.build.kernel.config > machines/voron/kernel/config.nix
   # allowImportFromDerivation = true;
