@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 {
-  catppuccin.k9s.enable = true;
+  # catppuccin.k9s.enable = true;
   programs.k9s = {
     enable = true;
     package = pkgs.unstable.k9s;

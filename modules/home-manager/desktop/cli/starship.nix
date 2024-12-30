@@ -1,5 +1,5 @@
 {
-  catppuccin.starship.enable = true;
+  # catppuccin.starship.enable = true;
   programs.starship = {
     enable = true;
     enableZshIntegration = true;

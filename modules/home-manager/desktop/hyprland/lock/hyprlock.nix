@@ -5,7 +5,7 @@
   ...
 }:
 {
-  catppuccin.hyprlock.enable = true;
+  # catppuccin.hyprlock.enable = true;
   programs.hyprlock = {
     enable = true;
     package = pkgs.unstable.hyprlock;

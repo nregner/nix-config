@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  catppuccin.mako.enable = true;
+  # catppuccin.mako.enable = true;
 
   home.packages = with pkgs; [ libnotify ];
 

@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  catppuccin.lazygit.enable = true;
+  # catppuccin.lazygit.enable = true;
   programs.lazygit = {
     enable = true;
     package = pkgs.unstable.lazygit;
