@@ -1,5 +1,5 @@
 {
-  catppuccin.tofi.enable = true;
+  # catppuccin.tofi.enable = true;
   programs.tofi = {
     enable = true;
     # https://github.com/philj56/tofi/blob/master/doc/config
