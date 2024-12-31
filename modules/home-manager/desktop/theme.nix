@@ -1,14 +1,14 @@
 { inputs, pkgs, ... }:
 {
   imports = [
-    inputs.catppuccin-nix.homeManagerModules.catppuccin
+    # inputs.catppuccin-nix.homeManagerModules.catppuccin
     ./theme.linux.nix
   ];
 
-  catppuccin = {
-    flavor = "mocha";
-    accent = "blue";
-  };
+  # catppuccin = {
+  #   flavor = "mocha";
+  #   accent = "blue";
+  # };
 
   # fc-cache -rf to clear
   fonts.fontconfig.enable = true;

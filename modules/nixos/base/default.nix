@@ -6,7 +6,7 @@
 }:
 {
   imports = [
-    inputs.catppuccin-nix.nixosModules.catppuccin
+    # inputs.catppuccin-nix.nixosModules.catppuccin
     inputs.nixos-generators.nixosModules.all-formats
     ./docker.nix
     ./networking.nix
@@ -20,11 +20,11 @@
   time.timeZone = "America/Boise";
   i18n.defaultLocale = "en_US.UTF-8";
 
-  # theme
-  catppuccin = {
-    flavor = "mocha";
-    accent = "blue";
-  };
+  # # theme
+  # catppuccin = {
+  #   flavor = "mocha";
+  #   accent = "blue";
+  # };
 
   nix.gc = {
     automatic = true;
