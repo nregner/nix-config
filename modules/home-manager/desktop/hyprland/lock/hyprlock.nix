@@ -9,6 +9,9 @@
   programs.hyprlock = {
     enable = true;
     package = pkgs.unstable.hyprlock;
+    extraConfig = ''
+      source=${config.xdg.configHome}/hypr/hyprlock.user.conf
+    '';
   };
 
   xdg.configFile = {
