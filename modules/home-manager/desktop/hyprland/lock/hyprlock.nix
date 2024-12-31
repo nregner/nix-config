@@ -9,10 +9,13 @@
   programs.hyprlock = {
     enable = true;
     package = pkgs.unstable.hyprlock;
+    extraConfig = ''
+      source=${config.xdg.configHome}/hypr/hyprlock.user.conf
+    '';
   };
 
   xdg.configFile = {
-    "hypr/hyprlock.user.conf".source = config.lib.file.mkFlakeSymlink ./hyprlock.conf;
+    "hypr/hyprlock.user.conf".source = ./hyprlock.conf;
   };
 
   services.hypridle = {
