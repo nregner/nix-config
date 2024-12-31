@@ -18,7 +18,7 @@
   };
 
   xdg.configFile = {
-    "hypr/hyprlock.user.conf".source = config.lib.file.mkFlakeSymlink ./hyprlock.conf;
+    "hypr/hyprlock.user.conf".source = ./hyprlock.conf;
   };
 
   services.hypridle = {
