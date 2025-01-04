@@ -75,6 +75,12 @@
                 "noatime"
               ];
             };
+            "home-snapshots" = {
+              mountpoint = "/home/.snapshots";
+              mountOptions = [
+                "noatime"
+              ];
+            };
             "nix" = {
               mountpoint = "/nix";
               mountOptions = [

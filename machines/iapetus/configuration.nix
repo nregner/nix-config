@@ -140,6 +140,21 @@
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
   };
 
+  services.snapper = {
+    snapshotInterval = "*:0/15";
+    persistentTimer = true;
+    # snapper -c home <...>
+    # https://wiki.archlinux.org/title/Snapper
+    configs.home = {
+      SUBVOLUME = "/home";
+      ALLOW_USERS = [ "nregner" ];
+      TIMELINE_CLEANUP = true;
+      TIMELINE_CREATE = true;
+      TIMELINE_MIN_AGE = 1800;
+      TIMELINE_LIMIT_DAILY = 7;
+    };
+  };
+
   services.udev.extraRules = builtins.readFile ./probe-rs.rules;
 
   # This value determines the NixOS release from which the default
