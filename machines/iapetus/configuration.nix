@@ -140,6 +140,16 @@
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
   };
 
+  services.nregner.backup.paths.steam = {
+    paths = [ "/home/nregner/.factorio" ];
+    timerConfig = {
+      OnCalendar = "hourly";
+    };
+    restic = {
+      s3 = { };
+    };
+  };
+
   services.udev.extraRules = builtins.readFile ./probe-rs.rules;
 
   # This value determines the NixOS release from which the default
