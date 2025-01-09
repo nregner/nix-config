@@ -121,8 +121,9 @@ in
         secret = null;
       };
       extraConfig = {
+        # disable old approval_prompt parameter: https://developers.google.com/identity/openid-connect/openid-connect#prompt
+        approval-prompt = null;
         client-secret-file = config.sops.secrets.oauth2-proxy-client-secret.path;
-        # whitelist-domain = [ "nregner.net" ];
       };
       keyFile = config.sops.templates.oauth2-proxy-env.path;
     };
