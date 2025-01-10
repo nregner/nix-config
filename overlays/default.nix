@@ -4,9 +4,9 @@ let
 
   warnIfOutdated =
     prev: final:
-    lib.warnIf (lib.versionOlder final.version prev.version)
-      "${final.name} is outdated. latest: ${prev.version}"
-      final;
+    lib.warnIf (
+      (lib.versionOlder final.version prev.version) || (final.version == prev.version)
+    ) "${final.name} overlay can be removed. nixpkgs version: ${prev.version}" final;
 
   sharedModifications =
     final: prev:
@@ -29,6 +29,22 @@ let
       # FIXME: https://github.com/NixOS/nixpkgs/issues/357979
       moonraker = warnIfOutdated prev.moonraker (final.callPackage ./moonraker { });
 
+      nvfetcher = final.haskell.lib.compose.overrideCabal (
+        drv:
+        (warnIfOutdated drv {
+          version = "0.7.0.0";
+          sha256 = "U4XyMspXTAhkj4es9tu1QJMNV7vI+H9YRtXl8IZirEU=";
+          revision = null;
+          editedCabalFile = null;
+        })
+      ) prev.nvfetcher;
+
+      wrapNeovimUnstable =
+        args: neovim-unwrapped:
+        (prev.wrapNeovimUnstable args neovim-unwrapped).overrideAttrs {
+          dontStrip = true;
+        };
+
       # disable xvfb-run tests to fix build on darwin
       xdot =
         (prev.xdot.overridePythonAttrs (oldAttrs: {
@@ -37,12 +53,6 @@ let
           (oldAttrs: {
             doInstallCheck = false;
           });
-
-      wrapNeovimUnstable =
-        args: neovim-unwrapped:
-        (prev.wrapNeovimUnstable args neovim-unwrapped).overrideAttrs {
-          dontStrip = true;
-        };
     };
 in
 rec {
