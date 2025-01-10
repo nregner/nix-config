@@ -38,6 +38,8 @@
     knownUsers = [ "builder" ];
   };
 
+  networking.wakeOnLan.enable = true;
+
   environment.etc."ssh/sshd_config.d/100-allow-tcp-forwarding".text = ''
     AllowTcpForwarding yes
   '';
