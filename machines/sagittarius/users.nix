@@ -1,6 +1,5 @@
 {
   self,
-  pkgs,
   lib,
   ...
 }:
@@ -27,4 +26,11 @@
     "!craigslist"
     "!factorio"
   ];
+
+  services.nregner.backup.paths.home = {
+    paths = [ "/home" ];
+    restic = {
+      s3 = { };
+    };
+  };
 }
