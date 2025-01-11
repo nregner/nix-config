@@ -1,13 +1,14 @@
 {
-  outputs,
+  inputs,
   sources,
   config,
-  lib,
   pkgs,
+  lib,
+  outputs,
   ...
 }:
 {
-  nixpkgs = import ../../../nixpkgs.nix { inherit outputs; };
+  nixpkgs = import ../../nixpkgs.nix { inherit outputs; };
 
   nix = {
     package = pkgs.unstable.nixVersions.latest;
@@ -34,6 +35,21 @@
       connect-timeout = 5;
 
       trusted-public-keys = [ "default:h0V4pJnSGtvqgGKLO3KF0VJ0iOaiVBfa4OjmnnR2ob8=" ];
+    };
+  };
+
+  nix.registry = {
+    nixpkgs.to = {
+      owner = "NixOS";
+      repo = "nixpkgs";
+      rev = inputs.nixpkgs-unstable.rev;
+      type = "github";
+    };
+    nixpkgs-stable.to = {
+      owner = "NixOS";
+      repo = "nixpkgs";
+      rev = inputs.nixpkgs.rev;
+      type = "github";
     };
   };
 

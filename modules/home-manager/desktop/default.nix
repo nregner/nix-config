@@ -1,6 +1,6 @@
-{ outputs, ... }:
 {
   imports = [
+    ../../portable/nix.nix
     ../base
     ./alacritty.nix
     ./cli
@@ -10,9 +10,6 @@
     ./sops.nix
     ./theme.nix
   ];
-
-  # standalone install - reimport nixpkgs
-  nixpkgs = import ../../../nixpkgs.nix { inherit outputs; };
 
   # Allow home-manager to manage itself
   programs.home-manager.enable = true;

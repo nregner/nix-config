@@ -8,9 +8,9 @@
   imports = [
     inputs.catppuccin-nix.nixosModules.catppuccin
     inputs.nixos-generators.nixosModules.all-formats
+    ../../portable/nix.nix
     ./docker.nix
     ./networking.nix
-    ./nix.nix
     ./services
     ./sops.nix
     ./tailscale.nix
