@@ -26,9 +26,6 @@ let
       # https://github.com/NixOS/nixpkgs/issues/154163#issuecomment-1350599022
       makeModulesClosure = x: prev.makeModulesClosure (x // { allowMissing = true; });
 
-      # FIXME: https://github.com/NixOS/nixpkgs/issues/357979
-      moonraker = warnIfOutdated prev.moonraker (final.callPackage ./moonraker { });
-
       nvfetcher = final.haskell.lib.compose.overrideCabal (
         drv:
         (warnIfOutdated drv {
