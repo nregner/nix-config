@@ -1,6 +1,5 @@
 {
   self,
-  pkgs,
   lib,
   ...
 }:
@@ -27,4 +26,20 @@
     "!craigslist"
     "!factorio"
   ];
+
+  services.snapper = {
+    snapshotInterval = "*:0/15";
+    persistentTimer = true;
+    # snapper -c home <...>
+    # https://wiki.archlinux.org/title/Snapper
+    configs.home = {
+      SUBVOLUME = "/home";
+      ALLOW_USERS = [ "nregner" ];
+      TIMELINE_CLEANUP = true;
+      TIMELINE_CREATE = true;
+      TIMELINE_MIN_AGE = 1800;
+      TIMELINE_LIMIT_DAILY = 7;
+    };
+  };
+
 }
