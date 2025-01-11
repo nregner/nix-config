@@ -33,7 +33,7 @@ in
             timerConfig = mkOption {
               type = types.attrsOf unitOption;
               default = {
-                OnCalendar = "daily";
+                OnCalendar = "3h";
                 Persistent = true;
               };
               description = lib.mdDoc ''
@@ -86,7 +86,8 @@ in
             passwordFile = args.config.sops.secrets.restic-password.path;
             environmentFile = args.config.sops.secrets.restic-s3-env.path;
             pruneOpts = [
-              "--keep-within 1m"
+              "--keep-within 1w"
+              "--keep-within-daily 1m"
               "--keep-within-weekly 6m"
               "--keep-within-monthly 1y"
             ];
