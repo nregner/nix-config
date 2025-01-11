@@ -13,19 +13,12 @@ let
     pname = "hydra-auto-upgrade";
     version = "1.0.0";
 
-    # src = lib.sources.sourceFilesBySuffices (lib.cleanSource ./.) [ ".nix" ];
     src = lib.cleanSource ./.;
+    cargoLock.lockFile = ./Cargo.lock;
 
     nativeBuildInputs = [ installShellFiles ];
 
     runtimeInputs = [ nvd ];
-
-    postPatch = ''
-      ln -sf ${./Cargo.toml} Cargo.toml
-      ln -sf ${./Cargo.lock} Cargo.lock
-    '';
-
-    cargoLock.lockFile = ./Cargo.lock;
 
     cargoBuildFlags = [
       "-Z"

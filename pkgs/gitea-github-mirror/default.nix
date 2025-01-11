@@ -11,7 +11,7 @@ let
     version = "1.0.0";
 
     src = lib.cleanSource ./.;
-    vendorHash = "sha256-/EebKxlfpaUfSpGQ7+GXByuv1lG7Na9rzuFKy7ONSFk=";
+    vendorHash = "sha256-xATgfGCNQPpQQJ0g3VQVjxXCG7lmFAJo1CWgU/5OUYg=";
     passthru.devShell = mkShell { packages = pkg.nativeBuildInputs ++ pkg.buildInputs; };
   };
 in

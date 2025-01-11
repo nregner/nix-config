@@ -12,14 +12,7 @@ let
 
     nativeBuildInputs = [ cmake ];
 
-    # src = lib.sources.sourceFilesBySuffices (lib.cleanSource ./.) [ ".nix" ];
     src = lib.cleanSource ./.;
-
-    postPatch = ''
-      ln -sf ${./Cargo.toml} Cargo.toml
-      ln -sf ${./Cargo.lock} Cargo.lock
-    '';
-
     cargoLock.lockFile = ./Cargo.lock;
 
     passthru.devShell = mkShell {
