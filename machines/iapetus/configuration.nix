@@ -145,12 +145,13 @@
     persistentTimer = true;
     # snapper -c home <...>
     # https://wiki.archlinux.org/title/Snapper
+    # https://doc.opensuse.org/documentation/leap/reference/html/book-reference/cha-snapper.html#sec-snapper-clean-up-timeline
     configs.home = {
       SUBVOLUME = "/home";
       ALLOW_USERS = [ "nregner" ];
       TIMELINE_CLEANUP = true;
       TIMELINE_CREATE = true;
-      TIMELINE_MIN_AGE = 1800;
+      TIMELINE_MIN_AGE = 24 * 60 * 60;
       TIMELINE_LIMIT_DAILY = 7;
     };
   };
