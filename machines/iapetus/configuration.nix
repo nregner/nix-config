@@ -151,7 +151,7 @@
       ALLOW_USERS = [ "nregner" ];
       TIMELINE_CLEANUP = true;
       TIMELINE_CREATE = true;
-      TIMELINE_MIN_AGE = 1800;
+      TIMELINE_MIN_AGE = 24 * 60 * 60;
       TIMELINE_LIMIT_DAILY = 7;
     };
   };
